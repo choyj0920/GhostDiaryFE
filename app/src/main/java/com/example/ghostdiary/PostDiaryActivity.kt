@@ -12,5 +12,7 @@ class PostDiaryActivity : AppCompatActivity() {
         binding=ActivityPostDiaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
     }
 }

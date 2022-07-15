@@ -2,6 +2,7 @@ package com.example.ghostdiary.fragment
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,7 @@ import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
+import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
@@ -37,7 +39,6 @@ class CalendarFragment : Fragment() {
     var pageIndex = 0
     lateinit var currentDate: Date
     lateinit var mContext: Context
-
     lateinit var calendar_year_month_text: TextView
     lateinit var calendar_view: RecyclerView
     lateinit var calendarAdapter: AdapterDay
@@ -106,7 +107,7 @@ class CalendarFragment : Fragment() {
 
 
         val dayListManager = GridLayoutManager(context, 7)
-        val dayListAdapter = AdapterDay(tempMonth, dayList,calendar_emotionArray)
+        val dayListAdapter = AdapterDay(this,tempMonth, dayList,calendar_emotionArray)
 
         calendarAdapter=dayListAdapter
 
@@ -149,4 +150,14 @@ class CalendarFragment : Fragment() {
         calendar_year_month_text.setText(datetime)
     }
 
+    fun start_post(day:Date){
+        var intent = Intent(getActivity(),PostDiaryActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
+
+
+    }
+    fun show_post(day:Date){
+
+    }
 }

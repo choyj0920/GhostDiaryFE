@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Our invisible item -->
+    <item
+        android:id="@+id/invisible"
+        android:visible="false"
+        android:icon="@drawable/close"
+        android:checked="true"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/calendar"
+        android:enabled="true"
+        android:icon="@drawable/menu_icon_calendar"
+        android:title="달력"
+        android:checked="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/record"
+        android:enabled="true"
+        android:icon="@drawable/menu_icon_record"
+        android:title="기록"
+        android:checked="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/memo"
+        android:enabled="true"
+
+        android:icon="@drawable/menu_icon_memo"
+        android:title="메모"
+        android:checked="false"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/clinic"
+        android:enabled="true"
+        android:checked="false"
+        android:icon="@drawable/menu_icon_clinic"
+        android:title="클리닉"
+        app:showAsAction="always" />
+
+
+
+</menu>
