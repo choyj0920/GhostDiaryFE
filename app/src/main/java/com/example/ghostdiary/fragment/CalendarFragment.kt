@@ -38,6 +38,7 @@ class CalendarFragment : Fragment() {
     }
     var pageIndex = 0
     lateinit var currentDate: Date
+    lateinit var dayList:MutableList<Date>
     lateinit var mContext: Context
     lateinit var calendar_year_month_text: TextView
     lateinit var calendar_view: RecyclerView
@@ -75,7 +76,7 @@ class CalendarFragment : Fragment() {
 
 
     fun create_days(){
-        var dayList: MutableList<Date> = MutableList(6 * 7) { Date() }
+        dayList = MutableList(6 * 7) { Date() }
         for(i in 0..5) {
             for(k in 0..6) {
                 calendar.add(Calendar.DAY_OF_MONTH, (1-calendar.get(Calendar.DAY_OF_WEEK)) + k)
@@ -102,6 +103,11 @@ class CalendarFragment : Fragment() {
         date=Date.from(LocalDate.of(2022,7,9).atStartOfDay(ZoneId.systemDefault()).toInstant())
         calendar_emotionArray.put("20220709" ,Day_Diary(date,3))
 
+        updatecalendar()
+
+    }
+
+    fun updatecalendar(){
         val tempMonth = calendar.get(Calendar.MONTH)
         Log.d(TAG,"${tempMonth} why!@!@!@#@@!")
 
@@ -117,7 +123,6 @@ class CalendarFragment : Fragment() {
             layoutManager=dayListManager
             adapter=dayListAdapter
         }
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
