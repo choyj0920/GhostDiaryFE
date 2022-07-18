@@ -10,13 +10,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.widget.ImageView
 
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isInvisible
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
+import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDay
@@ -35,7 +39,9 @@ class CalendarFragment : Fragment() {
 
     companion object {
         fun newInstance() = CalendarFragment()
+        var curCalendar:CalendarFragment?=null
     }
+    private val viewModel: MainViewModel by activityViewModels()
     var pageIndex = 0
     lateinit var currentDate: Date
     lateinit var dayList:MutableList<Date>
@@ -43,10 +49,9 @@ class CalendarFragment : Fragment() {
     lateinit var calendar_year_month_text: TextView
     lateinit var calendar_view: RecyclerView
     lateinit var calendarAdapter: AdapterDay
-    var calendar_emotionArray: HashMap<String,Day_Diary>  = HashMap<String, Day_Diary>()
-
-    private lateinit var viewModel: CalendarViewModel
+    lateinit var emotionImageviews:Array<ImageView>
     private var binding: FragmentCalendarBinding? =null
+    var isshow = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,8 +62,9 @@ class CalendarFragment : Fragment() {
 //        calendar.add(Calendar.MONTH, position - center)
 
         binding=FragmentCalendarBinding.inflate(inflater,container,false)
-        initView()
 
+        initView()
+        curCalendar=this
 
         create_days()
 
@@ -90,30 +96,27 @@ class CalendarFragment : Fragment() {
 
 
 
-        this.calendar_emotionArray = HashMap<String, Day_Diary>()
-        var instant = LocalDate.of(2022,7,10).atStartOfDay(ZoneId.systemDefault()).toInstant()
-        var date = Date.from(instant);
 
-
-        calendar_emotionArray.put("20220710" ,Day_Diary(date,2))
-        date=Date.from(LocalDate.of(2022,7,14).atStartOfDay(ZoneId.systemDefault()).toInstant())
-        calendar_emotionArray.put("20220714" , Day_Diary(date,1))
-        date=Date.from(LocalDate.of(2022,7,15).atStartOfDay(ZoneId.systemDefault()).toInstant())
-        calendar_emotionArray.put("20220715" ,Day_Diary(date,0, text = "배고프다."))
-        date=Date.from(LocalDate.of(2022,7,9).atStartOfDay(ZoneId.systemDefault()).toInstant())
-        calendar_emotionArray.put("20220709" ,Day_Diary(date,3))
 
         updatecalendar()
 
     }
+    fun addDiary(newDiary:Day_Diary){
+        var day=newDiary.date
+        var transFormat = SimpleDateFormat("yyyyMMdd")
+        var to = transFormat.format(day)
+        viewModel.getEmotionArray().put(to, newDiary)
+        Log.d("TAG","addDiary ${newDiary}")
+        updatecalendar()
 
+    }
     fun updatecalendar(){
         val tempMonth = calendar.get(Calendar.MONTH)
         Log.d(TAG,"${tempMonth} why!@!@!@#@@!")
 
 
         val dayListManager = GridLayoutManager(context, 7)
-        val dayListAdapter = AdapterDay(this,tempMonth, dayList,calendar_emotionArray)
+        val dayListAdapter = AdapterDay(this,tempMonth, dayList, viewModel.getEmotionArray())
 
         calendarAdapter=dayListAdapter
 
@@ -127,9 +130,8 @@ class CalendarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(CalendarViewModel::class.java)
-        // TODO: Use the ViewModel
 
+        // TODO: Use the ViewModel
         binding!!.ivTodayemotionhint.isInvisible =viewModel.ishintinvisible
     }
 
@@ -143,9 +145,9 @@ class CalendarFragment : Fragment() {
             viewModel.ishintinvisible= true
             binding!!.ivTodayemotionhint.isInvisible=viewModel.ishintinvisible
         }
-
+        emotionImageviews= arrayOf(binding!!.ivEmotionToday,binding!!.ivEmotion1,binding!!.ivEmotion2,binding!!.ivEmotion3,binding!!.ivEmotion4)
         pageIndex -= (Int.MAX_VALUE / 2)
-        Log.e(TAG, "Calender Index: $pageIndex")
+        //Log.e(TAG, "Calender Index: $pageIndex")
         calendar_year_month_text = binding!!.tvDate
         calendar_view = binding!!.calendar
         // 날짜 적용
@@ -157,12 +159,68 @@ class CalendarFragment : Fragment() {
 
     fun start_post(day:Date){
         var intent = Intent(getActivity(),PostDiaryActivity::class.java)
+        intent.putExtra("Date",day.time)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
-
-
     }
     fun show_post(day:Date){
+        if(isshow)
+            return
+
+        isshow=true
+        var transFormat = SimpleDateFormat("yyyyMMdd")
+        var to = transFormat.format(day)
+
+        var diary= viewModel.getEmotionArray()[to]
+        var emotions= diary!!.getEmotionarr()
+        Log.d("TAG","addDiary ${diary.getEmotionarr_name()} ${emotions}")
+
+        binding!!.ivEmotionToday.setImageResource(selectimage(emotions[0]))
+        var i =1
+        for(imageview in emotionImageviews){
+            if(emotions.size<=i)
+                break
+            imageview.setImageResource(selectimage(emotions[i]))
+            i+=1
+        }
+
+
+        binding!!.tvPopupDate.text=SimpleDateFormat("MMMM yyyy dd").format(day)
+
+        val animup = AnimationUtils.loadAnimation(
+            context,R.anim.popup_ani);
+        binding!!.popupLayout.startAnimation(animup)
+
+        binding!!.popupLayout.setOnClickListener{
+            if (isshow)
+                down_post()
+        }
+        binding!!.tvPopupText.text=diary.text
+
+        binding!!.popupLayout.visibility=View.VISIBLE
+
+
 
     }
+
+    fun down_post(){
+        if(!isshow)
+            return
+        isshow=false
+        binding!!.popupLayout.visibility=View.GONE
+
+    }
+
+    fun selectimage(index:Int): Int {
+        when(index){
+            0 -> return R.drawable.ghost_verygood
+            1 -> return R.drawable.ghost_good
+            2 -> return R.drawable.ghost_normal
+            3 -> return R.drawable.ghost_bad
+            4 -> return R.drawable.ghost_verybad
+
+        }
+        return R.drawable.ic_blankghost
+    }
+
 }
