@@ -2,6 +2,7 @@ package com.example.ghostdiary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityMainBinding
 import com.example.ghostdiary.fragment.CalendarFragment
 import com.example.ghostdiary.fragment.DefaultFragment
@@ -15,11 +16,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
 
+    lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding=ActivityMainBinding.inflate(layoutInflater)
-
+        viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
         defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
         recordFragment=RecordFragment()
