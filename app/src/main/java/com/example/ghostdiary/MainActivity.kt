@@ -59,7 +59,6 @@ class MainActivity : AppCompatActivity() {
             System.exit(0)
 
 
-
         }else{
             supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 

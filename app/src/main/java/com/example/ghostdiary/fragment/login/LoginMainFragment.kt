@@ -35,6 +35,7 @@ class LoginMainFragment : Fragment() {
     }
 
     fun init(){
+        viewModel=LoginActivity.loginActivity.viewModel
         binding.close.setOnClickListener {
             requireActivity().finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다.
 
@@ -44,14 +45,12 @@ class LoginMainFragment : Fragment() {
         }
 
         binding.tvLoginKakao.setOnClickListener{
-            Log.d(TAG,"클릭은 됩니다.")
+
         }
 
         binding.tvLoginGoogle.setOnClickListener{
-            Log.d(TAG,"클릭은 됩니다.")
         }
         binding.tvLoginEmail.setOnClickListener{
-            Log.e(TAG,"클릭은 됩니다.")
             LoginActivity.loginActivity.change_login_email()
 
         }
@@ -60,7 +59,6 @@ class LoginMainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         // TODO: Use the ViewModel
     }
 }
