@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -40,6 +41,11 @@ class LoginRegistFragment : Fragment() {
     }
 
     fun init(){
+        binding.close.setOnClickListener {
+            LoginActivity.loginActivity.change_login_email()
+        }
+
+        viewModel=LoginActivity.loginActivity.viewModel
 
         var emailpattern=android.util.Patterns.EMAIL_ADDRESS
 
@@ -164,22 +170,22 @@ class LoginRegistFragment : Fragment() {
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
             var name =binding.inputRegistName.text.toString()
             if(name.length==0){
-                Toast.makeText(context,"이름을 입력해주세요", Toast.LENGTH_SHORT)
+                Toast.makeText(context,"이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             else if(isemailduplicate) {
-                Toast.makeText(context, "email 중복 확인해주세요.", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "email 중복 확인해주세요.", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
 
             }else if(!ispasswordcorrect){
-                Toast.makeText(context, "형식에 맞는 password를 입력해주세요", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "형식에 맞는 password를 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }else if(!ispasswordcheckcorrect) {
-                Toast.makeText(context, "비밀번호 확인 체크", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "비밀번호 확인 체크", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
 
             }else if(!ischeckbirthday) {
-                Toast.makeText(context, "생일을 입력해주세요", Toast.LENGTH_SHORT)
+                Toast.makeText(context, "생일을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
 
             }else{
@@ -188,6 +194,9 @@ class LoginRegistFragment : Fragment() {
                 var birthday=binding.inputBirthday.text.toString()
                 viewModel.get_UserList()!!.put(email,LoginViewModel.User(name,email,password,birthday))
                 LoginActivity.loginActivity.change_login_email()
+
+                LoginActivity.loginActivity.loginRegistFragment=LoginRegistFragment()
+                Toast.makeText(context,"회원 가입 완료!",Toast.LENGTH_SHORT).show()
 
             }
             
@@ -229,7 +238,7 @@ class LoginRegistFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
         // TODO: Use the ViewModel
     }
 }
