@@ -170,7 +170,7 @@ class LoginRegistFragment : Fragment() {
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
             var name =binding.inputRegistName.text.toString()
             if(name.length==0){
-                Toast.makeText(context,"이름을 입력해주세요", Toast.LENGTH_SHORT)
+                Toast.makeText(context,"이름을 입력해주세요", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             else if(isemailduplicate) {
