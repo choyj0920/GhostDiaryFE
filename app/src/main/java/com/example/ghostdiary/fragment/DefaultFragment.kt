@@ -7,6 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ghostdiary.databinding.FragmentDefaultBinding
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class DefaultFragment : Fragment() {
 
@@ -22,6 +27,12 @@ class DefaultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentDefaultBinding.inflate(inflater,container,false)
+
+        var today=LocalDateTime.now()
+        var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+
+
+        binding!!.tvDate.text=to
 
         return binding!!.root
     }
