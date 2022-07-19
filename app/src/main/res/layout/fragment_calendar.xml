@@ -203,19 +203,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:id="@+id/popup_layout"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:layout_height="match_parent"
     >
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/line_1"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/googlebackground"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            android:elevation="16dp"
 
             >
 
@@ -315,15 +317,18 @@
             </LinearLayout>
 
             <TextView
+
                 android:id="@+id/tv_popup_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:layout_margin="10dp"
+
                 android:fontFamily="@font/roboto_thin"
                 android:text="안녕하세요"
-                android:textColor="@color/gray"></TextView>
+
+                android:textColor="@color/black"></TextView>
 
 
         </LinearLayout>

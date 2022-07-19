@@ -56,24 +56,24 @@
             android:padding="5dp"
             android:layout_weight="1"
             app:srcCompat="@drawable/ghost_normal" />
+
         <ImageView
-            android:alpha="0.4"
             android:id="@+id/iv_ghost_bad"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:padding="5dp"
             android:layout_weight="1"
+            android:alpha="0.4"
+            android:padding="5dp"
             app:srcCompat="@drawable/ghost_bad" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_weight="1"
-
             android:layout_height="match_parent">
             <ImageView
                 android:id="@+id/iv_ghost_verybad"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:alpha="0.4"
                 android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -85,23 +85,25 @@
 
             <ImageView
                 android:id="@+id/iv_addghost"
-                android:layout_width="match_parent"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
+                android:scaleType="fitCenter"
                 android:layout_weight="1"
                 android:alpha="1"
-                android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_ghost_verybad"
+                app:layout_constraintEnd_toEndOf="@+id/iv_ghost_verybad"
+                app:layout_constraintStart_toStartOf="@+id/iv_ghost_verybad"
+                app:layout_constraintTop_toTopOf="@+id/iv_ghost_verybad"
                 app:srcCompat="@drawable/rectangle">
 
             </ImageView>
 
             <TextView
                 android:id="@+id/tv_plus"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/noto_sans"
                 android:gravity="center"
                 android:textSize="40sp"

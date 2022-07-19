@@ -1,22 +1,15 @@
 package com.example.ghostdiary.adapter
 
 import android.content.ContentValues.TAG
-import android.content.Context
-import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.R
-import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.ItemCalendarDaysBinding
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.fragment.CalendarFragment
+import com.example.ghostdiary.fragment.main.CalendarFragment
 import java.text.SimpleDateFormat
 import java.util.*
 

@@ -1,10 +1,7 @@
 package com.example.ghostdiary.adapter
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,10 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemPostDiaryBinding
-import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.fragment.CalendarFragment
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.HashMap
 
 class AdapterPostdiary(val parent: PostDiaryActivity, val emotions: Array<String>, var selectemotion:HashMap<String,Int>): RecyclerView.Adapter<AdapterPostdiary.GhostView>() {

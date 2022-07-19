@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="1dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#FFE50C"/>
+            <corners
+                android:bottomRightRadius="4dp"
+                android:bottomLeftRadius="4dp"
+                android:topLeftRadius="4dp"
+                android:topRightRadius="4dp"/>
+            <padding android:bottom="11dp" android:left="14dp" android:right="14dp" android:top="11dp">
+            </padding>
+        </shape>
+    </item>
+</layer-list>

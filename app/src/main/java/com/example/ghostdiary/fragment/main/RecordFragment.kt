@@ -1,4 +1,4 @@
-package com.example.ghostdiary.fragment
+package com.example.ghostdiary.fragment.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle

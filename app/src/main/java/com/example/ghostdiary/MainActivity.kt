@@ -4,10 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityMainBinding
-import com.example.ghostdiary.fragment.CalendarFragment
-import com.example.ghostdiary.fragment.DefaultFragment
-import com.example.ghostdiary.fragment.RecordFragment
-import com.google.android.material.navigation.NavigationBarView
+import com.example.ghostdiary.fragment.main.CalendarFragment
+import com.example.ghostdiary.fragment.main.DefaultFragment
+import com.example.ghostdiary.fragment.main.RecordFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
+
 
     lateinit var viewModel: MainViewModel
 
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
         defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
-        recordFragment=RecordFragment()
+        recordFragment= RecordFragment()
 
         supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 
@@ -40,7 +40,30 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+
+
+
         setContentView(binding.root)
+
+    }
+
+    override fun onBackPressed() {
+
+        if (supportFragmentManager.fragments.get(0) is CalendarFragment && calendarFragment.isshow){
+            calendarFragment.down_post()
+        }
+        else if(supportFragmentManager.fragments.get(0) is DefaultFragment) {
+            finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다.
+
+            System.runFinalization() //현재 작업중인 쓰레드가 다 종료되면, 종료 시키라는 명령어이다.
+            System.exit(0)
+
+
+
+        }else{
+            supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
+
+        }
 
     }
 
