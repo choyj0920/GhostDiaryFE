@@ -44,7 +44,7 @@ class LoginMainFragment : Fragment() {
 
     fun init(){
         binding.close.setOnClickListener {
-            requireActivity().finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다. (API  16미만은 ActivityCompat.finishAffinity())
+            requireActivity().finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다.
 
             System.runFinalization() //현재 작업중인 쓰레드가 다 종료되면, 종료 시키라는 명령어이다.
 

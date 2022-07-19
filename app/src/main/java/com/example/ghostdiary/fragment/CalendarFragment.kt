@@ -155,7 +155,12 @@ class CalendarFragment : Fragment() {
         val datetime =LocalDateTime.now().format(formatter)
 
         calendar_year_month_text.setText(datetime)
+
+
+
     }
+
+    
 
     fun start_post(day:Date){
         var intent = Intent(getActivity(),PostDiaryActivity::class.java)
