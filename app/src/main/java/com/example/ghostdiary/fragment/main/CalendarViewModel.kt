@@ -1,4 +1,4 @@
-package com.example.ghostdiary.fragment
+package com.example.ghostdiary.fragment.main
 
 import androidx.lifecycle.ViewModel
 import com.example.ghostdiary.databinding.FragmentCalendarBinding

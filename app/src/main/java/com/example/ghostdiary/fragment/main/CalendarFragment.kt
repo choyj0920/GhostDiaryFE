@@ -1,9 +1,8 @@
-package com.example.ghostdiary.fragment
+package com.example.ghostdiary.fragment.main
 
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,7 +12,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.fragment.app.activityViewModels
@@ -27,19 +25,16 @@ import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.HashMap
 
 class CalendarFragment : Fragment() {
     private var calendar = Calendar.getInstance()
 
     companion object {
         fun newInstance() = CalendarFragment()
-        var curCalendar:CalendarFragment?=null
+        var curCalendar: CalendarFragment?=null
     }
     private val viewModel: MainViewModel by activityViewModels()
     var pageIndex = 0
@@ -64,7 +59,7 @@ class CalendarFragment : Fragment() {
         binding=FragmentCalendarBinding.inflate(inflater,container,false)
 
         initView()
-        curCalendar=this
+        curCalendar =this
 
         create_days()
 
@@ -160,7 +155,7 @@ class CalendarFragment : Fragment() {
 
     }
 
-    
+
 
     fun start_post(day:Date){
         var intent = Intent(getActivity(),PostDiaryActivity::class.java)

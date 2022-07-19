@@ -1,4 +1,4 @@
-package com.example.ghostdiary.fragment
+package com.example.ghostdiary.fragment.main
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,11 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.ghostdiary.databinding.FragmentDefaultBinding
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 class DefaultFragment : Fragment() {
 

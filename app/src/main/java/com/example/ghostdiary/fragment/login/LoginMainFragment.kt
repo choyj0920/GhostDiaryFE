@@ -2,24 +2,16 @@ package com.example.ghostdiary.fragment.login
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.LoginActivity
 import com.example.ghostdiary.LoginViewModel
-import com.example.ghostdiary.R
-import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentLoginMainBinding
-import com.example.ghostdiary.fragment.RecordFragment
-import com.example.ghostdiary.fragment.RecordViewModel
+import com.example.ghostdiary.fragment.main.RecordFragment
 
 class LoginMainFragment : Fragment() {
     companion object {

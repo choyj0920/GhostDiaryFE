@@ -1,20 +1,14 @@
 package com.example.ghostdiary
 
 import android.content.ContentValues
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageView
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityLoginBinding
-import com.example.ghostdiary.databinding.ActivityMainBinding
-import com.example.ghostdiary.databinding.FragmentLoginEmailBinding
-import com.example.ghostdiary.fragment.CalendarFragment
-import com.example.ghostdiary.fragment.DefaultFragment
-import com.example.ghostdiary.fragment.RecordFragment
 import com.example.ghostdiary.fragment.login.LoginEmailFragment
 import com.example.ghostdiary.fragment.login.LoginMainFragment
+import com.example.ghostdiary.fragment.login.LoginRegistFragment
 
 
 class LoginActivity : AppCompatActivity() {
@@ -23,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var loginMainFragment: LoginMainFragment
     lateinit var loginEmailFragment: LoginEmailFragment
+    lateinit var loginRegistFragment: LoginRegistFragment
 
     companion object{
         lateinit var loginActivity:LoginActivity
@@ -39,11 +34,18 @@ class LoginActivity : AppCompatActivity() {
         viewModel= ViewModelProvider(this).get(LoginViewModel::class.java)
         loginMainFragment= LoginMainFragment()
         loginEmailFragment= LoginEmailFragment()
+        loginRegistFragment=LoginRegistFragment()
 
         supportFragmentManager.beginTransaction().replace(binding.container.id,loginMainFragment).commit()
 
 
+
+
+
     }
+
+
+
 
     fun change_login_email(){
         Log.e(ContentValues.TAG,"전환 함수호출도 됩니다.")
@@ -57,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(binding.container.id,loginEmailFragment).commit()
     }
     fun change_login_register(){
-        supportFragmentManager.beginTransaction().replace(binding.container.id,loginEmailFragment).commit()
+        supportFragmentManager.beginTransaction().replace(binding.container.id,loginRegistFragment).commit()
     }
 
 

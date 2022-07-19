@@ -1,21 +1,17 @@
 package com.example.ghostdiary
 
 import android.content.ContentValues.TAG
-import android.content.Intent
-import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import androidx.core.view.isInvisible
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.adapter.AdapterPostdiary
 import com.example.ghostdiary.databinding.ActivityPostDiaryBinding
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.fragment.CalendarFragment
+import com.example.ghostdiary.fragment.main.CalendarFragment
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.HashMap
