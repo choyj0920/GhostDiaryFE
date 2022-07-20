@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.view.KeyEvent.KEYCODE_ENTER
+import android.view.KeyEvent.KEYCODE_BACK
+
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -70,21 +72,22 @@ class LoginEmailFragment : Fragment() {
         binding.close.setOnClickListener{
             LoginActivity.loginActivity.change_login_main()
         }
+
         //  엔터 키 리스너
         binding.inputLoginEmail.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
                 // 엔터 눌렀을때 행동
 //                binding.inputLoginPassword.requestFocus()
-                true
+
             }
             false
         }
+
         binding.inputLoginPassword.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_DOWN && keyCode == KEYCODE_ENTER) {
                 // 엔터 눌렀을때 행동
                 val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 imm.hideSoftInputFromWindow(binding.inputLoginPassword.windowToken, 0)
-                true
             }
             false
         }

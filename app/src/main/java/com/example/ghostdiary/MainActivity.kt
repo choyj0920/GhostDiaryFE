@@ -60,6 +60,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }else{
+            binding.navigationbar.selectedItemId=R.id.invisible
             supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 
         }

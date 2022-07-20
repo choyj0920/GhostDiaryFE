@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
+
     >
 
     <!-- Kakao button -->
@@ -40,77 +41,72 @@
 
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+
+
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="48dp"
-        android:orientation="vertical"
 
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
         <EditText
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="1dp"
-            android:singleLine="true"
-            android:textIsSelectable="true"
-
-            android:focusableInTouchMode="true"
-            android:focusable="true"
-            android:layout_gravity="center"
+            android:inputType="textWebEmailAddress"
             android:id="@+id/input_login_email"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:cursorVisible="true"
-            android:fontFamily="@font/roboto_thin"
-            android:layout_weight="1"
-            android:background="@drawable/border"
-            android:hint="이메일 입력"
-            android:textSize="16dp"
-            android:textCursorDrawable="@drawable/text_cursor"
-            />
-
-        <EditText
+            android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:textCursorDrawable="@drawable/text_cursor"
-            android:focusable="true"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/border"
+            android:fontFamily="@font/roboto_thin"
+            android:hint="이메일 입력"
             android:singleLine="true"
-            android:textIsSelectable="true"
-            android:layout_gravity="center"
-            android:cursorVisible="true"
-            android:focusableInTouchMode="true"
+            android:textCursorDrawable="@drawable/text_cursor"
+            android:textSize="16dp" />
+
+        <EditText
             android:id="@+id/input_login_password"
             android:layout_width="match_parent"
             android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="24dp"
+            android:layout_marginRight="5dp"
             android:background="@drawable/border"
             android:fontFamily="@font/roboto_thin"
             android:hint="비밀번호 입력"
-            android:textSize="16dp"
-            />
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/text_cursor"
+            android:textSize="16dp" />
+
         <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:visibility="gone"
             android:id="@+id/tv_wrongpassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"
             android:fontFamily="@font/noto_sans"
-            android:textSize="13sp"
             android:text="비밀번호가 일치하지 않습니다."
             android:textColor="#ff0000"
-            />
+            android:textSize="13sp"
+            android:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="15dp"
+            android:layout_marginRight="5dp"
 
             >
 
@@ -160,40 +156,36 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:id="@+id/btn_login_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="18dp"
-            android:text="로그인"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:fontFamily="@font/noto_sans"
-            android:gravity="center"
+            android:layout_marginRight="5dp"
             android:background="@drawable/borderloginbtn"
             android:elevation="3dp"
-            />
+            android:fontFamily="@font/noto_sans"
+            android:gravity="center"
+            android:text="로그인"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
 
         <TextView
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
             android:id="@+id/tv_register"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="24dp"
-            android:text="회원가입"
-            android:textColor="@color/pink"
-            android:textSize="16sp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/borderloginregister"
             android:fontFamily="@font/noto_sans"
             android:gravity="center"
-            android:background="@drawable/borderloginregister"
-            />
-
+            android:text="회원가입"
+            android:textColor="@color/pink"
+            android:textSize="16sp" />
 
 
     </LinearLayout>
@@ -206,4 +198,9 @@
         android:background="@drawable/close"
         app:layout_constraintBottom_toTopOf="@id/constraintLayout"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
+
+
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

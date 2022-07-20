@@ -266,13 +266,15 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:visibility="visible"
+                    android:letterSpacing="-0.02"
                     android:id="@+id/tv_checkpassword2"
+                    android:alpha="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:fontFamily="@font/noto_sans"
                     android:textSize="12sp"
-                    android:text=" ✓영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
+                    android:text=" ✓ 영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
                     android:textColor="@color/green"
                     />
 

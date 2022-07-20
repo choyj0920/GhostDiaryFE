@@ -39,6 +39,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:fontFamily="@font/roboto"
                 android:text="캘린더"
                 android:textSize="18sp" />
 
