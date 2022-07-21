@@ -232,7 +232,7 @@ class LoginRegistFragment : Fragment() {
         }
 
 
-        var check2:Boolean= s.matches("^(?=.*[a-zA-Z0-9])(?=.*[a-zA-Z!@#\$%^&*])(?=.*[0-9!@#\$%^&*]).{10,}\$".toRegex())
+        var check2:Boolean= s.matches("^(?=.*[a-zA-Z0-9])(?=.*[a-zA-Z!@#\$%^&*])(?=.*[0-9!@#\$%^&*]).{1,}\$".toRegex())
         if(check2){
             binding.tvCheckpassword2.text=" ✓ 영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
             binding.tvCheckpassword2.setTextColor(ContextCompat.getColor(requireContext(),R.color.green))
