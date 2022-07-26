@@ -30,10 +30,8 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CalendarFragment : Fragment() {
-    private var calendar = Calendar.getInstance()
-
+    private lateinit var calendar :Calendar
     companion object {
-        fun newInstance() = CalendarFragment()
         var curCalendar: CalendarFragment?=null
     }
     private val viewModel: MainViewModel by activityViewModels()
@@ -52,8 +50,10 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        calendar.time = Date()
+        calendar = viewModel.calendar
         calendar.set(Calendar.DAY_OF_MONTH, 1)
+        Log.d("TAG","current Date: ${calendar.get(Calendar.YEAR)}/${calendar.get(Calendar.MONTH)}/${calendar.get(Calendar.DAY_OF_MONTH)}")
+
 //        calendar.add(Calendar.MONTH, position - center)
 
         binding=FragmentCalendarBinding.inflate(inflater,container,false)
@@ -66,6 +66,16 @@ class CalendarFragment : Fragment() {
         return binding!!.root
     }
 
+    fun addMonth(add:Int){
+
+        calendar.add(Calendar.MONTH,add)
+        var transFormat = SimpleDateFormat("yyyy/MM")
+        var to = transFormat.format(calendar.time)
+        calendar_year_month_text.setText(to)
+        create_days()
+
+    }
+
 
 
     override fun onAttach(context: Context) {
@@ -76,20 +86,21 @@ class CalendarFragment : Fragment() {
     }
 
 
+
     fun create_days(){
         dayList = MutableList(6 * 7) { Date() }
+        var _calendar=Calendar.getInstance()
+        _calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE))
         for(i in 0..5) {
             for(k in 0..6) {
-                calendar.add(Calendar.DAY_OF_MONTH, (1-calendar.get(Calendar.DAY_OF_WEEK)) + k)
-                dayList[i * 7 + k] = calendar.time
+                _calendar.add(Calendar.DAY_OF_MONTH, (1-_calendar.get(Calendar.DAY_OF_WEEK)) + k)
+                dayList[i * 7 + k] = _calendar.time
             }
-            calendar.add(Calendar.WEEK_OF_MONTH, 1)
+            _calendar.add(Calendar.WEEK_OF_MONTH, 1)
             Log.d("TAG","${Calendar.WEEK_OF_MONTH} , ${1}")
 
         }
         Log.d("TAG","${dayList}")
-
-
 
 
 
@@ -107,14 +118,11 @@ class CalendarFragment : Fragment() {
     }
     fun updatecalendar(){
         val tempMonth = calendar.get(Calendar.MONTH)
-        Log.d(TAG,"${tempMonth} why!@!@!@#@@!")
-
 
         val dayListManager = GridLayoutManager(context, 7)
         val dayListAdapter = AdapterDay(this,tempMonth, dayList, viewModel.getEmotionArray())
 
         calendarAdapter=dayListAdapter
-
 
 
         calendar_view.apply {
@@ -150,6 +158,13 @@ class CalendarFragment : Fragment() {
         val datetime =LocalDateTime.now().format(formatter)
 
         calendar_year_month_text.setText(datetime)
+
+        binding!!.btnLastmonth.setOnClickListener {
+            addMonth(-1)
+        }
+        binding!!.btnNextmonth.setOnClickListener {
+            addMonth(1)
+        }
 
 
 
