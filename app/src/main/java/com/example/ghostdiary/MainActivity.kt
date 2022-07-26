@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityMainBinding
 import com.example.ghostdiary.fragment.main.CalendarFragment
@@ -35,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
         
         binding!!.tvDate.text=to
+
+        binding!!.btnSideomenu.setOnClickListener {
+            binding!!.drawerlayout.openDrawer(GravityCompat.START)
+        }
 
         supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 
