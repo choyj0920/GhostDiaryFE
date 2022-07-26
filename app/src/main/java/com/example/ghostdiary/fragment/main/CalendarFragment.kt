@@ -69,9 +69,7 @@ class CalendarFragment : Fragment() {
     fun addMonth(add:Int){
 
         calendar.add(Calendar.MONTH,add)
-        var transFormat = SimpleDateFormat("yyyy/MM")
-        var to = transFormat.format(calendar.time)
-        calendar_year_month_text.setText(to)
+
         create_days()
 
     }
@@ -117,6 +115,9 @@ class CalendarFragment : Fragment() {
 
     }
     fun updatecalendar(){
+        var transFormat = SimpleDateFormat("yyyy/MM")
+        var to = transFormat.format(calendar.time)
+        calendar_year_month_text.setText(to)
         val tempMonth = calendar.get(Calendar.MONTH)
 
         val dayListManager = GridLayoutManager(context, 7)
@@ -214,8 +215,6 @@ class CalendarFragment : Fragment() {
 
         binding!!.popupLayout.visibility=View.VISIBLE
 
-
-
     }
 
     fun down_post(){
@@ -225,7 +224,6 @@ class CalendarFragment : Fragment() {
         binding!!.popupLayout.visibility=View.GONE
 
     }
-
     fun selectimage(index:Int): Int {
         when(index){
             0 -> return R.drawable.ghost_verygood
