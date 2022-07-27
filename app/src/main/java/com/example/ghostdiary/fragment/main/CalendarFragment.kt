@@ -1,7 +1,9 @@
 package com.example.ghostdiary.fragment.main
 
+import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +12,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Button
 import android.widget.ImageView
+import android.widget.NumberPicker
 
 import android.widget.TextView
 import androidx.core.view.isInvisible
@@ -23,6 +27,7 @@ import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
+import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -30,10 +35,8 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CalendarFragment : Fragment() {
-    private var calendar = Calendar.getInstance()
-
+    private lateinit var calendar :Calendar
     companion object {
-        fun newInstance() = CalendarFragment()
         var curCalendar: CalendarFragment?=null
     }
     private val viewModel: MainViewModel by activityViewModels()
@@ -52,8 +55,10 @@ class CalendarFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        calendar.time = Date()
+        calendar = viewModel.calendar
         calendar.set(Calendar.DAY_OF_MONTH, 1)
+        Log.d("TAG","current Date: ${calendar.get(Calendar.YEAR)}/${calendar.get(Calendar.MONTH)}/${calendar.get(Calendar.DAY_OF_MONTH)}")
+
 //        calendar.add(Calendar.MONTH, position - center)
 
         binding=FragmentCalendarBinding.inflate(inflater,container,false)
@@ -66,6 +71,16 @@ class CalendarFragment : Fragment() {
         return binding!!.root
     }
 
+    fun addMonth(add:Int){
+
+        calendar.add(Calendar.MONTH,add)
+        create_days()
+    }
+
+    fun setMonth(year:Int,month:Int){
+        calendar.set(year,month-1,1)
+        create_days()
+    }
 
 
     override fun onAttach(context: Context) {
@@ -76,20 +91,21 @@ class CalendarFragment : Fragment() {
     }
 
 
+
     fun create_days(){
         dayList = MutableList(6 * 7) { Date() }
+        var _calendar=Calendar.getInstance()
+        _calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE))
         for(i in 0..5) {
             for(k in 0..6) {
-                calendar.add(Calendar.DAY_OF_MONTH, (1-calendar.get(Calendar.DAY_OF_WEEK)) + k)
-                dayList[i * 7 + k] = calendar.time
+                _calendar.add(Calendar.DAY_OF_MONTH, (1-_calendar.get(Calendar.DAY_OF_WEEK)) + k)
+                dayList[i * 7 + k] = _calendar.time
             }
-            calendar.add(Calendar.WEEK_OF_MONTH, 1)
+            _calendar.add(Calendar.WEEK_OF_MONTH, 1)
             Log.d("TAG","${Calendar.WEEK_OF_MONTH} , ${1}")
 
         }
         Log.d("TAG","${dayList}")
-
-
 
 
 
@@ -106,15 +122,15 @@ class CalendarFragment : Fragment() {
 
     }
     fun updatecalendar(){
+        var transFormat = SimpleDateFormat("yyyy/MM")
+        var to = transFormat.format(calendar.time)
+        calendar_year_month_text.setText(to)
         val tempMonth = calendar.get(Calendar.MONTH)
-        Log.d(TAG,"${tempMonth} why!@!@!@#@@!")
-
 
         val dayListManager = GridLayoutManager(context, 7)
         val dayListAdapter = AdapterDay(this,tempMonth, dayList, viewModel.getEmotionArray())
 
         calendarAdapter=dayListAdapter
-
 
 
         calendar_view.apply {
@@ -135,6 +151,61 @@ class CalendarFragment : Fragment() {
         super.onDestroyView()
     }
 
+    fun initmonthpicker(){
+        //  날짜 dialog
+        binding!!.tvDate.setOnClickListener {
+
+            val edialog : LayoutInflater = LayoutInflater.from(context)
+            val dialogbinding:FragmentMonthpickerBinding=FragmentMonthpickerBinding.inflate(edialog)
+            val mView : View = dialogbinding.root
+
+            val year : NumberPicker = dialogbinding.yearpickerDatepicker
+            val month : NumberPicker = dialogbinding.monthpickerDatepicker
+
+            val dialog = AlertDialog.Builder(context).apply {
+                setPositiveButton("확인",
+                    DialogInterface.OnClickListener { dialog, i ->
+
+                        setMonth(year.value, month.value)
+                        dialog.dismiss()
+                        dialog.cancel()
+                    })
+                setNegativeButton("취소",
+                    DialogInterface.OnClickListener { dialog, i ->
+                        dialog.dismiss()
+                        dialog.cancel()
+
+                    })}.create()
+
+
+            //  순환 안되게 막기
+            year.wrapSelectorWheel = false
+            month.wrapSelectorWheel = false
+
+            //  editText 설정 해제
+            year.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+            month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+
+            //  최소값 설정
+            year.minValue = 2001
+            month.minValue = 1
+
+            //  최대값 설정
+            year.maxValue = 2080
+            month.maxValue = 12
+
+            // 값 설정
+            year.value=calendar.get(Calendar.YEAR)
+            month.value=calendar.get(Calendar.MONTH)+1
+
+            dialog.setView(mView)
+            dialog.create()
+            dialog.show()
+
+
+        }
+    }
+
     fun initView() {
         binding!!.ivTodayemotionhint.setOnClickListener{
             viewModel.ishintinvisible= true
@@ -150,6 +221,14 @@ class CalendarFragment : Fragment() {
         val datetime =LocalDateTime.now().format(formatter)
 
         calendar_year_month_text.setText(datetime)
+
+        binding!!.btnLastmonth.setOnClickListener {
+            addMonth(-1)
+        }
+        binding!!.btnNextmonth.setOnClickListener {
+            addMonth(1)
+        }
+        initmonthpicker()
 
 
 
@@ -199,8 +278,6 @@ class CalendarFragment : Fragment() {
 
         binding!!.popupLayout.visibility=View.VISIBLE
 
-
-
     }
 
     fun down_post(){
@@ -210,7 +287,6 @@ class CalendarFragment : Fragment() {
         binding!!.popupLayout.visibility=View.GONE
 
     }
-
     fun selectimage(index:Int): Int {
         when(index){
             0 -> return R.drawable.ghost_verygood

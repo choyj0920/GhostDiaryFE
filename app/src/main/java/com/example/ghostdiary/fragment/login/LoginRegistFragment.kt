@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -74,6 +75,17 @@ class LoginRegistFragment : Fragment() {
                 // 우린 이 함수를 사용한다.
                 check_password(binding.inputRegistPassword.text.toString())
 
+                if(binding.inputRegistPassword2.text.toString()== binding.inputRegistPassword.text.toString()){
+                    binding.tvCheckpassword3.text=" ✓ 동일한 비밀번호를 입력하세요"
+                    binding.tvCheckpassword3.setTextColor(ContextCompat.getColor(context!!,R.color.green))
+                    ispasswordcheckcorrect=true
+                }else{
+
+                    binding.tvCheckpassword3.text=" × 동일한 비밀번호를 입력하세요"
+                    binding.tvCheckpassword3.setTextColor(ContextCompat.getColor(context!!,R.color.red2))
+                    ispasswordcheckcorrect=false
+                }
+
             }
         })
         // 비밀번호 확인 체크부
@@ -85,13 +97,13 @@ class LoginRegistFragment : Fragment() {
                 // text가 바뀔 때마다 호출된다.
                 // 우린 이 함수를 사용한다.
                 if(binding.inputRegistPassword2.text.toString()== binding.inputRegistPassword.text.toString()){
-                    binding.tvCheckpassword3.text=" ✓동일한 비밀번호를 입력하세요"
-                    binding.tvCheckpassword3.setTextColor(Color.GREEN)
+                    binding.tvCheckpassword3.text=" ✓ 동일한 비밀번호를 입력하세요"
+                    binding.tvCheckpassword3.setTextColor(ContextCompat.getColor(context!!,R.color.green))
                     ispasswordcheckcorrect=true
                 }else{
 
-                    binding.tvCheckpassword3.text=" • 동일한 비밀번호를 입력하세요"
-                    binding.tvCheckpassword3.setTextColor(Color.BLACK)
+                    binding.tvCheckpassword3.text=" × 동일한 비밀번호를 입력하세요"
+                    binding.tvCheckpassword3.setTextColor(ContextCompat.getColor(context!!,R.color.red2))
                     ispasswordcheckcorrect=false
                 }
 
@@ -212,22 +224,22 @@ class LoginRegistFragment : Fragment() {
         var check1:Boolean= s.length>=10 && s.length<=20
         if(check1){
             binding.tvCheckpassword1.text=" ✓ 10자 이상 입력"
-            binding.tvCheckpassword1.setTextColor(Color.GREEN)
+            binding.tvCheckpassword1.setTextColor(ContextCompat.getColor(requireContext(),R.color.green))
 
         }else{
             binding.tvCheckpassword1.text=" • 10자 이상 입력"
-            binding.tvCheckpassword1.setTextColor(Color.BLACK)
+            binding.tvCheckpassword1.setTextColor(ContextCompat.getColor(requireContext(),R.color.black2))
         }
 
 
-        var check2:Boolean= s.matches("^(?=.*[a-zA-Z0-9])(?=.*[a-zA-Z!@#\$%^&*])(?=.*[0-9!@#\$%^&*]).{10,}\$".toRegex())
+        var check2:Boolean= s.matches("^(?=.*[a-zA-Z0-9])(?=.*[a-zA-Z!@#\$%^&*])(?=.*[0-9!@#\$%^&*]).{1,}\$".toRegex())
         if(check2){
-            binding.tvCheckpassword2.text=" ✓영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
-            binding.tvCheckpassword2.setTextColor(Color.GREEN)
+            binding.tvCheckpassword2.text=" ✓ 영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
+            binding.tvCheckpassword2.setTextColor(ContextCompat.getColor(requireContext(),R.color.green))
 
         }else{
-            binding.tvCheckpassword2.text=" •영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
-            binding.tvCheckpassword2.setTextColor(Color.BLACK)
+            binding.tvCheckpassword2.text=" • 영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
+            binding.tvCheckpassword2.setTextColor(ContextCompat.getColor(requireContext(),R.color.black2))
         }
 
         ispasswordcorrect=check1 && check2

@@ -34,7 +34,10 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 
         var transFormat = SimpleDateFormat("yyyyMMdd")
         var to = transFormat.format(dayList[position]);
-        if(emotionMap.containsKey(to)){
+        if(tempMonth != dayList.get(position).month) {
+            holder.bindng.ivDate.isInvisible=true
+            holder.bindng.tvDate.isInvisible=true
+        } else if(emotionMap.containsKey(to)){
             Log.d(TAG,"포함!! ${to}, ${emotionMap[to]}")
             holder.bindng.ivDate.setImageResource(
                 when(emotionMap.get(to)!!.today_emotion){
@@ -50,10 +53,6 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
             holder.bindng.ivDate.setOnClickListener{
                 parent_fragment.show_post(emotionMap[to]!!.date)
             }
-        }
-        else if(tempMonth != dayList.get(position).month+1) {
-            holder.bindng.ivDate.isInvisible=true
-            holder.bindng.tvDate.isInvisible=true
         }
         else{ // 비워져 있는 칸
             holder.bindng.ivDate.setOnClickListener{

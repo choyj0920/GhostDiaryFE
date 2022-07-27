@@ -54,8 +54,6 @@
                     android:layout_alignParentTop="true"
                     android:textColor="@color/black"
                     android:gravity="center_vertical"
-                    android:fontFamily="@font/noto_sans"
-                    android:lineSpacingExtra="-7sp"
                     android:text="이메일로 회원가입"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -83,7 +81,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
 
                         android:textSize="14sp"
                         android:textColor="#1f1f1f"
@@ -93,7 +90,6 @@
                         android:layout_marginRight="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
                         android:layout_gravity="top"
 
                         android:textSize="14sp"
@@ -115,7 +111,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:cursorVisible="true"
-                    android:fontFamily="@font/roboto_thin"
                     android:layout_weight="1"
                     android:background="@drawable/border"
                     android:hint="이름을 입력하세요"
@@ -134,7 +129,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
 
                         android:text="이메일"
                         android:textColor="#1f1f1f"
@@ -143,7 +137,6 @@
                         android:layout_marginRight="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
                         android:layout_gravity="top"
 
                         android:textSize="14sp"
@@ -172,7 +165,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         android:background="@drawable/border"
-                        android:fontFamily="@font/noto_sans"
                         android:hint="예 : Diary@naver.com"
                         android:textSize="16dp"
                         android:layout_weight="1"
@@ -208,7 +200,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
 
                         android:textSize="14sp"
                         android:textColor="#1f1f1f"
@@ -218,7 +209,6 @@
                         android:layout_marginRight="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
                         android:layout_gravity="top"
 
                         android:textSize="14sp"
@@ -240,7 +230,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:cursorVisible="true"
-                    android:fontFamily="@font/roboto_thin"
                     android:layout_weight="1"
                     android:background="@drawable/border"
                     android:hint="비밀번호를 입력하세요"
@@ -257,7 +246,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/noto_sans"
                     android:textSize="12sp"
                     android:text=" • 10자 이상 입력"
                     android:textColor="@color/black"
@@ -266,13 +254,14 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:visibility="visible"
+                    android:letterSpacing="-0.02"
                     android:id="@+id/tv_checkpassword2"
+                    android:alpha="1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:fontFamily="@font/noto_sans"
                     android:textSize="12sp"
-                    android:text=" ✓영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
+                    android:text=" ✓ 영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합"
                     android:textColor="@color/green"
                     />
 
@@ -286,7 +275,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
 
                         android:textSize="14sp"
                         android:textColor="#1f1f1f"
@@ -296,7 +284,6 @@
                         android:layout_marginRight="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
                         android:layout_gravity="top"
 
                         android:textSize="14sp"
@@ -318,7 +305,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:cursorVisible="true"
-                    android:fontFamily="@font/roboto_thin"
                     android:layout_weight="1"
                     android:background="@drawable/border"
                     android:hint="비밀번호를 한번 더 입력하세요"
@@ -333,7 +319,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:fontFamily="@font/noto_sans"
                     android:textSize="12sp"
                     android:text=" • 동일한 비밀번호를 입력하세요"
                     android:textColor="@color/black"
@@ -350,7 +335,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
                         android:textSize="14sp"
                         android:textColor="#1f1f1f"
                         android:text="생년월일"
@@ -359,7 +343,6 @@
                         android:layout_marginRight="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/noto_sans"
                         android:layout_gravity="top"
 
                         android:textSize="14sp"
@@ -382,7 +365,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:cursorVisible="true"
-                    android:fontFamily="@font/roboto_thin"
                     android:layout_weight="1"
                     android:background="@drawable/border"
                     android:hint="생년월일 입력하세요"
@@ -403,7 +385,6 @@
                     android:text="회원가입"
                     android:textColor="@color/white"
                     android:textSize="16sp"
-                    android:fontFamily="@font/noto_sans"
                     android:gravity="center"
                     android:background="@drawable/borderloginbtn"
                     android:elevation="3dp"
@@ -451,7 +432,6 @@
                 android:id="@+id/tv_regist_popuptext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans"
                 android:textColor="#757575"
                 android:textSize="16sp"
                 android:layout_margin="24dp"
@@ -465,7 +445,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
-                android:fontFamily="@font/noto_sans"
                 android:text="확인"
                 android:textColor="@color/pink"
                 android:textSize="16sp"

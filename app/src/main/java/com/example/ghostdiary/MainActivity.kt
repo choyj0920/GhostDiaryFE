@@ -2,11 +2,16 @@ package com.example.ghostdiary
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
+import android.view.View
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityMainBinding
 import com.example.ghostdiary.fragment.main.CalendarFragment
 import com.example.ghostdiary.fragment.main.DefaultFragment
 import com.example.ghostdiary.fragment.main.RecordFragment
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,14 +32,36 @@ class MainActivity : AppCompatActivity() {
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
 
+        var today= LocalDateTime.now()
+        var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+        
+        binding!!.tvDate.text=to
+
+        binding!!.btnSideomenu.setOnClickListener {
+            binding!!.drawerlayout.openDrawer(GravityCompat.START)
+        }
+
         supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 
         binding.navigationbar.setOnItemSelectedListener { item ->
             when(item.itemId) {
-                R.id.invisible -> supportFragmentManager.beginTransaction().replace(binding.container.id, defaultFragment).commit()
-                R.id.calendar ->  supportFragmentManager.beginTransaction().replace(binding.container.id,calendarFragment).commit()
+                R.id.invisible -> {
+                    var today= LocalDateTime.now()
+                    var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+                    binding!!.tvDate.text=to
+                    binding!!.tvDate.gravity=Gravity.LEFT
 
-                R.id.record-> supportFragmentManager.beginTransaction().replace(binding.container.id,recordFragment).commit()
+                    supportFragmentManager.beginTransaction().replace(binding.container.id, defaultFragment).commit()
+                }
+                R.id.calendar ->  {
+                    binding!!.tvDate.text="캘린더"
+                    binding!!.tvDate.gravity=Gravity.CENTER
+                    supportFragmentManager.beginTransaction().replace(binding.container.id,calendarFragment).commit()
+                }
+
+                R.id.record-> {
+                    supportFragmentManager.beginTransaction().replace(binding.container.id,recordFragment).commit()
+                }
 
             }
             true
@@ -60,6 +87,7 @@ class MainActivity : AppCompatActivity() {
 
 
         }else{
+            binding.navigationbar.selectedItemId=R.id.invisible
             supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 
         }

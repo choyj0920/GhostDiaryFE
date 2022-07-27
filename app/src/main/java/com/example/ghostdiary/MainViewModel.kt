@@ -9,6 +9,8 @@ import kotlin.collections.HashMap
 
 class MainViewModel(): ViewModel() {
     var ishintinvisible: Boolean = false
+    var calendar =Calendar.getInstance()
+
 
     var calendar_emotionArray: HashMap<String, Day_Diary>? = null
 

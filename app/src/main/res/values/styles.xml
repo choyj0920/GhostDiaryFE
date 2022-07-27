@@ -1,8 +1,14 @@
 <resources>
 
+
+
     <style name="Widget.Theme.Ghostdiary.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+    </style>
+
+    <style name="AppTheme.NumberPicker" parent="Theme.Ghostdiary">
+        <item name="colorControlNormal">@color/pink</item>
     </style>
 
     <style name="MySpinnerDatePickerStyle" parent="Theme.AppCompat.Light.Dialog">
@@ -16,5 +22,11 @@
         <!-- 취소/확인버튼 색상 -->
         <item name="android:textColor">@color/pink</item>
     </style>
+
+    <style name="customfont" parent="">
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+
 
 </resources>

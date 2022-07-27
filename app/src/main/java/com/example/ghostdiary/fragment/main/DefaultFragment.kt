@@ -25,11 +25,7 @@ class DefaultFragment : Fragment() {
     ): View? {
         binding=FragmentDefaultBinding.inflate(inflater,container,false)
 
-        var today=LocalDateTime.now()
-        var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
 
-
-        binding!!.tvDate.text=to
 
         return binding!!.root
     }

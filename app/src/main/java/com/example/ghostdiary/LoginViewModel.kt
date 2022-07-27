@@ -22,6 +22,7 @@ class LoginViewModel(): ViewModel() {
         if (UserList==null){
             UserList= hashMapOf()
 
+            UserList!!.put("ad",User("admin1","ad","ad","2022 / 07 / 10 "))
             UserList!!.put("admin1@ad.ad",User("admin1","admin1@ad.ad","123456789!","2022 / 07 / 10 "))
             UserList!!.put("admin2@ad.ad",User("admin2","admin2@ad.ad","123456789!","2022 / 07 / 20 "))
             UserList!!.put("admin3@ad.ad",User("admin3","admin3@ad.ad","123456789!","2022 / 07 / 30 "))
