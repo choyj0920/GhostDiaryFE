@@ -12,11 +12,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.NumberPicker
+import android.widget.*
 
-import android.widget.TextView
 import androidx.core.view.isInvisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,6 +23,7 @@ import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDay
+import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -49,6 +47,7 @@ class CalendarFragment : Fragment() {
     lateinit var calendarAdapter: AdapterDay
     lateinit var emotionImageviews:Array<ImageView>
     private var binding: FragmentCalendarBinding? =null
+    var emotionpostion:Int=-1
     var isshow = false
 
     override fun onCreateView(
@@ -88,6 +87,33 @@ class CalendarFragment : Fragment() {
         if (context is MainActivity) {
             mContext = context
         }
+    }
+
+    fun selecttoday_emotion(){
+
+
+    }
+    fun init_spinner(){
+        val array= arrayListOf<Int>(-1,0,1,2,3,4)
+        val adapter=EmotionSpinnerAdapter(requireContext(),array)
+
+        binding!!.spinnerEmotion.adapter=adapter
+
+        binding!!.spinnerEmotion.onItemSelectedListener= object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                emotionpostion=array.get(position)
+
+                updatecalendar()
+
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+
+        }
+
+
+
     }
 
 
@@ -143,7 +169,7 @@ class CalendarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // TODO: Use the ViewModel
-        binding!!.ivTodayemotionhint.isInvisible =viewModel.ishintinvisible
+
     }
 
     override fun onDestroyView() {
@@ -207,10 +233,7 @@ class CalendarFragment : Fragment() {
     }
 
     fun initView() {
-        binding!!.ivTodayemotionhint.setOnClickListener{
-            viewModel.ishintinvisible= true
-            binding!!.ivTodayemotionhint.isInvisible=viewModel.ishintinvisible
-        }
+
         emotionImageviews= arrayOf(binding!!.ivEmotionToday,binding!!.ivEmotion1,binding!!.ivEmotion2,binding!!.ivEmotion3,binding!!.ivEmotion4)
         pageIndex -= (Int.MAX_VALUE / 2)
         //Log.e(TAG, "Calender Index: $pageIndex")
@@ -230,6 +253,7 @@ class CalendarFragment : Fragment() {
         }
         initmonthpicker()
 
+        init_spinner()
 
 
     }
