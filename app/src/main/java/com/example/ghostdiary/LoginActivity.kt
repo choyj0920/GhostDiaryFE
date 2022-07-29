@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityLoginBinding
 import com.example.ghostdiary.fragment.login.LoginEmailFragment
+import com.example.ghostdiary.fragment.login.LoginFindFragment
 import com.example.ghostdiary.fragment.login.LoginMainFragment
 import com.example.ghostdiary.fragment.login.LoginRegistFragment
 import com.example.ghostdiary.fragment.main.CalendarFragment
@@ -20,6 +21,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var loginMainFragment: LoginMainFragment
     lateinit var loginEmailFragment: LoginEmailFragment
     lateinit var loginRegistFragment: LoginRegistFragment
+    lateinit var loginFindFragment: LoginFindFragment
 
     companion object{
         lateinit var loginActivity:LoginActivity
@@ -37,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
         loginMainFragment= LoginMainFragment()
         loginEmailFragment= LoginEmailFragment()
         loginRegistFragment=LoginRegistFragment()
+        loginFindFragment= LoginFindFragment()
 
         supportFragmentManager.beginTransaction().replace(binding.container.id,loginMainFragment).commit()
 
@@ -47,19 +50,18 @@ class LoginActivity : AppCompatActivity() {
 
 
     fun change_login_email(){
-        Log.e(ContentValues.TAG,"전환 함수호출도 됩니다.")
-
         supportFragmentManager.beginTransaction().replace(binding.container.id,loginEmailFragment).commit()
     }
     fun change_login_main(){
         supportFragmentManager.beginTransaction().replace(binding.container.id,loginMainFragment).commit()
     }
-    fun change_login_findpassword(){
-        supportFragmentManager.beginTransaction().replace(binding.container.id,loginEmailFragment).commit()
+    fun change_login_find(){
+        supportFragmentManager.beginTransaction().replace(binding.container.id,loginFindFragment).commit()
     }
     fun change_login_register(){
         supportFragmentManager.beginTransaction().replace(binding.container.id,loginRegistFragment).commit()
     }
+
 
     override fun onBackPressed() {
 
@@ -75,8 +77,11 @@ class LoginActivity : AppCompatActivity() {
         }else if(supportFragmentManager.fragments.get(0) is LoginRegistFragment){
             change_login_email()
         }
+        else if(supportFragmentManager.fragments.get(0) is LoginFindFragment){
+            change_login_email()
+        }
         else{
-
+            super.onBackPressed()
         }
 
     }

@@ -13,6 +13,7 @@
         <item name="android:textViewStyle">@style/customfont</item>
         <item name="android:editTextStyle">@style/customfont</item>
         <item name="android:buttonStyle">@style/customfont</item>
+        <item name="alertDialogStyle">@style/AlertDialogTheme</item>
     </style>
     <style name="NewDialog">
         <item name="android:windowFrame">@null</item>
@@ -23,6 +24,9 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorAccent">@color/pink</item>
+        
     </style>
 
 </resources>

@@ -37,6 +37,11 @@ class LoginEmailFragment : Fragment() {
     fun init(){
         viewModel=LoginActivity.loginActivity.viewModel
 
+        //이메일/비밀번호 찾기
+        binding.btnLoginFindpassword.setOnClickListener{
+            LoginActivity.loginActivity.change_login_find()
+        }
+
         // 로그인 버튼
         binding.btnLoginEmail.setOnClickListener {
             val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

@@ -60,7 +60,17 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.record-> {
+                    binding!!.tvDate.text="기록"
+                    binding!!.tvDate.gravity=Gravity.CENTER
                     supportFragmentManager.beginTransaction().replace(binding.container.id,recordFragment).commit()
+                }
+                R.id.memo->{
+                    binding!!.tvDate.text="메모"
+                    binding!!.tvDate.gravity=Gravity.CENTER
+                }
+                R.id.clinic->{
+                    binding!!.tvDate.text="클리닉"
+                    binding!!.tvDate.gravity=Gravity.CENTER
                 }
 
             }

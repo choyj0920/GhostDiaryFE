@@ -1,7 +1,9 @@
 package com.example.ghostdiary.fragment.login
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
@@ -113,30 +115,24 @@ class LoginRegistFragment : Fragment() {
         binding.tvRegistEmailDuplicate.setOnClickListener {
             val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
-            binding.layoutRegistPopup.visibility=View.VISIBLE
-            binding.layoutRegistMain.isClickable=false
+//            binding.layoutRegistPopup.visibility=View.VISIBLE
+//            binding.layoutRegistMain.isClickable=false
 
             var email=binding.inputRegistEmail.text
 
             if(!emailpattern.matcher(email).matches()){
-                binding.tvRegistPopuptext.text="이메일이 아닙니다."
+                show_dialog("이메일이 아닙니다.")
                 isemailduplicate=true
 
-            }
-
-            else if(true) { // 사용가능 이메일
-                binding.tvRegistPopuptext.text="사용 가능한 이메일 입니다."
+            }else if(true) { // 사용가능 이메일
+                show_dialog("사용 가능한 이메일 입니다.")
                 isemailduplicate=false
 
             }else{ //이미 존재하는 이메일
-                binding.tvRegistPopuptext.text="중복된 이메일이 있습니다."
+                show_dialog("중복된 이메일이 있습니다.")
                 isemailduplicate=true
 
 
-            }
-            binding.tvRegistPopupclose.setOnClickListener {
-                binding.layoutRegistPopup.visibility=View.GONE
-                binding.layoutRegistMain.isClickable=true
             }
 
         }
@@ -171,7 +167,7 @@ class LoginRegistFragment : Fragment() {
                 month,
                 day
             )
-//           최소 날짜를 현재 시각 이후로
+//           최대 날짜를 현재 시각 이후로
             dpd.datePicker.maxDate = System.currentTimeMillis() - 1000;
             dpd.show()
 
@@ -182,22 +178,29 @@ class LoginRegistFragment : Fragment() {
             imm.hideSoftInputFromWindow(binding.root.windowToken, 0)
             var name =binding.inputRegistName.text.toString()
             if(name.length==0){
-                Toast.makeText(context,"이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context,"이름을 입력해주세요", Toast.LENGTH_SHORT).show()
+                show_dialog("이름을 입력해주세요")
+
                 return@setOnClickListener
             }
             else if(isemailduplicate) {
-                Toast.makeText(context, "email 중복 확인해주세요.", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "email 중복 확인해주세요.", Toast.LENGTH_SHORT).show()
+                show_dialog("email 중복 확인해주세요.")
                 return@setOnClickListener
 
             }else if(!ispasswordcorrect){
-                Toast.makeText(context, "형식에 맞는 password를 입력해주세요", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "형식에 맞는 password를 입력해주세요", Toast.LENGTH_SHORT).show()
+                show_dialog("형식에 맞는 password를 입력해주세요")
                 return@setOnClickListener
             }else if(!ispasswordcheckcorrect) {
-                Toast.makeText(context, "비밀번호 확인 체크", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "비밀번호 확인 체크", Toast.LENGTH_SHORT).show()
+                    show_dialog("비밀번호 확인 체크")
                 return@setOnClickListener
 
+
             }else if(!ischeckbirthday) {
-                Toast.makeText(context, "생일을 입력해주세요", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "생일을 입력해주세요", Toast.LENGTH_SHORT).show()
+                    show_dialog("생일을 입력해주세요")
                 return@setOnClickListener
 
             }else{
@@ -214,9 +217,24 @@ class LoginRegistFragment : Fragment() {
             
         }
 
+    }
 
+    fun show_dialog(text:String){
+        var builder=AlertDialog.Builder(context,R.style.AlertDialogTheme)
+        builder.setMessage(text)
+        builder.setPositiveButton("확인",
+            DialogInterface.OnClickListener { dialog, i ->
 
-
+            dialog.dismiss()
+            dialog.cancel()
+        })
+        var dialog= builder.create()
+        dialog.setOnShowListener{
+            DialogInterface.OnShowListener(){
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(requireContext(),R.color.pink))
+            }
+        }
+        dialog.show()
     }
 
 

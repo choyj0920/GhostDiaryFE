@@ -15,12 +15,12 @@
         android:layout_marginRight="5dp"
         android:layout_width="14dp"
         android:layout_height="14dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="17dp"
         android:background="@drawable/close"
-        app:layout_constraintBottom_toTopOf="@id/constraintLayout"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout" />
+        />
 
     <TextView
+        android:textStyle="bold"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:id="@+id/tv_login_title"
