@@ -11,7 +11,7 @@
         android:id="@+id/layout_emotion"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -74,7 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -193,18 +193,50 @@
             android:layout_marginBottom="10dp"
             android:id="@+id/ev_text_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+
 
             android:gravity="top"
             android:hint="글 작성란"
             android:textSize="16sp"
             android:cursorVisible="true"
+            android:background="@color/white"
 
             android:scrollbars="vertical"
             android:textColorHint="@color/gray"
+            android:maxLines="15"
             >
 
         </EditText>
+
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="9dp"
+                app:srcCompat="@drawable/ic_image" />
+
+            <ImageView
+                android:id="@+id/iv_clock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:padding="9dp"
+                app:srcCompat="@drawable/ic_clock" />
+
+
+        </RelativeLayout>
+
+
+
 
 
 

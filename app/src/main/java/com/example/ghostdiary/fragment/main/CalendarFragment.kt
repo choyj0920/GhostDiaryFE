@@ -1,6 +1,7 @@
 package com.example.ghostdiary.fragment.main
 
 import android.app.AlertDialog
+
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.DialogInterface
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.*
+import androidx.core.content.ContextCompat
 
 import androidx.core.view.isInvisible
 import androidx.fragment.app.activityViewModels
@@ -24,6 +26,7 @@ import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
+import com.example.ghostdiary.databinding.DialogTodayemotionBinding
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -31,6 +34,7 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CalendarFragment : Fragment() {
     private lateinit var calendar :Calendar
@@ -234,7 +238,7 @@ class CalendarFragment : Fragment() {
 
     fun initView() {
 
-        emotionImageviews= arrayOf(binding!!.ivEmotionToday,binding!!.ivEmotion1,binding!!.ivEmotion2,binding!!.ivEmotion3,binding!!.ivEmotion4)
+//        emotionImageviews= arrayOf(binding!!.ivEmotionToday,binding!!.ivEmotion1,binding!!.ivEmotion2,binding!!.ivEmotion3,binding!!.ivEmotion4)
         pageIndex -= (Int.MAX_VALUE / 2)
         //Log.e(TAG, "Calender Index: $pageIndex")
         calendar_year_month_text = binding!!.tvDate
@@ -258,7 +262,40 @@ class CalendarFragment : Fragment() {
 
     }
 
+    fun select_emotion(day:Date){
+        val inflater : LayoutInflater = LayoutInflater.from(context)
+        val emotionbinding: DialogTodayemotionBinding  =DialogTodayemotionBinding.inflate(inflater)
 
+        val builder= AlertDialog.Builder(context,R.style.CustomAlertDialog)
+        var emotionarray:ArrayList<TextView> = arrayListOf(emotionbinding.selectEmotionVerygood,emotionbinding.selectEmotionGood,
+            emotionbinding.selectEmotionNormal,emotionbinding.selectEmotionBad,emotionbinding.selectEmotionVerybad)
+
+
+        builder.setView(emotionbinding.root)
+
+        var dialog=builder.create()
+        dialog.setOnShowListener {
+            for(i in 0.. emotionarray.size-1){
+                emotionarray[i].setOnClickListener {
+                    var day=day
+                    var transFormat = SimpleDateFormat("yyyyMMdd")
+                    var to = transFormat.format(day)
+                    if(viewModel.getEmotionArray().contains(to)){
+                        viewModel.getEmotionArray()[to]!!.today_emotion =i
+
+                    }else{
+                        viewModel.getEmotionArray().put(to, Day_Diary(day,i))
+                    }
+                    dialog.dismiss()
+                    dialog.cancel()
+                    updatecalendar()
+
+                }
+            }
+        }
+
+        dialog.show()
+    }
 
     fun start_post(day:Date){
         var intent = Intent(getActivity(),PostDiaryActivity::class.java)
@@ -267,48 +304,11 @@ class CalendarFragment : Fragment() {
         startActivity(intent)
     }
     fun show_post(day:Date){
-        if(isshow)
-            return
-
-        isshow=true
-        var transFormat = SimpleDateFormat("yyyyMMdd")
-        var to = transFormat.format(day)
-
-        var diary= viewModel.getEmotionArray()[to]
-        var emotions= diary!!.getEmotionarr()
-        Log.d("TAG","addDiary ${diary.getEmotionarr_name()} ${emotions}")
-
-        binding!!.ivEmotionToday.setImageResource(selectimage(emotions[0]))
-        var i =1
-        for(imageview in emotionImageviews){
-            if(emotions.size<=i)
-                break
-            imageview.setImageResource(selectimage(emotions[i]))
-            i+=1
-        }
-
-
-        binding!!.tvPopupDate.text=SimpleDateFormat("MMMM yyyy dd").format(day)
-
-        val animup = AnimationUtils.loadAnimation(
-            context,R.anim.popup_ani);
-        binding!!.popupLayout.startAnimation(animup)
-
-        binding!!.popupLayout.setOnClickListener{
-            if (isshow)
-                down_post()
-        }
-        binding!!.tvPopupText.text=diary.text
-
-        binding!!.popupLayout.visibility=View.VISIBLE
 
     }
 
     fun down_post(){
-        if(!isshow)
-            return
-        isshow=false
-        binding!!.popupLayout.visibility=View.GONE
+
 
     }
     fun selectimage(index:Int): Int {

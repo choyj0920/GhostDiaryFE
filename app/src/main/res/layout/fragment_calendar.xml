@@ -172,144 +172,148 @@
 
     <!--요일-->
     <!--달력뷰-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/popup_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="1dp"
-            android:background="@drawable/googlebackground"
-            android:elevation="16dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-
-            >
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginTop="30dp">
-
-                <TextView
-                    android:id="@+id/tv_popup_date"
-                    android:layout_width="130dp"
-                    android:layout_height="23dp"
-
-                    android:layout_marginStart="34dp"
-                    android:text="December 2022"
-                    android:textColor="@color/black"
-                    android:textSize="15sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="31dp"
-                    android:rotation="90"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_sideoption" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginBottom="10dp">
-
-
-                <ImageView
-                    android:id="@+id/iv_emotion_today"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="15dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ghost_verygood" />
-
-                <ImageView
-                    android:id="@+id/iv_emotion_1"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_blankghost" />
-
-                <ImageView
-                    android:id="@+id/iv_emotion_2"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_blankghost" />
-
-                <ImageView
-                    android:id="@+id/iv_emotion_3"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_blankghost" />
-
-                <ImageView
-                    android:id="@+id/iv_emotion_4"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="1"
-                    android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_blankghost" />
-
-
-            </LinearLayout>
-
-            <TextView
-
-                android:id="@+id/tv_popup_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-
-                android:text="안녕하세요"
-
-                android:textColor="@color/black"></TextView>
-
-
-        </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--안쓰는 popuplayout-->
+
+<!--<androidx.constraintlayout.widget.ConstraintLayout-->
+<!--android:id="@+id/popup_layout"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="match_parent"-->
+<!--android:layout_weight="1"-->
+<!--android:visibility="gone"-->
+<!--app:layout_constraintBottom_toBottomOf="parent"-->
+<!--app:layout_constraintEnd_toEndOf="parent"-->
+<!--app:layout_constraintStart_toStartOf="parent">-->
+
+<!--<LinearLayout-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_marginLeft="1dp"-->
+<!--    android:layout_marginTop="10dp"-->
+<!--    android:layout_marginRight="1dp"-->
+<!--    android:background="@drawable/googlebackground"-->
+<!--    android:elevation="16dp"-->
+<!--    android:orientation="vertical"-->
+<!--    app:layout_constraintBottom_toBottomOf="parent"-->
+<!--    app:layout_constraintEnd_toEndOf="parent"-->
+<!--    app:layout_constraintStart_toStartOf="parent"-->
+
+<!--    >-->
+
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginTop="30dp">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_popup_date"-->
+<!--            android:layout_width="130dp"-->
+<!--            android:layout_height="23dp"-->
+
+<!--            android:layout_marginStart="34dp"-->
+<!--            android:text="December 2022"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textSize="15sp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imageView4"-->
+<!--            android:layout_width="30dp"-->
+<!--            android:layout_height="30dp"-->
+<!--            android:layout_marginEnd="31dp"-->
+<!--            android:rotation="90"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:srcCompat="@drawable/ic_sideoption" />-->
+
+
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_marginLeft="30dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginRight="30dp"-->
+<!--        android:layout_marginBottom="10dp">-->
+
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_emotion_today"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginRight="15dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:srcCompat="@drawable/ghost_verygood" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_emotion_1"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:srcCompat="@drawable/ic_blankghost" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_emotion_2"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:srcCompat="@drawable/ic_blankghost" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_emotion_3"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:srcCompat="@drawable/ic_blankghost" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/iv_emotion_4"-->
+<!--            android:layout_width="50dp"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            app:srcCompat="@drawable/ic_blankghost" />-->
+
+
+<!--    </LinearLayout>-->
+
+<!--    <TextView-->
+
+<!--        android:id="@+id/tv_popup_text"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:layout_marginLeft="40dp"-->
+<!--        android:layout_marginRight="40dp"-->
+
+<!--        android:text="안녕하세요"-->
+
+<!--        android:textColor="@color/black"></TextView>-->
+
+
+<!--</LinearLayout>-->
+
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

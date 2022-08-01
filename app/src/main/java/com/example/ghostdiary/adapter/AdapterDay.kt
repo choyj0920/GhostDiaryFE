@@ -52,7 +52,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 
             )
             holder.bindng.ivDate.setOnClickListener{
-                parent_fragment.show_post(emotionMap[to]!!.date)
+                parent_fragment.select_emotion(emotionMap[to]!!.date)
             }
             if(parent_fragment.emotionpostion != -1 && parent_fragment.emotionpostion != emotionMap.get(to)!!.today_emotion){
                 holder.bindng.ivDate.setImageResource(R.drawable.rectangle)
@@ -61,7 +61,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
         }
         else{ // 비워져 있는 칸
             holder.bindng.ivDate.setOnClickListener{
-                parent_fragment.start_post(dayList[position])
+                parent_fragment.select_emotion(dayList[position])
             }
             
         }
