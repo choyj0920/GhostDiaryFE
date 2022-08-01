@@ -99,6 +99,8 @@ class FindEmailFragment : Fragment() {
             var str_birthday = binding.inputFindemailBirth.text
             val formatter = DateTimeFormatter.ofPattern("yyyy / MM / dd",Locale.KOREA)
             var birthday = LocalDate.parse(str_birthday, formatter)
+            
+            show_dialog("이메일을 찾았습니다.")
 
         }
 

@@ -74,6 +74,10 @@ class FindPasswordFragment : Fragment() {
                     */
                     binding.layoutCodenumber.visibility=View.VISIBLE
 
+                    binding.btnFindepasswordNext.alpha=0.5f
+                    binding.btnFindepasswordNext.isClickable=false
+
+
 
                     int_count = 180
 
