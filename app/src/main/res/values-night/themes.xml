@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Ghostdiary" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Ghostdiary" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>
@@ -13,12 +13,8 @@
         <item name="android:textViewStyle">@style/customfont</item>
         <item name="android:editTextStyle">@style/customfont</item>
         <item name="android:buttonStyle">@style/customfont</item>
+        <item name="alertDialogStyle">@style/AlertDialogTheme</item>
     </style>
-    <style name="ThemeOverlay.Ghostdiary.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/light_blue_600</item>
-        <item name="fullscreenTextColor">@color/light_blue_A200</item>
-    </style>
-
     <style name="NewDialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -28,6 +24,9 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:background">@android:color/transparent</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="colorAccent">@color/pink</item>
+
     </style>
 
 </resources>

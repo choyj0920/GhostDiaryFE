@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Ghostdiary" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Ghostdiary" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/white</item>

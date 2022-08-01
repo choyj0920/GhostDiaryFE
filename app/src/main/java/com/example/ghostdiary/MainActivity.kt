@@ -10,11 +10,14 @@ import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityMainBinding
+import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.fragment.main.CalendarFragment
 import com.example.ghostdiary.fragment.main.DefaultFragment
 import com.example.ghostdiary.fragment.main.RecordFragment
+import com.example.ghostdiary.fragment.main.SelectEmotionFragment
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
+
+    companion object{
+        lateinit var mainactivity:MainActivity
+    }
 
 
     lateinit var viewModel: MainViewModel
@@ -34,10 +41,11 @@ class MainActivity : AppCompatActivity() {
         defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
+        mainactivity=this
 
         var today= LocalDateTime.now()
         var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
-        
+
         binding!!.tvDate.text=to
 
         binding!!.btnSideomenu.setOnClickListener {
@@ -50,6 +58,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.navigationbar.setOnItemSelectedListener { item ->
             when(item.itemId) {
+
                 R.id.invisible -> {
                     var today= LocalDateTime.now()
                     var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
@@ -79,6 +88,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
             }
+            hide_emotionmenu()
             true
         }
 
@@ -100,6 +110,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
     }
+    fun selectemotion(date: Date){
+        var newselectemotion=SelectEmotionFragment(date)
+        supportFragmentManager.beginTransaction().replace(binding.container.id, newselectemotion).commit()
+        binding!!.tvDate.text="하루의 감정"
+        binding.btnPostcheck.visibility=View.VISIBLE
+        binding.btnPosttext.visibility=View.VISIBLE
+
+        binding.btnPostcheck.setOnClickListener {
+            newselectemotion.postemotion(calendarFragment)
+            binding.navigationbar.selectedItemId=R.id.calendar
+
+
+        }
+
+
+
+
+    }
+    fun hide_emotionmenu(){
+        binding.btnPostcheck.visibility=View.GONE
+        binding.btnPosttext.visibility=View.GONE
+
+    }
+
 
     override fun onBackPressed() {
 

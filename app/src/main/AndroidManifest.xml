@@ -14,9 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Ghostdiary"
         tools:targetApi="31" >
-        <activity
-            android:name=".PostDiaryActivity"
-            android:exported="false" />
+
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity

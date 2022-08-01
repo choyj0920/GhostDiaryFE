@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
-import com.example.ghostdiary.PostDiaryActivity
+import com.example.ghostdiary.fragment.main.SelectEmotionFragment
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
@@ -298,7 +298,7 @@ class CalendarFragment : Fragment() {
     }
 
     fun start_post(day:Date){
-        var intent = Intent(getActivity(),PostDiaryActivity::class.java)
+        var intent = Intent(getActivity(), SelectEmotionFragment::class.java)
         intent.putExtra("Date",day.time)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)

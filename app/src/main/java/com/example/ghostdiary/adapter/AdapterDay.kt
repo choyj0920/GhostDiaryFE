@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemCalendarDaysBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -50,9 +51,10 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
                     else -> {R.drawable.ic_ghost}
                 } as Int
 
+
             )
             holder.bindng.ivDate.setOnClickListener{
-                parent_fragment.select_emotion(emotionMap[to]!!.date)
+                parent_fragment.show_post(emotionMap[to]!!.date)
             }
             if(parent_fragment.emotionpostion != -1 && parent_fragment.emotionpostion != emotionMap.get(to)!!.today_emotion){
                 holder.bindng.ivDate.setImageResource(R.drawable.rectangle)
@@ -61,11 +63,13 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
         }
         else{ // 비워져 있는 칸
             holder.bindng.ivDate.setOnClickListener{
-                parent_fragment.select_emotion(dayList[position])
+                MainActivity.mainactivity.selectemotion(dayList[position])
             }
-            
+
         }
     }
+
+
 
     override fun getItemViewType(position: Int): Int {
         return super.getItemViewType(position)
