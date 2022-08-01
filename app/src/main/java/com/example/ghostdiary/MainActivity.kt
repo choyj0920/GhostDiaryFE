@@ -1,5 +1,8 @@
 package com.example.ghostdiary
 
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -7,11 +10,14 @@ import android.view.View
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityMainBinding
+import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.fragment.main.CalendarFragment
 import com.example.ghostdiary.fragment.main.DefaultFragment
 import com.example.ghostdiary.fragment.main.RecordFragment
+import com.example.ghostdiary.fragment.main.SelectEmotionFragment
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
+
+    companion object{
+        lateinit var mainactivity:MainActivity
+    }
 
 
     lateinit var viewModel: MainViewModel
@@ -31,10 +41,11 @@ class MainActivity : AppCompatActivity() {
         defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
+        mainactivity=this
 
         var today= LocalDateTime.now()
         var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
-        
+
         binding!!.tvDate.text=to
 
         binding!!.btnSideomenu.setOnClickListener {
@@ -43,8 +54,11 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 
+
+
         binding.navigationbar.setOnItemSelectedListener { item ->
             when(item.itemId) {
+
                 R.id.invisible -> {
                     var today= LocalDateTime.now()
                     var to = today.format(DateTimeFormatter.ofPattern("yyyy.MM.dd"))
@@ -60,19 +74,66 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.record-> {
+                    binding!!.tvDate.text="기록"
+                    binding!!.tvDate.gravity=Gravity.CENTER
                     supportFragmentManager.beginTransaction().replace(binding.container.id,recordFragment).commit()
+                }
+                R.id.memo->{
+                    binding!!.tvDate.text="메모"
+                    binding!!.tvDate.gravity=Gravity.CENTER
+                }
+                R.id.clinic->{
+                    binding!!.tvDate.text="클리닉"
+                    binding!!.tvDate.gravity=Gravity.CENTER
                 }
 
             }
+            hide_emotionmenu()
             true
+        }
+
+
+        binding.sidemenuLogout.setOnClickListener{
+            val prefs : SharedPreferences = this.getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+            val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+            editor.remove("auto_email")
+            editor.remove("auto_password")
+            editor.commit()
+            var intent = Intent(this, LoginActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+
+
+        }
+
+        setContentView(binding.root)
+
+    }
+    fun selectemotion(date: Date){
+        var newselectemotion=SelectEmotionFragment(date)
+        supportFragmentManager.beginTransaction().replace(binding.container.id, newselectemotion).commit()
+        binding!!.tvDate.text="하루의 감정"
+        binding.btnPostcheck.visibility=View.VISIBLE
+        binding.btnPosttext.visibility=View.VISIBLE
+
+        binding.btnPostcheck.setOnClickListener {
+            newselectemotion.postemotion(calendarFragment)
+            binding.navigationbar.selectedItemId=R.id.calendar
+
+
         }
 
 
 
 
-        setContentView(binding.root)
+    }
+    fun hide_emotionmenu(){
+        binding.btnPostcheck.visibility=View.GONE
+        binding.btnPosttext.visibility=View.GONE
 
     }
+
 
     override fun onBackPressed() {
 

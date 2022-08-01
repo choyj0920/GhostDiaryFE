@@ -1,6 +1,29 @@
 <resources>
 
+    <style name="tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16sp</item>
+        <item name="tabTextColor">#B2B2B2</item>
+        <item name="android:textStyle">bold</item>
 
+    </style>
+
+    <style name="CustomAlertDialog">
+        <!-- 꽉 채운 화면에 배경 없이 (custom view 영역만 보일 것이다.) -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- Dim 처리 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:colorBackground">?attr/colorBackgroundFloating</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+
+        <!-- Dialog 가 센터에 나오도록 하자. -->
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+
+        <item name="colorAccent">@color/pink</item>
+
+    </style>
 
     <style name="Widget.Theme.Ghostdiary.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/black_overlay</item>
@@ -25,6 +48,26 @@
 
     <style name="customfont" parent="">
         <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+
+        <!--    수면시간 선택 슬라이더-->
+    <style name="Myslider" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="trackColorActive">@color/pink</item>
+        <item name="trackColorInactive">@color/white</item>
+        <item name="labelStyle">@style/My_Tooltip</item>
+
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
+    </style>
+
+    <style name="My_Tooltip" parent="Widget.MaterialComponents.Tooltip">
+        <!-- background color of the Tooltip -->
+        <item name="backgroundTint">@color/pink</item>
+    </style>
+
+    <style name="ThemeOverlay.Slider" parent="">
+        <!-- color used by the text in the Tooltip -->
+        <item name="colorOnPrimary">@color/white</item>
     </style>
 
 
