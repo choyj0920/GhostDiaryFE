@@ -2,6 +2,7 @@ package com.example.ghostdiary.fragment.login
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -50,20 +51,30 @@ class LoginEmailFragment : Fragment() {
             var email :String=binding.inputLoginEmail.text.toString()
             var password :String=binding.inputLoginPassword.text.toString()
 
-            if(! viewModel.get_UserList().contains(email)){
+            val checkresult= viewModel.checkemail(email,password)
+
+            if(checkresult==0){
                 Toast.makeText(activity,"해당 이메일 없음",Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if(viewModel.get_UserList()!!.get(email)!!.password==password){
+            if(checkresult==1){
                 var intent = Intent(getActivity(), MainActivity::class.java)
                 intent.putExtra("uid",email)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                if(binding.cbAutologin.isChecked){
+                    val prefs : SharedPreferences = requireContext().getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+                    val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+                    editor.putString("auto_email",email)
+                    editor.putString("auto_password",password)
+                    editor.commit()
+                }
+
                 startActivity(intent)
 
                 return@setOnClickListener
             }
-            else{
+            else{ // 비밀번호 불 일치
                 binding.tvWrongpassword.visibility=View.VISIBLE
                 binding.inputLoginPassword.setBackgroundResource(R.drawable.red_border)
             }

@@ -11,6 +11,20 @@ import kotlin.collections.HashMap
 
 class LoginViewModel(): ViewModel() {
 
+
+    fun checkemail(email:String,password: String):Int{ // 회원 체크 0리턴 이메일도없음. 1리턴 로그인성공, 2리턴 비밀번호 오류
+        if(get_UserList().contains(email)){
+            if(get_UserList().get(email)!!.password==password) {
+                return 1
+            }
+            else{
+                return 2
+            }
+        }
+        return 0
+
+    }
+
     class User(var name:String,var email:String,var password:String,var birthday:String,var registerday:String="2022 / 07 / 29"){
         override fun toString(): String {
             return "name:${name},email:${email},password:${password},birthday:${birthday}"

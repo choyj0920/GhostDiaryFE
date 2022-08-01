@@ -1,6 +1,9 @@
 package com.example.ghostdiary
 
 import android.content.ContentValues
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -43,6 +46,15 @@ class LoginActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(binding.container.id,loginMainFragment).commit()
 
+        val prefs : SharedPreferences = this.getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+        val auto_email= prefs.getString("auto_email","")
+        val auto_password=prefs.getString("auto_password","")
+        if(viewModel.checkemail(auto_email!!,auto_password!!) ==1){
+            var intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("uid",auto_email)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+        }
 
     }
 
