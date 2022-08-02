@@ -54,8 +54,9 @@
         <!--    수면시간 선택 슬라이더-->
     <style name="Myslider" parent="@style/Widget.MaterialComponents.Slider">
         <item name="trackColorActive">@color/pink</item>
-        <item name="trackColorInactive">@color/white</item>
+        <item name="trackColorInactive">@color/gray</item>
         <item name="labelStyle">@style/My_Tooltip</item>
+        <item name="tickVisible">false</item>
 
         <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
     </style>
