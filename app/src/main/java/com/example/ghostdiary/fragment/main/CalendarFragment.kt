@@ -8,6 +8,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,7 +50,6 @@ class CalendarFragment : Fragment() {
     lateinit var calendar_year_month_text: TextView
     lateinit var calendar_view: RecyclerView
     lateinit var calendarAdapter: AdapterDay
-    lateinit var emotionImageviews:Array<ImageView>
     private var binding: FragmentCalendarBinding? =null
     var emotionpostion:Int=-1
     var isshow = false
@@ -262,40 +262,6 @@ class CalendarFragment : Fragment() {
 
     }
 
-    fun select_emotion(day:Date){
-        val inflater : LayoutInflater = LayoutInflater.from(context)
-        val emotionbinding: DialogTodayemotionBinding  =DialogTodayemotionBinding.inflate(inflater)
-
-        val builder= AlertDialog.Builder(context,R.style.CustomAlertDialog)
-        var emotionarray:ArrayList<TextView> = arrayListOf(emotionbinding.selectEmotionVerygood,emotionbinding.selectEmotionGood,
-            emotionbinding.selectEmotionNormal,emotionbinding.selectEmotionBad,emotionbinding.selectEmotionVerybad)
-
-
-        builder.setView(emotionbinding.root)
-
-        var dialog=builder.create()
-        dialog.setOnShowListener {
-            for(i in 0.. emotionarray.size-1){
-                emotionarray[i].setOnClickListener {
-                    var day=day
-                    var transFormat = SimpleDateFormat("yyyyMMdd")
-                    var to = transFormat.format(day)
-                    if(viewModel.getEmotionArray().contains(to)){
-                        viewModel.getEmotionArray()[to]!!.today_emotion =i
-
-                    }else{
-                        viewModel.getEmotionArray().put(to, Day_Diary(day,i))
-                    }
-                    dialog.dismiss()
-                    dialog.cancel()
-                    updatecalendar()
-
-                }
-            }
-        }
-
-        dialog.show()
-    }
 
     fun start_post(day:Date){
         var intent = Intent(getActivity(), SelectEmotionFragment::class.java)

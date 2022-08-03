@@ -1,29 +1,35 @@
 package com.example.ghostdiary.adapter
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
+import com.example.ghostdiary.dataclass.emotionclass
 import com.example.ghostdiary.fragment.main.SelectEmotionFragment
 import com.google.android.material.slider.LabelFormatter
 import java.text.SimpleDateFormat
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<String>, var selectemotion:HashMap<String,Int>, val selecttexts:HashMap<String,Array<String>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<String>, var selecttexts:MutableList<MutableList<emotionclass>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var rv_emotionList:Array<RecyclerView?> = arrayOfNulls<RecyclerView?>(emotions.size)
+    var emotionAdapterList:Array<AdapterEmotion?> = arrayOfNulls<AdapterEmotion?>(emotions.size)
 
-    class GhostView(binding: ItemSelectEmotionBinding) : RecyclerView.ViewHolder(binding.root) {
+    class EmotionView(binding: ItemSelectEmotionBinding) : RecyclerView.ViewHolder(binding.root) {
         var tv_title: TextView = binding.tvTitle
-        var arr_emotion:Array<ImageView> = arrayOf(binding.ivGhostVerygood,binding.ivGhostGood,binding.ivGhostNormal,binding.ivGhostBad,binding.ivGhostVerybad)
-        var arr_text:Array<TextView> = arrayOf(binding.tvGhostVerygood ,binding.tvGhostGood,binding.tvGhostNormal,binding.tvGhostBad,binding.tvGhostVerybad)
-        var arr_layout:Array<View> = arrayOf(binding.layoutGhostVerygood,binding.tvGhostGood,binding.layoutGhostNoraml,binding.layoutGhostBad,binding.layoutGhostVerybad)
+        var rv_emotion: RecyclerView= binding.rvEmotionlist
+
+
     }
     class SleepView(binding: ItemSelectSleeptimeBinding) :RecyclerView.ViewHolder(binding.root) {
         var tv_title: TextView = binding.tvTitle
@@ -38,7 +44,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<St
             1 -> {
                 view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_select_emotion, parent, false)
-                return GhostView(ItemSelectEmotionBinding.bind(view))
+                return EmotionView(ItemSelectEmotionBinding.bind(view))
             }
             else -> {
                 var view = LayoutInflater.from(parent.context)
@@ -48,35 +54,33 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<St
         }
 
     }
+    fun update(position: Int){
+        var emotionManager = GridLayoutManager(parent.context, 5)
+        emotionAdapterList[position]= AdapterEmotion(this,position,selecttexts[position])
+
+        rv_emotionList[position]!!.apply {
+            layoutManager=emotionManager
+            adapter=emotionAdapterList[position]
+        }
+
+    }
+
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(getItemViewType(position)==1){
-            var holder=holder as GhostView
+            var holder=holder as EmotionView
 
             holder.tv_title.text=emotions[position]
-            var seltext =selecttexts[emotions[position]]
-            var j =0
 
-            if(emotions[position]=="하루의 감정") {
-                switch_Active(holder)
-            }
 
-            for(i in 0..4){
-                if (seltext==null || j >= seltext!!.size ){
-                    holder.arr_layout[i].visibility=View.GONE
-                    continue
-                }
-                holder.arr_text[i].text = seltext[j]
-                holder.arr_emotion[i].setOnClickListener{
-                    if(selectemotion[emotions[position]]!= -1)
-                        holder.arr_emotion[selectemotion[emotions[position]]!!].alpha=0.4f
-                    selectemotion[emotions[position]]=i
-                    holder.arr_emotion[i].alpha=1f
+            rv_emotionList[position]=holder.rv_emotion
 
-                }
-                j++
-            }
+            update(position)
 
-        }else {
+
+
+        }
+        else {
             var holder = holder as SleepView
             var yesterday = Calendar.getInstance()
             var curday = Calendar.getInstance()
@@ -110,15 +114,6 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<St
 
     }
 
-    fun switch_Active(holder:GhostView){
-
-        for(i in holder.arr_emotion){
-            i.setAlpha(0.4f)
-        }
-        selectemotion[holder.tv_title.text as String]=2
-        holder.arr_emotion[2].alpha=1f
-
-    }
 
     override fun getItemViewType(position: Int): Int {
         if(emotions[position]!="수면시간"){

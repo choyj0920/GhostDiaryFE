@@ -13,6 +13,7 @@ import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterPostdiary
 import com.example.ghostdiary.databinding.ActivitySelectEmotionBinding
 import com.example.ghostdiary.dataclass.Day_Diary
+import com.example.ghostdiary.dataclass.emotionclass
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -20,7 +21,7 @@ class SelectEmotionFragment(var date: Date) : Fragment() {
 
 
     lateinit var emotions:Array<String>
-    lateinit var emotionselect :HashMap<String,Int>
+    lateinit var emotionselect :MutableList<MutableList<emotionclass>>
     lateinit var selecttexts:HashMap<String,Array<String>>
     lateinit var adapterPostdiary:AdapterPostdiary
     lateinit var emotionImageviews:Array<ImageView>
@@ -35,9 +36,16 @@ class SelectEmotionFragment(var date: Date) : Fragment() {
 
         binding=ActivitySelectEmotionBinding.inflate(inflater,container,false)
 
-        emotionselect= hashMapOf()
 
+        emotionselect= mutableListOf()
+        for( i in Day_Diary.emotionname){
+            if (Day_Diary.emotionarr.contains(i)) {
 
+                var temp = mutableListOf<emotionclass>().apply { addAll(Day_Diary.emotionarr[i]!!) }
+                emotionselect.add(temp)
+            }
+
+        }
 
 
         initdata()
@@ -47,22 +55,13 @@ class SelectEmotionFragment(var date: Date) : Fragment() {
     }
     fun initdata(){
         emotions= Day_Diary.emotionname
-        selecttexts= Day_Diary.selecttexts
-
-        for( i in emotions){
-            emotionselect.put(i,-1)
-        }
-
-
-
 
         update()
-
     }
 
     fun update(){
 
-        val emotionListAdapter = AdapterPostdiary(this,emotions,emotionselect,selecttexts)
+        val emotionListAdapter = AdapterPostdiary(this,emotions,emotionselect)
 
         adapterPostdiary=emotionListAdapter
 
@@ -86,9 +85,16 @@ class SelectEmotionFragment(var date: Date) : Fragment() {
     }
 
     fun postemotion(calendarFragment: CalendarFragment) {
-        var array:MutableList<Int> = mutableListOf()
-        for(i in emotions){
-            array.add(emotionselect[i]!!)
+        var array:MutableList<emotionclass?> = mutableListOf()
+        for(i in emotionselect){
+            var temp:emotionclass?=null
+            for(j in i){
+                if(j.isactive){
+                    temp=j.clone()
+                    break
+                }
+            }
+            array.add(temp)
         }
         var startsleep:Date? =null
         var endsleep:Date? =null
@@ -111,7 +117,7 @@ class SelectEmotionFragment(var date: Date) : Fragment() {
         }
 
 
-        calendarFragment.addDiary(Day_Diary(date,array[0],array[1],array[2],array[3],array[4],text="", sleepend = endsleep, sleepstart = startsleep))
+        calendarFragment.addDiary(Day_Diary(date,array[0]!!,array[1],array[2],array[3],array[4],text="", sleepend = endsleep, sleepstart = startsleep))
 
 
 
