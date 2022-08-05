@@ -71,8 +71,6 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
         }
 
 
-
-
     }
 
 

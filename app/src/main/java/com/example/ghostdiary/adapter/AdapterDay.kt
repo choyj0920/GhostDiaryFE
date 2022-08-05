@@ -63,7 +63,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
         }
         else{ // 비워져 있는 칸
             holder.bindng.ivDate.setOnClickListener{
-                MainActivity.mainactivity.selectemotion(dayList[position])
+                MainActivity.mainactivity.selectemotion_fromcalendar(dayList[position])
             }
 
         }

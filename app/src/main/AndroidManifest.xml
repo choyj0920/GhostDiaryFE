@@ -18,7 +18,7 @@
         <activity android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity
-            android:name=".LoginActivity" android:windowSoftInputMode="adjustPan"
+            android:name=".LoginActivity" android:windowSoftInputMode="adjustResize"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,5 +31,8 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
 </manifest>
