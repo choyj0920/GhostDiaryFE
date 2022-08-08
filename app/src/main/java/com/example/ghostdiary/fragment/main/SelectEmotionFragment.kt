@@ -58,10 +58,16 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
                 tempend.time=curDiary.sleepend
                 yesterday.time = date
                 yesterday.add(Calendar.DATE, -1)
-                yesterday.set(Calendar.HOUR, 18)
+                yesterday.set(Calendar.HOUR_OF_DAY, 18)
 
-                sleepstart= round((curDiary.sleepstart!!.time - yesterday.time.time)/(1000 * 60 * 60f)).toInt()+1
-                sleepend=  round((curDiary.sleepend!!.time - yesterday.time.time)/(1000 * 60 * 60f)).toInt()+1
+                sleepstart= ((curDiary.sleepstart!!.time - yesterday.time.time)/(1000 * 60 * 60)).toInt()
+
+                sleepend=  ((curDiary.sleepend!!.time - yesterday.time.time)/(1000 * 60 * 60)).toInt() + 1
+
+                if(sleepstart>24 || sleepstart<0||sleepend>24 ||sleepend<0) {
+                    sleepstart = -1
+                    sleepend = -1
+                }
 
             }
 
@@ -122,16 +128,16 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
         if(sleepend != -1 && sleepstart != -1){
             var yesterday = Calendar.getInstance()
             yesterday.time = date
-            yesterday.add(Calendar.DATE, -1)
-            yesterday.set(Calendar.HOUR, 18)
+            yesterday.add(Calendar.DAY_OF_MONTH, -1)
+            yesterday.set(Calendar.HOUR_OF_DAY, 18)
             yesterday.set(Calendar.MINUTE,0)
             yesterday.set(Calendar.SECOND,0)
             var temp = Calendar.getInstance()
             temp.time=yesterday.time
-            temp.add(Calendar.HOUR,sleepstart)
+            temp.add(Calendar.HOUR_OF_DAY,sleepstart)
             startsleep=temp.time
             temp.time=yesterday.time
-            temp.add(Calendar.HOUR,sleepend)
+            temp.add(Calendar.HOUR_OF_DAY,sleepend)
             endsleep=temp.time
 
             Log.d("TAG",startsleep.toString()+endsleep.toString())

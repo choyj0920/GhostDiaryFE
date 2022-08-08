@@ -9,8 +9,9 @@
 
     <ImageView
         android:id="@+id/btn_ghost_delete"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:padding="3dp"
         app:layout_constraintBottom_toTopOf="@+id/iv_ghost"
         app:layout_constraintStart_toEndOf="@+id/iv_ghost"
         app:srcCompat="@drawable/close" />

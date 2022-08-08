@@ -10,25 +10,55 @@ import android.util.Log
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.ZoneId
 import java.util.*
-import kotlin.collections.HashMap
 
 // SQLiteOpenHelper 상속받아 SQLite 를 사용하도록 하겠습니다.
 class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
 
     //onCreate(), onUpgrade() 두가지 메소드를 오버라이드 받아 줍시다.
+    override fun onConfigure(db: SQLiteDatabase?) {
+        super.onConfigure(db)
+        db?.setForeignKeyConstraintsEnabled(true)
+    }
+
+
+    override fun onOpen(db: SQLiteDatabase) {
+        super.onOpen(db)
+        db.setForeignKeyConstraintsEnabled(true)
+        db.execSQL("PRAGMA foreign_keys=ON")
+    }
 
     //데이터베이스가 만들어 지지않은 상태에서만 작동합니다. 이미 만들어져 있는 상태라면 실행되지 않습니다.
     override fun onCreate(db: SQLiteDatabase?) {
         //테이블을 생성할 쿼리를 작성하여 줍시다.
+        Log.d("DEBUG","db 재생성")
+        db?.setForeignKeyConstraintsEnabled(true)
 
-        createdb()
+        db?.execSQL("PRAGMA foreign_keys=ON");
+
+        val create1= "CREATE TABLE Diary(                " +
+                "diary_id    integer  NOT NULL    PRIMARY KEY autoincrement ," +
+                "date     TEXT  NOT NULL," +
+                "image TEXT  ," +
+                "text TEXT  ," +
+                "sleepstart TEXT ," +
+                "sleepend    TEXT );"
+        db?.execSQL(create1)
+
+        val create2="CREATE TABLE emotions(" +
+                " emotion_id  integer NOT NULL PRIMARY KEY autoincrement," +
+                "diary_id    integer ," +
+                "category    integer NOT NULL," +
+                "ghost_num   integer NOT NULL," +
+                "text   TEXT ," +
+                "FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE ON UPDATE CASCADE);"
+        db?.execSQL(create2)
 
     }
     fun createdb(){
         var db =writableDatabase
+        db?.setForeignKeyConstraintsEnabled(true)
+
 
         db?.execSQL("DROP TABLE IF EXISTS emotions;")
         db?.execSQL("DROP TABLE IF EXISTS Diary;")
@@ -44,15 +74,12 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
         val create2="CREATE TABLE emotions(" +
                 " emotion_id  integer NOT NULL PRIMARY KEY autoincrement," +
-                "diary_id    integer NOT NULL ," +
+                "diary_id    integer ," +
                 "category    integer NOT NULL," +
                 "ghost_num   integer NOT NULL," +
-                "text   TEXT ,"+
-                "CONSTRAINT diary_fk FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE );"
+                "text   TEXT ," +
+                "FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create2)
-
-
-
 
     }
 
@@ -193,7 +220,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
 
             val emotioncursor=rd.rawQuery(selectAll_emotions+id.toString()+";",null)
-            Log.e("TAG","현재 다이어리 id ${id} ,${date} , ${diary.image}, ${diary.text}")
+            Log.e("TAG","현재 다이어리 id ${id} ,${date} , ${diary.image}, ${diary.text} ,${diary.sleepstart},${diary.sleepend}")
             while(emotioncursor.moveToNext()){
                 cursor_emotion(emotioncursor,diary)
             }
@@ -243,13 +270,27 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     }
 
     //delete 메소드
+    @SuppressLint("Range")
     fun deleteDiary(date:Date){
         var formatDate = SimpleDateFormat("yyyy-MM-dd");
-        val delete = "delete from Diary where date = ${formatDate.format(date)}"
+        var strdate=formatDate.format(date)
+        val selectAll_diary = "select * from Diary where date =${strdate}"
+        val selectAll_emotions = "select * from emotions where diary_id = "
+        //읽기전용 데이터베이스 변수
         val db = writableDatabase
-        db.execSQL(delete)
-        db.close()
+        //데이터를 받아 줍니다.
+        val cursor = db.rawQuery(selectAll_diary,null)
 
+
+        //반복문을 사용하여 list 에 데이터를 넘겨 줍시다.
+        while(cursor.moveToNext()){
+            val id = cursor.getLong(cursor.getColumnIndex("diary_id")).toInt()
+
+            db.delete("emotions","diary_id = ${id}",null)
+
+        }
+        db.delete("Diary","date = \"${strdate}\"",null)
+        db.close()
     }
 
 }

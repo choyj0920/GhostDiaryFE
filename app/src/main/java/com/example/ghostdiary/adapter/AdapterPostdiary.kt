@@ -1,5 +1,6 @@
 package com.example.ghostdiary.adapter
 
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -81,15 +82,11 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
         else {
             var holder = holder as SleepView
             var yesterday = Calendar.getInstance()
-            var curday = Calendar.getInstance()
-            curday.time = parent.date
             yesterday.time = parent.date
             yesterday.add(Calendar.DATE, -1)
-            yesterday.set(Calendar.HOUR, 18)
+            yesterday.set(Calendar.HOUR_OF_DAY, 18)
 
             var timeformat = SimpleDateFormat("dd일 HH시")
-
-
 
 
             holder.slider.values= listOf<Float>(0.0f,10.0f)
@@ -101,8 +98,9 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
                 LabelFormatter { value ->
                     var temp = Calendar.getInstance()
                     temp.time=yesterday.time
-                    temp.add(Calendar.HOUR, value.toInt())
+                    temp.add(Calendar.HOUR_OF_DAY, value.toInt())
                     var to = timeformat.format(temp.time)
+
 
                     to
                 })
