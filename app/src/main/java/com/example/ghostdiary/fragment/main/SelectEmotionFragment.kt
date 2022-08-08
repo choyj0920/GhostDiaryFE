@@ -8,20 +8,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterPostdiary
 import com.example.ghostdiary.databinding.FragmentSelectEmotionBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
+import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.math.round
 
 class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
 
+    private val viewModel: MainViewModel by activityViewModels()
 
     lateinit var emotions:Array<String>
-    lateinit var emotionselect :MutableList<MutableList<emotionclass>>
+    lateinit var emotionselect :ArrayList<ArrayList<emotionclass>>
     lateinit var selecttexts:HashMap<String,Array<String>>
     lateinit var adapterPostdiary:AdapterPostdiary
     lateinit var emotionImageviews:Array<ImageView>
@@ -38,16 +44,33 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
 
         binding=FragmentSelectEmotionBinding.inflate(inflater,container,false)
 
+        var formatDate = SimpleDateFormat("yyyy-MM-dd")
+        var strdate = formatDate.format(date)
 
-        emotionselect= mutableListOf()
-        for( i in Day_Diary.emotionname){
-            if (Day_Diary.emotionarr.contains(i)) {
+        if (viewModel.getEmotionArray(requireContext()).contains(strdate)){
+            curDiary= viewModel.getEmotionArray(null)[strdate]!!
 
-                var temp = mutableListOf<emotionclass>().apply { addAll(Day_Diary.emotionarr[i]!!) }
-                emotionselect.add(temp)
+            if(curDiary.sleepstart != null && curDiary.sleepend !=null){
+                var yesterday = Calendar.getInstance()
+                var tempstart=Calendar.getInstance()
+                tempstart.time=curDiary.sleepstart
+                var tempend=Calendar.getInstance()
+                tempend.time=curDiary.sleepend
+                yesterday.time = date
+                yesterday.add(Calendar.DATE, -1)
+                yesterday.set(Calendar.HOUR, 18)
+
+                sleepstart= round((curDiary.sleepstart!!.time - yesterday.time.time)/(1000 * 60 * 60f)).toInt()+1
+                sleepend=  round((curDiary.sleepend!!.time - yesterday.time.time)/(1000 * 60 * 60f)).toInt()+1
+
             }
 
+
+        }else{
+            curDiary= Day_Diary(date)
         }
+
+        emotionselect=curDiary.getEmotionarr()
 
 
         initdata()
@@ -63,7 +86,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
 
     fun update(){
 
-        val emotionListAdapter = AdapterPostdiary(this,emotions,emotionselect)
+        val emotionListAdapter = AdapterPostdiary(this,sleepstart,sleepend,emotions,emotionselect)
 
         adapterPostdiary=emotionListAdapter
 
@@ -87,16 +110,12 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
     }
 
     fun postemotion(calendarFragment: CalendarFragment) {
-        var array:MutableList<emotionclass?> = mutableListOf()
-        for(i in emotionselect){
-            var temp:emotionclass?=null
-            for(j in i){
-                if(j.isactive){
-                    temp=j.clone()
-                    break
-                }
+        var todayemotion:emotionclass=emotionclass("오류임",0,false)
+        for(i in emotionselect[0]){
+            if(i.isactive) {
+                todayemotion = i
+                break
             }
-            array.add(temp)
         }
         var startsleep:Date? =null
         var endsleep:Date? =null
@@ -118,7 +137,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
             Log.d("TAG",startsleep.toString()+endsleep.toString())
         }
 
-        curDiary= Day_Diary(date,array[0]!!,array[1],array[2],array[3],array[4],text="", sleepend = endsleep, sleepstart = startsleep)
+        curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],startsleep,endsleep,curDiary.text, curDiary.image)
 
 
         calendarFragment.addDiary(curDiary)
@@ -126,16 +145,12 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
     }
 
     fun getcurDiary():Day_Diary{
-        var array:MutableList<emotionclass?> = mutableListOf()
-        for(i in emotionselect){
-            var temp:emotionclass?=null
-            for(j in i){
-                if(j.isactive){
-                    temp=j.clone()
-                    break
-                }
+        var todayemotion:emotionclass=emotionclass("오류임",0,false)
+        for(i in emotionselect[0]){
+            if(i.isactive) {
+                todayemotion = i
+                break
             }
-            array.add(temp)
         }
         var startsleep:Date? =null
         var endsleep:Date? =null
@@ -157,7 +172,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
             Log.d("TAG",startsleep.toString()+endsleep.toString())
         }
 
-        curDiary= Day_Diary(date,array[0]!!,array[1],array[2],array[3],array[4],text="", sleepend = endsleep, sleepstart = startsleep)
+        curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],startsleep,endsleep,curDiary.text, curDiary.image)
 
 
         return curDiary

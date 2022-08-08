@@ -33,7 +33,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
         }
         holder.bindng.tvDate.text = dayList[position].date.toString()
 
-        var transFormat = SimpleDateFormat("yyyyMMdd")
+        var transFormat = SimpleDateFormat("yyyy-MM-dd")
         var to = transFormat.format(dayList[position]);
         if(tempMonth != dayList.get(position).month) {
             holder.bindng.ivDate.isInvisible=true
@@ -54,7 +54,8 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 
             )
             holder.bindng.ivDate.setOnClickListener{
-                parent_fragment.show_post(emotionMap[to]!!.date)
+//                parent_fragment.show_post(emotionMap[to]!!.date)
+                MainActivity.mainactivity.selectemotion_fromcalendar(dayList[position])
             }
             if(parent_fragment.emotionpostion != -1 && parent_fragment.emotionpostion != emotionMap.get(to)!!.today_emotion.ghostimage){
                 holder.bindng.ivDate.setImageResource(R.drawable.rectangle)

@@ -20,7 +20,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<String>, var selecttexts:MutableList<MutableList<emotionclass>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var sleepend :Int,val emotions: Array<String>, var selecttexts:ArrayList<ArrayList<emotionclass>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var rv_emotionList:Array<RecyclerView?> = arrayOfNulls<RecyclerView?>(emotions.size)
     var emotionAdapterList:Array<AdapterEmotion?> = arrayOfNulls<AdapterEmotion?>(emotions.size)
@@ -77,8 +77,6 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<St
 
             update(position)
 
-
-
         }
         else {
             var holder = holder as SleepView
@@ -92,7 +90,12 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, val emotions: Array<St
             var timeformat = SimpleDateFormat("dd일 HH시")
 
 
+
+
             holder.slider.values= listOf<Float>(0.0f,10.0f)
+            if(sleepstart !=-1 && sleepend != -1){
+                holder.slider.values= listOf<Float>(sleepstart.toFloat(),sleepend.toFloat())
+            }
             holder.slider.setLabelFormatter(
 
                 LabelFormatter { value ->
