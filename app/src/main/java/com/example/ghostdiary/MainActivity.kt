@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         binding=ActivityMainBinding.inflate(layoutInflater)
         viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel.getEmotionArray(this)
+
         defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
@@ -105,7 +107,8 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-
+        // 로그아웃 부분 주석
+        /*
         binding.sidemenuLogout.setOnClickListener{
             val prefs : SharedPreferences = this.getSharedPreferences("Prefs", Context.MODE_PRIVATE)
             val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
@@ -116,7 +119,15 @@ class MainActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
             finish()
+        } */
 
+        //db
+        binding.sidemenuDbinit.setOnClickListener{
+            viewModel.getdb(this).createdb()
+            finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다.
+
+            System.runFinalization() //현재 작업중인 쓰레드가 다 종료되면, 종료 시키라는 명령어이다.
+            System.exit(0)
 
         }
 

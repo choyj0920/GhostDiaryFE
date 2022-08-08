@@ -51,6 +51,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
         }else{
             curDiary=diary!!
         }
+        binding!!.inputText.setText(curDiary.text)
 
         var transFormat = SimpleDateFormat("yyyy/MM/dd")
         var to = transFormat.format(date)

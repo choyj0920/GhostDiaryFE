@@ -45,24 +45,29 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
         var holder=holder as GhostView
         holder.emotionname.text =emotions[position].text
         holder.ghostimage.setImageResource(Day_Diary.int_to_Image(emotions[position].ghostimage))
-        if(emotions[position].isactive){
-            holder.ghostimage.alpha=1.0f
-        }
-        holder.ghostimage.setOnClickListener {
-            if(!emotions[position].isactive){
-                for(i in emotions){
-                    i.isactive=false
-                }
-                emotions[position].isactive=true
-                parent.update(listPosion)
-            }
 
-        }
 
-        if(listPosion==0){
+        if(listPosion==0){ // 하루의감정
             //하루의 감정은 삭제못함
             holder.btn_close.visibility=View.INVISIBLE
-        }else{
+
+            if(emotions[position].isactive){
+                holder.ghostimage.alpha=1.0f
+            }else{
+                holder.ghostimage.alpha=0.4f
+            }
+            holder.ghostimage.setOnClickListener {
+                if(!emotions[position].isactive){
+                    for(i in emotions){
+                        i.isactive=false
+                    }
+                    emotions[position].isactive=true
+                    parent.update(listPosion)
+                }
+            }
+        }else{ //다른곳 삭제도 가능 추가도가능
+
+            holder.ghostimage.alpha=1.0f
             holder.btn_close.setOnClickListener {
                 emotions.removeAt(position)
                 parent.update(listPosion)

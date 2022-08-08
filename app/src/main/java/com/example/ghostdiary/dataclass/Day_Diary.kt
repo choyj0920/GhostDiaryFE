@@ -2,16 +2,16 @@ package com.example.ghostdiary.dataclass
 
 import com.example.ghostdiary.R
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 class Day_Diary(
     var date: Date,
     var today_emotion:emotionclass,
-    var whom:emotionclass?=null,
-    var doing:emotionclass?=null,
-    var where:emotionclass?=null,
-//    var mood:Int=-1,
-    var weather:emotionclass?=null,
+    var whom:ArrayList<emotionclass> = arrayListOf(),
+    var doing:ArrayList<emotionclass> =arrayListOf(),
+    var where:ArrayList<emotionclass> = arrayListOf(),
+    var weather:ArrayList<emotionclass> = arrayListOf(),
     var sleepstart: Date?=null,
     var sleepend : Date? = null,
     var text:String="",
@@ -20,9 +20,22 @@ class Day_Diary(
 
 
 ) {
-    constructor(date:Date,today: Int,text: String=""):this(date, emotionclass(emotionarr["오늘의 감정"]?.get(today)!!.text,today,true),text=text){
+    init {
 
     }
+
+    constructor(date:Date,today: Int=2,text: String=""):this(date, emotionclass(emotionarr["오늘의 감정"]?.get(today)!!.text,today,true),text=text){
+        whom=arrayListOf<emotionclass>()
+        whom.addAll(emotionarr["누구와"]!!)
+        doing=arrayListOf<emotionclass>()
+        doing.addAll(emotionarr["무엇을"]!!)
+        where=arrayListOf<emotionclass>()
+        where.addAll(emotionarr["어디에서"]!!)
+        weather=arrayListOf<emotionclass>()
+        weather.addAll(emotionarr["날씨"]!!)
+
+    }
+
 
     companion object {
 
@@ -38,9 +51,9 @@ class Day_Diary(
 
         }
 
-        var emotionname= arrayOf("오늘의 감정","누구와","무엇을","어디에서","날씨","수면시간")
-        var emotionarr: HashMap<String,Array<emotionclass>> = hashMapOf(
-            "오늘의 감정" to arrayOf(emotionclass("매우좋음",0,false),emotionclass("좋음",1,true),
+        val emotionname= arrayOf("오늘의 감정","누구와","무엇을","어디에서","날씨","수면시간")
+        val emotionarr: HashMap<String,Array<emotionclass>> = hashMapOf(
+            "오늘의 감정" to arrayOf(emotionclass("매우좋음",0,false),emotionclass("좋음",1,false),
                 emotionclass("보통",2,false),emotionclass("나쁨",3,false),
                 emotionclass("매우나쁨",4,false)),
             "누구와" to arrayOf(emotionclass("혼자",0,false),emotionclass("가족",1,false),
@@ -58,19 +71,20 @@ class Day_Diary(
         )
 
     }
-    fun getEmotionarr():MutableList<emotionclass>{
-        var arr:MutableList<emotionclass> = mutableListOf()
-        arr.add(today_emotion)
-        if(whom !=null)
-            arr.add(whom!!)
-        if(doing !=null)
-            arr.add(doing!!)
-        if(where !=null)
-            arr.add(where!!)
-//        if(mood !=-1)
-//            arr.add(mood)
-        if(weather !=null)
-            arr.add(weather!!)
+
+
+    fun getEmotionarr():ArrayList<ArrayList<emotionclass>>{
+        var arr:ArrayList<ArrayList<emotionclass>> = arrayListOf()
+        var today=arrayListOf<emotionclass>()
+        for (i in emotionarr["오늘의 감정"]!!){
+            today.add(i.clone())
+        }
+        today!![today_emotion.ghostimage].isactive=true
+        arr.add(today)
+        arr.add(whom)
+        arr.add(doing)
+        arr.add(where)
+        arr.add(weather)
         return arr
     }
     fun getEmotionarr_name():MutableList<String>{
