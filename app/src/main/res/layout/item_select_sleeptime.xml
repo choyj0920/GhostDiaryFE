@@ -25,9 +25,11 @@
     <com.google.android.material.slider.RangeSlider
         android:id="@+id/slider"
         style="@style/Myslider"
+
         android:layout_marginTop="36dp"
         android:layout_marginBottom="30dp"
         android:layout_marginLeft="30dp"
+
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

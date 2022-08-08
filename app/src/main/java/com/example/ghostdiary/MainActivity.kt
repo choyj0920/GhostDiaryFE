@@ -11,16 +11,13 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.ghostdiary.databinding.ActivityMainBinding
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.fragment.main.CalendarFragment
-import com.example.ghostdiary.fragment.main.DefaultFragment
-import com.example.ghostdiary.fragment.main.RecordFragment
-import com.example.ghostdiary.fragment.main.SelectEmotionFragment
+import com.example.ghostdiary.fragment.main.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
+    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
     private lateinit var binding: ActivityMainBinding
     private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
@@ -54,6 +51,22 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 
+        keyboardVisibilityUtils = KeyboardVisibilityUtils(window,
+            onShowKeyboard = {
+                binding.drawerlayout.run {
+                    //smoothScrollTo(scrollX, scrollY + keyboardHeight)
+                    //키보드 올라왔을때 원하는 동작
+                    binding.navigationbar.visibility = View.GONE
+                }
+            },
+            onHideKeyboard = {
+                binding.drawerlayout.run {
+                    //키보드 내려갔을때 원하는 동작
+                    //smoothScrollTo(scrollX, scrollY + keyboardHeight)
+                    binding.navigationbar.visibility = View.VISIBLE
+                }
+            }
+        )
 
 
         binding.navigationbar.setOnItemSelectedListener { item ->
@@ -110,8 +123,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
     }
-    fun selectemotion(date: Date){
-        var newselectemotion=SelectEmotionFragment(date)
+    fun selectemotion_fromcalendar(date: Date){
+        var newselectemotion=SelectEmotionFragment(calendarFragment,date)
         supportFragmentManager.beginTransaction().replace(binding.container.id, newselectemotion).commit()
         binding!!.tvDate.text="하루의 감정"
         binding.btnPostcheck.visibility=View.VISIBLE
@@ -121,7 +134,13 @@ class MainActivity : AppCompatActivity() {
             newselectemotion.postemotion(calendarFragment)
             binding.navigationbar.selectedItemId=R.id.calendar
 
+        }
+        binding.btnPosttext.setOnClickListener {
+            var diary =newselectemotion.getcurDiary()
 
+            supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(calendarFragment,date, diary = diary)).commit()
+
+            hide_emotionmenu()
         }
 
 
@@ -132,6 +151,11 @@ class MainActivity : AppCompatActivity() {
         binding.btnPostcheck.visibility=View.GONE
         binding.btnPosttext.visibility=View.GONE
 
+    }
+
+    override fun onDestroy() {
+        keyboardVisibilityUtils.detachKeyboardListeners()
+        super.onDestroy()
     }
 
 
@@ -153,6 +177,19 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    fun change_calendar(){
+        supportFragmentManager.beginTransaction().replace(binding.container.id,calendarFragment).commit()
+    }
+    fun change_record(){
+        supportFragmentManager.beginTransaction().replace(binding.container.id,recordFragment).commit()
+    }
+    fun change_memo(){
+//        supportFragmentManager.beginTransaction().replace(binding.container.id,).commit()
+    }
+    fun change_clinic(){
+//        supportFragmentManager.beginTransaction().replace(binding.container.id,).commit()
     }
 
 }

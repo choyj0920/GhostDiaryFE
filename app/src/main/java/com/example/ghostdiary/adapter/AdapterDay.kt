@@ -41,7 +41,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
         } else if(emotionMap.containsKey(to)){
             Log.d(TAG,"포함!! ${to}, ${emotionMap[to]}")
             holder.bindng.ivDate.setImageResource(
-                when(emotionMap.get(to)!!.today_emotion){
+                when(emotionMap.get(to)!!.today_emotion.ghostimage){
                     0 -> R.drawable.ghost_verygood
                     1 -> R.drawable.ghost_good
                     2 -> R.drawable.ghost_normal
@@ -56,14 +56,14 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
             holder.bindng.ivDate.setOnClickListener{
                 parent_fragment.show_post(emotionMap[to]!!.date)
             }
-            if(parent_fragment.emotionpostion != -1 && parent_fragment.emotionpostion != emotionMap.get(to)!!.today_emotion){
+            if(parent_fragment.emotionpostion != -1 && parent_fragment.emotionpostion != emotionMap.get(to)!!.today_emotion.ghostimage){
                 holder.bindng.ivDate.setImageResource(R.drawable.rectangle)
             }
 
         }
         else{ // 비워져 있는 칸
             holder.bindng.ivDate.setOnClickListener{
-                MainActivity.mainactivity.selectemotion(dayList[position])
+                MainActivity.mainactivity.selectemotion_fromcalendar(dayList[position])
             }
 
         }
