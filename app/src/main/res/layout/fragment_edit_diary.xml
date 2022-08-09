@@ -77,35 +77,86 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
         android:orientation="horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
 
-        android:scaleX="0.6"
-        android:background="@drawable/ic_testghosts"
 
         >
 
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <EditText
-        android:id="@+id/input_text"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/white"
-        android:paddingBottom="40dp"
-        android:scrollbars="vertical"
-        android:textSize="15sp"
-        android:hint="글 작성란"
-        android:paddingTop="20dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:gravity="top"
-
-
-        android:singleLine="false"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="5dp"
 
         app:layout_constraintTop_toBottomOf="@+id/rv_emotionlist"
-        tools:layout_editor_absoluteX="1dp" />
+
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_image"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/iv_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+
+                android:paddingLeft="10dp"
+                android:scaleType="fitCenter"
+                android:paddingRight="10dp"
+                android:src="@drawable/defaultimage"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+
+                android:id="@+id/btn_delimage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:padding="3dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <EditText
+            android:id="@+id/input_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingBottom="40dp"
+
+            android:background="@color/white"
+            android:scrollbars="vertical"
+            android:textSize="15sp"
+            android:hint="글 작성란"
+            android:paddingTop="20dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:gravity="top"
+
+            android:singleLine="false" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"

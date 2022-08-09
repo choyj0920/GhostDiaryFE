@@ -150,7 +150,6 @@ class CalendarFragment : Fragment() {
         viewModel.getdb(null).insertDiary(newDiary)
         Log.d("TAG","addDiary ${newDiary}")
         updatecalendar()
-
     }
     fun updatecalendar(){
         var transFormat = SimpleDateFormat("yyyy/MM")

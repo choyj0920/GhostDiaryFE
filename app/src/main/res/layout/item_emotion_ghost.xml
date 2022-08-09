@@ -2,19 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:layout_weight="1"
     >
 
 
-    <ImageView
-        android:id="@+id/btn_ghost_delete"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:padding="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/iv_ghost"
-        app:layout_constraintStart_toEndOf="@+id/iv_ghost"
-        app:srcCompat="@drawable/close" />
 
     <ImageView
         android:id="@+id/iv_ghost"
@@ -33,6 +26,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ghost_verygood" />
+    <ImageView
+        android:id="@+id/btn_ghost_delete"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/iv_ghost"
+        app:layout_constraintEnd_toEndOf="@+id/iv_ghost"
+        app:layout_constraintStart_toEndOf="@+id/iv_ghost"
+        app:layout_constraintTop_toTopOf="@+id/iv_ghost"
+        app:srcCompat="@drawable/close" />
 
     <TextView
         android:id="@+id/tv_ghost"

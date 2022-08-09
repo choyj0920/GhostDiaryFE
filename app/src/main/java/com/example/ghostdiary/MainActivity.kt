@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnPosttext.setOnClickListener {
             var diary =newselectemotion.getcurDiary()
 
-            supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(calendarFragment,date, diary = diary)).commit()
+            supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(supportFragmentManager.fragments.get(0),date, diary = diary),).commit()
 
             hide_emotionmenu()
         }
@@ -182,7 +182,16 @@ class MainActivity : AppCompatActivity() {
             System.exit(0)
 
 
-        }else{
+        }else if(supportFragmentManager.fragments.get(0) is SelectEmotionFragment){
+            supportFragmentManager.beginTransaction().replace(binding.container.id, (supportFragmentManager.fragments.get(0) as SelectEmotionFragment).parent).commit()
+
+        }else if(supportFragmentManager.fragments.get(0) is EditDiaryFragment){
+            supportFragmentManager.beginTransaction().replace(binding.container.id, (supportFragmentManager.fragments.get(0) as EditDiaryFragment).parent).commit()
+
+        }
+
+
+        else{
             binding.navigationbar.selectedItemId=R.id.invisible
             supportFragmentManager.beginTransaction().replace(binding.container.id,defaultFragment).commit()
 

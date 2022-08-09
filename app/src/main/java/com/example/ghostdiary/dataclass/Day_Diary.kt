@@ -87,6 +87,24 @@ class Day_Diary(
         arr.add(weather)
         return arr
     }
+    fun getEmotionarrElement():ArrayList<emotionclass?>{
+        var arr:ArrayList<emotionclass?> = arrayListOf()
+        arr.add(today_emotion)
+        arr.add(null)
+        arr.addAll(whom)
+        if(whom.size!=0)
+            arr.add(null)
+        arr.addAll(doing)
+        if(doing.size!=0)
+            arr.add(null)
+        arr.addAll(where)
+        if(where.size !=0)
+            arr.add(null)
+        arr.addAll(weather)
+        return arr
+
+    }
+
     fun getEmotionarr_name():MutableList<String>{
         var arr:MutableList<String> = mutableListOf()
         arr.add(emotionname[0])
