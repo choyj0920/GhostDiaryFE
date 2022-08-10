@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.NumberPicker
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDiary
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
+import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.databinding.FragmentRecordBinding
@@ -31,12 +33,14 @@ class RecordFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var binding: FragmentRecordBinding?=null
     private lateinit var monthDiary: ArrayList<Day_Diary>
+    var emotionpostion:Int=-1
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        calendar=Calendar.getInstance()
+        calendar=viewModel.recordcalendar
         calendar.set(Calendar.DAY_OF_MONTH, 1)
         binding= FragmentRecordBinding.inflate(inflater,container,false)
 
@@ -58,6 +62,7 @@ class RecordFragment : Fragment() {
             addMonth(1)
         }
         initmonthpicker()
+        init_spinner()
 
         update()
 
@@ -129,6 +134,11 @@ class RecordFragment : Fragment() {
 
         }
     }
+    fun addDiary(newDiary:Day_Diary){
+        viewModel.addDiary(newDiary)
+        update()
+    }
+
     fun update(){
 
         var transFormat1 = SimpleDateFormat("yyyy/MM")
@@ -140,10 +150,13 @@ class RecordFragment : Fragment() {
         var to = transFormat.format(calendar.time)
         for ((key,value) in viewModel.getEmotionArray()){
             if(key.slice(IntRange(0,6)).equals(to)){
+                if(emotionpostion==-1 || emotionpostion==value.today_emotion.ghostimage) {
+                    monthDiary.add(value)
+                }
 
-                monthDiary.add(value)
             }
         }
+        monthDiary.sortBy { dayDiary -> dayDiary.date  }
 
         var _adapter = AdapterDiary(this,monthDiary)
 
@@ -154,6 +167,30 @@ class RecordFragment : Fragment() {
 
     }
 
+    fun init_spinner() {
+        val array = arrayListOf<Int>(-1, 0, 1, 2, 3, 4)
+        val adapter = EmotionSpinnerAdapter(requireContext(), array)
+
+        binding!!.spinnerEmotion.adapter = adapter
+
+        binding!!.spinnerEmotion.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    emotionpostion = array.get(position)
+                    update()
+
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+
+            }
+    }
 
 
     override fun onDestroyView() {
@@ -161,4 +198,9 @@ class RecordFragment : Fragment() {
         super.onDestroyView()
     }
 
+    fun deleteDiary(date: Date) {
+        viewModel.deleteDiary(date)
+        update()
+
+    }
 }

@@ -115,7 +115,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
         return R.drawable.ic_blankghost
     }
 
-    fun postemotion(calendarFragment: CalendarFragment) {
+    fun postemotion(uptofragment: Fragment) {
         var todayemotion:emotionclass=emotionclass("오류임",0,false)
         for(i in emotionselect[0]){
             if(i.isactive) {
@@ -145,8 +145,13 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
 
         curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],startsleep,endsleep,curDiary.text, curDiary.image)
 
+        if(uptofragment is CalendarFragment){
+            uptofragment.addDiary(curDiary)
 
-        calendarFragment.addDiary(curDiary)
+        }else if(uptofragment is RecordFragment){
+            uptofragment.addDiary(curDiary)
+
+        }
 
     }
 
@@ -183,6 +188,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
 
         return curDiary
     }
+
 
 
 

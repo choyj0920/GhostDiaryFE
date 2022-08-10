@@ -4,25 +4,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemDiaryBinding
-import com.example.ghostdiary.databinding.ItemEmotionGhostBinding
-import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
-import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
+
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.dataclass.emotionclass
-import com.example.ghostdiary.fragment.main.EditDiaryFragment
+
 import com.example.ghostdiary.fragment.main.RecordFragment
-import com.example.ghostdiary.fragment.main.SelectEmotionFragment
-import com.google.android.material.slider.LabelFormatter
-import com.skydoves.balloon.Balloon
-import com.skydoves.balloon.BalloonSizeSpec
 import java.io.File
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -40,6 +34,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         var iv_image:ImageView=binding.ivImage
         var sideoption:ImageView = binding.btnOption
         var tv_text:TextView= binding.tvText
+        var layout=binding.layoutItemDiary
 
     }
 
@@ -66,7 +61,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         day.time=diary.date
 
         holder.tv_date.text=str_date
-        holder.tv_day.text= daytostring[day.get(Calendar.DAY_OF_WEEK)]
+        holder.tv_day.text= "${daytostring[day.get(Calendar.DAY_OF_WEEK)]}요일"
 
         holder.iv_ghost.setImageResource(Day_Diary.int_to_Image(diary.today_emotion.ghostimage))
 
@@ -92,6 +87,21 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         }
          holder.sideoption.setOnClickListener {
 
+             var popupMenu=PopupMenu(parent.context,holder.sideoption)
+             parent.requireActivity().menuInflater.inflate(R.menu.diary_sidemenu,popupMenu.menu)
+
+             popupMenu.setOnMenuItemClickListener { item  ->
+                when(item?.itemId){
+                    R.id.menu_edit->{
+                        MainActivity.mainactivity.change_to_editDiary(diary.date)
+                    }
+                    R.id.menu_delete->{
+                        parent.deleteDiary(diary.date)
+                    }
+                }
+                 item !=null
+             }
+             popupMenu.show()
          }
          holder.tv_text.text=diary.text
 

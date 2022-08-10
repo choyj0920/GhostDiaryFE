@@ -134,33 +134,53 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
     }
-    fun selectemotion_fromcalendar(date: Date){
-        var newselectemotion=SelectEmotionFragment(calendarFragment,date)
+
+    fun change_to_selectemotion(date :Date){
+        var parent=when(binding.navigationbar.selectedItemId){
+            R.id.calendar->calendarFragment
+            R.id.record->recordFragment
+            else -> {return}
+
+        }
+        var newselectemotion=SelectEmotionFragment(parent,date)
         supportFragmentManager.beginTransaction().replace(binding.container.id, newselectemotion).commit()
         binding!!.tvDate.text="하루의 감정"
         binding.btnPostcheck.visibility=View.VISIBLE
         binding.btnPosttext.visibility=View.VISIBLE
 
         binding.btnPostcheck.setOnClickListener {
-            newselectemotion.postemotion(calendarFragment)
-            binding.navigationbar.selectedItemId=R.id.calendar
+            if(parent is CalendarFragment){
+                newselectemotion.postemotion(parent)
+                binding.navigationbar.selectedItemId=R.id.calendar
+            }else if (parent is RecordFragment){
+                newselectemotion.postemotion(parent)
+                binding.navigationbar.selectedItemId=R.id.record
+            }else{
 
+            }
         }
         binding.btnPosttext.setOnClickListener {
             var diary =newselectemotion.getcurDiary()
 
             supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(supportFragmentManager.fragments.get(0),date, diary = diary),).commit()
-
+            binding.tvDate.text=""
             hide_emotionmenu()
         }
 
+    }
+    fun change_to_editDiary(date :Date){
 
-
+        supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(supportFragmentManager.fragments.get(0),date),).commit()
+        binding.tvDate.text=""
+        hide_emotionmenu()
 
     }
+
+
     fun hide_emotionmenu(){
         binding.btnPostcheck.visibility=View.GONE
         binding.btnPosttext.visibility=View.GONE
+
 
     }
 
@@ -183,11 +203,25 @@ class MainActivity : AppCompatActivity() {
 
 
         }else if(supportFragmentManager.fragments.get(0) is SelectEmotionFragment){
-            supportFragmentManager.beginTransaction().replace(binding.container.id, (supportFragmentManager.fragments.get(0) as SelectEmotionFragment).parent).commit()
+            var frag=supportFragmentManager.fragments.get(0) as SelectEmotionFragment
+            if(frag.parent is CalendarFragment){
+                binding.navigationbar.selectedItemId=R.id.calendar
+            }else{
+
+            }
 
         }else if(supportFragmentManager.fragments.get(0) is EditDiaryFragment){
-            supportFragmentManager.beginTransaction().replace(binding.container.id, (supportFragmentManager.fragments.get(0) as EditDiaryFragment).parent).commit()
+            var frag=supportFragmentManager.fragments.get(0) as EditDiaryFragment
+            if(frag.parent is RecordFragment){
+                binding.navigationbar.selectedItemId=R.id.record
+            }else if(frag.parent is SelectEmotionFragment){
+                supportFragmentManager.beginTransaction().replace(binding.container.id, frag.parent).commit()
+                binding!!.tvDate.text="하루의 감정"
+                binding.btnPostcheck.visibility=View.VISIBLE
+                binding.btnPosttext.visibility=View.VISIBLE
 
+
+            }
         }
 
 

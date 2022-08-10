@@ -18,6 +18,21 @@
         android:animateLayoutChanges="true"
         android:background="#ffffff">
 
+        <Spinner
+            android:id="@+id/spinner_emotion"
+            android:layout_width="85dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+
+            android:background="@drawable/bg_spinner_emotion"
+            android:gravity="center"
+            android:popupBackground="@drawable/bg_spinner_emotion"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/tv_date"
@@ -37,11 +52,11 @@
         <ImageView
             android:layout_marginEnd="18dp"
             android:id="@+id/btn_lastmonth"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:scaleType="center"
             android:rotation="180"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="7dp"
             android:src="@drawable/ic_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btn_nextmonth"
@@ -49,10 +64,10 @@
 
         <ImageView
             android:id="@+id/btn_nextmonth"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:scaleType="center"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="7dp"
             android:src="@drawable/ic_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -68,8 +83,7 @@
         android:orientation="vertical"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+
         android:layout_marginBottom="10dp"
         android:layout_gravity="center"
         android:background="@color/white"

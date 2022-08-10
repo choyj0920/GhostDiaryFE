@@ -1,9 +1,11 @@
 package com.example.ghostdiary
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.ghostdiary.database.SqliteHelper
 import com.example.ghostdiary.dataclass.Day_Diary
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.*
@@ -12,6 +14,7 @@ import kotlin.collections.HashMap
 class MainViewModel(): ViewModel() {
     var ishintinvisible: Boolean = false
     var calendar =Calendar.getInstance()
+    var recordcalendar =Calendar.getInstance()
 
     var maindb:SqliteHelper?=null
 
@@ -24,8 +27,24 @@ class MainViewModel(): ViewModel() {
 
     }
 
+    fun addDiary(newDiary:Day_Diary) {
+        var day = newDiary.date
+        var transFormat = SimpleDateFormat("yyyy-MM-dd")
+        var to = transFormat.format(day)
+        getEmotionArray().put(to, newDiary)
+        getdb(null).insertDiary(newDiary)
+        Log.d("TAG", "addDiary ${newDiary}")
+    }
+    fun deleteDiary(date:Date){
+        var transFormat = SimpleDateFormat("yyyy-MM-dd")
+        var to = transFormat.format(date)
+        maindb!!.deleteDiary(date)
+        calendar_emotionArray!!.remove(to)
 
-        var calendar_emotionArray: HashMap<String, Day_Diary>? = null
+
+    }
+
+    var calendar_emotionArray: HashMap<String, Day_Diary>? = null
 
     fun getEmotionArray(context: Context?=null): HashMap<String, Day_Diary> {
         if (calendar_emotionArray == null) {

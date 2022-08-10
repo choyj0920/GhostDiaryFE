@@ -143,12 +143,7 @@ class CalendarFragment : Fragment() {
 
     }
     fun addDiary(newDiary:Day_Diary){
-        var day=newDiary.date
-        var transFormat = SimpleDateFormat("yyyy-MM-dd")
-        var to = transFormat.format(day)
-        viewModel.getEmotionArray().put(to, newDiary)
-        viewModel.getdb(null).insertDiary(newDiary)
-        Log.d("TAG","addDiary ${newDiary}")
+        viewModel.addDiary(newDiary)
         updatecalendar()
     }
     fun updatecalendar(){
