@@ -50,6 +50,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "diary_id    integer ," +
                 "category    integer NOT NULL," +
                 "ghost_num   integer NOT NULL," +
+                "isactive integer NOT NULL," +
                 "text   TEXT ," +
                 "FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create2)
@@ -77,6 +78,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "diary_id    integer ," +
                 "category    integer NOT NULL," +
                 "ghost_num   integer NOT NULL," +
+                "isactive integer NOT NULL," +
                 "text   TEXT ," +
                 "FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create2)
@@ -130,6 +132,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                     temp.put("diary_id",result)
                     temp.put("category",1)
                     temp.put("ghost_num",i.ghostimage)
+                    temp.put("isactive", if(i.isactive) 1 else 0)
                     temp.put("text",i.text)
                     Log.d("TAG","emotion1 ${i}" )
 
@@ -142,6 +145,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                     temp.put("diary_id",result)
                     temp.put("category",2)
                     temp.put("ghost_num",i.ghostimage)
+                    temp.put("isactive", if(i.isactive) 1 else 0)
                     temp.put("text",i.text)
                     wd.insert("emotions",null,temp)
                     Log.d("TAG","emotion2 ${i}" )
@@ -154,6 +158,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                     temp.put("diary_id",result)
                     temp.put("category",3)
                     temp.put("ghost_num",i.ghostimage)
+                    temp.put("isactive", if(i.isactive) 1 else 0)
                     temp.put("text",i.text)
                     wd.insert("emotions",null,temp)
                     Log.d("TAG","emotion3 ${i}" )
@@ -166,6 +171,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                     temp.put("diary_id",result)
                     temp.put("category",4)
                     temp.put("ghost_num",i.ghostimage)
+                    temp.put("isactive", if(i.isactive) 1 else 0)
                     temp.put("text",i.text)
                     wd.insert("emotions",null,temp)
                 }
@@ -241,9 +247,10 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         val diary_id = cursor.getLong(cursor.getColumnIndex("diary_id")).toInt()
         var category = cursor.getLong(cursor.getColumnIndex("category")).toInt()
         val ghost_num = cursor.getString(cursor.getColumnIndex("ghost_num")).toInt()
+        val isactive = cursor.getString(cursor.getColumnIndex("isactive")).toInt()==1
         val text = cursor.getString(cursor.getColumnIndex("text"))
 
-        val emotion =emotionclass(text,ghost_num)
+        val emotion =emotionclass(text,ghost_num,isactive)
         when(category){
             0->Diary.today_emotion=emotion
             1->Diary.whom!!.add(emotion)
