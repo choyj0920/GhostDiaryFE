@@ -30,6 +30,7 @@ import com.example.ghostdiary.adapter.AdapterEmotion
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.databinding.FragmentEditDiaryBinding
 import com.example.ghostdiary.dataclass.Day_Diary
+import com.example.ghostdiary.dataclass.emotionclass
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -73,7 +74,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
         }else if (viewModel.getEmotionArray(requireContext()).contains(strdate)) {
             curDiary = viewModel.getEmotionArray(null)[strdate]!!
         }else{
-            curDiary= Day_Diary(date,3)
+            curDiary= Day_Diary(date,emotionclass("매우 좋음",0), arrayListOf<emotionclass>(), arrayListOf<emotionclass>(), arrayListOf<emotionclass>())
 
         }
         binding!!.inputText.setText(curDiary.text)

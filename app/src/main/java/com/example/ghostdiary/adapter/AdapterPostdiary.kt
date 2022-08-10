@@ -84,7 +84,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             var yesterday = Calendar.getInstance()
             yesterday.time = parent.date
             yesterday.add(Calendar.DATE, -1)
-            yesterday.set(Calendar.HOUR_OF_DAY, 18)
+            yesterday.set(Calendar.HOUR_OF_DAY, 22)
 
             var timeformat = SimpleDateFormat("dd일 HH시")
 
