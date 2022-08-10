@@ -91,16 +91,28 @@ class Day_Diary(
         var arr:ArrayList<emotionclass?> = arrayListOf()
         arr.add(today_emotion)
         arr.add(null)
-        arr.addAll(whom)
+        for( i in whom){
+            if(i.isactive)
+                arr.add(i)
+        }
         if(whom.size!=0)
             arr.add(null)
-        arr.addAll(doing)
+        for( i in doing){
+            if(i.isactive)
+                arr.add(i)
+        }
         if(doing.size!=0)
             arr.add(null)
-        arr.addAll(where)
+        for( i in where){
+            if(i.isactive)
+                arr.add(i)
+        }
         if(where.size !=0)
             arr.add(null)
-        arr.addAll(weather)
+        for( i in weather){
+            if(i.isactive)
+                arr.add(i)
+        }
         return arr
 
     }

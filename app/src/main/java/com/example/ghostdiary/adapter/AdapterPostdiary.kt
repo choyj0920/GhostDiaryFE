@@ -29,6 +29,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
     class EmotionView(binding: ItemSelectEmotionBinding) : RecyclerView.ViewHolder(binding.root) {
         var tv_title: TextView = binding.tvTitle
         var rv_emotion: RecyclerView= binding.rvEmotionlist
+        var btn_plus:ImageView=binding.btnPlusbutton
 
 
     }
@@ -72,8 +73,12 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             var holder=holder as EmotionView
 
             holder.tv_title.text=emotions[position]
-
-
+            if(parent.editmode){
+                holder.btn_plus.visibility=View.VISIBLE
+            }
+            else{
+                holder.btn_plus.visibility=View.GONE
+            }
             rv_emotionList[position]=holder.rv_emotion
 
             update(position)

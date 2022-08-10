@@ -22,7 +22,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 import kotlin.math.round
 
-class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
+class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Boolean=false) : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -84,6 +84,11 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date) : Fragment() {
         return binding!!.root
 
     }
+    fun switcheditmode(isedit:Boolean){
+        editmode=isedit
+        update()
+    }
+
     fun getIgnoreTime(time:Long):Long{
         return Calendar.getInstance().apply {
             timeInMillis=time

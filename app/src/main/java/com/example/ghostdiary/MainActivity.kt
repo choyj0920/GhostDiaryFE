@@ -166,8 +166,15 @@ class MainActivity : AppCompatActivity() {
             binding.tvDate.text=""
             hide_emotionmenu()
         }
+        binding.tvEdittext.visibility=View.VISIBLE
+        binding.tvEdittext.setOnClickListener {
+            newselectemotion.switcheditmode(!newselectemotion.editmode)
+        }
+        binding.btnSideomenu.visibility=View.INVISIBLE
 
     }
+
+
     fun change_to_editDiary(date :Date){
 
         supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(supportFragmentManager.fragments.get(0),date),).commit()
@@ -180,8 +187,8 @@ class MainActivity : AppCompatActivity() {
     fun hide_emotionmenu(){
         binding.btnPostcheck.visibility=View.GONE
         binding.btnPosttext.visibility=View.GONE
-
-
+        binding.tvEdittext.visibility=View.GONE
+        binding.btnSideomenu.visibility=View.VISIBLE
     }
 
     override fun onDestroy() {

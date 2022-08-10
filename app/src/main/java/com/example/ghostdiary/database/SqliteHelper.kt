@@ -7,6 +7,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import android.widget.Toast
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
 import java.text.SimpleDateFormat
@@ -244,23 +245,32 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     @SuppressLint("Range")
     fun cursor_emotion(cursor: Cursor,Diary:Day_Diary){
 
-        val diary_id = cursor.getLong(cursor.getColumnIndex("diary_id")).toInt()
-        var category = cursor.getLong(cursor.getColumnIndex("category")).toInt()
-        val ghost_num = cursor.getString(cursor.getColumnIndex("ghost_num")).toInt()
-        val isactive = cursor.getString(cursor.getColumnIndex("isactive")).toInt()==1
-        val text = cursor.getString(cursor.getColumnIndex("text"))
 
-        val emotion =emotionclass(text,ghost_num,isactive)
-        when(category){
-            0->Diary.today_emotion=emotion
-            1->Diary.whom!!.add(emotion)
-            2->Diary.doing!!.add(emotion)
-            3->Diary.where!!.add(emotion)
-            4->Diary.weather!!.add(emotion)
-            else->{
+        try {
+            val diary_id = cursor.getLong(cursor.getColumnIndex("diary_id")).toInt()
+            var category = cursor.getLong(cursor.getColumnIndex("category")).toInt()
+            val ghost_num = cursor.getString(cursor.getColumnIndex("ghost_num")).toInt()
+            val isactive = cursor.getString(cursor.getColumnIndex("isactive")).toInt()==1
+            val text = cursor.getString(cursor.getColumnIndex("text"))
 
+            val emotion =emotionclass(text,ghost_num,isactive)
+            when(category){
+                0->Diary.today_emotion=emotion
+                1->Diary.whom!!.add(emotion)
+                2->Diary.doing!!.add(emotion)
+                3->Diary.where!!.add(emotion)
+                4->Diary.weather!!.add(emotion)
+                else->{
+
+                }
             }
+
+        }catch (e:Exception){
+            Log.e("ERROR","오류로 db가 초기화 되었습니다.")
+            createdb()
+
         }
+
 
     }
 
