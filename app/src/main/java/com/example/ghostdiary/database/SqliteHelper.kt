@@ -100,6 +100,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
         values.put("date",formatDate.format(diary.date))
         values.put("image",diary.image)
+        values.put("text",diary.text)
         if(diary.sleepstart==null || diary.sleepend==null){
             values.put("sleepstart", "")
             values.put("sleepend", "")
