@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+
 android {
     compileSdk 32
 
@@ -33,7 +34,10 @@ android {
     buildFeatures{
         viewBinding=true
     }
+
+
 }
+
 
 dependencies {
 
@@ -48,6 +52,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
 
     implementation "com.github.skydoves:balloon:1.4.7"
+    implementation 'com.github.thealeksandr:PFLockScreen-Android:1.0.0-beta7'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
