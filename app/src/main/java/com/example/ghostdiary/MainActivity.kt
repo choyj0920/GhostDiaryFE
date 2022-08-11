@@ -226,7 +226,11 @@ class MainActivity : AppCompatActivity() {
                 binding!!.tvDate.text="하루의 감정"
                 binding.btnPostcheck.visibility=View.VISIBLE
                 binding.btnPosttext.visibility=View.VISIBLE
-
+                binding.tvEdittext.visibility=View.VISIBLE
+                binding.tvEdittext.setOnClickListener {
+                    (frag.parent as SelectEmotionFragment).switcheditmode(!(frag.parent as SelectEmotionFragment).editmode)
+                }
+                binding.btnSideomenu.visibility=View.INVISIBLE
 
             }
         }

@@ -59,12 +59,13 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
                 yesterday.time = date
                 yesterday.add(Calendar.DATE, -1)
                 yesterday.set(Calendar.HOUR_OF_DAY, 22)
+                yesterday.set(Calendar.MINUTE, 0)
 
-                sleepstart= ((getIgnoreTime(curDiary.sleepstart!!.time) - getIgnoreTime(yesterday.time.time))/(1000 * 60 * 60)).toInt()
+                sleepstart= ((getIgnoreTime(curDiary.sleepstart!!.time) - getIgnoreTime(yesterday.time.time))/(1000 * 60 * 10)).toInt()
 
-                sleepend=  ((getIgnoreTime(curDiary.sleepend!!.time) - getIgnoreTime(yesterday.time.time))/(1000 * 60 * 60)).toInt()
+                sleepend=  ((getIgnoreTime(curDiary.sleepend!!.time) - getIgnoreTime(yesterday.time.time))/(1000 * 60 * 10)).toInt()
 
-                if(sleepstart>24 || sleepstart<0||sleepend>24 ||sleepend<0) {
+                if(sleepstart>72 || sleepstart<0||sleepend>72 ||sleepend<0) {
                     sleepstart = -1
                     sleepend = -1
                 }
@@ -93,7 +94,6 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
         return Calendar.getInstance().apply {
             timeInMillis=time
 
-            set(Calendar.MINUTE,0)
             set(Calendar.SECOND,0)
             set(Calendar.MILLISECOND,0)
 
@@ -150,10 +150,10 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
             yesterday.set(Calendar.SECOND,0)
             var temp = Calendar.getInstance()
             temp.time=yesterday.time
-            temp.add(Calendar.HOUR_OF_DAY,sleepstart)
+            temp.add(Calendar.MINUTE,sleepstart*10)
             startsleep=temp.time
             temp.time=yesterday.time
-            temp.add(Calendar.HOUR_OF_DAY,sleepend)
+            temp.add(Calendar.MINUTE,sleepend*10)
             endsleep=temp.time
 
             Log.d("TAG",startsleep.toString()+endsleep.toString())

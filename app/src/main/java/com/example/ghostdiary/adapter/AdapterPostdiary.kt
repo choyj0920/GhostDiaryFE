@@ -91,11 +91,12 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             yesterday.time = parent.date
             yesterday.add(Calendar.DATE, -1)
             yesterday.set(Calendar.HOUR_OF_DAY, 22)
+            yesterday.set(Calendar.MINUTE,0)
 
-            var timeformat = SimpleDateFormat("dd일 HH시")
+            var timeformat = SimpleDateFormat("dd일 HH시 mm분")
 
 
-            holder.slider.values= listOf<Float>(0.0f,10.0f)
+            holder.slider.values= listOf<Float>(0.0f,48.0f)
             if(sleepstart !=-1 && sleepend != -1){
                 holder.slider.values= listOf<Float>(sleepstart.toFloat(),sleepend.toFloat())
             }
@@ -104,7 +105,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
                 LabelFormatter { value ->
                     var temp = Calendar.getInstance()
                     temp.time=yesterday.time
-                    temp.add(Calendar.HOUR_OF_DAY, value.toInt())
+                    temp.add(Calendar.MINUTE, value.toInt()*10)
                     var to = timeformat.format(temp.time)
 
 

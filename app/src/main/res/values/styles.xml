@@ -57,7 +57,7 @@
         <item name="trackColorInactive">@color/gray</item>
         <item name="labelStyle">@style/My_Tooltip</item>
         <item name="tickColor">#333333</item>
-        <item name="tickVisible">true</item>
+        <item name="tickVisible">false</item>
 
 
         <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
