@@ -17,7 +17,7 @@ class DefaultFragment : Fragment() {
     }
     private var binding: FragmentDefaultBinding? =null
 
-    private lateinit var viewModel: DefaultViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,13 +26,12 @@ class DefaultFragment : Fragment() {
         binding=FragmentDefaultBinding.inflate(inflater,container,false)
 
 
-
         return binding!!.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(DefaultViewModel::class.java)
+
         // TODO: Use the ViewModel
     }
     override fun onDestroyView() {

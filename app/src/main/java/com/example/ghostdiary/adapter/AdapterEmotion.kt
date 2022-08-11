@@ -47,6 +47,8 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
         holder.ghostimage.setImageResource(Day_Diary.int_to_Image(emotions[position].ghostimage))
 
 
+
+
         if(listPosion==0){ // 하루의감정
             //하루의 감정은 삭제못함
             holder.btn_close.visibility=View.INVISIBLE
@@ -65,18 +67,56 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
                     parent.update(listPosion)
                 }
             }
-        }else{ //다른곳 삭제도 가능 추가도가능
 
-            holder.ghostimage.alpha=1.0f
-            holder.btn_close.setOnClickListener {
-                emotions.removeAt(position)
-                parent.update(listPosion)
+
+        }else{ //다른곳 삭제도 가능 추가도가능
+            if(emotions[position].isactive){
+                holder.ghostimage.alpha=1.0f
+
+            }else{
+                holder.ghostimage.alpha=0.4f
+            }
+
+            if(parent.parent.editmode){
+                holder_editmode(holder,position)
+            }else{
+                holder_select_mode(holder,position)
 
             }
+
+
         }
 
 
     }
+
+    fun holder_editmode(holder:GhostView, position: Int){
+        holder.btn_close.visibility=View.VISIBLE
+
+        holder.btn_close.setOnClickListener {
+            emotions.removeAt(position)
+            parent.update(listPosion)
+
+        }
+
+
+    }
+    fun holder_select_mode(holder:GhostView, position: Int){
+        holder.btn_close.visibility=View.INVISIBLE
+        holder.ghostimage.setOnClickListener {
+            if(emotions[position].isactive){
+                emotions[position].isactive = false
+                holder.ghostimage.alpha = 0.4f
+
+            }else {
+                emotions[position].isactive = true
+                holder.ghostimage.alpha = 1.0f
+            }
+
+        }
+
+    }
+
 
 
     override fun getItemViewType(position: Int): Int {

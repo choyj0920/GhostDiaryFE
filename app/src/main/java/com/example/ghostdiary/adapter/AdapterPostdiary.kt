@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
@@ -57,7 +58,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
 
     }
     fun update(position: Int){
-        var emotionManager = GridLayoutManager(parent.context, 5)
+        var emotionManager = LinearLayoutManager(parent.context,LinearLayoutManager.HORIZONTAL,false)
         emotionAdapterList[position]= AdapterEmotion(this,position,selecttexts[position])
 
         rv_emotionList[position]!!.apply {

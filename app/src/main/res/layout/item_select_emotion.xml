@@ -55,12 +55,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_emotionlist"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="39dp"
-        android:layout_marginRight="43dp"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginBottom="15dp"
 
 
