@@ -77,17 +77,23 @@
 
     </style>
 
+    <style name="sw_mainColor">
+        <item name="colorControlActivated">@color/pink</item>
+        <item name="colorControlNormal">#00000061</item>
+    </style>
+
 
 <!--    -->
 
     <style name="MyLockScreenStyle">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:foreground">@android:color/transparent</item>
+        <item name="android:textColor">#000</item>
     </style>
 
     <style name="MyLockScreenButtonStyle">
         <item name="android:textColor">#B2B2B2</item>
-        <item name="android:textSize">18dp</item>
-        <item name="android:foreground">@color/white</item>
+        <item name="android:textSize">23dp</item>
     </style>
 
     <style name="MyLockScreenFingerprintButtonStyle">
@@ -99,18 +105,19 @@
     </style>
 
     <style name="MyLockScreenCodeStyle">
-        <item name="android:button">@drawable/code_selector_pf</item>
+        <item name="android:button">@drawable/codeselector</item>
+        <item name="pf_code_view"></item>
     </style>
 
     <style name="MyLockNextButtonStyle">
-        <item name="android:textColor">#9FFF</item>
+        <item name="android:textColor">@color/pink</item>
         <item name="android:textSize">18dp</item>
-        <item name="android:background">@null</item>
-        <item name="android:layout_margin">20dp</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:layout_margin">40dp</item>
     </style>
 
     <style name="MyLockTitleStyle">
-        <item name="android:textColor">#FFF</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="MyLockHintStyle">

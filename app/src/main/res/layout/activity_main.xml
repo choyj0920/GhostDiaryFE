@@ -5,6 +5,7 @@
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:openDrawer="left"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -164,17 +165,42 @@
                     android:textColor="#001018"
                     android:text="이용권 구매"
                     />
-                <TextView
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/sidemenu_lock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:textSize="15dp"
-                    android:textColor="#001018"
-                    android:text="화면 잠금"
-                    />
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:id="@+id/sidemenu_lock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+
+                        android:text="화면 잠금"
+                        android:textColor="#001018"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Switch
+                        android:id="@+id/sidemenu_switch_lock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:switchMinWidth="40dp"
+                        android:checked="false"
+                        android:theme="@style/sw_mainColor"
+                        android:thumbTint="#FAFAFA"
+                        android:layout_marginEnd="36dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <TextView
                     android:layout_marginTop="30dp"
                     android:id="@+id/sidemenu_alarm"

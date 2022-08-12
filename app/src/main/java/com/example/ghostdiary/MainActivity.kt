@@ -7,8 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
+import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.example.ghostdiary.databinding.ActivityMainBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.fragment.main.*
@@ -22,10 +24,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
-
+    private lateinit var prefs : SharedPreferences
     companion object{
         lateinit var mainactivity:MainActivity
     }
+    var lastTimeBackPressed : Long = 0
+
 
 
     lateinit var viewModel: MainViewModel
@@ -36,6 +40,17 @@ class MainActivity : AppCompatActivity() {
         binding=ActivityMainBinding.inflate(layoutInflater)
         viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getEmotionArray(this)
+
+        prefs = this.getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+
+        val islock= prefs.getBoolean("isLock",false)
+        if(islock){
+            lockapp()
+            binding.sidemenuSwitchLock.isChecked=true
+        }else{
+            binding.sidemenuSwitchLock.isChecked=false
+
+        }
 
         defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
@@ -121,7 +136,14 @@ class MainActivity : AppCompatActivity() {
             finish()
         } */
 
-        //db
+        init_sidemenu()
+
+        setContentView(binding.root)
+
+    }
+
+    fun init_sidemenu(){
+        //db 초기화
         binding.sidemenuDbinit.setOnClickListener{
             viewModel.getdb(this).createdb()
             finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다.
@@ -131,8 +153,36 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        setContentView(binding.root)
+        binding.sidemenuLock.setOnClickListener {
+            val islock= prefs.getBoolean("isLock",false)
+            if(islock) // 글자 눌러서 잠금되어있을때만 락
+                lockapp()
+            binding.drawerlayout.closeDrawer(GravityCompat.START)
+        }
 
+
+        binding.sidemenuSwitchLock.setOnCheckedChangeListener { buttonview, ischecked ->
+            if(ischecked){
+                var intent = Intent(this, LockActivity::class.java)
+                intent.putExtra("iscreate",true )
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                startActivity(intent)
+                binding.drawerlayout.closeDrawer(GravityCompat.START)
+            }else{
+                val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+                editor.putBoolean("isLock",false).apply()
+                editor.remove("pinencode").apply()
+                editor.commit()
+                PFSecurityManager.getInstance().getPinCodeHelper().delete {  }
+
+            }
+        }
+    }
+    fun lockapp(){
+        var intent = Intent(this, LockActivity::class.java)
+        intent.putExtra("iscreate",false)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
     }
 
     fun change_to_selectemotion(date :Date){
@@ -203,10 +253,14 @@ class MainActivity : AppCompatActivity() {
             calendarFragment.down_post()
         }
         else if(supportFragmentManager.fragments.get(0) is DefaultFragment) {
-            finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다.
-
-            System.runFinalization() //현재 작업중인 쓰레드가 다 종료되면, 종료 시키라는 명령어이다.
-            System.exit(0)
+            if(System.currentTimeMillis() - lastTimeBackPressed >= 1500){
+                lastTimeBackPressed = System.currentTimeMillis()
+                Toast.makeText(this,"'뒤로' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_LONG).show() }
+            else {
+                finishAffinity()
+                System.runFinalization()
+                System.exit(0)
+            }
 
 
         }else if(supportFragmentManager.fragments.get(0) is SelectEmotionFragment){
