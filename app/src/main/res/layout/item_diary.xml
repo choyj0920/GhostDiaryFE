@@ -75,12 +75,13 @@
     <ImageView
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:paddingBottom="10dp"
-
-        android:scaleType="fitXY"
-        android:src="@drawable/defaultimage"
+        android:maxHeight="300dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/rectangle"
         />
     <TextView
         android:id="@+id/tv_text"

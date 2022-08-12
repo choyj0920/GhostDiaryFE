@@ -101,12 +101,13 @@
             android:id="@+id/layout_image"
             android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_image"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="300dp"
                 android:paddingTop="4dp"
                 android:paddingBottom="4dp"
 
@@ -114,6 +115,7 @@
                 android:scaleType="fitCenter"
                 android:paddingRight="10dp"
                 android:src="@drawable/defaultimage"
+                android:adjustViewBounds="true"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
