@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- NOTE: order is important (the first matching state(s) is what is rendered) -->
-    <item
-        android:state_checked="true"
-        android:drawable="@drawable/ic_pincode_codefill"/>
-    <item
-        android:drawable="@drawable/ic_pincode_codenonfill"/>
-</selector>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:bottom="10dp"
+    android:left="10dp"
+    android:right="10dp"
+    android:top="10dp">
+
+    <selector xmlns:android="http://schemas.android.com/apk/res/android">
+        <!-- NOTE: order is important (the first matching state(s) is what is rendered) -->
+        <item
+            android:state_checked="true"
+            android:drawable="@drawable/ic_pincode_codefill"
+            />
+        <item
+            android:drawable="@drawable/ic_pincode_codenonfill"/>
+    </selector>
+</item>
+</layer-list>

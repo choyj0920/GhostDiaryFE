@@ -189,7 +189,7 @@
                         android:id="@+id/sidemenu_switch_lock"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:switchMinWidth="40dp"
+                        android:switchMinWidth="50dp"
                         android:checked="false"
                         android:theme="@style/sw_mainColor"
                         android:thumbTint="#FAFAFA"
@@ -259,18 +259,7 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_weight="1"
-                    android:layout_marginTop="34dp"
-                    android:id="@+id/sidemenu_mode"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:textSize="15dp"
-                    android:textColor="#001018"
-                    android:text="언어/다크모드"
-                    />
+
 
                 <TextView
                     android:layout_gravity="bottom"

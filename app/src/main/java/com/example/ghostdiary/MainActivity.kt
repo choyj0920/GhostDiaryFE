@@ -167,7 +167,9 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("iscreate",true )
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
+
                 binding.drawerlayout.closeDrawer(GravityCompat.START)
+
             }else{
                 val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
                 editor.putBoolean("isLock",false).apply()
@@ -178,6 +180,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        val islock= prefs.getBoolean("isLock",false)
+        if(islock){
+            binding.sidemenuSwitchLock.isChecked=true
+        }else{
+            binding.sidemenuSwitchLock.isChecked=false
+
+        }
+    }
+
     fun lockapp(){
         var intent = Intent(this, LockActivity::class.java)
         intent.putExtra("iscreate",false)

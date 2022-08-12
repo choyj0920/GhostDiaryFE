@@ -23,6 +23,7 @@
         <item name="pf_title">@style/MyLockTitleStyle</item>
         <item name="pf_next">@style/MyLockNextButtonStyle</item>
 
+
     </style>
     <style name="NewDialog">
         <item name="android:windowFrame">@null</item>

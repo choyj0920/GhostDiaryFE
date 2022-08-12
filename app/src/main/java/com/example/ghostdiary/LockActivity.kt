@@ -55,10 +55,11 @@ class LockActivity : AppCompatActivity() {
         val fragment = PFLockScreenFragment()
         val builder = PFFLockScreenConfiguration.Builder(this)
             .setMode(PFFLockScreenConfiguration.MODE_CREATE).setCodeLength(4)
-            .setTitle("새 비밀번호를 입력해주세요").setUseFingerprint(false)
+            .setTitle("새 비밀번호를 입력해 주세요").setUseFingerprint(false)
             .setNextButton("다 음")
             .setNewCodeValidation(true)
-            .setNewCodeValidationTitle("다시 한 번 새 비밀번호를 입력해주세요")
+
+            .setNewCodeValidationTitle("한번 더 입력해 주세요")
         fragment.setConfiguration(builder.build())
         fragment.setCodeCreateListener(
             object : OnPFLockScreenCodeCreateListener {
@@ -89,7 +90,7 @@ class LockActivity : AppCompatActivity() {
         fragment.setEncodedPinCode(curPinencode)
         val builder = PFFLockScreenConfiguration.Builder(this)
             .setMode(PFFLockScreenConfiguration.MODE_AUTH).setCodeLength(4).setUseFingerprint(false)
-            .setTitle("비밀번호를 입력해주세요").setClearCodeOnError(true)
+            .setTitle("비밀번호를 입력해 주세요").setClearCodeOnError(true)
         fragment.setConfiguration(builder.build())
         fragment.setLoginListener(
             object : PFLockScreenFragment.OnPFLockScreenLoginListener {
