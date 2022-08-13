@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import android.widget.Toast
+import com.example.ghostdiary.MainActivity
+import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
 import java.text.SimpleDateFormat
@@ -267,6 +269,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
         }catch (e:Exception){
             Log.e("ERROR","오류로 db가 초기화 되었습니다.")
+            Toast.makeText(MainActivity.mainactivity,"기존 db테이블과 충돌으로 db가 초기화됩니다.",Toast.LENGTH_SHORT)
             createdb()
 
         }

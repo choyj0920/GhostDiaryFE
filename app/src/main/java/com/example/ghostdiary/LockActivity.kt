@@ -55,10 +55,9 @@ class LockActivity : AppCompatActivity() {
         val fragment = PFLockScreenFragment()
         val builder = PFFLockScreenConfiguration.Builder(this)
             .setMode(PFFLockScreenConfiguration.MODE_CREATE).setCodeLength(4)
-            .setTitle("새 비밀번호를 입력해 주세요").setUseFingerprint(false)
+            .setTitle("비밀번호를 입력해 주세요").setUseFingerprint(false)
             .setNextButton("다 음")
             .setNewCodeValidation(true)
-
             .setNewCodeValidationTitle("한번 더 입력해 주세요")
         fragment.setConfiguration(builder.build())
         fragment.setCodeCreateListener(
@@ -75,6 +74,10 @@ class LockActivity : AppCompatActivity() {
 
                 }
                 override fun onNewCodeValidationFailed() {
+                    title="한번 더 입력해 주세요"
+
+                    showmessage("입력하신 비밃 번호와 다릅니다. 다시 입력해주세요")
+                    
 
                 }
             }

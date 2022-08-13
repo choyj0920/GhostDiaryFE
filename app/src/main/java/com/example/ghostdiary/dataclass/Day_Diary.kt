@@ -39,17 +39,13 @@ class Day_Diary(
 
     companion object {
 
-        fun int_to_Image(index:Int):Int{
-            return when(index){
-                0 -> R.drawable.ghost_verygood
-                1 -> R.drawable.ghost_good
-                2 -> R.drawable.ghost_normal
-                3 -> R.drawable.ghost_bad
-                4 -> R.drawable.ghost_verybad
-                else -> {R.drawable.rectangle}
-            }
-
-        }
+        var int_to_image:ArrayList<Int> = arrayListOf(
+            R.drawable.ghost_verygood,
+            R.drawable.ghost_good,
+            R.drawable.ghost_normal,
+            R.drawable.ghost_bad,
+            R.drawable.ghost_verybad
+        )
 
         val emotionname= arrayOf("오늘의 감정","누구와","무엇을","어디에서","날씨","수면시간")
         val emotionarr: HashMap<String,Array<emotionclass>> = hashMapOf(

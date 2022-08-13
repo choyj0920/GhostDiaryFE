@@ -9,6 +9,7 @@
     <color name="pink">#F08080</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#B2B2B2</color>
+    <color name="gray_overlay">#90B2B2B2</color>
     <color name="green">#81C147</color>
     <color name="red2">#ED1C24</color>
     <color name="black2">#9C9C9C</color>

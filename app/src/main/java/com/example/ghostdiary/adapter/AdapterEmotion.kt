@@ -44,7 +44,7 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
 
         var holder=holder as GhostView
         holder.emotionname.text =emotions[position].text
-        holder.ghostimage.setImageResource(Day_Diary.int_to_Image(emotions[position].ghostimage))
+        holder.ghostimage.setImageResource(Day_Diary.int_to_image.get(emotions[position].ghostimage))
 
 
 

@@ -63,7 +63,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         holder.tv_date.text=str_date
         holder.tv_day.text= "${daytostring[day.get(Calendar.DAY_OF_WEEK)]}요일"
 
-        holder.iv_ghost.setImageResource(Day_Diary.int_to_Image(diary.today_emotion.ghostimage))
+        holder.iv_ghost.setImageResource(Day_Diary.int_to_image[diary.today_emotion.ghostimage])
 
         // 이미지 뷰 등록
         if(diary.image!="" && diary.image != null){

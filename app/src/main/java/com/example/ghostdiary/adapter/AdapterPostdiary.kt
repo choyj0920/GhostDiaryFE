@@ -1,5 +1,6 @@
 package com.example.ghostdiary.adapter
 
+import android.os.Parcelable
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.GhostsDialog
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
@@ -58,6 +60,15 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
 
     }
     fun update(position: Int){
+
+        var state: Parcelable?=null
+        try {
+            state= rv_emotionList[position]!!.layoutManager!!.onSaveInstanceState()
+
+        }catch (e:Exception){
+            state=null
+        }
+
         var emotionManager = LinearLayoutManager(parent.context,LinearLayoutManager.HORIZONTAL,false)
         emotionAdapterList[position]= AdapterEmotion(this,position,selecttexts[position])
 
@@ -65,6 +76,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             layoutManager=emotionManager
             adapter=emotionAdapterList[position]
         }
+        state.let { rv_emotionList[position]!!.layoutManager?.onRestoreInstanceState(it) }
 
     }
 
@@ -74,8 +86,14 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             var holder=holder as EmotionView
 
             holder.tv_title.text=emotions[position]
-            if(parent.editmode){
+            if(parent.editmode && position !=0){
                 holder.btn_plus.visibility=View.VISIBLE
+                holder.btn_plus.setOnClickListener {
+                    val dialog = GhostsDialog(position,this, selecttexts[position])
+                    dialog.isCancelable = true
+                    dialog.show(parent.requireActivity().supportFragmentManager, "ConfirmDialog")
+                }
+
             }
             else{
                 holder.btn_plus.visibility=View.GONE

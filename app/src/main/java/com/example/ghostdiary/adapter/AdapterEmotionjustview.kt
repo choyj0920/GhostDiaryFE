@@ -53,7 +53,7 @@ class AdapterEmotionjustview(val parent: EditDiaryFragment, var emotions:Mutable
             return
         }
 
-        holder.ghostimage.setImageResource(Day_Diary.int_to_Image(emotions[position]!!.ghostimage))
+        holder.ghostimage.setImageResource(Day_Diary.int_to_image.get(emotions[position]!!.ghostimage))
         holder.ghostimage.alpha=1f
         holder.ghostimage.setOnClickListener {
 

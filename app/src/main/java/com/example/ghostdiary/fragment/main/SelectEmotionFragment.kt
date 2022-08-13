@@ -32,6 +32,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
     lateinit var adapterPostdiary:AdapterPostdiary
     lateinit var emotionImageviews:Array<ImageView>
     lateinit var curDiary:Day_Diary
+    lateinit var rv_linearlayoutmanger : LinearLayoutManager
 
     var sleepstart:Int =-1
     var sleepend:Int =-1
@@ -43,6 +44,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
     ): View? {
 
         binding=FragmentSelectEmotionBinding.inflate(inflater,container,false)
+        rv_linearlayoutmanger=LinearLayoutManager(this.context)
 
         var formatDate = SimpleDateFormat("yyyy-MM-dd")
         var strdate = formatDate.format(date)
@@ -86,8 +88,12 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
 
     }
     fun switcheditmode(isedit:Boolean){
+        var rv_state = binding!!.rvPostdiary.layoutManager?.onSaveInstanceState()
         editmode=isedit
         update()
+        binding!!.rvPostdiary.layoutManager?.onRestoreInstanceState(rv_state)
+
+
     }
 
     fun getIgnoreTime(time:Long):Long{
