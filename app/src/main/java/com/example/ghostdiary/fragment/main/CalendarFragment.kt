@@ -2,32 +2,25 @@ package com.example.ghostdiary.fragment.main
 
 import android.app.AlertDialog
 
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.widget.*
-import androidx.core.content.ContextCompat
 
-import androidx.core.view.isInvisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
-import com.example.ghostdiary.fragment.main.SelectEmotionFragment
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
-import com.example.ghostdiary.databinding.DialogTodayemotionBinding
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -35,7 +28,6 @@ import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.collections.ArrayList
 
 class CalendarFragment : Fragment() {
     private lateinit var calendar :Calendar
@@ -274,11 +266,11 @@ class CalendarFragment : Fragment() {
     }
     fun selectimage(index:Int): Int {
         when(index){
-            0 -> return R.drawable.ghost_verygood
-            1 -> return R.drawable.ghost_good
-            2 -> return R.drawable.ghost_normal
-            3 -> return R.drawable.ghost_bad
-            4 -> return R.drawable.ghost_verybad
+            0 -> return R.drawable.ghost_00_verygood
+            1 -> return R.drawable.ghost_01_good
+            2 -> return R.drawable.ghost_02_normal
+            3 -> return R.drawable.ghost_03_bad
+            4 -> return R.drawable.ghost_04_verybad
 
         }
         return R.drawable.ic_blankghost

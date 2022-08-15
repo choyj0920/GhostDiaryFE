@@ -1,9 +1,7 @@
 package com.example.ghostdiary.fragment.main
 
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
@@ -14,19 +12,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
-import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
-import com.example.ghostdiary.adapter.AdapterEmotion
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.databinding.FragmentEditDiaryBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -338,11 +332,11 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
     fun selectimage(index:Int): Int {
         when(index){
-            0 -> return R.drawable.ghost_verygood
-            1 -> return R.drawable.ghost_good
-            2 -> return R.drawable.ghost_normal
-            3 -> return R.drawable.ghost_bad
-            4 -> return R.drawable.ghost_verybad
+            0 -> return R.drawable.ghost_00_verygood
+            1 -> return R.drawable.ghost_01_good
+            2 -> return R.drawable.ghost_02_normal
+            3 -> return R.drawable.ghost_03_bad
+            4 -> return R.drawable.ghost_04_verybad
 
         }
         return R.drawable.ic_blankghost

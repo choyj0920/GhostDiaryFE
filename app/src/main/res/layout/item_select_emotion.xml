@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginEnd="105dp"
+            android:layout_marginEnd="110dp"
             app:srcCompat="@drawable/ic_plus"
             app:tint="#666666" />
 

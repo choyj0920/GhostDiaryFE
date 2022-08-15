@@ -20,9 +20,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-import kotlin.math.round
 
-class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Boolean=false) : Fragment() {
+class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Diary?=null ,var editmode:Boolean=false) : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -43,14 +42,18 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
         savedInstanceState: Bundle?
     ): View? {
 
+
         binding=FragmentSelectEmotionBinding.inflate(inflater,container,false)
         rv_linearlayoutmanger=LinearLayoutManager(this.context)
 
         var formatDate = SimpleDateFormat("yyyy-MM-dd")
         var strdate = formatDate.format(date)
-
-        if (viewModel.getEmotionArray(requireContext()).contains(strdate)){
-            curDiary= viewModel.getEmotionArray(null)[strdate]!!
+        if(diary!=null || viewModel.getEmotionArray((requireContext())).contains(strdate)){
+            if(diary!=null){
+                curDiary=diary!!
+            }else{
+                curDiary=viewModel.getEmotionArray(null)[strdate]!!
+            }
 
             if(curDiary.sleepstart != null && curDiary.sleepend !=null){
                 var yesterday = Calendar.getInstance()
@@ -106,6 +109,12 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
         }.timeInMillis
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        AdapterPostdiary.init_value()
+
+    }
+
     fun initdata(){
         emotions= Day_Diary.emotionname
 
@@ -127,11 +136,11 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
 
     fun selectimage(index:Int): Int {
         when(index){
-            0 -> return R.drawable.ghost_verygood
-            1 -> return R.drawable.ghost_good
-            2 -> return R.drawable.ghost_normal
-            3 -> return R.drawable.ghost_bad
-            4 -> return R.drawable.ghost_verybad
+            0 -> return R.drawable.ghost_00_verygood
+            1 -> return R.drawable.ghost_01_good
+            2 -> return R.drawable.ghost_02_normal
+            3 -> return R.drawable.ghost_03_bad
+            4 -> return R.drawable.ghost_04_verybad
 
         }
         return R.drawable.ic_blankghost
@@ -196,10 +205,10 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var editmode:Bool
             yesterday.set(Calendar.SECOND,0)
             var temp = Calendar.getInstance()
             temp.time=yesterday.time
-            temp.add(Calendar.HOUR,sleepstart)
+            temp.add(Calendar.MINUTE,sleepstart*10)
             startsleep=temp.time
             temp.time=yesterday.time
-            temp.add(Calendar.HOUR,sleepend)
+            temp.add(Calendar.MINUTE,sleepend*10)
             endsleep=temp.time
 
             Log.d("TAG",startsleep.toString()+endsleep.toString())

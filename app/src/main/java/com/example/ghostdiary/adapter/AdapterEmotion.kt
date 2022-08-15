@@ -8,15 +8,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemEmotionGhostBinding
-import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
-import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
-import com.example.ghostdiary.fragment.main.SelectEmotionFragment
-import com.google.android.material.slider.LabelFormatter
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 
 class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotions:MutableList<emotionclass>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -26,6 +19,9 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
         var emotionname: TextView = binding.tvGhost
         var btn_close: ImageView = binding.btnGhostDelete
         var ghostimage:ImageView=binding.ivGhost
+    }
+    companion object{
+
     }
 
 
@@ -64,7 +60,7 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
                         i.isactive=false
                     }
                     emotions[position].isactive=true
-                    parent.update(listPosion)
+                    parent.update(listPosion, AdapterPostdiary.states[position])
                 }
             }
 
@@ -95,7 +91,7 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
 
         holder.btn_close.setOnClickListener {
             emotions.removeAt(position)
-            parent.update(listPosion)
+            parent.update(listPosion, AdapterPostdiary.states[position])
 
         }
 

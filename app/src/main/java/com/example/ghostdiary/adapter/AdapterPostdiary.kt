@@ -1,33 +1,42 @@
 package com.example.ghostdiary.adapter
 
 import android.os.Parcelable
-import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.GhostsDialog
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
+import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
 import com.example.ghostdiary.fragment.main.SelectEmotionFragment
 import com.google.android.material.slider.LabelFormatter
 import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
 
 class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var sleepend :Int,val emotions: Array<String>, var selecttexts:ArrayList<ArrayList<emotionclass>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    var rv_emotionList:Array<RecyclerView?> = arrayOfNulls<RecyclerView?>(emotions.size)
-    var emotionAdapterList:Array<AdapterEmotion?> = arrayOfNulls<AdapterEmotion?>(emotions.size)
+    companion object{
+        var rv_emotionList:Array<RecyclerView?> = arrayOfNulls<RecyclerView?>(Day_Diary.emotionarr.size)
+        var states:Array<Parcelable?> = arrayOfNulls<Parcelable?>(Day_Diary.emotionarr.size)
+        var emotionAdapterList:Array<AdapterEmotion?> = arrayOfNulls<AdapterEmotion?>(Day_Diary.emotionarr.size)
+
+        fun init_value(){
+            rv_emotionList= arrayOfNulls<RecyclerView?>(Day_Diary.emotionarr.size)
+            states = arrayOfNulls<Parcelable?>(Day_Diary.emotionarr.size)
+            emotionAdapterList = arrayOfNulls<AdapterEmotion?>(Day_Diary.emotionarr.size)
+        }
+    }
+
+
+
 
     class EmotionView(binding: ItemSelectEmotionBinding) : RecyclerView.ViewHolder(binding.root) {
         var tv_title: TextView = binding.tvTitle
@@ -59,24 +68,24 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
         }
 
     }
-    fun update(position: Int){
+    fun update(position: Int, parcelable: Parcelable?=null,isadd:Boolean=false){
 
-        var state: Parcelable?=null
-        try {
-            state= rv_emotionList[position]!!.layoutManager!!.onSaveInstanceState()
+        var state = states[position]
 
-        }catch (e:Exception){
-            state=null
-        }
 
         var emotionManager = LinearLayoutManager(parent.context,LinearLayoutManager.HORIZONTAL,false)
         emotionAdapterList[position]= AdapterEmotion(this,position,selecttexts[position])
 
-        rv_emotionList[position]!!.apply {
-            layoutManager=emotionManager
-            adapter=emotionAdapterList[position]
+        rv_emotionList[position].let {
+            it?.apply {
+                layoutManager = emotionManager
+                adapter = emotionAdapterList[position]
+            }
+            state.let { rv_emotionList[position]!!.layoutManager?.onRestoreInstanceState(it) }
+            if(isadd)
+                rv_emotionList[position]!!.smoothScrollToPosition(selecttexts[position].size-1)
+
         }
-        state.let { rv_emotionList[position]!!.layoutManager?.onRestoreInstanceState(it) }
 
     }
 
@@ -86,7 +95,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             var holder=holder as EmotionView
 
             holder.tv_title.text=emotions[position]
-            if(parent.editmode && position !=0){
+            if(parent.editmode && position !=0 && emotions[position] !="날씨"){
                 holder.btn_plus.visibility=View.VISIBLE
                 holder.btn_plus.setOnClickListener {
                     val dialog = GhostsDialog(position,this, selecttexts[position])
@@ -98,9 +107,14 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             else{
                 holder.btn_plus.visibility=View.GONE
             }
+            try {
+                rv_emotionList[position].let { states[position]= it!!.layoutManager!!.onSaveInstanceState() }
+            }catch (e:Exception){
+                states[position]=null
+            }
             rv_emotionList[position]=holder.rv_emotion
 
-            update(position)
+            update(position,states[position])
 
         }
         else {

@@ -40,6 +40,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ghost_normal" />
+        app:srcCompat="@drawable/ghost_02_normal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

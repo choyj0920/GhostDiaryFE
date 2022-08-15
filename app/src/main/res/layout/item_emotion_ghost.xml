@@ -28,24 +28,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ghost_verygood" />
+        app:srcCompat="@drawable/ghost_00_verygood" />
     <ImageView
         android:id="@+id/btn_ghost_delete"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:padding="5dp"
+        android:background="@drawable/circle_backgroud_white"
         app:layout_constraintBottom_toTopOf="@+id/iv_ghost"
         app:layout_constraintEnd_toEndOf="@+id/iv_ghost"
         app:layout_constraintStart_toEndOf="@+id/iv_ghost"
         app:layout_constraintTop_toTopOf="@+id/iv_ghost"
-        app:srcCompat="@drawable/close" />
+        android:paddingTop="2dp"
+        android:scaleType="center"
+        android:elevation="5dp"
+        app:srcCompat="@drawable/ic_ghost_delete" />
 
     <TextView
         android:id="@+id/tv_ghost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-
         android:text="매우좋음"
         android:textSize="11sp"
         app:layout_constraintBottom_toBottomOf="parent"

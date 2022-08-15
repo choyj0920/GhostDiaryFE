@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="40dp"
+    android:viewportWidth="32"
+    android:viewportHeight="40">
+    <path
+        android:fillColor="#FFDF9731"
+        android:pathData="M28.7 36H3.3c-1.28 0-2.32-1.14-2.32-2.54V10.85h30.04v22.61c0 1.4-1.04 2.54-2.32 2.54Z"/>
+    <path
+        android:fillColor="#FFC1772A"
+        android:pathData="M28.58 34.25H3.42c-1.35 0-2.44-1.2-2.44-2.67v1.75c0 1.48 1.1 2.67 2.44 2.67h25.16c1.35 0 2.44-1.2 2.44-2.67v-1.75c0 1.47-1.1 2.67-2.44 2.67Z"/>
+    <path
+        android:fillColor="#FF474746"
+        android:pathData="M11.5 6.14h9c0.51 0 0.92 0.45 0.92 1v2.4h2.24V6.66c0-1.48-1.1-2.67-2.44-2.67H10.78C9.43 4 8.34 5.2 8.34 6.67v2.87h2.24v-2.4c0-0.55 0.4-1 0.92-1Z"/>
+    <path
+        android:fillColor="#FFC1772A"
+        android:pathData="M29.7 8.96H2.3c-1.27 0-2.3 1.12-2.3 2.51v4.95c0 0.45 0.27 0.84 0.66 0.96l15.26 4.76h0.17l15.25-4.76c0.39-0.12 0.66-0.51 0.66-0.96v-4.95c0-1.39-1.03-2.51-2.3-2.51Z"/>
+    <path
+        android:fillColor="#FF9B6224"
+        android:pathData="M16.09 20.42H15.9L0.2 15.52 0 15.42v1c0 0.45 0.27 0.84 0.66 0.96l15.26 4.76h0.17l15.25-4.76c0.39-0.12 0.66-0.51 0.66-0.96v-1l-0.2 0.1-15.71 4.9Z"/>
+    <path
+        android:fillColor="#FFF8D64D"
+        android:pathData="M16.97 24.62h-1.94c-0.1 0-0.2-0.08-0.22-0.2l-0.97-4.36c-0.03-0.16 0.08-0.3 0.22-0.3h3.88c0.14 0 0.25 0.14 0.22 0.3l-0.97 4.36c-0.02 0.12-0.11 0.2-0.22 0.2Z"/>
+    <path
+        android:fillColor="#FFE8A644"
+        android:pathData="M17.3 23h-2.6c-0.1 0-0.18-0.05-0.24-0.13l0.34 1.55c0.03 0.12 0.12 0.2 0.22 0.2h1.95c0.1 0 0.2-0.08 0.22-0.2l0.34-1.55C17.48 22.95 17.4 23 17.3 23Z"/>
+    <path
+        android:fillColor="#FFFFDA8F"
+        android:pathData="M16.97 24.57h-1.94c-0.1 0-0.2-0.07-0.22-0.19l-0.97-4.36c-0.03-0.16 0.08-0.31 0.22-0.31h3.88c0.14 0 0.25 0.15 0.22 0.3l-0.97 4.37c-0.02 0.12-0.11 0.2-0.22 0.2Z"/>
+    <path
+        android:fillColor="#FFE8A644"
+        android:pathData="M17.3 22.96h-2.6c-0.1 0-0.18-0.05-0.24-0.13l0.34 1.55c0.03 0.12 0.12 0.2 0.22 0.2h1.95c0.1 0 0.2-0.08 0.22-0.2l0.34-1.55c-0.05 0.08-0.14 0.13-0.23 0.13Z"/>
+</vector>

@@ -42,11 +42,11 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
             Log.d(TAG,"포함!! ${to}, ${emotionMap[to]}")
             holder.bindng.ivDate.setImageResource(
                 when(emotionMap.get(to)!!.today_emotion.ghostimage){
-                    0 -> R.drawable.ghost_verygood
-                    1 -> R.drawable.ghost_good
-                    2 -> R.drawable.ghost_normal
-                    3 -> R.drawable.ghost_bad
-                    4 -> R.drawable.ghost_verybad
+                    0 -> R.drawable.ghost_00_verygood
+                    1 -> R.drawable.ghost_01_good
+                    2 -> R.drawable.ghost_02_normal
+                    3 -> R.drawable.ghost_03_bad
+                    4 -> R.drawable.ghost_04_verybad
 
                     else -> {R.drawable.ic_ghost}
                 } as Int

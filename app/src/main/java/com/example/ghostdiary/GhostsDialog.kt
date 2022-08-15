@@ -1,30 +1,24 @@
 package com.example.ghostdiary;
 
-import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle;
 import android.os.Parcelable
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.adapter.AdapterPostdiary
 
 import com.example.ghostdiary.databinding.DialogGhostsBinding;
-import com.example.ghostdiary.databinding.ItemEmotionGhostBinding
+import com.example.ghostdiary.databinding.ItemGhostBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
-import com.example.ghostdiary.fragment.main.EditDiaryFragment
-import com.skydoves.balloon.Balloon
-import com.skydoves.balloon.BalloonSizeSpec
 
 class GhostsDialog(var curpos:Int,var parent:AdapterPostdiary,var emotionlist: ArrayList<emotionclass>): DialogFragment() {
 
@@ -65,9 +59,22 @@ class GhostsDialog(var curpos:Int,var parent:AdapterPostdiary,var emotionlist: A
             }
             emotionlist.add(emotionclass(ghostname,selectghost,false))
             dismiss()
-            parent.update(curpos)
+            parent.update(curpos,isadd = true)
 
         }
+        binding.inputGhostname.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.tvTextcount.text= "${binding.inputGhostname.text.toString().length}/30"
+
+            }
+        })
+
         Update_rv()
 
 
@@ -81,8 +88,8 @@ class GhostsDialog(var curpos:Int,var parent:AdapterPostdiary,var emotionlist: A
             state=null
         }
 
-        val ghostarr= (0..(Day_Diary.int_to_image.size-1)).toList()
-        val ghostlistmanager = GridLayoutManager(context, 4)
+        val ghostarr= Day_Diary.addghost_arr()
+        val ghostlistmanager = GridLayoutManager(context, 3,GridLayoutManager.HORIZONTAL,false)
         val ghostlistadpter = ghostadaper(this,ghostarr)
 
 
@@ -104,10 +111,8 @@ class GhostsDialog(var curpos:Int,var parent:AdapterPostdiary,var emotionlist: A
     class ghostadaper(var parent:GhostsDialog ,var emotions:List<Int>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-        class GhostView(binding: ItemEmotionGhostBinding) : RecyclerView.ViewHolder(binding.root) {
-            var emotionname: TextView = binding.tvGhost
+        class GhostView(binding: ItemGhostBinding) : RecyclerView.ViewHolder(binding.root) {
             var layout=binding.layoutGhostView
-            var btn_close: ImageView = binding.btnGhostDelete
             var ghostimage: ImageView =binding.ivGhost
         }
 
@@ -117,8 +122,8 @@ class GhostsDialog(var curpos:Int,var parent:AdapterPostdiary,var emotionlist: A
             val view : View?
 
             view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_emotion_ghost, parent, false)
-            return GhostView(ItemEmotionGhostBinding.bind(view))
+                .inflate(R.layout.item_ghost, parent, false)
+            return GhostView(ItemGhostBinding.bind(view))
 
 
         }
@@ -127,18 +132,29 @@ class GhostsDialog(var curpos:Int,var parent:AdapterPostdiary,var emotionlist: A
 
             var holder=holder as GhostView
 
-            holder.btn_close.visibility=View.GONE
-            holder.emotionname.visibility=View.GONE
+
+            holder.ghostimage.alpha=1f
+
+            var isnum=emotions[position]
+            if(isnum==-1){
+                holder.layout.visibility=View.INVISIBLE
+                return
+
+            }else{
+                holder.layout.visibility=View.VISIBLE
+            }
 
             holder.ghostimage.setImageResource(Day_Diary.int_to_image.get(emotions[position]))
-            if(position==parent.selectghost){
-                holder.layout.setBackgroundColor(ContextCompat.getColor(MainActivity.mainactivity,R.color.gray_overlay))
+            if(emotions[position]==parent.selectghost){
+                holder.layout.background=ContextCompat.getDrawable(MainActivity.mainactivity,R.drawable.circle_backgroud)
+            }else{
+                holder.layout.background=ContextCompat.getDrawable(MainActivity.mainactivity,R.drawable.circle_backgroud_white)
             }
             holder.ghostimage.setOnClickListener {
-                if(position==parent.selectghost){
+                if(isnum==parent.selectghost){
 
                 }else{
-                    parent.selectghost=position
+                    parent.selectghost=isnum
 
                     parent.Update_rv()
 

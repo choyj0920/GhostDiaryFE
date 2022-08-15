@@ -187,16 +187,17 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun change_to_selectemotion(date :Date){
+    fun change_to_selectemotion(date :Date,dayDiary: Day_Diary?=null){
         var parent=when(binding.navigationbar.selectedItemId){
             R.id.calendar->calendarFragment
             R.id.record->recordFragment
             else -> {return}
 
         }
-        var newselectemotion=SelectEmotionFragment(parent,date)
+        var newselectemotion=SelectEmotionFragment(parent,date,dayDiary)
         supportFragmentManager.beginTransaction().replace(binding.container.id, newselectemotion).commit()
         binding!!.tvDate.text="하루의 감정"
+        binding.tvEdittext.text="수정"
         binding.btnPostcheck.visibility=View.VISIBLE
         binding.btnPosttext.visibility=View.VISIBLE
 
@@ -220,7 +221,18 @@ class MainActivity : AppCompatActivity() {
         }
         binding.tvEdittext.visibility=View.VISIBLE
         binding.tvEdittext.setOnClickListener {
-            newselectemotion.switcheditmode(!newselectemotion.editmode)
+            if(newselectemotion.editmode){
+                binding.tvEdittext.text="수정"
+                newselectemotion.switcheditmode(false)
+                binding.btnPostcheck.visibility=View.VISIBLE
+                binding.btnPosttext.visibility=View.VISIBLE
+            }else{
+                binding.tvEdittext.text="완료"
+                newselectemotion.switcheditmode(true)
+                binding.btnPostcheck.visibility=View.GONE
+                binding.btnPosttext.visibility=View.GONE
+
+            }
         }
         binding.btnSideomenu.visibility=View.INVISIBLE
 
@@ -279,19 +291,20 @@ class MainActivity : AppCompatActivity() {
             if(frag.parent is RecordFragment){
                 binding.navigationbar.selectedItemId=R.id.record
             }else if(frag.parent is SelectEmotionFragment){
-                supportFragmentManager.beginTransaction().replace(binding.container.id, frag.parent).commit()
-                binding!!.tvDate.text="하루의 감정"
-                binding.btnPostcheck.visibility=View.VISIBLE
-                binding.btnPosttext.visibility=View.VISIBLE
-                binding.tvEdittext.visibility=View.VISIBLE
-                binding.tvEdittext.setOnClickListener {
-                    (frag.parent as SelectEmotionFragment).switcheditmode(!(frag.parent as SelectEmotionFragment).editmode)
-                }
-                binding.btnSideomenu.visibility=View.INVISIBLE
+                change_to_selectemotion(date = frag.date,frag.diary)
+//                supportFragmentManager.beginTransaction().replace(binding.container.id, SelectEmotionFragment(
+//                    (frag.parent as SelectEmotionFragment).parent,frag.date,frag.diary)).commit()
+//                binding!!.tvDate.text="하루의 감정"
+//                binding.btnPostcheck.visibility=View.VISIBLE
+//                binding.btnPosttext.visibility=View.VISIBLE
+//                binding.tvEdittext.visibility=View.VISIBLE
+//                binding.tvEdittext.setOnClickListener {
+//                    (frag.parent as SelectEmotionFragment).switcheditmode(!(frag.parent as SelectEmotionFragment).editmode)
+//                }
+//                binding.btnSideomenu.visibility=View.INVISIBLE
 
             }
         }
-
 
         else{
             binding.navigationbar.selectedItemId=R.id.invisible
