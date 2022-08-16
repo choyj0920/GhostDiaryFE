@@ -24,8 +24,6 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
 
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view : View?
 

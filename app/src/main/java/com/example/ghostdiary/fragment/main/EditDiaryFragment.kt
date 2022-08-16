@@ -68,7 +68,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
         }else if (viewModel.getEmotionArray(requireContext()).contains(strdate)) {
             curDiary = viewModel.getEmotionArray(null)[strdate]!!
         }else{
-            curDiary= Day_Diary(date,emotionclass("매우 좋음",0), arrayListOf<emotionclass>(), arrayListOf<emotionclass>(), arrayListOf<emotionclass>())
+            curDiary= Day_Diary(date)
 
         }
         binding!!.inputText.setText(curDiary.text)
@@ -102,7 +102,10 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
             }else if(parent is RecordFragment){
                 var recordparent=parent as RecordFragment
-                // recordparent.update()
+                addDiary(curDiary)
+                MainActivity.mainactivity.change_record()
+
+
             }
 
         }

@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.NumberPicker
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.adapter.AdapterDiary
@@ -140,6 +141,18 @@ class RecordFragment : Fragment() {
     }
 
     fun update(){
+
+        if(calendar.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)){
+            binding!!.ivPost.visibility=View.VISIBLE
+            binding!!.ivPost.setOnClickListener {
+                MainActivity.mainactivity.change_to_editDiary(date = Calendar.getInstance().time)
+            }
+
+
+        }else{
+            binding!!.ivPost.visibility=View.GONE
+
+        }
 
         var transFormat1 = SimpleDateFormat("yyyy/MM")
         var to1 = transFormat1.format(calendar.time)
