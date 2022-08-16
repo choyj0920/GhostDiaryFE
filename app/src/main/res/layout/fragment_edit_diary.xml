@@ -99,7 +99,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_image"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -125,11 +125,14 @@
             <ImageView
 
                 android:id="@+id/btn_delimage"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:padding="3dp"
-                android:layout_alignParentEnd="true"
-                android:src="@drawable/close"
+                android:layout_margin="4dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_button_x_close"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:elevation="4dp"
+                android:background="@drawable/circle_backgroud_white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
