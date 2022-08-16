@@ -269,7 +269,7 @@ class MainActivity : AppCompatActivity() {
         else if(supportFragmentManager.fragments.get(0) is DefaultFragment) {
             if(System.currentTimeMillis() - lastTimeBackPressed >= 1500){
                 lastTimeBackPressed = System.currentTimeMillis()
-                showmessage("\"'뒤로' 버튼을 한번 더 누르시면 종료됩니다.\"")
+                showmessage("\'뒤로' 버튼을 한번 더 누르시면 종료됩니다.")
             }
             else {
                 finishAffinity()

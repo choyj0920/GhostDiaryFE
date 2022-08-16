@@ -90,8 +90,14 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
         holder.btn_close.visibility=View.VISIBLE
 
         holder.btn_close.setOnClickListener {
+            try {
+                AdapterPostdiary.rv_emotionList[listPosion].let { AdapterPostdiary.states[listPosion]= it!!.layoutManager!!.onSaveInstanceState() }
+            }catch (e:Exception){
+                AdapterPostdiary.states[listPosion]=null
+            }
             emotions.removeAt(position)
-            parent.update(listPosion, AdapterPostdiary.states[position])
+            parent.update(listPosion, null)
+
 
         }
 
