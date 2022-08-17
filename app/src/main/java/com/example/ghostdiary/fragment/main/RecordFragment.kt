@@ -143,11 +143,12 @@ class RecordFragment : Fragment() {
     fun update(){
 
         if(calendar.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)){
+            /*
             binding!!.ivPost.visibility=View.VISIBLE
             binding!!.ivPost.setOnClickListener {
                 MainActivity.mainactivity.change_to_editDiary(date = Calendar.getInstance().time)
-            }
-
+            }*/
+            binding!!.ivPost.visibility=View.GONE
 
         }else{
             binding!!.ivPost.visibility=View.GONE

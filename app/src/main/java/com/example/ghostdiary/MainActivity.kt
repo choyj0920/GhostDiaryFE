@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.example.ghostdiary.databinding.ActivityMainBinding
 import com.example.ghostdiary.dataclass.Day_Diary
+import com.example.ghostdiary.dataclass.Memo
 import com.example.ghostdiary.fragment.main.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
+    private lateinit var memoFragment: MemoFragment
+    private lateinit var clinicFragment: ClinicFragment
     private lateinit var prefs : SharedPreferences
     companion object{
         lateinit var mainactivity:MainActivity
@@ -56,6 +59,8 @@ class MainActivity : AppCompatActivity() {
         defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
+        memoFragment=MemoFragment()
+        clinicFragment= ClinicFragment()
         mainactivity=this
 
         var today= LocalDateTime.now()
@@ -112,10 +117,14 @@ class MainActivity : AppCompatActivity() {
                 R.id.memo->{
                     binding!!.tvDate.text="메모"
                     binding!!.tvDate.gravity=Gravity.CENTER
+                    supportFragmentManager.beginTransaction().replace(binding.container.id,memoFragment).commit()
+
                 }
                 R.id.clinic->{
                     binding!!.tvDate.text="클리닉"
                     binding!!.tvDate.gravity=Gravity.CENTER
+                    supportFragmentManager.beginTransaction().replace(binding.container.id,clinicFragment).commit()
+
                 }
 
             }
@@ -239,9 +248,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun change_to_editDiary(date :Date){
+    fun change_to_editDiary(date :Date,iseditmode:Boolean=true){
 
-        supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(supportFragmentManager.fragments.get(0),date),).commit()
+        supportFragmentManager.beginTransaction().replace(binding.container.id, EditDiaryFragment(supportFragmentManager.fragments.get(0),date, isEditmode =iseditmode),).commit()
         binding.tvDate.text=""
         hide_emotionmenu()
 
@@ -332,10 +341,10 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(binding.container.id,recordFragment).commit()
     }
     fun change_memo(){
-//        supportFragmentManager.beginTransaction().replace(binding.container.id,).commit()
+        supportFragmentManager.beginTransaction().replace(binding.container.id,memoFragment).commit()
     }
     fun change_clinic(){
-//        supportFragmentManager.beginTransaction().replace(binding.container.id,).commit()
+        supportFragmentManager.beginTransaction().replace(binding.container.id,clinicFragment).commit()
     }
 
 }

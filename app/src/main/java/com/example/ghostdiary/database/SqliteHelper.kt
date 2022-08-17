@@ -11,9 +11,12 @@ import android.widget.Toast
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.dataclass.Day_Diary
+import com.example.ghostdiary.dataclass.Memo
+import com.example.ghostdiary.dataclass.Memo_Folder
 import com.example.ghostdiary.dataclass.emotionclass
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 // SQLiteOpenHelper 상속받아 SQLite 를 사용하도록 하겠습니다.
 class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
@@ -28,6 +31,42 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     override fun onOpen(db: SQLiteDatabase) {
         super.onOpen(db)
         db.setForeignKeyConstraintsEnabled(true)
+
+        val create1= "CREATE TABLE if NOT EXISTS Diary(                " +
+                "diary_id    integer  NOT NULL    PRIMARY KEY autoincrement ," +
+                "date     TEXT  NOT NULL," +
+                "image TEXT  ," +
+                "text TEXT  ," +
+                "sleepstart TEXT ," +
+                "sleepend    TEXT );"
+        db?.execSQL(create1)
+
+        val create2="CREATE TABLE if NOT EXISTS emotions(" +
+                " emotion_id  integer NOT NULL PRIMARY KEY autoincrement," +
+                "diary_id    integer ," +
+                "category    integer NOT NULL," +
+                "ghost_num   integer NOT NULL," +
+                "isactive integer NOT NULL," +
+                "text   TEXT ," +
+                "FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE ON UPDATE CASCADE);"
+        db?.execSQL(create2)
+
+        val create_memo_folder= "CREATE TABLE if NOT EXISTS MEMO_FOLDER(                " +
+                "folder_id    integer  NOT NULL    PRIMARY KEY autoincrement ," +
+                "folder_name     TEXT  NOT NULL," +
+                "ghost_num integer NOT NULL);"
+        db?.execSQL(create_memo_folder)
+
+        val create_memo="CREATE TABLE if NOT EXISTS MEMO(" +
+                "memo_id  integer NOT NULL PRIMARY KEY autoincrement," +
+                "folder_id    integer NOT NULL," +
+                "title    TEXT NOT NULL," +
+                "text   TEXT NOT NULL," +
+                "FOREIGN KEY(folder_id) REFERENCES MEMO_FOLDER(folder_id) ON DELETE CASCADE ON UPDATE CASCADE);"
+        db?.execSQL(create_memo)
+
+
+
         db.execSQL("PRAGMA foreign_keys=ON")
     }
 
@@ -58,8 +97,30 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create2)
 
+        val create_memo_folder= "CREATE TABLE MEMO_FOLDER(                " +
+                "folder_id    integer  NOT NULL    PRIMARY KEY autoincrement ," +
+                "folder_name     TEXT  NOT NULL," +
+                "ghost_num integer NOT NULL);"
+        db?.execSQL(create_memo_folder)
+
+        val create_memo="CREATE TABLE MEMO(" +
+                "memo_id  integer NOT NULL PRIMARY KEY autoincrement," +
+                "folder_id    integer NOT NULL," +
+                "title    TEXT NOT NULL," +
+                "text   TEXT NOT NULL," +
+                "FOREIGN KEY(folder_id) REFERENCES MEMO_FOLDER(folder_id) ON DELETE CASCADE ON UPDATE CASCADE);"
+        db?.execSQL(create_memo)
+
+
     }
     fun createdb(){
+
+        create_Diary_db()
+        create_Memo_db()
+
+
+
+    }fun create_Diary_db(){
         var db =writableDatabase
         db?.setForeignKeyConstraintsEnabled(true)
 
@@ -67,7 +128,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         db?.execSQL("DROP TABLE IF EXISTS emotions;")
         db?.execSQL("DROP TABLE IF EXISTS Diary;")
 
-        val create1= "CREATE TABLE Diary(                " +
+
+        val create1= "CREATE TABLE if NOT EXISTS Diary(                " +
                 "diary_id    integer  NOT NULL    PRIMARY KEY autoincrement ," +
                 "date     TEXT  NOT NULL," +
                 "image TEXT  ," +
@@ -76,7 +138,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "sleepend    TEXT );"
         db?.execSQL(create1)
 
-        val create2="CREATE TABLE emotions(" +
+        val create2="CREATE TABLE if NOT EXISTS emotions(" +
                 " emotion_id  integer NOT NULL PRIMARY KEY autoincrement," +
                 "diary_id    integer ," +
                 "category    integer NOT NULL," +
@@ -86,13 +148,88 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "FOREIGN KEY(diary_id) REFERENCES Diary(diary_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create2)
 
+        db.close()
+
     }
+
+    fun create_Memo_db(){
+        var db =writableDatabase
+        db?.setForeignKeyConstraintsEnabled(true)
+
+        db?.execSQL("DROP TABLE IF EXISTS MEMO_FOLDER;")
+        db?.execSQL("DROP TABLE IF EXISTS MEMO;")
+
+        val create_memo_folder= "CREATE TABLE if NOT EXISTS MEMO_FOLDER(                " +
+                "folder_id    integer  NOT NULL    PRIMARY KEY autoincrement ," +
+                "folder_name     TEXT  NOT NULL," +
+                "ghost_num integer NOT NULL);"
+        db?.execSQL(create_memo_folder)
+
+        val create_memo="CREATE TABLE if NOT EXISTS MEMO(" +
+                "memo_id  integer NOT NULL PRIMARY KEY autoincrement," +
+                "folder_id    integer NOT NULL," +
+                "title    TEXT NOT NULL," +
+                "text   TEXT NOT NULL," +
+                "FOREIGN KEY(folder_id) REFERENCES MEMO_FOLDER(folder_id) ON DELETE CASCADE ON UPDATE CASCADE);"
+        db?.execSQL(create_memo)
+
+        db.close()
+
+
+    }
+
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
 
     }
 
-    //insert 메소드
+    fun insertMemo_folder(ghostNum:Int, folderName: String):Int{
+        val values = ContentValues()
+        //넘겨줄 컬럼의 매개변수 지정
+
+        values.put("folder_name",folderName)
+        values.put("ghost_num",ghostNum)
+
+
+        //쓰기나 수정이 가능한 데이터베이스 변수
+        val wd = writableDatabase
+        var result=-1
+        try {
+            result =wd.insert("MEMO_FOLDER",null,values).toInt()
+
+        }catch (e:Exception){
+            MainActivity.mainactivity.showmessage("메모 db확인 오류, memodb를 초기화합니다.")
+            create_Memo_db()
+            result =wd.insert("MEMO_FOLDER",null,values).toInt()
+
+
+        }
+        wd.close()
+        return result
+
+    }
+    fun insert_Memo(folder_id:Int,title:String,text:String,meme_id:Int=-1){
+
+        if(meme_id!=-1){
+            deleteMemo(meme_id)
+        }
+
+        val values = ContentValues()
+        //넘겨줄 컬럼의 매개변수 지정
+
+
+        values.put("folder_id",folder_id)
+        values.put("title",title)
+        values.put("text",text)
+
+
+        //쓰기나 수정이 가능한 데이터베이스 변수
+        val wd = writableDatabase
+        var result =wd.insert("MEMO",null,values).toInt()
+        wd.close()
+    }
+
+    //insert diary 메소드
     fun insertDiary(diary:Day_Diary){
         //있엇으면 삭제
         deleteDiary(diary.date)
@@ -187,6 +324,58 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         wd.close()
     }
 
+    @SuppressLint("Range")
+    fun select_Memo():ArrayList<Memo_Folder>{
+        var folderlist:ArrayList<Memo_Folder> = arrayListOf()
+
+        val selectAll_folder = "select * from MEMO_FOLDER;"
+        val rd=readableDatabase
+
+        val folder_cursor = rd.rawQuery(selectAll_folder,null)
+
+
+        //반복문을 사용하여 list 에 데이터를 넘겨 줍시다.
+        while(folder_cursor.moveToNext()){
+
+            val id = folder_cursor.getLong(folder_cursor.getColumnIndex("folder_id")).toInt()
+            var folder_name = folder_cursor.getString(folder_cursor.getColumnIndex("folder_name"))
+            val ghost_num = folder_cursor.getLong(folder_cursor.getColumnIndex("ghost_num")).toInt()
+
+            var memoFolder=Memo_Folder(id,folder_name,ghost_num)
+
+            folderlist.add(memoFolder)
+
+        }
+
+
+        val selectAll_memo = "select * from MEMO;"
+        val memo_cursor = rd.rawQuery(selectAll_memo,null)
+
+
+        while(memo_cursor.moveToNext()){
+
+            val memo_id = memo_cursor.getLong(memo_cursor.getColumnIndex("memo_id")).toInt()
+            val folder_id = memo_cursor.getLong(memo_cursor.getColumnIndex("folder_id")).toInt()
+            var title = memo_cursor.getString(memo_cursor.getColumnIndex("title"))
+            var text = memo_cursor.getString(memo_cursor.getColumnIndex("text"))
+
+            var memo=Memo(memo_id,folder_id,title,text)
+
+            for (i in folderlist){
+                if(i.folder_id==folder_id) {
+                    i.arrMemo.add(memo)
+                    break
+                }
+            }
+
+        }
+
+        rd.close()
+
+        return folderlist
+
+    }
+
     //select 메소드
     @SuppressLint("Range")
     fun selectDiary():HashMap<String, Day_Diary> {
@@ -270,7 +459,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         }catch (e:Exception){
             Log.e("ERROR","오류로 db가 초기화 되었습니다.")
             Toast.makeText(MainActivity.mainactivity,"기존 db테이블과 충돌으로 db가 초기화됩니다.",Toast.LENGTH_SHORT)
-            createdb()
+            create_Diary_db()
 
         }
 
@@ -311,6 +500,21 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
         }
         db.delete("Diary","date = \"${strdate}\"",null)
+        db.close()
+    }
+
+    @SuppressLint("Range")
+    fun deleteMemo(memo_id:Int){
+
+        val db = writableDatabase
+
+        db.delete("MEMO","memo_id = ${memo_id}",null)
+        db.close()
+    }
+    fun deleteMemoFolder(folder_id: Int){
+        val db = writableDatabase
+
+        db.delete("memo_Folder","folder_id = ${folder_id}",null)
         db.close()
     }
 

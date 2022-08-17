@@ -65,6 +65,8 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
         if(diary!=null){
             curDiary=diary!!
+            date=curDiary.date
+
         }else if (viewModel.getEmotionArray(requireContext()).contains(strdate)) {
             curDiary = viewModel.getEmotionArray(null)[strdate]!!
         }else{
@@ -86,7 +88,8 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
                 MainActivity.mainactivity.change_record()
 
             }else if(parent is SelectEmotionFragment){
-
+                curDiary.image=null
+                MainActivity.mainactivity.change_to_selectemotion(date,curDiary)
 
             }
         }
@@ -100,8 +103,8 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
                 addDiary(curDiary)
                 MainActivity.mainactivity.change_calendar()
 
-            }else if(parent is RecordFragment){
-                var recordparent=parent as RecordFragment
+            }
+            else if(parent is RecordFragment){
                 addDiary(curDiary)
                 MainActivity.mainactivity.change_record()
 
@@ -207,6 +210,9 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
             binding!!.inputText.focusable=View.FOCUSABLE
             binding!!.constraintLayout4.visibility=View.VISIBLE
             binding!!.btnPost.visibility=View.VISIBLE
+            binding!!.btnDelimage.visibility=View.VISIBLE
+            binding!!.inputText.hint="글 작성란"
+
 
 
 
@@ -215,6 +221,8 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
             binding!!.inputText.focusable=View.NOT_FOCUSABLE
             binding!!.constraintLayout4.visibility=View.GONE
             binding!!.btnPost.visibility=View.GONE
+            binding!!.btnDelimage.visibility=View.GONE
+            binding!!.inputText.hint=""
 
         }
     }

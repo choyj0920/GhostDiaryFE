@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.GhostsDialog
+import com.example.ghostdiary.GhostsSelectDialog
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
@@ -98,7 +98,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             if(parent.editmode && position !=0 && emotions[position] !="날씨"){
                 holder.btn_plus.visibility=View.VISIBLE
                 holder.btn_plus.setOnClickListener {
-                    val dialog = GhostsDialog(position,this, selecttexts[position])
+                    val dialog = GhostsSelectDialog(position,this, selecttexts[position])
                     dialog.isCancelable = true
                     dialog.show(parent.requireActivity().supportFragmentManager, "ConfirmDialog")
                 }

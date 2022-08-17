@@ -53,7 +53,12 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
 
         var holder=holder as DiaryView
 
+
         var diary=diaryarr[position]
+        holder.layout.setOnClickListener {
+            MainActivity.mainactivity.change_to_editDiary(diary.date,iseditmode = false)
+        }
+
 
         var transFormat = SimpleDateFormat("M월 d일")
         var str_date = transFormat.format(diary.date)
@@ -104,6 +109,8 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
              popupMenu.show()
          }
          holder.tv_text.text=diary.text
+
+
 
     }
 
