@@ -262,6 +262,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
             temp.put("category",0)
             temp.put("ghost_num",diary.today_emotion.ghostimage)
             temp.put("text",diary.today_emotion.text ?: "")
+            temp.put("isactive", 1)
+
             diary.today_emotion
             Log.d("TAG"," today emotion ${diary.today_emotion}" )
             wd.insert("emotions",null,temp)

@@ -78,7 +78,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:paddingBottom="10dp"
-        android:maxHeight="300dp"
+        android:maxHeight="500dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
         android:src="@drawable/rectangle"

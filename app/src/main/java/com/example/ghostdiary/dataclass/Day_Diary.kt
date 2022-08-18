@@ -99,16 +99,18 @@ class Day_Diary(
 
         fun addghost_arr():ArrayList<Int>{
             var arr=arrayListOf(
-                5,6,7,8,9,0,1,2,3,4,
+                0,1,2,3,4,-1,-1,-1,-1,-1,
+                5,6,7,8,9,-1,-1,-1,-1,-1,
                 20,21,22,23,24,25,26,27,28,29,
                 10,11,12,13,14,15,16,17,18,19
             )
-            var temp=(arr.size/3).toInt()
+            var temp=(arr.size/4).toInt()
             var result= arrayListOf<Int>()
             for(i in 0..temp-1){
                 result.add(arr[10*0+i])
                 result.add(arr[10+i])
                 result.add(arr[20+i])
+                result.add(arr[30+i])
             }
             return result
 

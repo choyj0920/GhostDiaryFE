@@ -10,9 +10,9 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:textViewStyle">@style/customfont</item>
-        <item name="android:editTextStyle">@style/customfont</item>
-        <item name="android:buttonStyle">@style/customfont</item>
+        <item name="fontFamily">@font/custom_font_family</item>
+        <item name="android:fontFamily">@font/custom_font_family</item>
+
         <item name="alertDialogStyle">@style/AlertDialogTheme</item>
         <item name="labelStyle">@color/pink</item>
         <item name="pf_key_button">@style/MyLockScreenButtonStyle</item>
@@ -22,6 +22,13 @@
         <item name="pf_code_view">@style/MyLockScreenCodeStyle</item>
         <item name="pf_title">@style/MyLockTitleStyle</item>
         <item name="pf_next">@style/MyLockNextButtonStyle</item>
+        <item name="android:textViewStyle">@style/customTextViewFontStyle</item>
+        <item name="android:buttonStyle">@style/customButtonFontStyle</item>
+        <item name="android:editTextStyle">@style/customEditTextFontStyle</item>
+        <item name="editTextStyle">@style/customEditTextFontStyle</item>
+        <item name="android:radioButtonStyle">@style/customRadioButtonFontStyle</item>
+        <item name="android:checkboxStyle">@style/customCheckboxFontStyle</item>
+
 
     </style>
     <style name="NewDialog">
@@ -33,7 +40,7 @@
         <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:background">@android:color/transparent</item>
-        <item name="alertDialogStyle">@style/customfont</item>
+        <item name="alertDialogStyle">@font/custom_font_family</item>
 
         <item name="android:textColor">@color/black</item>
         <item name="colorAccent">@color/pink</item>

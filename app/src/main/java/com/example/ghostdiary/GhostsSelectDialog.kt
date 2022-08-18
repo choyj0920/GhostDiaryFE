@@ -149,7 +149,7 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
         }
 
         val ghostarr= Day_Diary.addghost_arr()
-        val ghostlistmanager = GridLayoutManager(context, 3,GridLayoutManager.HORIZONTAL,false)
+        val ghostlistmanager = GridLayoutManager(context, 4,GridLayoutManager.HORIZONTAL,false)
         val ghostlistadpter = ghostadapter(this,ghostarr)
 
 
