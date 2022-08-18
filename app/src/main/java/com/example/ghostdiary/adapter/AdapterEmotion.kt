@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemEmotionGhostBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
@@ -29,6 +31,9 @@ class AdapterEmotion(val parent: AdapterPostdiary,var listPosion:Int,var emotion
 
         view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_emotion_ghost, parent, false)
+
+        Util.setGlobalFont(view!!)
+
         return GhostView(ItemEmotionGhostBinding.bind(view))
 
 

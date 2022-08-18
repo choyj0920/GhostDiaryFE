@@ -10,9 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.GhostsSelectDialog
-import com.example.ghostdiary.MainViewModel
-import com.example.ghostdiary.R
+import com.example.ghostdiary.*
 import com.example.ghostdiary.databinding.*
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.Memo_Folder
@@ -36,6 +34,7 @@ class MemoFragment : Fragment() {
         folderList=viewModel.getMemo_FolderArray()
 
         init()
+        Util.setGlobalFont(binding!!.root)
 
         return binding!!.root
     }
@@ -87,6 +86,8 @@ class MemoFragment : Fragment() {
 
             view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_folder, parent, false)
+            Util.setGlobalFont(view!!)
+
             return GhostView(ItemFolderBinding.bind(view))
 
 

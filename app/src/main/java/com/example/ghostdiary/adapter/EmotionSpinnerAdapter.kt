@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemSpinnerEmotionBinding
 
 
@@ -49,6 +51,7 @@ class EmotionSpinnerAdapter(private val context: Context,val emotionarray: Array
             )
 
         }
+        Util.setGlobalFont(rootview!!)
 
         return rootview
 

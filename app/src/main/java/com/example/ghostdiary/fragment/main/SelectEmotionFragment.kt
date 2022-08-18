@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterPostdiary
 import com.example.ghostdiary.databinding.FragmentSelectEmotionBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -86,7 +87,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
 
 
         initdata()
-
+        Util.setGlobalFont(binding!!.root)
         return binding!!.root
 
     }

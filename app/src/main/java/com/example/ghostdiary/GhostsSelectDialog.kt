@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.adapter.AdapterPostdiary
 
-import com.example.ghostdiary.databinding.DialogGhostsBinding;
+import com.example.ghostdiary.databinding.DialogGhostsSelectBinding
 import com.example.ghostdiary.databinding.ItemGhostBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.Memo_Folder
@@ -25,7 +25,7 @@ import com.example.ghostdiary.fragment.main.MemoFragment
 class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, var emotionlist: ArrayList<emotionclass>?, var memoparent:MemoFragment?=null): DialogFragment() {
 
     // 뷰 바인딩 정의
-    private var _binding: DialogGhostsBinding? = null
+    private var _binding: DialogGhostsSelectBinding? = null
     private val binding get() = _binding!!
 
     private var selectghost:Int=-1
@@ -37,7 +37,7 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogGhostsBinding.inflate(inflater, container, false)
+        _binding = DialogGhostsSelectBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
@@ -45,6 +45,7 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
         initview()
 
 
+        Util.setGlobalFont(binding.root)
 
         return view
     }
@@ -183,6 +184,9 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
 
             view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_ghost, parent, false)
+
+            Util.setGlobalFont(view!!)
+
             return GhostView(ItemGhostBinding.bind(view))
 
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.FragmentClinicBinding
 import com.example.ghostdiary.databinding.FragmentMemoBinding
 import com.example.ghostdiary.databinding.FragmentRecordBinding
@@ -29,6 +30,7 @@ class ClinicFragment : Fragment() {
         binding= FragmentClinicBinding.inflate(inflater,container,false)
 
         init()
+        Util.setGlobalFont(binding!!.root)
 
         return binding!!.root
     }

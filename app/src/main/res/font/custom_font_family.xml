@@ -5,7 +5,7 @@
 
     <!--regular-->
     <font
-        android:font="@font/inter"
+        android:font="@font/nanumbarunpenr"
         android:fontStyle="normal"
         android:fontWeight="400"
         app:font="@font/nanumbarunpenr"
@@ -14,13 +14,14 @@
 
     <!--bold-->
     <font
-        android:font="@font/roboto"
+        android:font="@font/nanumbarunpenb"
         android:fontStyle="normal"
         android:fontWeight="700"
         app:font="@font/nanumbarunpenb"
         app:fontStyle="normal"
         app:fontWeight="1000"
         />
+
 
 
 </font-family>

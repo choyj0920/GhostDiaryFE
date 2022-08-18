@@ -8,6 +8,7 @@ import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemCalendarDaysBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.fragment.main.CalendarFragment
@@ -24,6 +25,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayView {
 
         var view = LayoutInflater.from(parent.context).inflate(R.layout.item_calendar_days, parent, false)
+        Util.setGlobalFont(view!!)
 
         return DayView(ItemCalendarDaysBinding.bind(view))
     }

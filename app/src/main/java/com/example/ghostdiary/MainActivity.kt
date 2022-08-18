@@ -3,13 +3,17 @@ package com.example.ghostdiary
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Resources
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.example.ghostdiary.databinding.ActivityMainBinding
@@ -19,6 +23,7 @@ import com.example.ghostdiary.fragment.main.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
     private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
@@ -31,6 +36,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs : SharedPreferences
     companion object{
         lateinit var mainactivity:MainActivity
+
+        var fontname:Array<String> = arrayOf("roboto","나눔바른펜","나눔 손글씨펜","d2코딩")
     }
     var lastTimeBackPressed : Long = 0
 
@@ -38,14 +45,41 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var viewModel: MainViewModel
 
+    fun setfont(){
+        Util.setGlobalFont(binding.root)
+
+    }fun savefontsetting(fontindex:Int){
+        val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+        editor.putInt("curfont",fontindex).apply()
+        editor.commit()
+        Util.curfont=fontindex
+
+        setfont()
+
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
 
         binding=ActivityMainBinding.inflate(layoutInflater)
         viewModel= ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.getEmotionArray(this)
 
         prefs = this.getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+        var array:ArrayList<Typeface?> = arrayListOf(
+            ResourcesCompat.getFont(this,R.font.roboto),
+            ResourcesCompat.getFont(this,R.font.nanumbarunpenr),
+            ResourcesCompat.getFont(this,R.font.nanumpen),
+            ResourcesCompat.getFont(this,R.font.d2coding)
+        )
+
+        var iscur=prefs.getInt("curfont",2)
+        Util.init(array,prefs.getInt("isfontnum",iscur))
+
+
 
         val islock= prefs.getBoolean("isLock",false)
         if(islock){
@@ -136,6 +170,7 @@ class MainActivity : AppCompatActivity() {
         init_sidemenu()
 
         setContentView(binding.root)
+        setfont()
 
     }
 
@@ -155,6 +190,11 @@ class MainActivity : AppCompatActivity() {
             if(islock) // 글자 눌러서 잠금되어있을때만 락
                 lockapp()
             binding.drawerlayout.closeDrawer(GravityCompat.START)
+        }
+        binding.sidemenuFont.setOnClickListener {
+            val dialog = FontSelectDialog(this)
+            dialog.isCancelable = true
+            dialog.show(supportFragmentManager, "ConfirmDialog")
         }
 
 
@@ -271,6 +311,10 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
+        if(binding.drawerlayout.isDrawerOpen(GravityCompat.START)){
+            binding.drawerlayout.closeDrawer(GravityCompat.START)
+            return
+        }
 
         if (supportFragmentManager.fragments.get(0) is CalendarFragment && calendarFragment.isshow){
             calendarFragment.down_post()
@@ -279,6 +323,7 @@ class MainActivity : AppCompatActivity() {
             if(System.currentTimeMillis() - lastTimeBackPressed >= 1500){
                 lastTimeBackPressed = System.currentTimeMillis()
                 showmessage("\'뒤로' 버튼을 한번 더 누르시면 종료됩니다.")
+
             }
             else {
                 finishAffinity()

@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.databinding.FragmentEditDiaryBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -51,6 +52,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
         binding=FragmentEditDiaryBinding.inflate(inflater,container,false)
 
         init()
+        Util.setGlobalFont(binding!!.root)
 
         return binding!!.root
 

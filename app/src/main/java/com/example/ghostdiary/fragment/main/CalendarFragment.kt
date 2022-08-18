@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterDay
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
@@ -62,7 +63,7 @@ class CalendarFragment : Fragment() {
         curCalendar =this
 
         create_days()
-
+        Util.setGlobalFont(binding!!.root)
         return binding!!.root
     }
 

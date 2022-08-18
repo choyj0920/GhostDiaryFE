@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.FragmentDefaultBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -25,6 +26,7 @@ class DefaultFragment : Fragment() {
     ): View? {
         binding=FragmentDefaultBinding.inflate(inflater,container,false)
 
+        Util.setGlobalFont(binding!!.root)
 
         return binding!!.root
     }

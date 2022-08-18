@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterDiary
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
@@ -46,6 +47,7 @@ class RecordFragment : Fragment() {
         binding= FragmentRecordBinding.inflate(inflater,container,false)
 
         init()
+        Util.setGlobalFont(binding!!.root)
 
         return binding!!.root
     }

@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemEmotionGhostBinding
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
@@ -38,6 +40,8 @@ class AdapterEmotionjustview(val parent: EditDiaryFragment, var emotions:Mutable
 
         view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_emotion_ghost, parent, false)
+        Util.setGlobalFont(view!!)
+
         return GhostView(ItemEmotionGhostBinding.bind(view))
 
 

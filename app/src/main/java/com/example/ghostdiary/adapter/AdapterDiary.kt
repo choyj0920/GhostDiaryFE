@@ -10,6 +10,7 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemDiaryBinding
 
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -40,11 +41,14 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(vg: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view : View?
 
-        view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_diary, parent, false)
+        view = LayoutInflater.from(vg.context)
+            .inflate(R.layout.item_diary, vg, false)
+
+        Util.setGlobalFont(view!!)
+
         return DiaryView(ItemDiaryBinding.bind(view))
 
 

@@ -9,7 +9,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.GhostsSelectDialog
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
+import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -58,11 +60,15 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             1 -> {
                 view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_select_emotion, parent, false)
+                Util.setGlobalFont(view!!)
+
                 return EmotionView(ItemSelectEmotionBinding.bind(view))
             }
             else -> {
                 var view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_select_sleeptime, parent, false)
+                Util.setGlobalFont(view!!)
+
                 return SleepView(ItemSelectSleeptimeBinding.bind(view))
             }
         }

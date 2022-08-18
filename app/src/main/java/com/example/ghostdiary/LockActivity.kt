@@ -6,14 +6,15 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.beautycoder.pflockscreen.PFFLockScreenConfiguration
 import com.beautycoder.pflockscreen.fragments.PFLockScreenFragment
 import com.beautycoder.pflockscreen.fragments.PFLockScreenFragment.OnPFLockScreenCodeCreateListener
 import com.example.ghostdiary.databinding.ActivityLockBinding
-import com.example.ghostdiary.databinding.ActivityMainBinding
 
+import com.beautycoder.pflockscreen.R
 
 class LockActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLockBinding
@@ -49,6 +50,8 @@ class LockActivity : AppCompatActivity() {
             authPin()
 
         }
+        Util.setGlobalFont(binding!!.root)
+
     }
 
     fun createPin() {
@@ -82,7 +85,6 @@ class LockActivity : AppCompatActivity() {
                 }
             }
         )
-
         supportFragmentManager.beginTransaction().replace(binding.container.id, fragment).commit()
     }
 
@@ -125,8 +127,9 @@ class LockActivity : AppCompatActivity() {
                 }
             }
         )
-
         supportFragmentManager.beginTransaction().replace(binding.container.id, fragment).commit()
+
+
 
     }
 
