@@ -22,8 +22,9 @@
 
 
 
-<img src="asset/폰트설정.gif" width="400" height="800" />
+
+
+<img src="asset/폰트설정.gif" width="300" height="700" />           <img src="asset/메모.gif" width="300" height="700" />
 
 
 
-<img src="asset/메모.gif" width="400" height="800" />
