@@ -11,17 +11,19 @@
 
 
 
-<img src="asset/유령추가_선택장면.gif" alt="유령추가_선택장면" width="300" height="600" />
+<img src="asset/유령추가_선택장면.gif" alt="유령추가_선택장면" width="400" height="800" />
 
 
 
 ## 8/19 
 
 - [x] 폰트 설정 Ui수정 ,현재 폰트 표시 추가
+- [x]  메모, 추가/수정/제거 
 
 
 
-<img src="asset/폰트설정.gif" width="300" height="600" />
+<img src="asset/폰트설정.gif" width="400" height="800" />
 
 
 
+<img src="asset/메모.gif" width="400" height="800" />
