@@ -44,9 +44,10 @@ class MainActivity : AppCompatActivity() {
 
 
     lateinit var viewModel: MainViewModel
-
     fun setfont(){
         Util.setGlobalFont(binding.root)
+        binding.sidemenuTvCurfont.text= fontname[Util.curfont]
+
 
     }fun savefontsetting(fontindex:Int){
         val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
@@ -192,6 +193,11 @@ class MainActivity : AppCompatActivity() {
             binding.drawerlayout.closeDrawer(GravityCompat.START)
         }
         binding.sidemenuFont.setOnClickListener {
+            val dialog = FontSelectDialog(this)
+            dialog.isCancelable = true
+            dialog.show(supportFragmentManager, "ConfirmDialog")
+        }
+        binding.sidemenuTvCurfont.setOnClickListener {
             val dialog = FontSelectDialog(this)
             dialog.isCancelable = true
             dialog.show(supportFragmentManager, "ConfirmDialog")
