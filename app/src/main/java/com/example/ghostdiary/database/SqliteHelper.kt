@@ -120,7 +120,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
 
 
-    }fun create_Diary_db(){
+    }
+    fun create_Diary_db(){
         var db =writableDatabase
         db?.setForeignKeyConstraintsEnabled(true)
 
@@ -208,11 +209,13 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         return result
 
     }
-    fun insert_Memo(folder_id:Int,title:String,text:String,meme_id:Int=-1){
+    fun insert_Memo(folder_id:Int,title:String,text:String,memo_id:Int=-1):Int{
 
-        if(meme_id!=-1){
-            deleteMemo(meme_id)
+        if(memo_id!=-1){
+            updateMemo(title,text,memo_id)
+            return memo_id
         }
+        val wd = writableDatabase
 
         val values = ContentValues()
         //넘겨줄 컬럼의 매개변수 지정
@@ -224,9 +227,9 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
 
         //쓰기나 수정이 가능한 데이터베이스 변수
-        val wd = writableDatabase
         var result =wd.insert("MEMO",null,values).toInt()
         wd.close()
+        return result.toInt()
     }
 
     //insert diary 메소드
@@ -361,7 +364,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
             var title = memo_cursor.getString(memo_cursor.getColumnIndex("title"))
             var text = memo_cursor.getString(memo_cursor.getColumnIndex("text"))
 
-            var memo=Memo(memo_id,folder_id,title,text)
+            var memo=Memo(folder_id,title,text,memo_id)
 
             for (i in folderlist){
                 if(i.folder_id==folder_id) {
@@ -469,14 +472,19 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     }
 
     //update 메소드
-    fun updateMemo(){
-        val values = ContentValues()
-
-        values.put("content",1)
-        values.put("datetime",1)
-
+    fun updateMemo(title: String,text: String,memo_id: Int){
         val wd = writableDatabase
-        wd.update("memo",values,"id=${1}}",null)
+
+        val values = ContentValues()
+        //넘겨줄 컬럼의 매개변수 지정
+
+
+        values.put("title",title)
+        values.put("text",text)
+
+        //쓰기나 수정이 가능한 데이터베이스 변수
+
+        wd.update("MEMO",values,"memo_id=${memo_id}",null)
         wd.close()
 
     }

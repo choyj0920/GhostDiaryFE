@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.ghostdiary.database.SqliteHelper
 import com.example.ghostdiary.dataclass.Day_Diary
+import com.example.ghostdiary.dataclass.Memo
 import com.example.ghostdiary.dataclass.Memo_Folder
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -29,6 +30,19 @@ class MainViewModel(): ViewModel() {
 
     }
 
+    fun addMemo(folder_id:Int ,title: String,text:String){
+        maindb!!.insert_Memo(folder_id,title,text)
+    }fun editmemo(memo: Memo){
+        var memo_id=maindb!!.insert_Memo(memo.folder_id,memo.title,memo.text,memo.memoid)
+        if(memo.memoid ==-1){
+            memo.memoid=memo_id
+            for (folder in memofolder_array!!){
+                if(folder.folder_id==memo.folder_id)
+                    folder.arrMemo.add(memo)
+            }
+        }
+    }
+
 
     fun addDiary(newDiary:Day_Diary) {
         var day = newDiary.date
@@ -43,7 +57,6 @@ class MainViewModel(): ViewModel() {
         var to = transFormat.format(date)
         maindb!!.deleteDiary(date)
         calendar_emotionArray!!.remove(to)
-
 
     }
 

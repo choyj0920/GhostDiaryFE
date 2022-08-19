@@ -71,10 +71,10 @@ class MemoFragment : Fragment() {
 
 
 
-    class Folderadpater(var folders:ArrayList<Memo_Folder>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    inner class Folderadpater(var folders:ArrayList<Memo_Folder>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-        class GhostView(binding: ItemFolderBinding) : RecyclerView.ViewHolder(binding.root) {
+        inner class GhostView(binding: ItemFolderBinding) : RecyclerView.ViewHolder(binding.root) {
             var foldername:TextView= binding.tvName
             var ghostimage: ImageView =binding.ivGhost
         }
@@ -100,6 +100,11 @@ class MemoFragment : Fragment() {
 
             holder.ghostimage.alpha=1f
             holder.ghostimage.setImageResource(Day_Diary.int_to_image.get(folders[position].ghost_num))
+
+            holder.ghostimage.setOnClickListener {
+                MainActivity.mainactivity.containerChange(MemoSelectFragment(folders[position]))
+
+            }
 
             holder.foldername.text=folders[position].folder_name
 

@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.example.ghostdiary.databinding.ActivityMainBinding
@@ -234,6 +235,12 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+    fun containerChange(new_fragment:Fragment){
+        getSupportFragmentManager().beginTransaction().replace(binding.container.id, new_fragment).addToBackStack(null).commit();
+    }fun reversechange(fragment: Fragment){
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        getSupportFragmentManager().popBackStack();
+    }
 
     fun lockapp(){
         var intent = Intent(this, LockActivity::class.java)
@@ -321,6 +328,7 @@ class MainActivity : AppCompatActivity() {
             binding.drawerlayout.closeDrawer(GravityCompat.START)
             return
         }
+        var curfragment=supportFragmentManager.fragments.get(0)
 
         if (supportFragmentManager.fragments.get(0) is CalendarFragment && calendarFragment.isshow){
             calendarFragment.down_post()
@@ -364,6 +372,9 @@ class MainActivity : AppCompatActivity() {
 //                binding.btnSideomenu.visibility=View.INVISIBLE
 
             }
+        }else if(curfragment is MemoSelectFragment || curfragment is EditMemoFragment){
+            super.onBackPressed()
+            return
         }
 
         else{
