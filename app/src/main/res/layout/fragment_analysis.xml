@@ -261,6 +261,10 @@
                                 android:id="@+id/slider_good1"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
+                                android:enabled="false"
+
+                                app:trackColorActive="@color/pink"
+
                                 android:focusable="false"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
@@ -341,6 +345,8 @@
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                android:enabled="false"
+                                app:trackColorActive="@color/pink"
 
                                 android:value="77"
                                 app:trackColorInactive="#B2B2B2"
@@ -413,7 +419,8 @@
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-
+                                android:enabled="false"
+                                app:trackColorActive="@color/pink"
                                 android:value="77"
                                 app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -532,6 +539,7 @@
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 android:value="30"
+                                android:enabled="false"
                                 app:trackColorActive="#8FCBCA"
                                 app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -606,6 +614,7 @@
                                 android:focusable="false"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
+                                android:enabled="false"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 android:value="30"
@@ -684,6 +693,7 @@
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                android:enabled="false"
                                 android:value="30"
                                 app:trackColorActive="#8FCBCA"
                                 app:trackColorInactive="#B2B2B2"
