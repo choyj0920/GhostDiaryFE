@@ -82,6 +82,16 @@
         <item name="colorControlNormal">#00000061</item>
     </style>
 
+    <style name="Myslider_other" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="trackColorActive">#8FCBCA</item>
+        <item name="trackColorInactive">@color/gray</item>
+        <item name="labelStyle">@style/My_Tooltip</item>
+        <item name="tickColor">#333333</item>
+        <item name="tickVisible">false</item>
+
+
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
+    </style>
 
 <!--    -->
 

@@ -58,6 +58,7 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
             binding.tvOk.setOnClickListener {
 
                 var ghostname=binding.inputGhostname.text.toString()
+                ghostname=ghostname.trim()
                 if(selectghost==-1){
                     MainActivity.mainactivity.showmessage("유령을 골라주세요.")
                     return@setOnClickListener

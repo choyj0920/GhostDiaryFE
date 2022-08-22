@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
@@ -15,7 +14,7 @@ import com.example.ghostdiary.databinding.FragmentMemoBinding
 import com.example.ghostdiary.databinding.FragmentRecordBinding
 
 
-class ClinicFragment : Fragment() {
+class AdviceFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
     private var binding: FragmentClinicBinding?=null
@@ -37,18 +36,6 @@ class ClinicFragment : Fragment() {
     }
 
     private fun init() {
-
-        binding!!.btnAnalysis.setOnClickListener{
-            viewModel.getdiaryAnalysisMap(requireContext())
-            if(viewModel.diaryAnalysisMap!!.size <3){
-                MainActivity.mainactivity.showmessage("분석에 필요한 감정수가 너무 적습니다!!\n다이어리를 더 써주세요")
-                return@setOnClickListener
-            }else if(viewModel.diaryAnalysisMap!!.size < 6 || viewModel.getEmotionArray().size <= 10){
-                MainActivity.mainactivity.showmessage("분석에 필요한 감정수가 적습니다!!\n정확하지 않을 수 있습니다.")
-
-            }
-            MainActivity.mainactivity.containerChange(AnalysisFragment())
-        }
 
     }
 

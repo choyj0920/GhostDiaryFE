@@ -372,7 +372,7 @@ class MainActivity : AppCompatActivity() {
 //                binding.btnSideomenu.visibility=View.INVISIBLE
 
             }
-        }else if(curfragment is MemoSelectFragment || curfragment is EditMemoFragment){
+        }else if(curfragment is MemoSelectFragment || curfragment is EditMemoFragment || curfragment is AnalysisFragment){
             super.onBackPressed()
             return
         }

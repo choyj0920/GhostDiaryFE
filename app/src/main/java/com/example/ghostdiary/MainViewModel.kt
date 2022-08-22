@@ -7,6 +7,7 @@ import com.example.ghostdiary.database.SqliteHelper
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.Memo
 import com.example.ghostdiary.dataclass.Memo_Folder
+import com.example.ghostdiary.dataclass.emotion_analysis
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
@@ -61,6 +62,7 @@ class MainViewModel(): ViewModel() {
     }
 
     var calendar_emotionArray: HashMap<String, Day_Diary>? = null
+    var diaryAnalysisMap: HashMap<String, emotion_analysis>? = null
     var memofolder_array: ArrayList<Memo_Folder>? = null
 
     fun getMemo_FolderArray(context: Context?=null): ArrayList<Memo_Folder> {
@@ -89,5 +91,17 @@ class MainViewModel(): ViewModel() {
                 calendar_emotionArray =maindb!!.selectDiary()
         }
         return calendar_emotionArray!!
+    }
+    fun getdiaryAnalysisMap(context: Context?=null): HashMap<String, emotion_analysis> {
+        if(maindb==null) {
+            diaryAnalysisMap = getdb(context!!)?.select_diaryanalysis()
+        }
+        else
+            diaryAnalysisMap =maindb!!.select_diaryanalysis()
+        for((key,value) in diaryAnalysisMap!!){
+            value.init()
+        }
+
+        return diaryAnalysisMap!!
     }
 }

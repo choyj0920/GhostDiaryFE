@@ -10,13 +10,11 @@ import android.util.Log
 import android.widget.Toast
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
-import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.dataclass.Memo
-import com.example.ghostdiary.dataclass.Memo_Folder
-import com.example.ghostdiary.dataclass.emotionclass
+import com.example.ghostdiary.dataclass.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 // SQLiteOpenHelper 상속받아 SQLite 를 사용하도록 하겠습니다.
 class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
@@ -327,6 +325,55 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
 
         wd.close()
+    }
+
+    @SuppressLint("Range")
+    fun select_diaryanalysis():HashMap<String,emotion_analysis>{
+        var hashMap :HashMap<String,emotion_analysis> = hashMapOf()
+
+        emotion_analysis.allemotion= arrayOf(0,0,0,0,0)
+        val rd =readableDatabase
+
+        val allque="select count(*) as cnt, today from Diary join (select emotions.diary_id as ed, ghost_num as today from emotions where category=0 AND isactive=1) on Diary.diary_id=ed GROUP by today;"
+
+        val allcursor=rd.rawQuery(allque,null)
+
+        while(allcursor.moveToNext()){
+            val cnt = allcursor.getLong(allcursor.getColumnIndex("cnt")).toInt()
+            val today = allcursor.getLong(allcursor.getColumnIndex("today")).toInt()
+            emotion_analysis.allemotion[today]+=cnt
+        }
+
+
+        val que="select count(*) as cnt,text,today from emotions join (select Diary.diary_id as did, today from Diary join (select emotions.diary_id as ed, ghost_num as today from emotions where category=0 AND isactive=1) on Diary.diary_id=ed) on emotions.diary_id=did  where isactive=1  AND category is not 0 GROUP by text,today;"
+
+
+        val analcursor=rd.rawQuery(que,null)
+
+        while (analcursor.moveToNext()){
+            val cnt = analcursor.getLong(analcursor.getColumnIndex("cnt")).toInt()
+            val text=analcursor.getString(analcursor.getColumnIndex("text"))
+            val today = analcursor.getLong(analcursor.getColumnIndex("today")).toInt()
+
+            val findque= "select ghost_num from emotions where text = \"${text}\";"
+            val findghostnumcursor=rd.rawQuery(findque,null)
+            var ghostnum=0
+
+            while (findghostnumcursor.moveToNext()){
+                ghostnum=findghostnumcursor.getLong(findghostnumcursor.getColumnIndex("ghost_num")).toInt()
+                Log.e("TAG","asdfasdfasdf !@#!@#_____________${ghostnum}: $text  sql : ${findque}")
+                break
+            }
+
+            if(!hashMap.contains(text)){
+                hashMap.put(text, emotion_analysis(text,ghostnum))
+            }
+            hashMap[text]!!.emotioncount[today]+=cnt
+
+        }
+
+        return hashMap
+
     }
 
     @SuppressLint("Range")

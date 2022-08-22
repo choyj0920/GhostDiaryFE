@@ -17,6 +17,7 @@
         android:layout_gravity="center"
         android:background="#F5F5F5"
         android:scrollbars="vertical"
+        android:nestedScrollingEnabled="false"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

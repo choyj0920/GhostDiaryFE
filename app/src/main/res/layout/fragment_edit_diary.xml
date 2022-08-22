@@ -70,6 +70,8 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:nestedScrollingEnabled="false"
+
         android:id="@+id/rv_emotionlist"
         android:layout_width="match_parent"
         android:layout_height="50dp"
