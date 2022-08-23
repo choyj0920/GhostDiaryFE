@@ -42,6 +42,8 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
     var sleepstart:Int =-1
     var sleepend:Int =-1
     lateinit var curDiary:Day_Diary
+    lateinit var fileName:String
+    lateinit var curbitmap:Bitmap
 
     private var binding:FragmentEditDiaryBinding?=null
     override fun onCreateView(
@@ -100,6 +102,13 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
             curDiary.text=binding!!.inputText.text.toString()
 
+            if(binding!!.layoutImage.visibility==View.VISIBLE){
+                saveBitmapToJpeg(curbitmap)
+
+
+
+            }
+
 
             if(parent is CalendarFragment || parent is SelectEmotionFragment){
                 addDiary(curDiary)
@@ -151,7 +160,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
                         }
 
                         if (bitmap != null) {
-                            saveBitmapToJpeg(bitmap)
+                            curbitmap=bitmap
                         }
 
                     }
@@ -316,7 +325,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
         //저장할 파일 이름
 
-        val fileName = "$to.jpg"
+        fileName = "$to.jpg"
 
         //storage 에 파일 인스턴스를 생성합니다.
         val tempFile = File(storage, fileName)
@@ -334,6 +343,8 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
             out.close()
 
             curDiary.image=fileName
+
+
         } catch (e: FileNotFoundException) {
             Log.e("MyTag", "FileNotFoundException : " )
         } catch (e: IOException) {

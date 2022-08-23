@@ -35,8 +35,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "date     TEXT  NOT NULL," +
                 "image TEXT  ," +
                 "text TEXT  ," +
-                "sleepstart TEXT ," +
-                "sleepend    TEXT );"
+                "sleepstart integer  NOT NULL," +
+                "sleepend    integer  NOT NULL);"
         db?.execSQL(create1)
 
         val create2="CREATE TABLE if NOT EXISTS emotions(" +
@@ -81,8 +81,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "date     TEXT  NOT NULL," +
                 "image TEXT  ," +
                 "text TEXT  ," +
-                "sleepstart TEXT ," +
-                "sleepend    TEXT );"
+                "sleepstart integer  NOT NULL," +
+                "sleepend    integer  NOT NULL);"
         db?.execSQL(create1)
 
         val create2="CREATE TABLE emotions(" +
@@ -133,8 +133,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "date     TEXT  NOT NULL," +
                 "image TEXT  ," +
                 "text TEXT  ," +
-                "sleepstart TEXT ," +
-                "sleepend    TEXT );"
+                "sleepstart integer  NOT NULL," +
+                "sleepend    integer  NOT NULL);"
         db?.execSQL(create1)
 
         val create2="CREATE TABLE if NOT EXISTS emotions(" +
@@ -244,12 +244,12 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         values.put("date",formatDate.format(diary.date))
         values.put("image",diary.image)
         values.put("text",diary.text)
-        if(diary.sleepstart==null || diary.sleepend==null){
-            values.put("sleepstart", "")
-            values.put("sleepend", "")
+        if(diary.sleepstart ==-1 ||diary.sleepend== -1 || diary.sleepstart==null || diary.sleepend==null){
+            values.put("sleepstart", -1)
+            values.put("sleepend", -1)
         }else {
-            values.put("sleepstart", formatDatetime.format(diary.sleepstart))
-            values.put("sleepend", formatDatetime.format(diary.sleepend))
+            values.put("sleepstart",diary.sleepstart)
+            values.put("sleepend", diary.sleepend)
         }
 
         //쓰기나 수정이 가능한 데이터베이스 변수
@@ -459,13 +459,14 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
             diary.image = cursor.getString(cursor.getColumnIndex("image"))
 
             diary.text = cursor.getString(cursor.getColumnIndex("text"))?: ""
-            var strStart=cursor.getString(cursor.getColumnIndex("sleepstart"))
-            var strEnd=cursor.getString(cursor.getColumnIndex("sleepend"))
-            if(strStart=="" ||strEnd ==""){
-
+            var strStart=cursor.getLong(cursor.getColumnIndex("sleepstart")).toInt()
+            var strEnd=cursor.getLong(cursor.getColumnIndex("sleepend")).toInt()
+            if(strStart==-1  || strEnd ==-1){
+                diary.sleepstart=-1
+                diary.sleepend=-1
             }else{
-                diary.sleepstart = formatDatetime.parse(strStart)
-                diary.sleepend = formatDatetime.parse(strEnd)
+                diary.sleepstart = strStart
+                diary.sleepend = strEnd
             }
 
 

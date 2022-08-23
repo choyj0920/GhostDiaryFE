@@ -12,8 +12,8 @@ class Day_Diary(
     var doing:ArrayList<emotionclass> =arrayListOf(),
     var where:ArrayList<emotionclass> = arrayListOf(),
     var weather:ArrayList<emotionclass> = arrayListOf(),
-    var sleepstart: Date?=null,
-    var sleepend : Date? = null,
+    var sleepstart: Int?=-1,
+    var sleepend : Int? = -1,
     var text:String="",
     var image:String?=null
 

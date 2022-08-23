@@ -57,19 +57,9 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
             }
 
             if(curDiary.sleepstart != null && curDiary.sleepend !=null){
-                var yesterday = Calendar.getInstance()
-                var tempstart=Calendar.getInstance()
-                tempstart.time=curDiary.sleepstart
-                var tempend=Calendar.getInstance()
-                tempend.time=curDiary.sleepend
-                yesterday.time = date
-                yesterday.add(Calendar.DATE, -1)
-                yesterday.set(Calendar.HOUR_OF_DAY, 22)
-                yesterday.set(Calendar.MINUTE, 0)
+                sleepstart=curDiary.sleepstart!!
+                sleepend= curDiary.sleepend!!
 
-                sleepstart= ((getIgnoreTime(curDiary.sleepstart!!.time) - getIgnoreTime(yesterday.time.time))/(1000 * 60 * 10)).toInt()
-
-                sleepend=  ((getIgnoreTime(curDiary.sleepend!!.time) - getIgnoreTime(yesterday.time.time))/(1000 * 60 * 10)).toInt()
 
                 if(sleepstart>72 || sleepstart<0||sleepend>72 ||sleepend<0) {
                     sleepstart = -1
@@ -155,27 +145,9 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
                 break
             }
         }
-        var startsleep:Date? =null
-        var endsleep:Date? =null
-        if(sleepend != -1 && sleepstart != -1){
-            var yesterday = Calendar.getInstance()
-            yesterday.time = date
-            yesterday.add(Calendar.DAY_OF_MONTH, -1)
-            yesterday.set(Calendar.HOUR_OF_DAY, 22)
-            yesterday.set(Calendar.MINUTE,0)
-            yesterday.set(Calendar.SECOND,0)
-            var temp = Calendar.getInstance()
-            temp.time=yesterday.time
-            temp.add(Calendar.MINUTE,sleepstart*10)
-            startsleep=temp.time
-            temp.time=yesterday.time
-            temp.add(Calendar.MINUTE,sleepend*10)
-            endsleep=temp.time
 
-            Log.d("TAG",startsleep.toString()+endsleep.toString())
-        }
 
-        curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],startsleep,endsleep,curDiary.text, curDiary.image)
+        curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],this.sleepstart,this.sleepend,curDiary.text, curDiary.image)
 
         if(uptofragment is CalendarFragment){
             uptofragment.addDiary(curDiary)
@@ -195,27 +167,9 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
                 break
             }
         }
-        var startsleep:Date? =null
-        var endsleep:Date? =null
-        if(sleepend != -1 && sleepstart != -1){
-            var yesterday = Calendar.getInstance()
-            yesterday.time = date
-            yesterday.add(Calendar.DATE, -1)
-            yesterday.set(Calendar.HOUR_OF_DAY, 22)
-            yesterday.set(Calendar.MINUTE,0)
-            yesterday.set(Calendar.SECOND,0)
-            var temp = Calendar.getInstance()
-            temp.time=yesterday.time
-            temp.add(Calendar.MINUTE,sleepstart*10)
-            startsleep=temp.time
-            temp.time=yesterday.time
-            temp.add(Calendar.MINUTE,sleepend*10)
-            endsleep=temp.time
 
-            Log.d("TAG",startsleep.toString()+endsleep.toString())
-        }
 
-        curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],startsleep,endsleep,curDiary.text, curDiary.image)
+        curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],this.sleepstart,this.sleepend,curDiary.text, curDiary.image)
 
 
         return curDiary
