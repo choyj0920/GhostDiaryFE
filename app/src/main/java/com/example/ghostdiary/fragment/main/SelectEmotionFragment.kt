@@ -28,9 +28,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
 
     lateinit var emotions:Array<String>
     lateinit var emotionselect :ArrayList<ArrayList<emotionclass>>
-    lateinit var selecttexts:HashMap<String,Array<String>>
     lateinit var adapterPostdiary:AdapterPostdiary
-    lateinit var emotionImageviews:Array<ImageView>
     lateinit var curDiary:Day_Diary
     lateinit var rv_linearlayoutmanger : LinearLayoutManager
 

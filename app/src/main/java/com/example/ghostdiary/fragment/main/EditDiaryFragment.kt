@@ -4,6 +4,7 @@ package com.example.ghostdiary.fragment.main
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
@@ -25,7 +26,6 @@ import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.databinding.FragmentEditDiaryBinding
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.dataclass.emotionclass
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -193,10 +193,10 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
             val fileName = curDiary.image
             //storage 에 파일 인스턴스를 생성합니다.
-            val tempFile = File(storage, fileName)
-            try {
-
-                binding!!.ivImage.setImageURI(tempFile.toUri())
+            val tempFile = File(storage, fileName).path
+            val bitmap = BitmapFactory.decodeFile(tempFile)
+            if (bitmap != null) {
+                binding!!.ivImage.setImageBitmap(bitmap)
 
                 binding!!.layoutImage.visibility=View.VISIBLE
 
@@ -205,9 +205,9 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
                     binding!!.layoutImage.visibility=View.GONE
 
                 }
-
-            }catch (e: Exception){
-
+            }
+            else {
+                binding!!.layoutImage.visibility=View.GONE
             }
         }
 

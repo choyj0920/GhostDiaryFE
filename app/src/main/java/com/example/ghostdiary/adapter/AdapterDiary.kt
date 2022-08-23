@@ -1,5 +1,7 @@
 package com.example.ghostdiary.adapter
 
+import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,13 +86,21 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
 
             val fileName = diary.image
             //storage 에 파일 인스턴스를 생성합니다.
-            val tempFile = File(storage, fileName)
-            try {
+            val tempFile = File(storage, fileName).path
+            val bitmap = BitmapFactory.decodeFile(tempFile)
+            if (bitmap != null) {
                 holder.iv_image.visibility=View.VISIBLE
                 holder.iv_image.setImageURI(tempFile.toUri())
-            }catch (e: Exception){
-                holder.iv_image.visibility=View.GONE
             }
+            else {
+                holder.iv_image.visibility=View.GONE
+                diary.image=null
+                Log.e("TAG","파일을 찾을 수 없어 수정되었습니다.")
+
+
+            }
+
+
         }else{
             holder.iv_image.visibility=View.GONE
         }
