@@ -336,7 +336,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
         var cnt=0
 
-        val que="select date,sleepstart,sleepend,(sleepend-sleepstart) as sleeptime from Diary where sleepstart != -1;"
+        val que="select date,sleepstart,sleepend,(sleepend-sleepstart) as sleeptime from Diary where sleepstart != -1 and sleepend != -1;"
 
         val sleepcursor=rd.rawQuery(que,null)
 
@@ -359,8 +359,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         }
 
         if(cnt != 0){
-            Sleep_data.avgsleepstart=sum_sleepstart/(cnt).toFloat()
-            Sleep_data.avgsleepend=sum_sleepend/(cnt).toFloat()
+            Sleep_data.avgsleepstart=sum_sleepstart/(cnt.toFloat())
+            Sleep_data.avgsleepend=sum_sleepend/(cnt.toFloat())
             Sleep_data.avgsleeptime= Sleep_data.avgsleepend!! -Sleep_data.avgsleepstart!!
             Log.d("TAG","수면시간------ :${Sleep_data.avgsleepstart}  , ${Sleep_data.avgsleepend}, ${Sleep_data.avgsleeptime}")
         }

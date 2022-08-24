@@ -13,6 +13,7 @@ import com.example.ghostdiary.databinding.FragmentSleepBinding
 import com.example.ghostdiary.dataclass.Sleep_data
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
+import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -110,10 +111,13 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
         xAxis.axisMaximum = (sleepArray[sleepArray.size-1].date.time + 1000*3600*24*1f).toFloat()
         xAxis.axisMinimum = (sleepArray[0].date.time- 1000*3600*24*1f).toFloat()
-        xAxis.labelCount = 5
+        xAxis.labelCount = 4
         xAxis.valueFormatter = TimeAxisValueFormat()
 
-        chart.setVisibleXRangeMaximum(1000*3600*24*20f)
+        chart.setVisibleXRangeMinimum(1000*3600*24*6f)
+
+
+
 
         xAxis.textColor = Color.BLACK
         xAxis.position = XAxis.XAxisPosition.BOTTOM  // x축 라벨 위치
@@ -122,8 +126,9 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
         // 왼쪽 y축 값
         val yLAxis = chart.axisLeft
-        yLAxis.axisMaximum = 12f   // y축 최대값(고정)
-        yLAxis.axisMinimum = 4f  // y축 최소값(고정)
+        yLAxis.axisMaximum = 13f   // y축 최대값(고정)
+        yLAxis.axisMinimum = 0f  // y축 최소값(고정)
+
 
         // 왼쪽 y축 도메인 변경
         val yAxisVals = ArrayList<String>()
@@ -138,11 +143,15 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         yRAxis.setDrawLabels(false)
         yRAxis.setDrawAxisLine(false)
         yRAxis.setDrawGridLines(false)
+        yRAxis.isEnabled=false
 
         // 마커 설정
 //        val marker = LineMarkerView(requireContext(), R.layout.graph_marker)
 //        marker.chartView = chart
 //        chart.marker = marker
+
+        chart.setVisibleYRangeMaximum(13f, YAxis.AxisDependency.LEFT);
+        chart.setVisibleYRangeMinimum(13f, YAxis.AxisDependency.LEFT);
 
         chart!!.description.isEnabled = false  // 설명
         chart!!.data = lineData  // 데이터 설정
