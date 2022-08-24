@@ -4,10 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.ghostdiary.database.SqliteHelper
-import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.dataclass.Memo
-import com.example.ghostdiary.dataclass.Memo_Folder
-import com.example.ghostdiary.dataclass.emotion_analysis
+import com.example.ghostdiary.dataclass.*
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.ZoneId
@@ -64,7 +61,17 @@ class MainViewModel(): ViewModel() {
     var calendar_emotionArray: HashMap<String, Day_Diary>? = null
     var diaryAnalysisMap: HashMap<String, emotion_analysis>? = null
     var memofolder_array: ArrayList<Memo_Folder>? = null
+    var sleepdata_array: ArrayList<Sleep_data>? = null
 
+    fun getsleepdataArray(context: Context?=null): ArrayList<Sleep_data> {
+        if(maindb==null) {
+            sleepdata_array = getdb(MainActivity.mainactivity)?.select_sleepdata()
+        }
+        else
+            sleepdata_array =maindb!!.select_sleepdata()
+
+        return sleepdata_array!!
+    }
     fun getMemo_FolderArray(context: Context?=null): ArrayList<Memo_Folder> {
         if (memofolder_array == null) {
             if(maindb==null) {

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:text="수면"
+                android:textSize="20sp"
+                android:textStyle="bold"
+
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="170dp"
+                android:orientation="vertical"
+                android:background="@drawable/border_just_topbottom"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border_black"
+                    android:gravity="center"
+                    android:minWidth="122dp"
+                    android:minHeight="30dp"
+                    android:text="평균 수면시간"
+                    android:textColor="#666666"
+                    android:textSize="13sp"
+
+                    />
+
+                <LinearLayout
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:textColor="#4A4A4A"
+                            android:text="잠든 시간"
+
+                            />
+                        <TextView
+                            android:id="@+id/tv_sleepstarttime"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="@color/pink"
+                            android:text="11:11"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:textColor="#4A4A4A"
+                            android:text="일어난 시간"
+
+                            />
+                        <TextView
+                            android:id="@+id/tv_sleependtime"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="@color/pink"
+                            android:text="11:11"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:textSize="16sp"
+                            android:gravity="center"
+                            android:textColor="#4A4A4A"
+                            android:text="수면 시간"
+
+                            />
+                        <TextView
+                            android:id="@+id/tv_sleeptime"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="0dp"
+                            android:gravity="center"
+                            android:textSize="16sp"
+                            android:textColor="@color/pink"
+                            android:text="11:11"
+
+                            />
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="200dp"
+                android:orientation="vertical"
+                android:background="@drawable/border_just_topbottom"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/border_black"
+                    android:gravity="center"
+                    android:minWidth="122dp"
+                    android:minHeight="30dp"
+                    android:text="수면 그래프"
+                    android:textColor="#666666"
+                    android:textSize="13sp"
+
+                    />
+
+                <com.github.mikephil.charting.charts.LineChart
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/chart"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="170dp"
+                android:orientation="vertical"
+                android:background="@drawable/border_just_bottom"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/border_black"
+                    android:gravity="center"
+                    android:minWidth="122dp"
+                    android:minHeight="30dp"
+                    android:text="추천 수면시간"
+                    android:textColor="#666666"
+                    android:textSize="13sp"
+
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#4A4A4A"
+                        android:text=" 점"
+
+                        />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

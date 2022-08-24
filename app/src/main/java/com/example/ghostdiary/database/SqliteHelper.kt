@@ -323,8 +323,52 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
         }
 
-
         wd.close()
+    }
+
+    @SuppressLint("Range")
+    fun select_sleepdata():ArrayList<Sleep_data> {
+        var sleepdataArray:ArrayList<Sleep_data> = arrayListOf()
+        val rd =readableDatabase
+
+        var sum_sleepstart=0
+        var sum_sleepend=0
+
+        var cnt=0
+
+        val que="select date,sleepstart,sleepend,(sleepend-sleepstart) as sleeptime from Diary where sleepstart != -1;"
+
+        val sleepcursor=rd.rawQuery(que,null)
+
+        while (sleepcursor.moveToNext()) {
+            var formatDate = SimpleDateFormat("yyyy-MM-dd");
+            var strdate = sleepcursor.getString(sleepcursor.getColumnIndex("date"))
+            var date:Date = formatDate.parse(strdate)
+
+
+            val sleepstart = sleepcursor.getLong(sleepcursor.getColumnIndex("sleepstart")).toInt()
+            val sleepend = sleepcursor.getLong(sleepcursor.getColumnIndex("sleepend")).toInt()
+            val sleeptime = sleepcursor.getLong(sleepcursor.getColumnIndex("sleeptime")).toInt()
+
+            sleepdataArray.add(Sleep_data(date,sleepstart,sleepend,sleeptime))
+
+            sum_sleepstart+=sleepstart
+            sum_sleepend+=sleepend
+
+            cnt+=1
+        }
+
+        if(cnt != 0){
+            Sleep_data.avgsleepstart=sum_sleepstart/(cnt).toFloat()
+            Sleep_data.avgsleepend=sum_sleepend/(cnt).toFloat()
+            Sleep_data.avgsleeptime= Sleep_data.avgsleepend!! -Sleep_data.avgsleepstart!!
+            Log.d("TAG","수면시간------ :${Sleep_data.avgsleepstart}  , ${Sleep_data.avgsleepend}, ${Sleep_data.avgsleeptime}")
+        }
+
+
+        rd.close()
+        return  sleepdataArray
+
     }
 
     @SuppressLint("Range")
