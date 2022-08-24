@@ -80,18 +80,22 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         sleepArray.sortBy { it.date }
 
         for(i in sleepArray){
-            chartData.add(Entry(i.date.time.toFloat(), i.sleeptime.toFloat()))
+            chartData.add(Entry(i.date.time.toFloat(), (i.sleeptime/6).toFloat()))
         }
 
 
         var set = LineDataSet(chartData, "set1")
+        set.setColor(Color.parseColor("#F08080"))
+        set.setCircleColor(Color.parseColor("#F08080"));
+
         lineDataSet.add(set)
         lineData = LineData(lineDataSet)
 
         set.lineWidth = 2F
         set.setDrawValues(false)
         set.highLightColor = Color.TRANSPARENT
-        set.mode = LineDataSet.Mode.STEPPED
+//        set.mode = LineDataSet.Mode.STEPPED
+
     }
     // 차트 초기화 메서드
     private fun initChart() {
@@ -104,10 +108,12 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         val xAxis = chart.xAxis
         xAxis.setDrawLabels(true)  // Label 표시 여부
 
-        xAxis.axisMaximum = sleepArray[sleepArray.size-1].date.time.toFloat()
-        xAxis.axisMinimum = sleepArray[0].date.time.toFloat()
+        xAxis.axisMaximum = (sleepArray[sleepArray.size-1].date.time + 1000*3600*24*1f).toFloat()
+        xAxis.axisMinimum = (sleepArray[0].date.time- 1000*3600*24*1f).toFloat()
         xAxis.labelCount = 5
         xAxis.valueFormatter = TimeAxisValueFormat()
+
+        chart.setVisibleXRangeMaximum(1000*3600*24*20f)
 
         xAxis.textColor = Color.BLACK
         xAxis.position = XAxis.XAxisPosition.BOTTOM  // x축 라벨 위치
@@ -117,10 +123,13 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         // 왼쪽 y축 값
         val yLAxis = chart.axisLeft
         yLAxis.axisMaximum = 12f   // y축 최대값(고정)
-        yLAxis.axisMinimum = -0f  // y축 최소값(고정)
+        yLAxis.axisMinimum = 4f  // y축 최소값(고정)
 
         // 왼쪽 y축 도메인 변경
-        val yAxisVals = ArrayList<String>(Arrays.asList("0", "1", "2", "3", "4","5","6","7","8","9","10","11","12"))
+        val yAxisVals = ArrayList<String>()
+        for (i in 0..12){
+            yAxisVals.add(i.toString())
+        }
         yLAxis.valueFormatter = IndexAxisValueFormatter(yAxisVals)
         yLAxis.granularity = 1f
 
@@ -138,6 +147,8 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         chart!!.description.isEnabled = false  // 설명
         chart!!.data = lineData  // 데이터 설정
 
+        chart.moveViewToX(chartData[chartData.size-1].x)
+
         chart!!.invalidate()  // 다시 그리기
     }
 
@@ -146,8 +157,7 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         override fun getFormattedValue(value: Float): String {
 
             // Float(min) -> Date
-            var valueToMinutes = TimeUnit.DAYS.toMillis(value.toLong())
-            var timeMimutes = Date(valueToMinutes)
+            var timeMimutes = Date(value.toLong())
             var formatMinutes = SimpleDateFormat("yy/MM/dd")
 
             return formatMinutes.format(timeMimutes)
