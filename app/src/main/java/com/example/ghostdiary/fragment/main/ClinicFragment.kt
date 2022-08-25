@@ -41,10 +41,10 @@ class ClinicFragment : Fragment() {
         binding!!.btnAnalysis.setOnClickListener{
             viewModel.getdiaryAnalysisMap(requireContext())
             if(viewModel.diaryAnalysisMap!!.size <3){
-                MainActivity.mainactivity.showmessage("분석에 필요한 감정수가 너무 적습니다!!\n다이어리를 더 써주세요")
+                MainActivity.mainactivity.showmessage("분석에 필요한 감정 수가 너무 적습니다!!\n다이어리를 더 써주세요")
                 return@setOnClickListener
             }else if(viewModel.diaryAnalysisMap!!.size < 6 || viewModel.getEmotionArray().size <= 10){
-                MainActivity.mainactivity.showmessage("분석에 필요한 감정수가 적습니다!!\n정확하지 않을 수 있습니다.")
+                MainActivity.mainactivity.showmessage("분석에 필요한 감정 수가 적습니다!!\n정확하지 않을 수 있습니다.")
 
             }
             MainActivity.mainactivity.containerChange(AnalysisFragment())
