@@ -51,11 +51,11 @@ class ClinicFragment : Fragment() {
         }
         binding!!.btnSleep.setOnClickListener{
             var array =viewModel.getsleepdataArray()
-            if(array.size==0){
-                MainActivity.mainactivity.showmessage("입력된 수면 데이터가 하나도 없습니다.\n 다이어리에 수면시간을 넣어주세요")
+            if(array.size<=4){
+                MainActivity.mainactivity.showmessage("입력된 수면 데이터가 너무 적습니다.\n 다이어리에 수면시간을 넣어주세요")
                 return@setOnClickListener
-            }else if (array.size<15){
-                MainActivity.mainactivity.showmessage("입력된 수면 데이터가 너무 적습니다.(${array.size})\n다이어리에 수면시간을 더 넣어주세요")
+            }else if (array.size<10){
+                MainActivity.mainactivity.showmessage("입력된 수면 데이터가 적습니다.\n다이어리에 수면시간을 더 넣어주세요")
 
             }
 

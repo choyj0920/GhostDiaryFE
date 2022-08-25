@@ -92,8 +92,8 @@ class Day_Diary(
                 emotionclass("직장",12,false),emotionclass("카페",13,false),
                 emotionclass("식당",14,false),emotionclass("여행",15,false),emotionclass("헬스장",16,false),
                 emotionclass("쇼핑",17,false),emotionclass("영화관",18,false),emotionclass("도서관",19,false)),
-            "날씨" to arrayOf(emotionclass("맑음",30,false),emotionclass("비",31,false),
-                emotionclass("구름",32,false))
+            "날씨" to arrayOf(emotionclass("맑음",30,false),emotionclass("구름",31,false),
+                emotionclass("비",32,false))
         )
 
 

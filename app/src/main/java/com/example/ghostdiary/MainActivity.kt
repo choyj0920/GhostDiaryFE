@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             ResourcesCompat.getFont(this,R.font.d2coding)
         )
 
-        var iscur=prefs.getInt("curfont",2)
+        var iscur=prefs.getInt("curfont",3)
         Util.init(array,prefs.getInt("isfontnum",iscur))
 
 
@@ -372,7 +372,7 @@ class MainActivity : AppCompatActivity() {
 //                binding.btnSideomenu.visibility=View.INVISIBLE
 
             }
-        }else if(curfragment is MemoSelectFragment || curfragment is EditMemoFragment || curfragment is AnalysisFragment){
+        }else if(curfragment is MemoSelectFragment || curfragment is EditMemoFragment || curfragment is AnalysisFragment ||curfragment is SleepFragment){
             super.onBackPressed()
             return
         }

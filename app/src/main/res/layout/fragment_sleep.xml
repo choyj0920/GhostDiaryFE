@@ -215,7 +215,7 @@
                 android:layout_gravity="center"
                 android:minHeight="170dp"
                 android:orientation="vertical"
-                android:background="@drawable/border_just_bottom"
+                android:background="@drawable/border_just_topbottom"
                 >
 
                 <TextView
@@ -229,7 +229,7 @@
                     android:minHeight="30dp"
                     android:text="추천 수면시간"
                     android:textColor="#666666"
-                    android:textSize="13sp"
+                    android:textSize="15sp"
 
                     />
 
@@ -239,17 +239,30 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="30dp"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     android:gravity="center"
                     >
 
                     <TextView
+                        android:layout_marginLeft="28dp"
+                        android:layout_marginRight="28dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:textSize="13sp"
                         android:textColor="#4A4A4A"
-                        android:text=" 점"
-
+                        android:gravity="center"
+                        android:text="규칙적인 수면시간은 신체와 정신 건강에 도움이 됩니다."
+                        />
+                    <TextView
+                        android:id="@+id/tv_advice_sleep"
+                        android:layout_marginLeft="28dp"
+                        android:layout_marginRight="28dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textSize="13sp"
+                        android:textColor="#4A4A4A"
+                        android:text="99 시에 자서  99 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"
                         />
 
 
@@ -257,7 +270,59 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:minHeight="170dp"
+                android:orientation="vertical"
+                android:background="@drawable/border_just_topbottom"
+                >
 
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="0dp"
+                    android:padding="10dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:minWidth="50dp"
+                        android:maxHeight="100dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ghost_sleep"
+                        android:maxWidth="100dp"
+                        />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:layout_margin="10dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/ic_ballon"
+                        android:elevation="10dp"
+                        android:paddingLeft="26dp"
+                        android:paddingTop="17dp"
+                        android:paddingRight="15dp"
+                        android:paddingBottom="15dp"
+                        android:text="Tip)\n\n성인의 수면 적정시간은\n7시간에서 8시간 정도입니다"
+                        android:textColor="#4A4A4A"
+                        android:textSize="12sp" />
+
+
+                </LinearLayout>
+            </LinearLayout>
 
 
 

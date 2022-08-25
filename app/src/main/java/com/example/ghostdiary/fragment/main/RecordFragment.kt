@@ -169,7 +169,6 @@ class RecordFragment : Fragment() {
                 if(emotionpostion==-1 || emotionpostion==value.today_emotion.ghostimage) {
                     monthDiary.add(value)
                 }
-
             }
         }
         monthDiary.sortBy { dayDiary -> dayDiary.date  }

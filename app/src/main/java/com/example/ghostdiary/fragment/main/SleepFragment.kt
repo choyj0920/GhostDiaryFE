@@ -2,6 +2,10 @@ package com.example.ghostdiary.fragment.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +26,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.math.round
 
 
 class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
@@ -70,6 +75,47 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
         initChart()
 
+        initadvice_sleep()
+
+
+    }
+
+    private fun initadvice_sleep(){
+
+        var sleepmiddle=(Sleep_data.avgsleepstart!! + Sleep_data.avgsleepend!!)/2
+        var Stime=Sleep_data.avgsleeptime!!/6
+        if(Stime <=7.5f){
+            Stime=3.5f
+        }else{
+            Stime=4.0f
+
+        }
+        sleepmiddle /= 6
+
+
+        var startsleep= ((22+round(sleepmiddle-Stime))%24).toInt().toString()
+        var endsleep= ((22+round(sleepmiddle+Stime))%24).toInt().toString()
+        if(startsleep =="0")
+            startsleep="24"
+        if(endsleep=="0")
+            endsleep="24"
+
+
+        val content  = "${startsleep}시에 자서  ${endsleep} 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"
+        val spannableString = SpannableString(content) //객체 생성
+
+
+        val Sstart: Int = content.indexOf(startsleep)
+        val Send = Sstart + startsleep.length
+        val Estart: Int = content.indexOf(endsleep)
+        val Eend = Estart + endsleep.length
+
+        spannableString.setSpan(ForegroundColorSpan(Color.parseColor("#F08080")), Sstart, Send, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(RelativeSizeSpan(1.2f), Sstart, Send, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(ForegroundColorSpan(Color.parseColor("#F08080")), Estart, Eend, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(RelativeSizeSpan(1.2f), Estart, Eend, SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        binding!!.tvAdviceSleep.text=spannableString
 
 
 
