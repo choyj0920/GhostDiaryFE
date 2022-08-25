@@ -171,7 +171,8 @@ class RecordFragment : Fragment() {
                 }
             }
         }
-        monthDiary.sortBy { dayDiary -> dayDiary.date  }
+        monthDiary.sortBy { dayDiary -> dayDiary.date}
+        monthDiary.reverse()
 
         var _adapter = AdapterDiary(this,monthDiary)
 

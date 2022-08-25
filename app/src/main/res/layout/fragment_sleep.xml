@@ -13,6 +13,7 @@
         android:nestedScrollingEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="#F5F5F5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -23,13 +24,15 @@
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="15dp"
+                android:gravity="center"
+                android:padding="15dp"
                 android:text="수면"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:background="@color/white"
 
                 />
 
@@ -206,17 +209,16 @@
                     android:layout_height="wrap_content" />
 
 
-            </LinearLayout>
 
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:minHeight="170dp"
-                android:orientation="vertical"
                 android:background="@drawable/border_just_topbottom"
-                >
+                android:minHeight="170dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -229,45 +231,44 @@
                     android:minHeight="30dp"
                     android:text="추천 수면시간"
                     android:textColor="#666666"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
 
                     />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:layout_height="0dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="30dp"
-                    android:orientation="vertical"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    >
+                    android:orientation="vertical">
 
                     <TextView
-                        android:layout_marginLeft="28dp"
-                        android:layout_marginRight="28dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:textColor="#4A4A4A"
+                        android:layout_marginLeft="28dp"
+                        android:layout_marginRight="28dp"
                         android:gravity="center"
                         android:text="규칙적인 수면시간은 신체와 정신 건강에 도움이 됩니다."
-                        />
+                        android:textColor="#4A4A4A"
+                        android:textSize="12sp" />
+
                     <TextView
                         android:id="@+id/tv_advice_sleep"
-                        android:layout_marginLeft="28dp"
-                        android:layout_marginRight="28dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="28dp"
+                        android:layout_marginRight="28dp"
                         android:gravity="center"
-                        android:textSize="13sp"
-                        android:textColor="#4A4A4A"
                         android:text="99 시에 자서  99 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"
-                        />
+                        android:textColor="#4A4A4A"
+                        android:textSize="12sp" />
 
 
                 </LinearLayout>
             </LinearLayout>
+
 
 
             <LinearLayout

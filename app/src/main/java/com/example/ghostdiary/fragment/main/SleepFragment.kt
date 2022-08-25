@@ -57,9 +57,9 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
     private fun init() {
 
-        var sleepstart =Date (TimeUnit.MINUTES.toMillis((60 * 13 +Sleep_data.avgsleepstart!!*10).toLong()))
-        var sleepend =Date (TimeUnit.MINUTES.toMillis(60 * 13+ (Sleep_data.avgsleepend!!*10).toLong()))
-        var sleeptime =Date (TimeUnit.MINUTES.toMillis(60*(-9)+ (Sleep_data.avgsleeptime!!*10).toLong()))
+        var sleepstart =Date (TimeUnit.MINUTES.toMillis(round(60 * 13 +Sleep_data.avgsleepstart!!*10).toLong()))
+        var sleepend =Date (TimeUnit.MINUTES.toMillis(60 * 13+ round(Sleep_data.avgsleepend!!*10).toLong()))
+        var sleeptime =Date (TimeUnit.MINUTES.toMillis(60*(-9)+ round(Sleep_data.avgsleeptime!!*10).toLong()))
 
         var formatMinutes = SimpleDateFormat("HH:mm")
 
@@ -196,13 +196,14 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 //        marker.chartView = chart
 //        chart.marker = marker
 
-        chart.setVisibleYRangeMaximum(13f, YAxis.AxisDependency.LEFT);
-        chart.setVisibleYRangeMinimum(13f, YAxis.AxisDependency.LEFT);
+        chart.setVisibleYRange(13f,13f,YAxis.AxisDependency.LEFT)
 
         chart!!.description.isEnabled = false  // 설명
         chart!!.data = lineData  // 데이터 설정
 
         chart.moveViewToX(chartData[chartData.size-1].x)
+
+
 
         chart!!.invalidate()  // 다시 그리기
     }

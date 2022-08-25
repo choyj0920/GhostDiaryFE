@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         lateinit var mainactivity:MainActivity
 
-        var fontname:Array<String> = arrayOf("roboto","나눔바른펜","나눔 손글씨펜","d2코딩")
+        var fontname:Array<String> = arrayOf("roboto","나눔바른펜","나눔 손글씨펜","d2코딩","BM연성","고도","고도마음","이롭게바탕","미생","야체")
     }
     var lastTimeBackPressed : Long = 0
 
@@ -75,7 +75,13 @@ class MainActivity : AppCompatActivity() {
             ResourcesCompat.getFont(this,R.font.roboto),
             ResourcesCompat.getFont(this,R.font.nanumbarunpenr),
             ResourcesCompat.getFont(this,R.font.nanumpen),
-            ResourcesCompat.getFont(this,R.font.d2coding)
+            ResourcesCompat.getFont(this,R.font.d2coding),
+            ResourcesCompat.getFont(this,R.font.bmhannaair),
+            ResourcesCompat.getFont(this,R.font.godofont),
+            ResourcesCompat.getFont(this,R.font.godomaum),
+            ResourcesCompat.getFont(this,R.font.iropkebatangm),
+            ResourcesCompat.getFont(this,R.font.sdmisaeng),
+            ResourcesCompat.getFont(this,R.font.yafont),
         )
 
         var iscur=prefs.getInt("curfont",3)
