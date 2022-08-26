@@ -1,26 +1,27 @@
 package com.example.ghostdiary.fragment.main
 
 import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.ghostdiary.MainViewModel
+import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.FragmentSleepBinding
 import com.example.ghostdiary.dataclass.Sleep_data
-import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.charts.CandleStickChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.*
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.text.SimpleDateFormat
@@ -34,10 +35,34 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var binding: FragmentSleepBinding?=null
 
-    private var chartData = ArrayList<Entry>()  // 데이터 배열
+    private var chartData = ArrayList<CandleEntry>()  // 데이터 배열
     private var lineDataSet = ArrayList<ILineDataSet>()  // 데이터 배열 → 데이터 셋
-    private var lineData: LineData = LineData()
-    lateinit var chart: LineChart
+    private var candleData: CandleData = CandleData()
+    lateinit var chart: CandleStickChart
+    companion object{
+        fun convertDays(date: Date): Float {
+            val basedata = "2022-02-10"
+
+            val format = SimpleDateFormat("yyyy-mm-dd")
+            val parsedata = format.parse(basedata)
+
+            Log.d("TAG","${date}--> ${(date.time- parsedata.time)/(1000*3600*24)}")
+            return round((date.time- parsedata.time)/(1000*3600*24f))
+
+        }fun reverseDate(day:Long): Date? {
+            val basedata = "2022-02-10"
+
+            val format = SimpleDateFormat("yyyy-mm-dd")
+
+            val parsedata = format.parse(basedata)
+
+            parsedata.time=parsedata.time+(day*(1000*3600*24))
+            return parsedata
+
+        }
+
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,8 +82,8 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
     private fun init() {
 
-        var sleepstart =Date (TimeUnit.MINUTES.toMillis(round(60 * 13 +Sleep_data.avgsleepstart!!*10).toLong()))
-        var sleepend =Date (TimeUnit.MINUTES.toMillis(60 * 13+ round(Sleep_data.avgsleepend!!*10).toLong()))
+        var sleepstart =Date (TimeUnit.MINUTES.toMillis(round(60 * 9 +Sleep_data.avgsleepstart!!*10).toLong()))
+        var sleepend =Date (TimeUnit.MINUTES.toMillis(60 * 9+ round(Sleep_data.avgsleepend!!*10).toLong()))
         var sleeptime =Date (TimeUnit.MINUTES.toMillis(60*(-9)+ round(Sleep_data.avgsleeptime!!*10).toLong()))
 
         var formatMinutes = SimpleDateFormat("HH:mm")
@@ -93,8 +118,8 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         sleepmiddle /= 6
 
 
-        var startsleep= ((22+round(sleepmiddle-Stime))%24).toInt().toString()
-        var endsleep= ((22+round(sleepmiddle+Stime))%24).toInt().toString()
+        var startsleep= ((18+round(sleepmiddle-Stime))%24).toInt().toString()
+        var endsleep= ((18+round(sleepmiddle+Stime))%24).toInt().toString()
         if(startsleep =="0")
             startsleep="24"
         if(endsleep=="0")
@@ -126,21 +151,36 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         // 더미데이터
         sleepArray.sortBy { it.date }
 
+
         for(i in sleepArray){
-            chartData.add(Entry(i.date.time.toFloat(), (i.sleeptime/6).toFloat()))
+
+            var start=i.sleepstart/6.0f
+            var end=i.sleepend/6.0f
+            Log.d("TAG","에베베베$start,$end")
+            if((i.sleeptime/6)<=8 && (i.sleeptime/6)>=7){
+                chartData.add(CandleEntry(convertDays(i.date).toFloat(), end,start,end,start))
+
+            }else{
+                chartData.add(CandleEntry(convertDays(i.date).toFloat(), start,end,start,end))
+
+            }
         }
 
 
-        var set = LineDataSet(chartData, "set1")
-        set.setColor(Color.parseColor("#F08080"))
-        set.setCircleColor(Color.parseColor("#F08080"));
+        var set = CandleDataSet(chartData, "set1")
+        set.setShadowColor(getResources().getColor(R.color.gray));
+        set.setShadowWidth(0.8f)
+        set.decreasingColor=resources.getColor(R.color.badsleep)
+        set.setDecreasingPaintStyle(Paint.Style.FILL);
+        set.increasingColor=resources.getColor(R.color.goodsleep)
+        set.setIncreasingPaintStyle(Paint.Style.FILL);
+        set.neutralColor=resources.getColor(R.color.goodsleep)
 
-        lineDataSet.add(set)
-        lineData = LineData(lineDataSet)
+        candleData = CandleData(set)
+        candleData
 
-        set.lineWidth = 2F
+
         set.setDrawValues(false)
-        set.highLightColor = Color.TRANSPARENT
 //        set.mode = LineDataSet.Mode.STEPPED
 
     }
@@ -150,17 +190,28 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
             setDrawGridBackground(false)
             setBackgroundColor(Color.WHITE)
             legend.isEnabled = false
+            isHighlightPerTapEnabled=false
         }
+        chart.setHighlightPerDragEnabled(false);
+
+
+        chart.requestDisallowInterceptTouchEvent(true)
+
 
         val xAxis = chart.xAxis
-        xAxis.setDrawLabels(true)  // Label 표시 여부
 
-        xAxis.axisMaximum = (sleepArray[sleepArray.size-1].date.time + 1000*3600*24*1f).toFloat()
-        xAxis.axisMinimum = (sleepArray[0].date.time- 1000*3600*24*1f).toFloat()
-        xAxis.labelCount = 4
+        xAxis.setDrawGridLines(false) // disable x axis grid lines
+
+        xAxis.axisMaximum = chartData.get(chartData.size-1).x +1
+        xAxis.axisMinimum = chartData.get(0).x - 1
+        xAxis.labelCount = 5
         xAxis.valueFormatter = TimeAxisValueFormat()
+        xAxis.textSize=12f
+        xAxis.granularity=1f
+        xAxis.position=XAxis.XAxisPosition.BOTTOM_INSIDE
 
-        chart.setVisibleXRangeMinimum(1000*3600*24*6f)
+
+        chart.setVisibleXRangeMinimum(10f)
 
 
 
@@ -172,14 +223,15 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
         // 왼쪽 y축 값
         val yLAxis = chart.axisLeft
-        yLAxis.axisMaximum = 13f   // y축 최대값(고정)
+        yLAxis.axisMaximum = 20f   // y축 최대값(고정)
         yLAxis.axisMinimum = 0f  // y축 최소값(고정)
-
+        yLAxis.setDrawGridLines(true)
+        yLAxis.setDrawAxisLine(true)
 
         // 왼쪽 y축 도메인 변경
         val yAxisVals = ArrayList<String>()
-        for (i in 0..12){
-            yAxisVals.add(i.toString())
+        for (i in 0..20){
+            yAxisVals.add(((i+18)%24).toString())
         }
         yLAxis.valueFormatter = IndexAxisValueFormatter(yAxisVals)
         yLAxis.granularity = 1f
@@ -191,21 +243,23 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         yRAxis.setDrawGridLines(false)
         yRAxis.isEnabled=false
 
+
         // 마커 설정
 //        val marker = LineMarkerView(requireContext(), R.layout.graph_marker)
 //        marker.chartView = chart
 //        chart.marker = marker
 
-        chart.setVisibleYRange(13f,13f,YAxis.AxisDependency.LEFT)
+        chart.setVisibleYRange(20f,20f,YAxis.AxisDependency.LEFT)
 
         chart!!.description.isEnabled = false  // 설명
-        chart!!.data = lineData  // 데이터 설정
+        chart.data=candleData
 
         chart.moveViewToX(chartData[chartData.size-1].x)
 
 
-
         chart!!.invalidate()  // 다시 그리기
+
+
     }
 
     class TimeAxisValueFormat : IndexAxisValueFormatter() {
@@ -213,7 +267,10 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         override fun getFormattedValue(value: Float): String {
 
             // Float(min) -> Date
-            var timeMimutes = Date(value.toLong())
+
+
+
+            var timeMimutes = reverseDate(value.toLong())
             var formatMinutes = SimpleDateFormat("yy/MM/dd")
 
             return formatMinutes.format(timeMimutes)

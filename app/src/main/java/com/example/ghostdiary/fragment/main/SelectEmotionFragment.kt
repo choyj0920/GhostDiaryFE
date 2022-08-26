@@ -59,7 +59,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
                 sleepend= curDiary.sleepend!!
 
 
-                if(sleepstart>72 || sleepstart<0||sleepend>72 ||sleepend<0) {
+                if(sleepstart>120 || sleepstart<0||sleepend>120 ||sleepend<0) {
                     sleepstart = -1
                     sleepend = -1
                 }

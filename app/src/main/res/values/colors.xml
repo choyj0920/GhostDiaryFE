@@ -9,6 +9,8 @@
     <color name="pink">#F08080</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#B2B2B2</color>
+    <color name="goodsleep">#39C7E4</color>
+    <color name="badsleep">#E6A572</color>
     <color name="gray_overlay">#90B2B2B2</color>
     <color name="green">#81C147</color>
     <color name="red2">#ED1C24</color>

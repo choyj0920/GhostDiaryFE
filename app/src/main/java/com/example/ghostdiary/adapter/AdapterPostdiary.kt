@@ -1,15 +1,17 @@
 package com.example.ghostdiary.adapter
 
 import android.os.Parcelable
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.GhostsSelectDialog
-import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
@@ -20,7 +22,6 @@ import com.example.ghostdiary.fragment.main.SelectEmotionFragment
 import com.google.android.material.slider.LabelFormatter
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var sleepend :Int,val emotions: Array<String>, var selecttexts:ArrayList<ArrayList<emotionclass>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -50,6 +51,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
     class SleepView(binding: ItemSelectSleeptimeBinding) :RecyclerView.ViewHolder(binding.root) {
         var tv_title: TextView = binding.tvTitle
         var slider=binding.slider
+        var scrollView=binding.viewScroll
 
     }
 
@@ -128,13 +130,13 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             var yesterday = Calendar.getInstance()
             yesterday.time = parent.date
             yesterday.add(Calendar.DATE, -1)
-            yesterday.set(Calendar.HOUR_OF_DAY, 22)
+            yesterday.set(Calendar.HOUR_OF_DAY, 18)
             yesterday.set(Calendar.MINUTE,0)
 
             var timeformat = SimpleDateFormat("dd일 HH시 mm분")
 
 
-            holder.slider.values= listOf<Float>(0.0f,48.0f)
+            holder.slider.values= listOf<Float>(24.0f,72.0f)
             if(sleepstart !=-1 && sleepend != -1){
                 holder.slider.values= listOf<Float>(sleepstart.toFloat(),sleepend.toFloat())
             }
@@ -154,6 +156,25 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
                 parent.sleepend = values[1].toInt()
                 parent.sleepstart = values[0].toInt()
             }
+
+
+
+            holder.scrollView.post(Runnable { holder.scrollView.smoothScrollTo((holder.slider.values.average() *600 / 120).toInt(),0) })
+
+            holder.slider.setOnTouchListener(OnTouchListener { v, event ->
+                val action = event.action
+                when (action) {
+                    MotionEvent.ACTION_DOWN ->                 // Disallow ScrollView to intercept touch events.
+                        v.parent.requestDisallowInterceptTouchEvent(true)
+                    MotionEvent.ACTION_UP ->                 // Allow ScrollView to intercept touch events.
+                        v.parent.requestDisallowInterceptTouchEvent(false)
+                }
+                // Handle Seekbar touch events.
+                v.onTouchEvent(event)
+                true
+            })
+
+
         }
 
 
