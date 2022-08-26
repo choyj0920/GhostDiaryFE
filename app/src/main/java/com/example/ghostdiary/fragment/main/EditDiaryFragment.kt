@@ -167,8 +167,9 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
                     binding!!.layoutImage.visibility=View.VISIBLE
 
+
+
                     binding!!.btnDelimage.setOnClickListener {
-                        curDiary.image=null
                         binding!!.layoutImage.visibility=View.GONE
 
                     }

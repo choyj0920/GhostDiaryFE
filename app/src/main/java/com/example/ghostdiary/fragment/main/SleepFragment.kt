@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.alpha
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.ghostdiary.MainViewModel
@@ -156,31 +157,40 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
             var start=i.sleepstart/6.0f
             var end=i.sleepend/6.0f
+            var middle=round((start+end)/2)
             Log.d("TAG","에베베베$start,$end")
-            if((i.sleeptime/6)<=8 && (i.sleeptime/6)>=7){
-                chartData.add(CandleEntry(convertDays(i.date).toFloat(), end,start,end,start))
+            chartData.add(CandleEntry(convertDays(i.date).toFloat(), end,start,start,start,resources.getDrawable(R.drawable.circle_justside)))
 
-            }else{
-                chartData.add(CandleEntry(convertDays(i.date).toFloat(), start,end,start,end))
-
-            }
+//            if((i.sleeptime/6)<=8 && (i.sleeptime/6)>=7){
+//                chartData.add(CandleEntry(convertDays(i.date).toFloat(), end,start,end,start,resources.getDrawable(R.drawable.circle_justside)))
+//
+//            }else{
+//                chartData.add(CandleEntry(convertDays(i.date).toFloat(), start,end,start,end,resources.getDrawable(R.drawable.circle_justside)))
+//
+//            }
         }
 
 
         var set = CandleDataSet(chartData, "set1")
-        set.setShadowColor(getResources().getColor(R.color.gray));
-        set.setShadowWidth(0.8f)
+        set.setDrawIcons(true)
+
+        set.setShadowColor(getResources().getColor(R.color.pink));
+        set.setShadowWidth(5f)
+
+        set.color=resources.getColor(R.color.black)
+
+
         set.decreasingColor=resources.getColor(R.color.badsleep)
         set.setDecreasingPaintStyle(Paint.Style.FILL);
-        set.increasingColor=resources.getColor(R.color.goodsleep)
+        set.increasingColor=resources.getColor(R.color.white)
         set.setIncreasingPaintStyle(Paint.Style.FILL);
-        set.neutralColor=resources.getColor(R.color.goodsleep)
+        set.neutralColor=resources.getColor(R.color.white)
 
         candleData = CandleData(set)
-        candleData
 
 
         set.setDrawValues(false)
+        set.formLineWidth=0f
 //        set.mode = LineDataSet.Mode.STEPPED
 
     }
@@ -191,6 +201,7 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
             setBackgroundColor(Color.WHITE)
             legend.isEnabled = false
             isHighlightPerTapEnabled=false
+            legend.setDrawInside(true)
         }
         chart.setHighlightPerDragEnabled(false);
 
@@ -255,6 +266,7 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         chart.data=candleData
 
         chart.moveViewToX(chartData[chartData.size-1].x)
+
 
 
         chart!!.invalidate()  // 다시 그리기
