@@ -4,134 +4,110 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
+
+
+
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/layout_topmenu"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:animateLayoutChanges="true"
-            android:background="#ffffff"
-            android:elevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <ImageView
-                android:id="@+id/btn_sideomenu"
-                android:layout_width="22dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_menu"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="60dp">
 
             <TextView
-                android:id="@+id/tv_edittext"
+                android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:minWidth="40dp"
+                android:layout_height="wrap_content"
+                android:minWidth="100dp"
                 android:gravity="center"
-                android:layout_marginStart="10dp"
-                android:text="수정"
-                android:textColor="@color/pink"
-                android:visibility="gone"
+                android:text="Calendar"
+                android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_sideomenu" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="0dp"
+            <Switch
+                android:id="@+id/swtichbutton"
+                android:switchMinWidth="30dp"
+                android:layout_width="wrap_content"
+                android:layout_margin="10dp"
+                android:scaleY="1.5"
+                android:scaleX="1.5"
+
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="62dp"
-                android:layout_weight="1"
-                android:fontFamily="@font/roboto"
-                android:gravity="left"
-                android:text="2022.07.10"
-                android:textColor="#001018"
-                android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_sideomenu"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:thumb="@drawable/switch_thumb"
 
+                android:track="@drawable/track"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/title_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             <ImageView
-                android:id="@+id/btn_posttext"
-                android:visibility="gone"
-                android:layout_width="22dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_edit_post"
-                android:layout_marginEnd="19dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_postcheck"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:id="@+id/iv_cookies"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_cookies"
+                android:layout_marginEnd="8dp"
 
+                android:clickable="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_share"
+                />
 
             <ImageView
-                android:id="@+id/btn_postcheck"
-                android:visibility="gone"
-                android:layout_width="22dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/ic_check"
-                android:layout_marginEnd="19dp"
+                android:id="@+id/iv_share"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_share"
+                android:layout_marginEnd="8dp"
+                android:clickable="true"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/iv_setting"
+                />
+
+            <ImageView
+                android:id="@+id/iv_setting"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_setting"
+                android:layout_marginEnd="5dp"
+
+                android:clickable="true"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="vertical"
+            android:layout_weight="1">
 
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        </androidx.viewpager2.widget.ViewPager2>
 
-
-            <FrameLayout
-                android:id="@+id/container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
-
-            </FrameLayout>
-
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/navigationbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/vector_menuback"
-                app:itemIconTint="@drawable/menu_selector_color"
-                app:itemTextColor="@drawable/menu_selector_color"
-                app:menu="@menu/bottom_menu" />
-            <!--            app:labelVisibilityMode="labeled"-->
-
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation"

@@ -15,12 +15,15 @@ import android.widget.*
 
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterDay
+import com.example.ghostdiary.adapter.AdapterMonth
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
@@ -31,52 +34,37 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class CalendarFragment : Fragment() {
-    private lateinit var calendar :Calendar
     companion object {
         var curCalendar: CalendarFragment?=null
     }
-    private val viewModel: MainViewModel by activityViewModels()
+    val viewModel: MainViewModel by activityViewModels()
     var pageIndex = 0
-    lateinit var currentDate: Date
-    lateinit var dayList:MutableList<Date>
     lateinit var mContext: Context
-    lateinit var calendar_year_month_text: TextView
-    lateinit var calendar_view: RecyclerView
-    lateinit var calendarAdapter: AdapterDay
     private var binding: FragmentCalendarBinding? =null
     var emotionpostion:Int=-1
-    var isshow = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        calendar = viewModel.calendar
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
-        Log.d("TAG","current Date: ${calendar.get(Calendar.YEAR)}/${calendar.get(Calendar.MONTH)}/${calendar.get(Calendar.DAY_OF_MONTH)}")
 
-//        calendar.add(Calendar.MONTH, position - center)
 
         binding=FragmentCalendarBinding.inflate(inflater,container,false)
 
         initView()
         curCalendar =this
 
-        create_days()
         Util.setGlobalFont(binding!!.root)
+        val snap = PagerSnapHelper()
+        snap.attachToRecyclerView(binding!!.rvMonth)
         return binding!!.root
     }
 
-    fun addMonth(add:Int){
-
-        calendar.add(Calendar.MONTH,add)
-        create_days()
+    override fun onStart() {
+        super.onStart()
     }
 
-    fun setMonth(year:Int,month:Int){
-        calendar.set(year,month-1,1)
-        create_days()
-    }
+
 
 
     override fun onAttach(context: Context) {
@@ -86,10 +74,21 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    fun selecttoday_emotion(){
+    fun init_rv(){
+
+        val monthListManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        val monthListAdapter = AdapterMonth(this,viewModel)
+
+        binding!!.rvMonth.apply {
+            layoutManager = monthListManager
+            adapter = monthListAdapter
+            scrollToPosition(Int.MAX_VALUE/2)
+        }
+
 
 
     }
+
     fun init_spinner(){
         val array= arrayListOf<Int>(-1,0,1,2,3,4)
         val adapter=EmotionSpinnerAdapter(requireContext(),array)
@@ -100,7 +99,7 @@ class CalendarFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 emotionpostion=array.get(position)
 
-                updatecalendar()
+                init_rv()
 
             }
 
@@ -109,53 +108,9 @@ class CalendarFragment : Fragment() {
 
         }
 
-
-
     }
 
 
-
-    fun create_days(){
-        dayList = MutableList(6 * 7) { Date() }
-        var _calendar=Calendar.getInstance()
-        _calendar.set(calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DATE))
-        for(i in 0..5) {
-            for(k in 0..6) {
-                _calendar.add(Calendar.DAY_OF_MONTH, (1-_calendar.get(Calendar.DAY_OF_WEEK)) + k)
-                dayList[i * 7 + k] = _calendar.time
-            }
-            _calendar.add(Calendar.WEEK_OF_MONTH, 1)
-            Log.d("TAG","${Calendar.WEEK_OF_MONTH} , ${1}")
-
-        }
-        Log.d("TAG","${dayList}")
-
-
-
-        updatecalendar()
-
-    }
-    fun addDiary(newDiary:Day_Diary){
-        viewModel.addDiary(newDiary)
-        updatecalendar()
-    }
-    fun updatecalendar(){
-        var transFormat = SimpleDateFormat("yyyy/MM")
-        var to = transFormat.format(calendar.time)
-        calendar_year_month_text.setText(to)
-        val tempMonth = calendar.get(Calendar.MONTH)
-
-        val dayListManager = GridLayoutManager(context, 7)
-        val dayListAdapter = AdapterDay(this,tempMonth, dayList, viewModel.getEmotionArray())
-
-        calendarAdapter=dayListAdapter
-
-
-        calendar_view.apply {
-            layoutManager=dayListManager
-            adapter=dayListAdapter
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -171,6 +126,7 @@ class CalendarFragment : Fragment() {
 
     fun initmonthpicker(){
         //  날짜 dialog
+        /*
         binding!!.tvDate.setOnClickListener {
 
             val edialog : LayoutInflater = LayoutInflater.from(context)
@@ -221,31 +177,15 @@ class CalendarFragment : Fragment() {
             dialog.show()
 
 
-        }
+        }*/
     }
 
     fun initView() {
 
-//        emotionImageviews= arrayOf(binding!!.ivEmotionToday,binding!!.ivEmotion1,binding!!.ivEmotion2,binding!!.ivEmotion3,binding!!.ivEmotion4)
-        pageIndex -= (Int.MAX_VALUE / 2)
-        //Log.e(TAG, "Calender Index: $pageIndex")
-        calendar_year_month_text = binding!!.tvDate
-        calendar_view = binding!!.calendar
-        // 날짜 적용
-        val formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd")
-        val datetime =LocalDateTime.now().format(formatter)
-
-        calendar_year_month_text.setText(datetime)
-
-        binding!!.btnLastmonth.setOnClickListener {
-            addMonth(-1)
-        }
-        binding!!.btnNextmonth.setOnClickListener {
-            addMonth(1)
-        }
         initmonthpicker()
 
         init_spinner()
+        init_rv()
 
 
     }
@@ -262,7 +202,6 @@ class CalendarFragment : Fragment() {
     }
 
     fun down_post(){
-
 
     }
     fun selectimage(index:Int): Int {

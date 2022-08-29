@@ -102,7 +102,7 @@ class MemoFragment : Fragment() {
             holder.ghostimage.setImageResource(Day_Diary.int_to_image.get(folders[position].ghost_num))
 
             holder.ghostimage.setOnClickListener {
-                MainActivity.mainactivity.containerChange(MemoSelectFragment(folders[position]))
+//                MainActivity.mainactivity.containerChange(MemoSelectFragment(folders[position]))
 
             }
 

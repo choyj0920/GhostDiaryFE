@@ -29,28 +29,22 @@ class EmotionSpinnerAdapter(private val context: Context,val emotionarray: Array
         var binding = ItemSpinnerEmotionBinding.inflate(LayoutInflater.from(context), p2, false)
         val rootview: View = binding.root
 
-        if (emotionarray.get(position) == -1) {
-            binding.ivSpinnerItem.visibility = View.GONE
-            binding.tvSpinnerItem.visibility = View.VISIBLE
-            binding.tvSpinnerItem.text = "분류"
-        } else {
-            binding.ivSpinnerItem.visibility = View.VISIBLE
-            binding.tvSpinnerItem.visibility = View.GONE
-            binding.ivSpinnerItem.setImageResource(
-                when (emotionarray.get(position)) {
-                    0 -> R.drawable.ghost_00_verygood
-                    1 -> R.drawable.ghost_01_good
-                    2 -> R.drawable.ghost_02_normal
-                    3 -> R.drawable.ghost_03_bad
-                    4 -> R.drawable.ghost_04_verybad
+        binding.ivSpinnerItem.visibility = View.VISIBLE
+        binding.tvSpinnerItem.visibility = View.GONE
+        binding.ivSpinnerItem.setImageResource(
+            when (emotionarray.get(position)) {
+                -1 ->R.drawable.ic_category
+                0 -> R.drawable.ghost_00_verygood
+                1 -> R.drawable.ghost_01_good
+                2 -> R.drawable.ghost_02_normal
+                3 -> R.drawable.ghost_03_bad
+                4 -> R.drawable.ghost_04_verybad
 
-                    else -> {
-                        R.drawable.ic_ghost
-                    }
-                } as Int
-            )
-
-        }
+                else -> {
+                    R.drawable.ic_ghost
+                }
+            } as Int
+        )
         Util.setGlobalFont(rootview!!)
 
         return rootview

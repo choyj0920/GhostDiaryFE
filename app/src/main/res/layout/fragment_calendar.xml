@@ -6,314 +6,84 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--헤더-->
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_month"
         android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="#ffffff"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_marginTop="10dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="50dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Spinner
+            android:id="@+id/spinner_emotion"
+            android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:animateLayoutChanges="true"
-            android:background="#ffffff">
+            android:layout_margin="5dp"
+            android:background="@drawable/border_white"
+
+            android:elevation="5dp"
+            android:gravity="center"
+            android:popupBackground="@drawable/border_white"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/iv_post"
+            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/iv_post"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/border_black"
+            android:elevation="5dp"
+            android:padding="15dp"
+
+            android:src="@drawable/ic_plus"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/iv_analyze"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/border_white"
+            android:elevation="5dp"
+
+            android:padding="10dp"
+            android:src="@drawable/ic_graph"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_post"
+            app:layout_constraintTop_toTopOf="parent"
+
+            tools:ignore="SpeakableTextPresentCheck" />
 
 
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="2022/07"
-                android:textStyle="bold"
-                android:lineSpacingExtra="5sp"
-                android:textColor="#001018"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_marginEnd="18dp"
-                android:id="@+id/btn_lastmonth"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:scaleType="center"
-                android:rotation="180"
-                android:layout_marginStart="7dp"
-                android:src="@drawable/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/btn_nextmonth"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/btn_nextmonth"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:scaleType="center"
-                android:layout_marginStart="7dp"
-                android:src="@drawable/ic_arrow"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/spinner_emotion"
-                android:layout_width="85dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-
-                android:background="@drawable/bg_spinner_emotion"
-                android:gravity="center"
-                android:popupBackground="@drawable/bg_spinner_emotion"
-                android:spinnerMode="dropdown"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-
-                tools:ignore="SpeakableTextPresentCheck" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="25dp"
-            android:layout_marginBottom="8dp"
-            android:background="#ffffff"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="일"
-
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="월"
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="화"
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="수"
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="목"
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="금"
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="토"
-                android:textColor="@color/gray"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-
-            android:id="@+id/calendar"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:background="@color/white" />
-
-
-
-    </LinearLayout>
-
-    <!--요일-->
-    <!--달력뷰-->
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-<!--안쓰는 popuplayout-->
-
-<!--<androidx.constraintlayout.widget.ConstraintLayout-->
-<!--android:id="@+id/popup_layout"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="match_parent"-->
-<!--android:layout_weight="1"-->
-<!--android:visibility="gone"-->
-<!--app:layout_constraintBottom_toBottomOf="parent"-->
-<!--app:layout_constraintEnd_toEndOf="parent"-->
-<!--app:layout_constraintStart_toStartOf="parent">-->
-
-<!--<LinearLayout-->
-<!--    android:layout_width="match_parent"-->
-<!--    android:layout_height="wrap_content"-->
-<!--    android:layout_marginLeft="1dp"-->
-<!--    android:layout_marginTop="10dp"-->
-<!--    android:layout_marginRight="1dp"-->
-<!--    android:background="@drawable/googlebackground"-->
-<!--    android:elevation="16dp"-->
-<!--    android:orientation="vertical"-->
-<!--    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--    app:layout_constraintEnd_toEndOf="parent"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-
-<!--    >-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:layout_marginTop="30dp">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_popup_date"-->
-<!--            android:layout_width="130dp"-->
-<!--            android:layout_height="23dp"-->
-
-<!--            android:layout_marginStart="34dp"-->
-<!--            android:text="December 2022"-->
-<!--            android:textColor="@color/black"-->
-<!--            android:textSize="15sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/imageView4"-->
-<!--            android:layout_width="30dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:layout_marginEnd="31dp"-->
-<!--            android:rotation="90"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:srcCompat="@drawable/ic_sideoption" />-->
-
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:layout_marginLeft="30dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginRight="30dp"-->
-<!--        android:layout_marginBottom="10dp">-->
-
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_emotion_today"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginRight="15dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            app:srcCompat="@drawable/ghost_verygood" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_emotion_1"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            app:srcCompat="@drawable/ic_blankghost" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_emotion_2"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            app:srcCompat="@drawable/ic_blankghost" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_emotion_3"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            app:srcCompat="@drawable/ic_blankghost" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_emotion_4"-->
-<!--            android:layout_width="50dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginLeft="10dp"-->
-<!--            android:layout_weight="1"-->
-<!--            android:scaleType="fitCenter"-->
-<!--            app:srcCompat="@drawable/ic_blankghost" />-->
-
-
-<!--    </LinearLayout>-->
-
-<!--    <TextView-->
-
-<!--        android:id="@+id/tv_popup_text"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:layout_marginLeft="40dp"-->
-<!--        android:layout_marginRight="40dp"-->
-
-<!--        android:text="안녕하세요"-->
-
-<!--        android:textColor="@color/black"></TextView>-->
-
-
-<!--</LinearLayout>-->
-
-
-<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

@@ -47,7 +47,7 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
         binding!!.tvName.text=memoFolder.folder_name
 
         binding!!.ivPost.setOnClickListener {
-            MainActivity.mainactivity.containerChange(EditMemoFragment( this,memoFolder.folder_id,null))
+//            MainActivity.mainactivity.containerChange(EditMemoFragment( this,memoFolder.folder_id,null))
 
         }
 
@@ -128,7 +128,7 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
                 popupMenu.setOnMenuItemClickListener { item  ->
                     when(item?.itemId){
                         R.id.menu_edit->{
-                            MainActivity.mainactivity.containerChange(EditMemoFragment(this@MemoSelectFragment,memo.folder_id,memo))
+//                            MainActivity.mainactivity.containerChange(EditMemoFragment(this@MemoSelectFragment,memo.folder_id,memo))
 
 
                         }

@@ -86,14 +86,14 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
         // 취소 버튼
         binding!!.btnCancel.setOnClickListener {
             if(parent is RecordFragment){
-                MainActivity.mainactivity.change_record()
+//                MainActivity.mainactivity.change_record()
 
             }else if (parent is CalendarFragment){
-                MainActivity.mainactivity.change_record()
+//                MainActivity.mainactivity.change_record()
 
             }else if(parent is SelectEmotionFragment){
                 curDiary.image=null
-                MainActivity.mainactivity.change_to_selectemotion(date,curDiary)
+//                MainActivity.mainactivity.change_to_selectemotion(date,curDiary)
 
             }
         }
@@ -112,12 +112,12 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
             if(parent is CalendarFragment || parent is SelectEmotionFragment){
                 addDiary(curDiary)
-                MainActivity.mainactivity.change_calendar()
+//                MainActivity.mainactivity.change_calendar()
 
             }
             else if(parent is RecordFragment){
                 addDiary(curDiary)
-                MainActivity.mainactivity.change_record()
+//                MainActivity.mainactivity.change_record()
 
 
             }
@@ -368,9 +368,6 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
     }
 
     fun postDiary(calendarFragment: CalendarFragment) {
-
-        calendarFragment.addDiary(curDiary)
-
 
 
     }

@@ -47,7 +47,7 @@ class ClinicFragment : Fragment() {
                 MainActivity.mainactivity.showmessage("분석에 필요한 감정 수가 적습니다!!\n정확하지 않을 수 있습니다.")
 
             }
-            MainActivity.mainactivity.containerChange(AnalysisFragment())
+//            MainActivity.mainactivity.containerChange(AnalysisFragment())
         }
         binding!!.btnSleep.setOnClickListener{
             var array =viewModel.getsleepdataArray()
@@ -59,7 +59,7 @@ class ClinicFragment : Fragment() {
 
             }
 
-            MainActivity.mainactivity.containerChange(SleepFragment(array))
+//            MainActivity.mainactivity.containerChange(SleepFragment(array))
 
         }
 

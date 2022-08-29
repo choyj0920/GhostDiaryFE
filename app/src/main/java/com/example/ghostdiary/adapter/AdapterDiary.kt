@@ -62,7 +62,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
 
         var diary=diaryarr[position]
         holder.layout.setOnClickListener {
-            MainActivity.mainactivity.change_to_editDiary(diary.date,iseditmode = false)
+//            MainActivity.mainactivity.change_to_editDiary(diary.date,iseditmode = false)
         }
 
 
@@ -112,7 +112,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
              popupMenu.setOnMenuItemClickListener { item  ->
                 when(item?.itemId){
                     R.id.menu_edit->{
-                        MainActivity.mainactivity.change_to_editDiary(diary.date)
+//                        MainActivity.mainactivity.change_to_editDiary(diary.date)
                     }
                     R.id.menu_delete->{
                         parent.deleteDiary(diary.date)

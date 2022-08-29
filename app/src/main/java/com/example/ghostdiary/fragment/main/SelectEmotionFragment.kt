@@ -148,7 +148,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
         curDiary= Day_Diary(date, todayemotion,emotionselect[1],emotionselect[2],emotionselect[3], emotionselect[4],this.sleepstart,this.sleepend,curDiary.text, curDiary.image)
 
         if(uptofragment is CalendarFragment){
-            uptofragment.addDiary(curDiary)
+//            uptofragment.addDiary(curDiary)
 
         }else if(uptofragment is RecordFragment){
             uptofragment.addDiary(curDiary)
