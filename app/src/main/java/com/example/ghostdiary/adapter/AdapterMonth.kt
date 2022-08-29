@@ -41,7 +41,7 @@ class AdapterMonth(var parent: CalendarFragment,val viewmodel : MainViewModel): 
     }
 
     override fun onBindViewHolder(holder: MonthView, position: Int) {
-        calendar.time = Date()
+        calendar.time = parent.lastcalendar.time
         calendar.set(Calendar.DAY_OF_MONTH, 1)
         calendar.add(Calendar.MONTH, position - center)
 

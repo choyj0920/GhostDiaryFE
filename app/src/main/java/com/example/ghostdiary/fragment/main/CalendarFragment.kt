@@ -7,11 +7,13 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.annotation.NonNull
 
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -27,6 +29,7 @@ import com.example.ghostdiary.adapter.AdapterMonth
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
+import com.example.ghostdiary.databinding.ViewGhostspinnerBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -42,6 +45,9 @@ class CalendarFragment : Fragment() {
     lateinit var mContext: Context
     private var binding: FragmentCalendarBinding? =null
     var emotionpostion:Int=-1
+    val snap = PagerSnapHelper()
+    var lastcalendar:Calendar=Calendar.getInstance()
+    var curpo:Int=0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,12 +61,14 @@ class CalendarFragment : Fragment() {
         curCalendar =this
 
         Util.setGlobalFont(binding!!.root)
-        val snap = PagerSnapHelper()
+
         snap.attachToRecyclerView(binding!!.rvMonth)
         return binding!!.root
     }
 
     override fun onStart() {
+        MainActivity.mainactivity.switchHidetopmenu(false)
+
         super.onStart()
     }
 
@@ -75,6 +83,35 @@ class CalendarFragment : Fragment() {
     }
 
     fun init_rv(){
+
+
+        val onScrollListener = object:RecyclerView.OnScrollListener() {
+            override fun onScrolled(@NonNull recyclerView:RecyclerView, dx:Int, dy:Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (recyclerView.layoutManager != null) {
+                    val view = snap.findSnapView(recyclerView.layoutManager)!!
+                    val position = recyclerView.layoutManager!!.getPosition(view)
+                    if (curpo != position) {
+                        curpo = position
+                        var center=Int.MAX_VALUE / 2
+                        var newcal=Calendar.getInstance()
+                        newcal.time=lastcalendar.time
+                        newcal.add(Calendar.MONTH, curpo - center)
+                        viewModel.calendar =newcal
+                    }
+                }
+
+            }
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+
+            }
+        }
+        binding!!.rvMonth.let {
+            it.clearOnScrollListeners()
+            it.addOnScrollListener(onScrollListener)
+        }
+        lastcalendar.time=viewModel.calendar.time
 
         val monthListManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         val monthListAdapter = AdapterMonth(this,viewModel)
@@ -91,9 +128,10 @@ class CalendarFragment : Fragment() {
 
     fun init_spinner(){
         val array= arrayListOf<Int>(-1,0,1,2,3,4)
-        val adapter=EmotionSpinnerAdapter(requireContext(),array)
+        val adapter=EmotionSpinnerAdapter(MainActivity.mainactivity,array)
 
         binding!!.spinnerEmotion.adapter=adapter
+
 
         binding!!.spinnerEmotion.onItemSelectedListener= object: AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {

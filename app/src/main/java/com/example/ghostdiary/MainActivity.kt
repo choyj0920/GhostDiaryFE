@@ -8,8 +8,10 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
+import android.view.View
 import android.view.View.OnTouchListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +23,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
 import androidx.viewpager2.widget.ViewPager2
 import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.example.ghostdiary.databinding.ActivityMainBinding
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         var fontname:Array<String> = arrayOf("roboto","나눔바른펜","나눔 손글씨펜","d2코딩","BM연성","고도","고도마음","이롭게바탕","미생","야체")
     }
     var lastTimeBackPressed : Long = 0
-
+    lateinit var pageCallBack: ViewPager2.OnPageChangeCallback
 
 
     lateinit var viewModel: MainViewModel
@@ -75,7 +78,6 @@ class MainActivity : AppCompatActivity() {
 
         init_view()
 
-
         setContentView(binding.root)
         setfont()
 
@@ -84,6 +86,24 @@ class MainActivity : AppCompatActivity() {
         val pagerAdapter = CustomPagerAdapter(this,isCalendar)
         viewPager.adapter = pagerAdapter
         viewPager.apply {  }
+        update_topmenu(isCalendar)
+        if(isCalendar){
+            pageCallBack = object: ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    // 특정 페이지가 선택될 때 마다 여기가 호출됩니다.
+                    // position 에는 현재 페이지 index - 첫페이지면 0
+                    when(position){
+                        0-> calendarFragment.init_rv()
+                        1-> recordFragment.update()
+                    }
+                }
+            }
+            viewPager.registerOnPageChangeCallback(pageCallBack)
+        }else{
+            viewPager.unregisterOnPageChangeCallback(pageCallBack)
+        }
+
+
     }
 
     fun init_view(){
@@ -153,7 +173,7 @@ class MainActivity : AppCompatActivity() {
                     v.setBackgroundColor(Color.parseColor("#00000000"))
                     if(v.id ==binding.ivSetting.id){
 
-                        binding.drawerlayout.openDrawer(GravityCompat.START)
+                        binding.drawerlayout.openDrawer(GravityCompat.END)
                     }
                 }
             }
@@ -220,14 +240,31 @@ class MainActivity : AppCompatActivity() {
             binding!!.titleTv.text="Calendar"
             if(binding.swtichbutton.isChecked)
                 binding.swtichbutton.isChecked=false
+            binding.ivCookies.visibility=View.VISIBLE
+            binding.ivSetting.visibility=View.VISIBLE
+            binding.ivShare.visibility=View.VISIBLE
+            binding.ivMemoplus.visibility=View.GONE
         }else{
             binding!!.titleTv.text="Memo"
             if(!binding.swtichbutton.isChecked)
                 binding.swtichbutton.isChecked=true
+            binding.ivCookies.visibility=View.GONE
+            binding.ivSetting.visibility=View.GONE
+            binding.ivShare.visibility=View.GONE
+            binding.ivMemoplus.visibility=View.VISIBLE
+            binding.ivMemoplus.setOnClickListener {
+                memoFragment
+            }
 
         }
 
 
+    }
+    fun switchHidetopmenu(ishide:Boolean){
+        if(ishide)
+            binding.layoutTopmenu.visibility=View.GONE
+        else
+            binding.layoutTopmenu.visibility=View.VISIBLE
     }
 
     override fun onStart() {
@@ -264,8 +301,8 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        if(binding.drawerlayout.isDrawerOpen(GravityCompat.START)){
-            binding.drawerlayout.closeDrawer(GravityCompat.START)
+        if(binding.drawerlayout.isDrawerOpen(GravityCompat.END)){
+            binding.drawerlayout.closeDrawer(GravityCompat.END)
             return
         }
         else {
@@ -300,7 +337,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    private inner class CustomPagerAdapter(fa: FragmentActivity,var isCalendar: Boolean) : FragmentStateAdapter(fa) {
+    private inner class CustomPagerAdapter(var fa: FragmentActivity,var isCalendar: Boolean) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int {
             if (isCalendar)
                 return 2
@@ -308,11 +345,34 @@ class MainActivity : AppCompatActivity() {
                 return 1
         }
 
+        override fun onBindViewHolder(
+            holder: FragmentViewHolder,
+            position: Int,
+            payloads: MutableList<Any>
+        ) {
+            val fragment  =  fa.supportFragmentManager.findFragmentByTag("f$position")
+            fragment?.let{
+                if( it is CalendarFragment){
+                    it.initView()
+                }else if(it is RecordFragment){
+                    Log.d("TAG","확인 vie호출")
+                    it.update()
+                }
+            }
+
+            super.onBindViewHolder(holder, position, payloads)
+        }
+
         override fun createFragment(position: Int): Fragment {
             if (isCalendar) {
                 when (position) {
-                    0 -> return calendarFragment
-                    else -> return recordFragment
+                    0 -> {
+                        return calendarFragment
+                    }
+                    else ->{
+                        return recordFragment
+                    }
+
                 }
             } else {
                 return memoFragment

@@ -39,6 +39,12 @@ class MemoFragment : Fragment() {
         return binding!!.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        init()
+        Util.setGlobalFont(binding!!.root)
+    }
+
     private fun init() {
 
         binding!!.ivFolderadd.setOnClickListener {

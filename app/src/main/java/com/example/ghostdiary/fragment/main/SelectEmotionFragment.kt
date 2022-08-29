@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,7 +15,7 @@ import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterPostdiary
-import com.example.ghostdiary.databinding.FragmentSelectEmotionBinding
+import com.example.ghostdiary.databinding.ActivitySelectEmotionBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
 import java.text.SimpleDateFormat
@@ -22,9 +23,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Diary?=null ,var editmode:Boolean=false) : Fragment() {
-
-    private val viewModel: MainViewModel by activityViewModels()
+class SelectEmotionFragment(val viewModel :MainViewModel,var date: Date,var editmode:Boolean=false) : AppCompatActivity () {
 
     lateinit var emotions:Array<String>
     lateinit var emotionselect :ArrayList<ArrayList<emotionclass>>
@@ -35,24 +34,20 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
     var sleepstart:Int =-1
     var sleepend:Int =-1
 
-    private var binding:FragmentSelectEmotionBinding ?=null
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    private lateinit var binding:ActivitySelectEmotionBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
 
-        binding=FragmentSelectEmotionBinding.inflate(inflater,container,false)
-        rv_linearlayoutmanger=LinearLayoutManager(this.context)
+        binding=ActivitySelectEmotionBinding.inflate(layoutInflater)
+        rv_linearlayoutmanger=LinearLayoutManager(this)
+        AdapterPostdiary.init_value()
+
 
         var formatDate = SimpleDateFormat("yyyy-MM-dd")
         var strdate = formatDate.format(date)
-        if(diary!=null || viewModel.getEmotionArray((requireContext())).contains(strdate)){
-            if(diary!=null){
-                curDiary=diary!!
-            }else{
-                curDiary=viewModel.getEmotionArray(null)[strdate]!!
-            }
+        if(viewModel.getEmotionArray(this).contains(strdate)){
+            curDiary=viewModel.getEmotionArray(null)[strdate]!!
 
             if(curDiary.sleepstart != null && curDiary.sleepend !=null){
                 sleepstart=curDiary.sleepstart!!
@@ -75,8 +70,9 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
 
 
         initdata()
+        setContentView(binding.root)
         Util.setGlobalFont(binding!!.root)
-        return binding!!.root
+
 
     }
     fun switcheditmode(isedit:Boolean){
@@ -98,11 +94,7 @@ class SelectEmotionFragment(var parent:Fragment,var date: Date,var diary:Day_Dia
         }.timeInMillis
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        AdapterPostdiary.init_value()
 
-    }
 
     fun initdata(){
         emotions= Day_Diary.emotionname

@@ -34,6 +34,8 @@
             android:layout_height="50dp"
             android:layout_margin="5dp"
             android:background="@drawable/border_white"
+            android:popupElevation="5dp"
+
 
             android:elevation="5dp"
             android:gravity="center"

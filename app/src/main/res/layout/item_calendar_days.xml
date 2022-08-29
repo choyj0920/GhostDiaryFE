@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_gravity="center"
 
-    android:layout_height="80dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/iv_date"
@@ -19,17 +19,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rectangle" />
+        app:srcCompat="@drawable/ic_ghost_default" />
 
     <TextView
         android:id="@+id/tv_date"
         android:layout_width="32dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_height="0dp"
         android:gravity="center"
         android:text="30"
-        android:textColor="@color/gray"
-        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

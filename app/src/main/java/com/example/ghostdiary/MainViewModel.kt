@@ -12,6 +12,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
+
 class MainViewModel(): ViewModel() {
     var ishintinvisible: Boolean = false
     var calendar =Calendar.getInstance()

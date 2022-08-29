@@ -42,9 +42,9 @@ class RecordFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        calendar=viewModel.recordcalendar
-        calendar.set(Calendar.DAY_OF_MONTH, 1)
+
         binding= FragmentRecordBinding.inflate(inflater,container,false)
+        calendar=viewModel.calendar
 
         init()
         Util.setGlobalFont(binding!!.root)
@@ -52,10 +52,20 @@ class RecordFragment : Fragment() {
         return binding!!.root
     }
 
+    override fun onStart() {
+        super.onStart()
+        calendar=viewModel.calendar
+
+        update()
+        Util.setGlobalFont(binding!!.root)
+
+    }
+
+
     fun init(){
 
         var transFormat = SimpleDateFormat("yyyy/MM")
-        var to = transFormat.format(Calendar.getInstance().time)
+        var to = transFormat.format(calendar.time)
         binding!!.tvDate.setText(to)
 
         binding!!.btnLastmonth.setOnClickListener {
@@ -144,18 +154,7 @@ class RecordFragment : Fragment() {
 
     fun update(){
 
-        if(calendar.get(Calendar.MONTH) == Calendar.getInstance().get(Calendar.MONTH)){
-            /*
-            binding!!.ivPost.visibility=View.VISIBLE
-            binding!!.ivPost.setOnClickListener {
-                MainActivity.mainactivity.change_to_editDiary(date = Calendar.getInstance().time)
-            }*/
-            binding!!.ivPost.visibility=View.GONE
-
-        }else{
-            binding!!.ivPost.visibility=View.GONE
-
-        }
+        calendar=viewModel.calendar
 
         var transFormat1 = SimpleDateFormat("yyyy/MM")
         var to1 = transFormat1.format(calendar.time)
