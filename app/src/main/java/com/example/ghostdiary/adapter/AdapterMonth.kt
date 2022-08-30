@@ -10,13 +10,11 @@ import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemMonthBinding
-import com.example.ghostdiary.fragment.main.CalendarFragment
+import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
-class AdapterMonth(var parent: CalendarFragment,val viewmodel : MainViewModel): RecyclerView.Adapter<AdapterMonth.MonthView>() {
+class AdapterMonth(var parent: CalendarFragment, val viewmodel : MainViewModel): RecyclerView.Adapter<AdapterMonth.MonthView>() {
     val center = Int.MAX_VALUE / 2
     private var calendar =Calendar.getInstance()
 

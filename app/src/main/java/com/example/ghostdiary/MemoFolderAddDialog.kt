@@ -16,16 +16,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.adapter.AdapterPostdiary
 
 import com.example.ghostdiary.databinding.DialogGhostsSelectBinding
+import com.example.ghostdiary.databinding.DialogMemoFolderAddBinding
 import com.example.ghostdiary.databinding.ItemGhostBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.Memo_Folder
 import com.example.ghostdiary.dataclass.emotionclass
 import com.example.ghostdiary.fragment.main.MemoFragment
 
-class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, var emotionlist: ArrayList<emotionclass>?, var memoparent:MemoFragment?=null): DialogFragment() {
+class MemoFolderAddDialog(var memoparent:MemoFragment?=null): DialogFragment() {
 
     // 뷰 바인딩 정의
-    private var _binding: DialogGhostsSelectBinding? = null
+    private var _binding: DialogMemoFolderAddBinding? = null
     private val binding get() = _binding!!
 
     private var selectghost:Int=-1
@@ -37,7 +38,7 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = DialogGhostsSelectBinding.inflate(inflater, container, false)
+        _binding = DialogMemoFolderAddBinding.inflate(inflater, container, false)
         val view = binding.root
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
@@ -51,92 +52,53 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
     }
 
     fun initview(){
-        if(adpaterparent!=null){
-            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            binding.inputGhostname.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
+        // 메모에서
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+      
 
+        binding.inputGhostname.hint="폴더 명을 입력하세요"
 
-            binding.tvOk.setOnClickListener {
+        binding.tvOk.setOnClickListener {
+            if(selectghost==-1){
+                MainActivity.mainactivity.showmessage("폴더 아이콘을 골라주세요.")
+                return@setOnClickListener
+            }
+            var ghostname=binding.inputGhostname.text.toString()
 
-                var ghostname=binding.inputGhostname.text.toString()
-                ghostname=ghostname.trim()
-                if(selectghost==-1){
-                    MainActivity.mainactivity.showmessage("유령을 골라주세요.")
-                    return@setOnClickListener
-                }
-                if(ghostname==""){
-                    MainActivity.mainactivity.showmessage("유령의 이름을 입력해주세요.")
-                    return@setOnClickListener
-                }
-                emotionlist!!.add(emotionclass(ghostname,selectghost,false))
-                dismiss()
-                adpaterparent!!.update(curpos,isadd = true)
+            if(ghostname==""){
+                MainActivity.mainactivity.showmessage("폴더의 이름을 입력해주세요.")
+                return@setOnClickListener
+            }
+            var index=MainActivity.mainactivity.viewModel.getdb(null).insertMemo_folder(selectghost,ghostname)
+            if(index==-1){
+                MainActivity.mainactivity.showmessage("오류로 폴더가 추가되지 않았습니다.")
+            }else{
+                memoparent!!.folderList.add(Memo_Folder(index,ghostname,selectghost))
+                memoparent!!.update()
 
             }
-            binding.inputGhostname.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    binding.tvTextcount.text= "${binding.inputGhostname.text.toString().length}/10"
-
-                }
-            })
-
-            Update_rv()
-        }else if(memoparent !=null){ // 메모에서
-            dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            binding.tvTitle.text="메모 폴더 추가"
-
-            binding.inputGhostname.hint="폴더 이름을 입력하세요"
-
-            binding.tvOk.setOnClickListener {
-                if(selectghost==-1){
-                    MainActivity.mainactivity.showmessage("폴더 아이콘을 골라주세요.")
-                    return@setOnClickListener
-                }
-                var ghostname=binding.inputGhostname.text.toString()
-
-                if(ghostname==""){
-                    MainActivity.mainactivity.showmessage("폴더의 이름을 입력해주세요.")
-                    return@setOnClickListener
-                }
-                var index=MainActivity.mainactivity.viewModel.getdb(null).insertMemo_folder(selectghost,ghostname)
-                if(index==-1){
-                    MainActivity.mainactivity.showmessage("오류로 폴더가 추가되지 않았습니다.")
-                }else{
-                    memoparent!!.folderList.add(Memo_Folder(index,ghostname,selectghost))
-                    memoparent!!.update()
-
-                }
-                dismiss()
-
-
-            }
-
-
-            binding.inputGhostname.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
-            binding.tvTextcount.text= "${binding.inputGhostname.text.toString().length}/10"
-
-            binding.inputGhostname.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                }
-
-                override fun afterTextChanged(p0: Editable?) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    binding.tvTextcount.text= "${binding.inputGhostname.text.toString().length}/10"
-
-                }
-            })
-
-            Update_rv()
+            dismiss()
 
         }
+
+
+        binding.inputGhostname.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
+        binding.tvTextcount.text= "${binding.inputGhostname.text.toString().length}/10"
+
+        binding.inputGhostname.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                binding.tvTextcount.text= "${binding.inputGhostname.text.toString().length}/10"
+
+            }
+        })
+
+        Update_rv()
 
 
 
@@ -171,7 +133,7 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
         _binding = null
     }
 
-    class ghostadapter(var parent:GhostsSelectDialog, var emotions:List<Int>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    class ghostadapter(var parent:MemoFolderAddDialog, var emotions:List<Int>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
         class GhostView(binding: ItemGhostBinding) : RecyclerView.ViewHolder(binding.root) {

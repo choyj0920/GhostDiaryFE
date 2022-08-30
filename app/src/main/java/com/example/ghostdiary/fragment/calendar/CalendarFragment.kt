@@ -1,13 +1,8 @@
-package com.example.ghostdiary.fragment.main
-
-import android.app.AlertDialog
+package com.example.ghostdiary.fragment.calendar
 
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,24 +11,14 @@ import android.widget.*
 import androidx.annotation.NonNull
 
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.MainActivity
-import com.example.ghostdiary.MainViewModel
-import com.example.ghostdiary.R
-import com.example.ghostdiary.Util
-import com.example.ghostdiary.adapter.AdapterDay
+import com.example.ghostdiary.*
 import com.example.ghostdiary.adapter.AdapterMonth
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
-import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
-import com.example.ghostdiary.databinding.ViewGhostspinnerBinding
-import com.example.ghostdiary.dataclass.Day_Diary
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import com.example.ghostdiary.fragment.postdiary.SelectEmotionFragment
 import java.util.*
 
 class CalendarFragment : Fragment() {
@@ -68,7 +53,7 @@ class CalendarFragment : Fragment() {
 
     override fun onStart() {
         MainActivity.mainactivity.switchHidetopmenu(false)
-
+        init_rv()
         super.onStart()
     }
 
@@ -100,7 +85,6 @@ class CalendarFragment : Fragment() {
                         viewModel.calendar =newcal
                     }
                 }
-
             }
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
@@ -224,6 +208,12 @@ class CalendarFragment : Fragment() {
 
         init_spinner()
         init_rv()
+        binding!!.ivPost.setOnClickListener{
+            val intent = Intent(requireContext(), PostDiaryActivity::class.java)
+            intent.putExtra("date",Calendar.getInstance().time.time)
+            intent.putExtra("firsttext",false)
+            startActivity(intent)
+        }
 
 
     }

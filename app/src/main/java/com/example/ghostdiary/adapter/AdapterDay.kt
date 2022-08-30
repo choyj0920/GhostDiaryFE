@@ -1,17 +1,18 @@
 package com.example.ghostdiary.adapter
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemCalendarDaysBinding
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.fragment.main.CalendarFragment
+import com.example.ghostdiary.fragment.calendar.CalendarFragment
+import com.example.ghostdiary.PostDiaryActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -50,7 +51,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
                     3 -> R.drawable.ghost_03_bad
                     4 -> R.drawable.ghost_04_verybad
 
-                    else -> {R.drawable.ic_ghost}
+                    else -> {R.drawable.ic_ghost_default}
                 } as Int
 
 
@@ -58,15 +59,24 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
             holder.bindng.ivDate.setOnClickListener{
 //                parent_fragment.show_post(emotionMap[to]!!.date)
 //                MainActivity.mainactivity.change_to_selectemotion(dayList[position])
+                val intent = Intent(parent_fragment.requireContext(), PostDiaryActivity::class.java)
+                intent.putExtra("date",dayList[position].time)
+                intent.putExtra("firsttext",false)
+                parent_fragment.requireActivity().startActivity(intent)
+
             }
             if(parent_fragment.emotionpostion != -1 && parent_fragment.emotionpostion != emotionMap.get(to)!!.today_emotion.ghostimage){
-                holder.bindng.ivDate.setImageResource(R.drawable.rectangle)
+                holder.bindng.ivDate.setImageResource(R.drawable.ic_ghost_default)
             }
 
         }
         else{ // 비워져 있는 칸
             holder.bindng.ivDate.setOnClickListener{
-//                MainActivity.mainactivity.change_to_selectemotion(dayList[position])
+                val intent = Intent(parent_fragment.requireContext(), PostDiaryActivity::class.java)
+                intent.putExtra("date",dayList[position].time)
+                intent.putExtra("firsttext",false)
+                parent_fragment.requireActivity().startActivity(intent)
+
             }
 
         }

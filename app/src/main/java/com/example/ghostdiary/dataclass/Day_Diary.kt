@@ -19,25 +19,43 @@ class Day_Diary(
 
 
 
-) {
+):Cloneable {
+
+
     init {
 
     }
 
-    constructor(date:Date,today: Int=2,text: String=""):this(date, emotionclass(emotionarr["오늘의 감정"]?.get(today)!!.text,today,true),text=text){
+
+
+    constructor(date:Date,today: Int=2,text: String=""):this(date, emotionclass(emotionarr[emotionname[0]]?.get(today)!!.text,today,true),text=text){
         whom=arrayListOf<emotionclass>()
-        whom.addAll(emotionarr["누구와"]!!)
+        whom.addAll(emotionarr[emotionname[1]]!!)
         doing=arrayListOf<emotionclass>()
-        doing.addAll(emotionarr["무엇을"]!!)
+        doing.addAll(emotionarr[emotionname[3]]!!)
         where=arrayListOf<emotionclass>()
-        where.addAll(emotionarr["어디에서"]!!)
+        where.addAll(emotionarr[emotionname[2]]!!)
         weather=arrayListOf<emotionclass>()
-        weather.addAll(emotionarr["날씨"]!!)
+        weather.addAll(emotionarr[emotionname[4]]!!)
 
     }
-
+    public override fun clone(): Day_Diary{
+        return Day_Diary(date,today_emotion.clone(), copyEmotionarr(whom), copyEmotionarr(doing),
+            copyEmotionarr(where), copyEmotionarr(weather),sleepstart,sleepend,text,image)
+    }
 
     companion object {
+        fun copyEmotionarr(arr:ArrayList<emotionclass>):ArrayList<emotionclass>{
+            var newarr:ArrayList<emotionclass> = arrayListOf()
+
+            for (i in arr){
+                newarr.add(i.clone())
+
+            }
+            return newarr
+
+        }
+
 
         var int_to_image:ArrayList<Int> = arrayListOf(
             R.drawable.ghost_00_verygood,
@@ -75,24 +93,24 @@ class Day_Diary(
             R.drawable.ghost_32_rain
         )
 
-        val emotionname= arrayOf("오늘의 감정","누구와","무엇을","어디에서","날씨","수면시간")
+        val emotionname= arrayOf("오늘은 어떤 기분이었나요?","누구와 함께 하루를 보냈나요?","어디에서 하루를 보냈나요?","무엇을 하며 하루를 보냈나요?","오늘의 날씨는 어땠나요?","수면시간을 기록해주세요.")
         val emotionarr: HashMap<String,Array<emotionclass>> = hashMapOf(
-            "오늘의 감정" to arrayOf(emotionclass("매우좋음",0,false),emotionclass("좋음",1,false),
+            emotionname[0] to arrayOf(emotionclass("매우좋음",0,false),emotionclass("좋음",1,false),
                 emotionclass("보통",2,false),emotionclass("나쁨",3,false),
                 emotionclass("매우나쁨",4,false)),
-            "누구와" to arrayOf(emotionclass("혼자",5,false),emotionclass("가족",6,false),
+            emotionname[1] to arrayOf(emotionclass("혼자",5,false),emotionclass("가족",6,false),
                 emotionclass("친구",7,false),emotionclass("연인",8,false),
                 emotionclass("반려동물",9,false)),
 
-            "무엇을" to arrayOf(emotionclass("산책",20,false),emotionclass("공부",21,false),
+            emotionname[3] to arrayOf(emotionclass("산책",20,false),emotionclass("공부",21,false),
                 emotionclass("운동",22,false),emotionclass("일",23,false),emotionclass("쇼핑",24,false),
                 emotionclass("그림",25,false),emotionclass("독서",26,false),emotionclass("술",27,false),
                 emotionclass("게임",28,false),emotionclass("여행",29,false)),
-            "어디에서" to arrayOf(emotionclass("집",10,false),emotionclass("학교",11,false),
+            emotionname[2] to arrayOf(emotionclass("집",10,false),emotionclass("학교",11,false),
                 emotionclass("직장",12,false),emotionclass("카페",13,false),
                 emotionclass("식당",14,false),emotionclass("여행",15,false),emotionclass("헬스장",16,false),
                 emotionclass("쇼핑",17,false),emotionclass("영화관",18,false),emotionclass("도서관",19,false)),
-            "날씨" to arrayOf(emotionclass("맑음",30,false),emotionclass("구름",31,false),
+            emotionname[4] to arrayOf(emotionclass("맑음",30,false),emotionclass("구름",31,false),
                 emotionclass("비",32,false))
         )
 
@@ -122,7 +140,7 @@ class Day_Diary(
     fun getEmotionarr():ArrayList<ArrayList<emotionclass>>{
         var arr:ArrayList<ArrayList<emotionclass>> = arrayListOf()
         var today=arrayListOf<emotionclass>()
-        for (i in emotionarr["오늘의 감정"]!!){
+        for (i in emotionarr[emotionname[0]]!!){
             today.add(i.clone())
         }
         today!![today_emotion.ghostimage].isactive=true
@@ -132,16 +150,18 @@ class Day_Diary(
             _whom.add(i.clone())
         }
         arr.add(_whom)
-        var _doing=arrayListOf<emotionclass>()
-        for(i in doing){
-            _doing.add(i.clone())
-        }
-        arr.add(_doing)
         var _where=arrayListOf<emotionclass>()
         for(i in where){
             _where.add(i.clone())
         }
         arr.add(_where)
+
+        var _doing=arrayListOf<emotionclass>()
+        for(i in doing){
+            _doing.add(i.clone())
+        }
+        arr.add(_doing)
+
         var _weather=arrayListOf<emotionclass>()
         for(i in weather){
             _weather.add(i.clone())

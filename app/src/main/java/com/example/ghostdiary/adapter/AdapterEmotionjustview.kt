@@ -4,32 +4,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
-import com.example.ghostdiary.databinding.ItemEmotionGhostBinding
-import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
-import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
+import com.example.ghostdiary.databinding.ItemEmotionGhostjustviewBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
-import com.example.ghostdiary.fragment.main.EditDiaryFragment
-import com.example.ghostdiary.fragment.main.SelectEmotionFragment
-import com.google.android.material.slider.LabelFormatter
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonSizeSpec
-import java.text.SimpleDateFormat
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 
-class AdapterEmotionjustview(val parent: EditDiaryFragment, var emotions:MutableList<emotionclass?>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterEmotionjustview(val parent: Fragment, var emotions:MutableList<emotionclass?>,var erasetoday:Boolean=false): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    class GhostView(binding: ItemEmotionGhostBinding) : RecyclerView.ViewHolder(binding.root) {
-        var emotionname: TextView = binding.tvGhost
-        var btn_close: ImageView = binding.btnGhostDelete
+    class GhostView(binding: ItemEmotionGhostjustviewBinding) : RecyclerView.ViewHolder(binding.root) {
+
+
         var ghostimage:ImageView=binding.ivGhost
     }
 
@@ -39,23 +30,25 @@ class AdapterEmotionjustview(val parent: EditDiaryFragment, var emotions:Mutable
         val view : View?
 
         view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_emotion_ghost, parent, false)
+            .inflate(R.layout.item_emotion_ghostjustview, parent, false)
         Util.setGlobalFont(view!!)
 
-        return GhostView(ItemEmotionGhostBinding.bind(view))
-
+        return GhostView(ItemEmotionGhostjustviewBinding.bind(view))
 
     }
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         var holder=holder as GhostView
-        holder.btn_close.visibility=View.GONE
-        holder.emotionname.visibility=View.GONE
 
         if (emotions[position]==null){
             holder.ghostimage.visibility=View.GONE
             return
         }
+        if(erasetoday && position==0){
+            holder.ghostimage.visibility=View.GONE
+            return
+        }
+        holder.ghostimage.visibility=View.VISIBLE
 
         holder.ghostimage.setImageResource(Day_Diary.int_to_image.get(emotions[position]!!.ghostimage))
         holder.ghostimage.alpha=1f

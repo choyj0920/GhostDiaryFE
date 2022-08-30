@@ -1,7 +1,6 @@
 package com.example.ghostdiary.adapter
 
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -18,13 +17,13 @@ import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
-import com.example.ghostdiary.fragment.main.SelectEmotionFragment
+import com.example.ghostdiary.fragment.postdiary.SelectEmotionFragment
 import com.google.android.material.slider.LabelFormatter
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var sleepend :Int,val emotions: Array<String>, var selecttexts:ArrayList<ArrayList<emotionclass>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class AdapterPostdiary(val parent: SelectEmotionFragment, var sleepstart:Int, var sleepend :Int, val emotions: Array<String>, var selecttexts:ArrayList<ArrayList<emotionclass>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object{
         var rv_emotionList:Array<RecyclerView?> = arrayOfNulls<RecyclerView?>(Day_Diary.emotionarr.size)
@@ -103,7 +102,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
             var holder=holder as EmotionView
 
             holder.tv_title.text=emotions[position]
-            if(parent.editmode && position !=0 && emotions[position] !="날씨"){
+            if(parent.editmode && position !=0 && emotions[position] !=Day_Diary.emotionname[4]){
                 holder.btn_plus.visibility=View.VISIBLE
                 holder.btn_plus.setOnClickListener {
                     val dialog = GhostsSelectDialog(position,this, selecttexts[position])
@@ -173,6 +172,18 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
                 v.onTouchEvent(event)
                 true
             })
+            holder.scrollView.setOnTouchListener(OnTouchListener { v, event ->
+                val action = event.action
+                when (action) {
+                    MotionEvent.ACTION_DOWN ->                 // Disallow ScrollView to intercept touch events.
+                        v.parent.requestDisallowInterceptTouchEvent(true)
+                    MotionEvent.ACTION_UP ->                 // Allow ScrollView to intercept touch events.
+                        v.parent.requestDisallowInterceptTouchEvent(false)
+                }
+                // Handle Seekbar touch events.
+                v.onTouchEvent(event)
+                true
+            })
 
 
         }
@@ -183,7 +194,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment,var sleepstart:Int,var 
 
 
     override fun getItemViewType(position: Int): Int {
-        if(emotions[position]!="수면시간"){
+        if(emotions[position]!=Day_Diary.emotionname[5]){
             return 1
 
         }

@@ -17,95 +17,109 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+
+        android:layout_marginBottom="5dp"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_ghost"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
+            android:layout_width="26dp"
+            android:layout_height="32dp"
             android:scaleType="fitCenter"
-            android:layout_marginLeft="7dp"
+            android:layout_marginLeft="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ghost_00_verygood" />
 
 
-
         <LinearLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/iv_ghost"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
             android:gravity="center|left"
-            android:layout_marginStart="23dp"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/iv_ghost"
 
 
+            app:layout_constraintTop_toTopOf="@+id/iv_ghost">
 
-            >
             <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="16dp"
 
                 android:text="8월 9일"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textColor="#DE000000"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/iv_ghost"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/tv_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minHeight="16dp"
 
                 android:text="화요일"
-                android:textColor="#8A000000"
-                android:textSize="15sp"
+                android:textColor="#474746"
+                android:textSize="11sp"
                 app:layout_constraintStart_toEndOf="@+id/iv_ghost"
                 app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
 
         </LinearLayout>
 
-
-
-
-
-        <ImageView
-            android:id="@+id/btn_option"
-            android:rotation="90"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:paddingBottom="10dp"
-
-            android:scaleType="fitCenter"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="155dp"
+            android:maxWidth="155dp"
+            android:layout_height="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sideoption"
-            app:tint="#666666" />
+            >
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_diary"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ImageView
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:paddingTop="4dp"
         android:paddingBottom="10dp"
         android:maxHeight="500dp"
         android:adjustViewBounds="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/rectangle"
+        android:scaleType="centerCrop"
+        android:src="@drawable/defaultimage"
         />
     <TextView
+        android:layout_marginTop="13dp"
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="12sp"
         android:textColor="#757575"
+        android:maxLines="3"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. "
 
         />

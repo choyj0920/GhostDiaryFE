@@ -9,25 +9,25 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.net.toUri
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemDiaryBinding
 
 import com.example.ghostdiary.dataclass.Day_Diary
 
-import com.example.ghostdiary.fragment.main.RecordFragment
+import com.example.ghostdiary.fragment.calendar.RecordFragment
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diary>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object{
-        var daytostring:ArrayList<String> = arrayListOf("error","월","화","수","목","금","토","일")
+        var daytostring: java.util.ArrayList<String> = arrayListOf("error","일","월","화","수","목","금","토")
+
     }
 
     class DiaryView(binding: ItemDiaryBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -35,7 +35,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         var tv_day: TextView = binding.tvDay
         var iv_ghost:ImageView=binding.ivGhost
         var iv_image:ImageView=binding.ivImage
-        var sideoption:ImageView = binding.btnOption
+        var rv_diary:RecyclerView = binding.rvDiary
         var tv_text:TextView= binding.tvText
         var layout=binding.layoutItemDiary
 
@@ -76,6 +76,13 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
 
         holder.iv_ghost.setImageResource(Day_Diary.int_to_image[diary.today_emotion.ghostimage])
 
+        var _adapter = AdapterEmotionjustview(this.parent, diary.getEmotionarrElement(),true)
+
+        holder.rv_diary.apply {
+            layoutManager= LinearLayoutManager(this.context, LinearLayoutManager.HORIZONTAL,false)
+            adapter=_adapter
+        }
+
         // 이미지 뷰 등록
         if(diary.image!="" && diary.image != null){
             var transFormat = SimpleDateFormat("yyyy_MM_dd")
@@ -104,24 +111,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         }else{
             holder.iv_image.visibility=View.GONE
         }
-         holder.sideoption.setOnClickListener {
 
-             var popupMenu=PopupMenu(parent.context,holder.sideoption)
-             parent.requireActivity().menuInflater.inflate(R.menu.diary_sidemenu,popupMenu.menu)
-
-             popupMenu.setOnMenuItemClickListener { item  ->
-                when(item?.itemId){
-                    R.id.menu_edit->{
-//                        MainActivity.mainactivity.change_to_editDiary(diary.date)
-                    }
-                    R.id.menu_delete->{
-                        parent.deleteDiary(diary.date)
-                    }
-                }
-                 item !=null
-             }
-             popupMenu.show()
-         }
          holder.tv_text.text=diary.text
 
 

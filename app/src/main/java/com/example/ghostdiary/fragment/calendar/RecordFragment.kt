@@ -1,25 +1,25 @@
-package com.example.ghostdiary.fragment.main
+package com.example.ghostdiary.fragment.calendar
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.NumberPicker
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.adapter.AdapterDiary
-import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
-import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.databinding.FragmentRecordBinding
 import com.example.ghostdiary.dataclass.Day_Diary
@@ -36,6 +36,7 @@ class RecordFragment : Fragment() {
     private var binding: FragmentRecordBinding?=null
     private lateinit var monthDiary: ArrayList<Day_Diary>
     var emotionpostion:Int=-1
+    private var isrevse=true
 
 
     override fun onCreateView(
@@ -61,19 +62,30 @@ class RecordFragment : Fragment() {
 
     }
 
-
+    @SuppressLint("ClickableViewAccessibility")
     fun init(){
 
-        var transFormat = SimpleDateFormat("yyyy/MM")
+        var transFormat = SimpleDateFormat("yyyy.MM.")
         var to = transFormat.format(calendar.time)
         binding!!.tvDate.setText(to)
 
-        binding!!.btnLastmonth.setOnClickListener {
-            addMonth(-1)
+        var toutchlistener = View.OnTouchListener { v, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    v.setBackgroundResource(R.drawable.circle_backgroud_select)
+                }
+                MotionEvent.ACTION_UP -> {
+                    v.setBackgroundColor(Color.parseColor("#00000000"))
+                    if (v.id == binding!!.ivSwap.id) {
+                        isrevse = !isrevse
+                        update()
+                    }
+                }
+            }
+            false
         }
-        binding!!.btnNextmonth.setOnClickListener {
-            addMonth(1)
-        }
+        binding!!.ivSwap.setOnTouchListener(toutchlistener)
+
         initmonthpicker()
         init_spinner()
 
@@ -152,11 +164,12 @@ class RecordFragment : Fragment() {
         update()
     }
 
+
     fun update(){
 
         calendar=viewModel.calendar
 
-        var transFormat1 = SimpleDateFormat("yyyy/MM")
+        var transFormat1 = SimpleDateFormat("yyyy.MM.")
         var to1 = transFormat1.format(calendar.time)
         binding!!.tvDate.setText(to1)
 
@@ -171,7 +184,8 @@ class RecordFragment : Fragment() {
             }
         }
         monthDiary.sortBy { dayDiary -> dayDiary.date}
-        monthDiary.reverse()
+        if(isrevse)
+            monthDiary.reverse()
 
         var _adapter = AdapterDiary(this,monthDiary)
 

@@ -9,7 +9,6 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
@@ -18,7 +17,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
-import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_OPEN
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -27,9 +25,9 @@ import androidx.viewpager2.adapter.FragmentViewHolder
 import androidx.viewpager2.widget.ViewPager2
 import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.example.ghostdiary.databinding.ActivityMainBinding
+import com.example.ghostdiary.fragment.calendar.CalendarFragment
+import com.example.ghostdiary.fragment.calendar.RecordFragment
 import com.example.ghostdiary.fragment.main.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 
@@ -41,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recordFragment: RecordFragment
     private lateinit var memoFragment: MemoFragment
     private lateinit var clinicFragment: ClinicFragment
-    private lateinit var viewPager: ViewPager2
     private lateinit var prefs : SharedPreferences
     companion object{
         lateinit var mainactivity:MainActivity
@@ -50,6 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
     var lastTimeBackPressed : Long = 0
     lateinit var pageCallBack: ViewPager2.OnPageChangeCallback
+    private lateinit var viewPager: ViewPager2
 
 
     lateinit var viewModel: MainViewModel
@@ -93,8 +91,24 @@ class MainActivity : AppCompatActivity() {
                     // 특정 페이지가 선택될 때 마다 여기가 호출됩니다.
                     // position 에는 현재 페이지 index - 첫페이지면 0
                     when(position){
-                        0-> calendarFragment.init_rv()
-                        1-> recordFragment.update()
+                        0-> {
+                            try {
+                                calendarFragment.init_rv()
+
+                            }catch(e: Exception){
+                            }
+
+                            binding.layoutTopmenu.visibility=View.VISIBLE
+                        }
+                        1-> {
+                            try {
+                                recordFragment.update()
+
+                            }catch(e: Exception){
+
+                            }
+                            binding.layoutTopmenu.visibility=View.GONE
+                        }
                     }
                 }
             }
@@ -162,6 +176,11 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     fun init_topmenu(){
+        binding.ivMemoplus.setOnClickListener {
+            val dialog = MemoFolderAddDialog(memoFragment )
+            dialog.isCancelable = true
+            dialog.show(supportFragmentManager, "ConfirmDialog")
+        }
 
         var toplistener = OnTouchListener { v, event ->
             when (event.action) {
@@ -188,6 +207,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
     fun init_sidemenu(){
         //db 초기화
@@ -252,9 +272,7 @@ class MainActivity : AppCompatActivity() {
             binding.ivSetting.visibility=View.GONE
             binding.ivShare.visibility=View.GONE
             binding.ivMemoplus.visibility=View.VISIBLE
-            binding.ivMemoplus.setOnClickListener {
-                memoFragment
-            }
+
 
         }
 
@@ -269,6 +287,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
         val islock= prefs.getBoolean("isLock",false)
         if(islock){
             binding.sidemenuSwitchLock.isChecked=true
@@ -311,14 +330,17 @@ class MainActivity : AppCompatActivity() {
                 // If the user is currently looking at the first step, allow the system to handle the
                 // Back button. This calls finish() on this activity and pops the back stack.
                 super.onBackPressed()
+                return
+
             } else {
                 // Otherwise, select the previous step.
                 viewPager.currentItem = viewPager.currentItem - 1
-            }
+                return
 
-            super.onBackPressed()
-            return
+            }
         }
+
+
 
 
     }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".fragment.main.SelectEmotionFragment">
+    tools:context=".fragment.postdiary.SelectEmotionFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="15dp"

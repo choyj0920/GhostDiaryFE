@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context=".fragment.main.SelectEmotionFragment">
+    tools:context=".fragment.postdiary.SelectEmotionFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -52,19 +52,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.526" />
 
-        <ImageView
-            android:id="@+id/btn_posttext"
-            android:layout_width="wrap_content"
-            android:minWidth="30dp"
-            android:layout_height="30dp"
-            android:padding="5dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_check"
-            android:layout_marginEnd="19dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btn_postcheck"
-            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ImageView

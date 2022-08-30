@@ -1,4 +1,4 @@
-package com.example.ghostdiary.fragment.main
+package com.example.ghostdiary.fragment.postdiary
 
 
 import android.app.Activity.RESULT_OK
@@ -15,17 +15,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.ghostdiary.MainActivity
-import com.example.ghostdiary.MainViewModel
-import com.example.ghostdiary.R
-import com.example.ghostdiary.Util
+import com.example.ghostdiary.*
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.databinding.FragmentEditDiaryBinding
 import com.example.ghostdiary.dataclass.Day_Diary
+import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
@@ -34,13 +30,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?=null,var isEditmode:Boolean = true) : Fragment() {
+class EditDiaryFragment(
+    var parent: PostDiaryActivity?,
+    var date: Date,
+    var isEditmode:Boolean = true) : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
     private lateinit var activityResultLauncher:ActivityResultLauncher<Intent>
 
-    var sleepstart:Int =-1
-    var sleepend:Int =-1
+    companion object{
+        var daytostring:ArrayList<String> = arrayListOf("error","일","월","화","수","목","금","토")
+    }
     lateinit var curDiary:Day_Diary
     lateinit var fileName:String
     lateinit var curbitmap:Bitmap
@@ -59,68 +58,39 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
         return binding!!.root
 
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // curDiary 초기화
+        curDiary=parent!!.curDiary
+    }
+
     fun init(){
         
         binding!!.inputText.requestFocus()
         switcheditmode(isEditmode)
-        var formatDate = SimpleDateFormat("yyyy-MM-dd")
-        var strdate = formatDate.format(date)
         // curDiary 초기화
+        curDiary=parent!!.curDiary
 
-        if(diary!=null){
-            curDiary=diary!!
-            date=curDiary.date
-
-        }else if (viewModel.getEmotionArray(requireContext()).contains(strdate)) {
-            curDiary = viewModel.getEmotionArray(null)[strdate]!!
-        }else{
-            curDiary= Day_Diary(date)
-
-        }
         binding!!.inputText.setText(curDiary.text)
 
-        var transFormat = SimpleDateFormat("yyyy/MM/dd")
+        var transFormat = SimpleDateFormat("yyyy/MM/dd.")
         var to = transFormat.format(date)
+        var tempcal=Calendar.getInstance()
+        tempcal.time =curDiary.date
+        binding!!.tvDay.text= "${daytostring[tempcal.get(Calendar.DAY_OF_WEEK)]}요일"
+
         binding!!.tvDate.text=to
 
         // 취소 버튼
         binding!!.btnCancel.setOnClickListener {
-            if(parent is RecordFragment){
-//                MainActivity.mainactivity.change_record()
-
-            }else if (parent is CalendarFragment){
-//                MainActivity.mainactivity.change_record()
-
-            }else if(parent is SelectEmotionFragment){
-                curDiary.image=null
-//                MainActivity.mainactivity.change_to_selectemotion(date,curDiary)
-
-            }
+            parent!!.onBackPressed()
         }
 
         binding!!.btnPost.setOnClickListener{
+            savediary()
+            parent!!.addDiary()
 
-            curDiary.text=binding!!.inputText.text.toString()
-
-            if(binding!!.layoutImage.visibility==View.VISIBLE){
-                saveBitmapToJpeg(curbitmap)
-
-
-
-            }
-
-
-            if(parent is CalendarFragment || parent is SelectEmotionFragment){
-                addDiary(curDiary)
-//                MainActivity.mainactivity.change_calendar()
-
-            }
-            else if(parent is RecordFragment){
-                addDiary(curDiary)
-//                MainActivity.mainactivity.change_record()
-
-
-            }
 
         }
 
@@ -216,6 +186,16 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
 
     }
 
+    fun savediary() {
+        curDiary.text=binding!!.inputText.text.toString()
+
+        if(binding!!.layoutImage.visibility==View.VISIBLE){
+            saveBitmapToJpeg(curbitmap)
+        }else{
+            curDiary.image=null
+        }
+    }
+
     fun switcheditmode(isedit:Boolean){
         if(isedit){
             isEditmode=true
@@ -239,11 +219,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
         }
     }
 
-    fun addDiary(newDiary:Day_Diary){
-        viewModel.addDiary(newDiary)
-        update()
 
-    }
 
     fun updateGhostview(){
 
@@ -301,6 +277,7 @@ class EditDiaryFragment(var parent:Fragment,var date: Date,var diary: Day_Diary?
     }
 
     fun update(){
+
 
 
 

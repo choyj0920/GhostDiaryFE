@@ -63,6 +63,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
+                android:textStyle="bold"
                 android:lineHeight="24px"
                 android:textColor="#474747"
                 android:textSize="12sp" />
@@ -73,6 +74,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="M"
+                android:textStyle="bold"
                 android:lineHeight="24px"
                 android:textColor="#474747"
                 android:textSize="12sp"  />
@@ -83,6 +85,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
+                android:textStyle="bold"
                 android:lineHeight="24px"
                 android:textColor="#474747"
                 android:textSize="12sp" />
@@ -93,6 +96,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="W"
+                android:textStyle="bold"
                 android:lineHeight="24px"
                 android:textColor="#474747"
                 android:textSize="12sp" />
@@ -103,6 +107,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="T"
+                android:textStyle="bold"
                 android:lineHeight="24px"
                 android:textColor="#474747"
                 android:textSize="12sp"  />
@@ -113,6 +118,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="F"
+                android:textStyle="bold"
                 android:lineHeight="24px"
                 android:textColor="#474747"
                 android:textSize="12sp"  />
@@ -123,6 +129,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="S"
+                android:textStyle="bold"
                 android:lineHeight="24px"
                 android:textColor="#474747"
                 android:textSize="12sp" />

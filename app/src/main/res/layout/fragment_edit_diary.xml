@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".fragment.main.SelectEmotionFragment">
+    tools:context=".fragment.postdiary.SelectEmotionFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_marginTop="15dp"
         android:id="@+id/constraintLayout3"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp"
         android:animateLayoutChanges="true"
-        android:background="#ffffff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,37 +30,58 @@
             android:rotation="180"
             android:layout_marginStart="10dp"
             android:src="@drawable/ic_arrow"
+            app:tint="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_date"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:lineSpacingExtra="5sp"
-            android:text="2022/07"
-            android:textColor="#001018"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
 
-        <TextView
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="24dp"
+                android:gravity="center"
+                android:lineSpacingExtra="5sp"
+                android:text="2022.08.30."
+                android:textColor="#474746"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                />
+            <TextView
+                android:id="@+id/tv_day"
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="화요일"
+                android:textColor="#001018"
+                android:textSize="11sp"
+                />
+
+        </LinearLayout>
+
+
+        <ImageView
             android:id="@+id/btn_post"
-            android:layout_width="wrap_content"
-            android:minWidth="60dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/border"
-            android:gravity="center"
-            android:text="등록"
-            android:textColor="@color/gray"
-            android:textSize="15sp"
-
+            android:layout_width="40dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_check"
+            android:layout_marginEnd="19dp"
+            android:paddingLeft="10dp"
+            app:tint="@color/black"
+            android:paddingRight="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -73,15 +94,17 @@
         android:nestedScrollingEnabled="false"
 
         android:id="@+id/rv_emotionlist"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+
         android:layout_height="50dp"
+
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
         android:orientation="horizontal"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
 
         >
 
@@ -128,13 +151,15 @@
 
                 android:id="@+id/btn_delimage"
                 android:layout_margin="4dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/ic_button_x_close"
+                app:tint="@color/white"
                 android:scaleType="fitCenter"
-                android:padding="8dp"
+                android:padding="7dp"
                 android:elevation="4dp"
-                android:background="@drawable/circle_backgroud_white"
+                android:background="@drawable/circle_black"
+                android:backgroundTint="#494949"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -152,7 +177,7 @@
             android:background="@color/white"
             android:scrollbars="vertical"
             android:textSize="15sp"
-            android:hint="글 작성란"
+            android:hint="내용을 입력해주세요"
             android:paddingTop="20dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"

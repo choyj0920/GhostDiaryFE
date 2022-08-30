@@ -8,6 +8,8 @@
     android:layout_marginTop="6dp"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
+    android:paddingBottom="50dp"
+
 
     android:background="@drawable/googlebackground"
     android:layout_height="wrap_content">
