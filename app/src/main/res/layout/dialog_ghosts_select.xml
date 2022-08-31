@@ -59,7 +59,7 @@
         android:layout_gravity="end"
         android:padding="5dp"
         android:text="확인"
-        android:textColor="@color/pink"
+        android:textColor="@color/black"
         android:textSize="13sp" />
 
 

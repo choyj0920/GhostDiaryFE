@@ -25,13 +25,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="하루의 감정"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:text="어디에서 하루를 보냈나요?"
+
             android:layout_marginLeft="20dp"
 
             android:textSize="13sp"
             android:textColor="@color/black"
+            android:background="@drawable/underline"
+            android:backgroundTintMode="src_in"
+            android:backgroundTint="#FDE9D1"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +66,7 @@
         android:layout_marginTop="0dp"
         android:layout_gravity="center"
 
-        android:paddingTop="20dp"
+        android:paddingTop="18dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:paddingBottom="30dp"

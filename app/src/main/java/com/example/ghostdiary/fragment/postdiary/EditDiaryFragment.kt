@@ -1,7 +1,9 @@
 package com.example.ghostdiary.fragment.postdiary
 
 
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -10,22 +12,28 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.PopupMenu
+import android.widget.PopupWindow
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ghostdiary.*
 import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.databinding.FragmentEditDiaryBinding
+import com.example.ghostdiary.databinding.MenuSideoptionBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
+import java.lang.reflect.Method
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -53,6 +61,9 @@ class EditDiaryFragment(
         binding=FragmentEditDiaryBinding.inflate(inflater,container,false)
 
         init()
+
+
+
         Util.setGlobalFont(binding!!.root)
 
         return binding!!.root
@@ -65,6 +76,7 @@ class EditDiaryFragment(
         curDiary=parent!!.curDiary
     }
 
+    @SuppressLint("RestrictedApi")
     fun init(){
         
         binding!!.inputText.requestFocus()
@@ -82,6 +94,11 @@ class EditDiaryFragment(
 
         binding!!.tvDate.text=to
 
+        binding!!.btnSidemenu.setOnClickListener {
+            showPopupMenu()
+        }
+
+
         // 취소 버튼
         binding!!.btnCancel.setOnClickListener {
             parent!!.onBackPressed()
@@ -93,6 +110,7 @@ class EditDiaryFragment(
 
 
         }
+
 
         //타임스탬프 기능
         binding!!.btnClock.setOnClickListener {
@@ -196,29 +214,94 @@ class EditDiaryFragment(
         }
     }
 
+    // popup menu 보여주는 method
+    private fun showPopupMenu() {
+
+
+
+
+        // popoup menu 에 적용할 style
+        val contextThemeWrapper =
+            ContextThemeWrapper(requireContext(),R.style.PopupMenuStyle)
+        // popup menu 가 보일 위치
+        val popupBase = binding!!.btnSidemenu
+
+        // popup menu 선언
+        val popupMenu = PopupMenu(contextThemeWrapper, popupBase,Gravity.BOTTOM)
+        popupMenu.menuInflater.inflate(R.menu.diary_sidemenu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { m ->
+            when (m.itemId) {
+                R.id.menu_edit -> {
+                    switcheditmode(true)
+                }
+                R.id.menu_delete -> {
+                    parent!!.deleteDiary(date)
+
+                }
+            }
+            false
+        }
+
+        // Icon 보여주기
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            popupMenu.setForceShowIcon(true)
+        } else {
+            try {
+                val fields = popupMenu.javaClass.declaredFields
+                for (field in fields) {
+                    if ("mPopup" == field.name) {
+                        field.isAccessible = true
+                        val menuPopupHelper = field[popupMenu]
+                        val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
+                        val setForceIcon: Method = classPopupHelper.getMethod(
+                            "setForceShowIcon",
+                            Boolean::class.javaPrimitiveType
+                        )
+                        setForceIcon.invoke(menuPopupHelper, true)
+                        break
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        popupMenu.show()
+
+
+    }
+
+
+
+
     fun switcheditmode(isedit:Boolean){
         if(isedit){
             isEditmode=true
-            binding!!.inputText.focusable=View.FOCUSABLE
+            binding!!.inputText.isEnabled=true
+
             binding!!.constraintLayout4.visibility=View.VISIBLE
             binding!!.btnPost.visibility=View.VISIBLE
             binding!!.btnDelimage.visibility=View.VISIBLE
-            binding!!.inputText.hint="글 작성란"
-
-
+            binding!!.inputText.hint="내용을 입력해주세요"
+            binding!!.btnSidemenu.visibility=View.GONE
 
 
         }else{
             isEditmode=true
-            binding!!.inputText.focusable=View.NOT_FOCUSABLE
+            binding!!.inputText.isEnabled=false
+
+
             binding!!.constraintLayout4.visibility=View.GONE
             binding!!.btnPost.visibility=View.GONE
             binding!!.btnDelimage.visibility=View.GONE
             binding!!.inputText.hint=""
+            binding!!.btnSidemenu.visibility=View.VISIBLE
+
 
         }
-    }
+        parent!!.switchmode_editdiary(isedit)
 
+    }
 
 
     fun updateGhostview(){
@@ -231,7 +314,6 @@ class EditDiaryFragment(
         }
 
     }
-
 
 
     fun timestamp(){
@@ -264,7 +346,6 @@ class EditDiaryFragment(
         )
 
         // 편집이 편하도록 커서를 삽입한 텍스트 끝에 위치시킨다.
-
 
         // 편집이 편하도록 커서를 삽입한 텍스트 끝에 위치시킨다.
         editText.setSelection(pos + text.length)
@@ -331,23 +412,6 @@ class EditDiaryFragment(
     }
 
 
-
-    fun selectimage(index:Int): Int {
-        when(index){
-            0 -> return R.drawable.ghost_00_verygood
-            1 -> return R.drawable.ghost_01_good
-            2 -> return R.drawable.ghost_02_normal
-            3 -> return R.drawable.ghost_03_bad
-            4 -> return R.drawable.ghost_04_verybad
-
-        }
-        return R.drawable.ic_blankghost
-    }
-
-    fun postDiary(calendarFragment: CalendarFragment) {
-
-
-    }
 
 
 }

@@ -9,6 +9,16 @@
 
     </style>
 
+    <style name="PopupMenuStyle" parent="Widget.AppCompat.PopupMenu">
+        <item name= "background">@drawable/border_white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:popupBackground">@drawable/border_white</item>
+
+        <item name="popupMenuBackground">@drawable/border_white</item>
+    </style>
+
+
     <style name="CustomAlertDialog">
         <!-- 꽉 채운 화면에 배경 없이 (custom view 영역만 보일 것이다.) -->
         <item name="android:windowBackground">@android:color/transparent</item>

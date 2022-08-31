@@ -37,6 +37,8 @@ class RecordFragment : Fragment() {
     private lateinit var monthDiary: ArrayList<Day_Diary>
     var emotionpostion:Int=-1
     private var isrevse=true
+    var curCal=Calendar.getInstance()
+
 
 
     override fun onCreateView(
@@ -46,6 +48,8 @@ class RecordFragment : Fragment() {
 
         binding= FragmentRecordBinding.inflate(inflater,container,false)
         calendar=viewModel.calendar
+        curCal.time=calendar.time
+
 
         init()
         Util.setGlobalFont(binding!!.root)
@@ -56,6 +60,7 @@ class RecordFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         calendar=viewModel.calendar
+        curCal.time=calendar.time
 
         update()
         Util.setGlobalFont(binding!!.root)
@@ -168,6 +173,8 @@ class RecordFragment : Fragment() {
     fun update(){
 
         calendar=viewModel.calendar
+        curCal.time=calendar.time
+
 
         var transFormat1 = SimpleDateFormat("yyyy.MM.")
         var to1 = transFormat1.format(calendar.time)

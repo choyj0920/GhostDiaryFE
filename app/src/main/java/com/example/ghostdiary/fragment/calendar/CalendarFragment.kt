@@ -27,6 +27,7 @@ class CalendarFragment : Fragment() {
     }
     val viewModel: MainViewModel by activityViewModels()
     var pageIndex = 0
+    var curCal=Calendar.getInstance()
     lateinit var mContext: Context
     private var binding: FragmentCalendarBinding? =null
     var emotionpostion:Int=-1
@@ -83,6 +84,7 @@ class CalendarFragment : Fragment() {
                         newcal.time=lastcalendar.time
                         newcal.add(Calendar.MONTH, curpo - center)
                         viewModel.calendar =newcal
+                        curCal.time=newcal.time
                     }
                 }
             }
@@ -96,6 +98,7 @@ class CalendarFragment : Fragment() {
             it.addOnScrollListener(onScrollListener)
         }
         lastcalendar.time=viewModel.calendar.time
+        curCal.time=lastcalendar.time
 
         val monthListManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         val monthListAdapter = AdapterMonth(this,viewModel)

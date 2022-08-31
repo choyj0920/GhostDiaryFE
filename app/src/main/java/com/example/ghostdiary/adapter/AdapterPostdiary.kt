@@ -1,5 +1,7 @@
 package com.example.ghostdiary.adapter
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -8,6 +10,7 @@ import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.GhostsSelectDialog
@@ -35,7 +38,10 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, var sleepstart:Int, va
             states = arrayOfNulls<Parcelable?>(Day_Diary.emotionarr.size)
             emotionAdapterList = arrayOfNulls<AdapterEmotion?>(Day_Diary.emotionarr.size)
         }
+
+        var arraytint:Array<String> = arrayOf("#FFDED7","#FDE9D1","#FFF4D7","#D7F5FF","#D7E2FF")
     }
+
 
 
 
@@ -100,6 +106,20 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, var sleepstart:Int, va
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if(getItemViewType(position)==1){
             var holder=holder as EmotionView
+
+
+            holder.tv_title.backgroundTintList=  ColorStateList.valueOf(ContextCompat.getColor(parent.requireContext(),
+                when(emotions[position]){
+                    Day_Diary.emotionname[0]->R.color.tint1
+                    Day_Diary.emotionname[1]->R.color.tint2
+                    Day_Diary.emotionname[2]->R.color.tint3
+                    Day_Diary.emotionname[3]->R.color.tint4
+                    Day_Diary.emotionname[4]->R.color.tint5
+
+                    else->R.color.tint5
+                } ))
+
+
 
             holder.tv_title.text=emotions[position]
             if(parent.editmode && position !=0 && emotions[position] !=Day_Diary.emotionname[4]){

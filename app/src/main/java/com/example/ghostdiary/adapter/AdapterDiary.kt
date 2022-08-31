@@ -1,5 +1,6 @@
 package com.example.ghostdiary.adapter
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemDiaryBinding
@@ -62,7 +64,11 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
 
         var diary=diaryarr[position]
         holder.layout.setOnClickListener {
-//            MainActivity.mainactivity.change_to_editDiary(diary.date,iseditmode = false)
+
+            val intent = Intent(parent.requireContext(), PostDiaryActivity::class.java)
+            intent.putExtra("date",diary.date.time)
+            intent.putExtra("firsttext",true)
+            parent.requireActivity().startActivity(intent)
         }
 
 

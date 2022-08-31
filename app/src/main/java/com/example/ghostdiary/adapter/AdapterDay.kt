@@ -61,7 +61,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 //                MainActivity.mainactivity.change_to_selectemotion(dayList[position])
                 val intent = Intent(parent_fragment.requireContext(), PostDiaryActivity::class.java)
                 intent.putExtra("date",dayList[position].time)
-                intent.putExtra("firsttext",false)
+                intent.putExtra("firsttext",true)
                 parent_fragment.requireActivity().startActivity(intent)
 
             }

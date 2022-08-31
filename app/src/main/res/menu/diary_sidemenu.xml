@@ -6,9 +6,10 @@
         android:id="@+id/menu_edit"
         android:title="수정하기"
         android:icon="@drawable/ic_edit_post"
+
         />
     <item
-        android:id="@+id/menu_delete"
+            android:id="@+id/menu_delete"
         android:title="삭제하기"
         android:icon="@drawable/ic_erase"
 

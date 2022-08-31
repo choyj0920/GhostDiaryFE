@@ -93,7 +93,8 @@ class MainActivity : AppCompatActivity() {
                     when(position){
                         0-> {
                             try {
-                                calendarFragment.init_rv()
+                                if(calendarFragment.curCal.time.time!=recordFragment.curCal.time.time)
+                                    calendarFragment.init_rv()
 
                             }catch(e: Exception){
                             }
@@ -102,7 +103,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         1-> {
                             try {
-                                recordFragment.update()
+                                if(calendarFragment.curCal.time.time!=recordFragment.curCal.time.time)
+                                    recordFragment.update()
+
 
                             }catch(e: Exception){
 

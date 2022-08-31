@@ -30,6 +30,7 @@ class PostDiaryActivity( ) : AppCompatActivity () {
     private lateinit var viewPager: ViewPager2
     lateinit var viewModel :MainViewModel
     lateinit var date: Date
+    var editdiarymode:Boolean=false
     var firsttext:Boolean=false
     private lateinit var binding:ActivityPostDiaryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +57,7 @@ class PostDiaryActivity( ) : AppCompatActivity () {
         }
 
         selectEmotionFragment= SelectEmotionFragment(this,curDiary.date)
-        editDiaryFragment= EditDiaryFragment(this,curDiary.date)
+        editDiaryFragment= EditDiaryFragment(this,curDiary.date,!firsttext)
 
         emotionselect=curDiary.getEmotionarr()
 
@@ -108,9 +109,15 @@ class PostDiaryActivity( ) : AppCompatActivity () {
                     }
                     1->{
                         binding.ivNext.visibility= View.GONE
-
                         selectEmotionFragment.getcurDiary()
-                        editDiaryFragment.updateGhostview()
+                        try{
+                            editDiaryFragment.updateGhostview()
+
+                        }catch(e: Exception){
+
+                        }
+
+
 
                     }
                 }
@@ -128,6 +135,23 @@ class PostDiaryActivity( ) : AppCompatActivity () {
 
 
         }
+    }fun switchmode_editdiary(isedit: Boolean){
+        editdiarymode=isedit
+        binding.ivNext.visibility=View.GONE
+
+        if(editdiarymode){
+            viewPager.isUserInputEnabled=true
+
+
+        }else{
+            viewPager.isUserInputEnabled=false
+
+        }
+
+    }
+    fun deleteDiary(date: Date){
+        viewModel.deleteDiary(date)
+        finish()
 
     }
 
@@ -137,10 +161,27 @@ class PostDiaryActivity( ) : AppCompatActivity () {
 
     override fun onBackPressed() {
 
-        if (viewPager.currentItem == 0 || firsttext) {
+        if (viewPager.currentItem == 0 ) {
+            if(firsttext && editdiarymode){
+                viewPager.currentItem=1
+                editDiaryFragment.switcheditmode(false)
+                return
+            }
 
             super.onBackPressed()
-        } else {
+        } else if(firsttext){
+            if(viewPager.currentItem==1){
+                if(editdiarymode){
+                    viewPager.currentItem=viewPager.currentItem-1
+                }else{
+                    finish()
+                }
+                return
+            }
+
+
+        }else{
+
             // Otherwise, select the previous step.
             viewPager.currentItem = viewPager.currentItem - 1
             return

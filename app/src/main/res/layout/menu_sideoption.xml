@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:background="@drawable/border_corners_allside"
+    android:elevation="10dp"
+    android:layout_marginRight="0dp"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/tv_edit"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="10dp"
+
+
+            android:src="@drawable/ic_edit_post" />
+
+        <TextView
+            android:id="@+id/tv_edit"
+            android:layout_width="40dp"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:paddingRight="0dp"
+            android:text="수정"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginBottom="5dp"
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_del"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:layout_toRightOf="@+id/tv_del"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="10dp"
+
+
+            android:src="@drawable/ic_edit_post" />
+
+        <TextView
+            android:id="@+id/tv_del"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:paddingRight="0dp"
+            android:text="삭제" />
+
+    </RelativeLayout>
+
+</LinearLayout>
