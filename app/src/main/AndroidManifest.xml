@@ -23,6 +23,11 @@
 
         </activity>
         <activity
+            android:name=".AnalyzeActivity"
+            android:exported="false" >
+
+        </activity>
+        <activity
             android:name=".PostDiaryActivity"
             android:exported="false" >
 

@@ -5,16 +5,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <ScrollView
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:nestedScrollingEnabled="false"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/banner_analyze1"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_wronganalyze"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+
+        android:text="충분한 데이터가 없어서 분석이 되지 않아요.\n\n 선택된 활동들의 종류가 5개이상이어야해요."
+
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ScrollView
+        android:visibility="visible"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:nestedScrollingEnabled="false"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,182 +50,200 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="15dp"
-                android:text="분석"
-                android:textSize="20sp"
-                android:textStyle="bold"
 
-                />
-
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:minHeight="200dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="12dp"
+                    android:padding="3dp"
+                    android:rotation="180"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView2"
+                    app:tint="@color/black" />
 
                 <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/underline"
+                    android:backgroundTint="#FFD7D7"
+                    android:drawableRight="@drawable/ic_graph"
+                    android:gravity="left"
+                    android:text="종합분석  "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/border_pink"
-                    android:gravity="center"
-                    android:minWidth="122dp"
-                    android:minHeight="30dp"
-                    android:text="종합분석"
-                    android:textColor="#F08080"
-                    android:textSize="13sp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-                    />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_veryhappy"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="예시"
-                        android:textColor="@color/pink"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                        android:textSize="15sp"
+                        <TextView
+                            android:id="@+id/tv_veryhappy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="예시"
+                            android:textColor="@color/pink"
 
-                        />
+                            android:textSize="15sp"
 
-                    <TextView
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="은(는) 당신을 가장 행복하게 하고,"
+                            android:textColor="#4A4A4A"
+
+                            android:textSize="15sp"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="은(는) 당신을 가장 행복하게 하고,"
-                        android:textColor="#4A4A4A"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
 
-                        android:textSize="15sp"
+                        <TextView
+                            android:id="@+id/tv_verybad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="예시"
+                            android:textColor="@color/pink"
 
-                        />
+                            android:textSize="15sp"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="은(는) 당신을 가장 다운되게 해요."
+                            android:textColor="#4A4A4A"
+
+                            android:textSize="15sp"
+
+                            />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="35dp"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_verybad2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="예시"
+                            android:textColor="@color/pink"
+
+                            android:textSize="15sp"
+
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+
+                            android:text="은(는) 가능한 피해보는게 어때요?"
+                            android:textColor="#4A4A4A"
+
+                            android:textSize="15sp"
+
+                            />
+
+                    </LinearLayout>
+
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_verybad"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="예시"
-                        android:textColor="@color/pink"
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        android:textSize="15sp"
-
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="은(는) 당신을 가장 다운되게 해요."
-                        android:textColor="#4A4A4A"
-
-                        android:textSize="15sp"
-
-                        />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_verybad2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="예시"
-                        android:textColor="@color/pink"
-
-                        android:textSize="15sp"
-
-                        />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-
-                        android:text="은(는) 가능한 피해보는게 어때요?"
-                        android:textColor="#4A4A4A"
-
-                        android:textSize="15sp"
-
-                        />
-
-                </LinearLayout>
-
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:paddingBottom="20dp"
-                android:paddingTop="20dp"
+                android:background="#F5F5F5"
                 android:minHeight="200dp"
                 android:orientation="horizontal"
-                android:background="@drawable/border_just_bottom"
-                >
-                
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp">
+
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="250dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border_justright">
+                    android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+
                         android:layout_marginStart="50dp"
                         android:layout_marginEnd="50dp"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
                         android:layout_marginBottom="10dp"
-                        android:layout_height="40dp">
+                        android:gravity="center">
+
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ghost_00_verygood"
                             android:layout_marginEnd="10dp"
-                            />
+                            android:layout_weight="1"
+                            android:src="@drawable/ghost_00_verygood" />
+
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
 
                             android:src="@drawable/ghost_01_good"
 
@@ -206,31 +252,31 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/iv_good1"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:minWidth="32dp"
-                            android:layout_height="match_parent"
 
-                            android:src="@drawable/ghost_00_verygood"
-                            android:layout_marginEnd="10dp"
-                            />
+                            android:minWidth="32dp"
+                            android:src="@drawable/ghost_00_verygood" />
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:minWidth="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:layout_height="match_parent">
+                            android:minWidth="100dp">
 
                             <TextView
                                 android:id="@+id/tv_good1"
@@ -238,78 +284,77 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="굳"
+                                android:text="--"
                                 android:textColor="#757575"
                                 android:textSize="11sp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
                             <TextView
                                 android:id="@+id/tv_good_value1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="+77%"
+                                android:layout_marginEnd="10dp"
+                                android:text="--"
                                 android:textColor="@color/pink"
                                 android:textSize="11sp"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
-                            
+
 
                             <com.google.android.material.slider.Slider
-                                
+
                                 android:id="@+id/slider_good1"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
                                 android:enabled="false"
 
-                                app:trackColorActive="@color/pink"
-
                                 android:focusable="false"
+
+                                android:value="0"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:value="77"
-                                app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:thumbRadius="0dp"
-                                app:tickVisible="false" />
+                                app:tickVisible="false"
+                                app:trackColorActive="@color/pink"
+                                app:trackColorInactive="#B2B2B2" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-                        
-
-
 
 
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/iv_good2"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:minWidth="32dp"
-                            android:layout_height="match_parent"
 
-                            android:src="@drawable/ghost_00_verygood"
-                            android:layout_marginEnd="10dp"
-                            />
+                            android:minWidth="32dp"
+                            android:src="@drawable/ghost_00_verygood" />
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:minWidth="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:layout_height="match_parent">
+                            android:minWidth="100dp">
 
                             <TextView
                                 android:id="@+id/tv_good2"
@@ -317,18 +362,19 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="굳"
+                                android:text="--"
                                 android:textColor="#757575"
                                 android:textSize="11sp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
                             <TextView
                                 android:id="@+id/tv_good_value2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="+77%"
+                                android:layout_marginEnd="10dp"
+                                android:text="--"
                                 android:textColor="@color/pink"
                                 android:textSize="11sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -340,50 +386,51 @@
                                 android:id="@+id/slider_good2"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
+                                android:enabled="false"
                                 android:focusable="false"
+                                android:value="0"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:enabled="false"
-                                app:trackColorActive="@color/pink"
 
-                                android:value="77"
-                                app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:thumbRadius="0dp"
-                                app:tickVisible="false" />
+                                app:tickVisible="false"
+                                app:trackColorActive="@color/pink"
+                                app:trackColorInactive="#B2B2B2" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/iv_good3"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:minWidth="32dp"
-                            android:layout_height="match_parent"
 
-                            android:src="@drawable/ghost_00_verygood"
-                            android:layout_marginEnd="10dp"
-                            />
+                            android:minWidth="32dp"
+                            android:src="@drawable/ghost_00_verygood" />
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:minWidth="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:layout_height="match_parent">
+                            android:minWidth="100dp">
 
                             <TextView
                                 android:id="@+id/tv_good3"
@@ -391,18 +438,19 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="굳"
+                                android:text="--"
                                 android:textColor="#757575"
                                 android:textSize="11sp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
                             <TextView
                                 android:id="@+id/tv_good_value3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="+77%"
+                                android:layout_marginEnd="10dp"
+                                android:text="--"
                                 android:textColor="@color/pink"
                                 android:textSize="11sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -414,62 +462,56 @@
                                 android:id="@+id/slider_good3"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
+                                android:enabled="false"
                                 android:focusable="false"
+                                android:value="0"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:enabled="false"
-                                app:trackColorActive="@color/pink"
-                                android:value="77"
-                                app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:thumbRadius="0dp"
-                                app:tickVisible="false" />
+                                app:tickVisible="false"
+                                app:trackColorActive="@color/pink"
+                                app:trackColorInactive="#B2B2B2" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
                     </LinearLayout>
-
-
-
-
 
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:minHeight="250dp"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+
                         android:layout_marginStart="50dp"
                         android:layout_marginEnd="50dp"
-
-                        android:layout_width="match_parent"
-                        android:gravity="center"
                         android:layout_marginBottom="10dp"
-                        android:layout_height="40dp">
+                        android:gravity="center">
+
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ghost_03_bad"
                             android:layout_marginEnd="10dp"
-                            />
+                            android:layout_weight="1"
+                            android:src="@drawable/ghost_03_bad" />
+
                         <ImageView
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="match_parent"
                             android:layout_marginStart="10dp"
+                            android:layout_weight="1"
 
                             android:src="@drawable/ghost_04_verybad"
 
@@ -478,31 +520,31 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/iv_bad1"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:minWidth="32dp"
-                            android:layout_height="match_parent"
 
-                            android:src="@drawable/ghost_21_study"
-                            android:layout_marginEnd="10dp"
-                            />
+                            android:minWidth="32dp"
+                            android:src="@drawable/ghost_21_study" />
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:minWidth="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:layout_height="match_parent">
+                            android:minWidth="100dp">
 
                             <TextView
                                 android:id="@+id/tv_bad1"
@@ -510,18 +552,19 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="안굳"
+                                android:text="--"
                                 android:textColor="#757575"
                                 android:textSize="11sp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
                             <TextView
                                 android:id="@+id/tv_bad_value1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="+77%"
+                                android:layout_marginEnd="10dp"
+                                android:text="--"
                                 android:textColor="#8FCBCA"
                                 android:textSize="11sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -533,53 +576,51 @@
                                 android:id="@+id/slider_bad1"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
+                                android:enabled="false"
                                 android:focusable="false"
+                                android:value="0"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:value="30"
-                                android:enabled="false"
-                                app:trackColorActive="#8FCBCA"
-                                app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:thumbRadius="0dp"
-                                app:tickVisible="false" />
+                                app:tickVisible="false"
+                                app:trackColorActive="#8FCBCA"
+                                app:trackColorInactive="#B2B2B2" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/iv_bad2"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:minWidth="32dp"
-                            android:layout_height="match_parent"
 
-                            android:src="@drawable/ghost_21_study"
-                            android:layout_marginEnd="10dp"
-                            />
+                            android:minWidth="32dp"
+                            android:src="@drawable/ghost_21_study" />
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:minWidth="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:layout_height="match_parent">
+                            android:minWidth="100dp">
 
                             <TextView
                                 android:id="@+id/tv_bad2"
@@ -587,19 +628,20 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="안굳"
+                                android:text="--"
                                 android:textColor="#757575"
                                 android:textSize="11sp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
                             <TextView
                                 android:id="@+id/tv_bad_value2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginEnd="10dp"
 
-                                android:text="+77%"
+                                android:text="--"
                                 android:textColor="#8FCBCA"
                                 android:textSize="11sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -611,53 +653,51 @@
                                 android:id="@+id/slider_bad2"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
+                                android:enabled="false"
                                 android:focusable="false"
+                                android:value="0"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
-                                android:enabled="false"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:value="30"
-                                app:trackColorActive="#8FCBCA"
-                                app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:thumbRadius="0dp"
-                                app:tickVisible="false" />
+                                app:tickVisible="false"
+                                app:trackColorActive="#8FCBCA"
+                                app:trackColorInactive="#B2B2B2" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-
-
                     </LinearLayout>
+
                     <LinearLayout
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="20dp"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
                         android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/iv_bad3"
                             android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="10dp"
                             android:layout_weight="1"
                             android:adjustViewBounds="true"
-                            android:minWidth="32dp"
-                            android:layout_height="match_parent"
 
-                            android:src="@drawable/ghost_21_study"
-                            android:layout_marginEnd="10dp"
-                            />
+                            android:minWidth="32dp"
+                            android:src="@drawable/ghost_21_study" />
+
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="0dp"
-                            android:minWidth="100dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="4"
-                            android:layout_height="match_parent">
+                            android:minWidth="100dp">
 
                             <TextView
                                 android:id="@+id/tv_bad3"
@@ -665,18 +705,19 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="안굳"
+                                android:text="--"
                                 android:textColor="#757575"
                                 android:textSize="11sp"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
+
                             <TextView
                                 android:id="@+id/tv_bad_value3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="10dp"
                                 android:layout_marginTop="10dp"
-                                android:text="+77%"
+                                android:layout_marginEnd="10dp"
+                                android:text="--"
                                 android:textColor="#8FCBCA"
                                 android:textSize="11sp"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -688,355 +729,297 @@
                                 android:id="@+id/slider_bad3"
                                 android:layout_width="match_parent"
                                 android:layout_height="100dp"
+                                android:enabled="false"
                                 android:focusable="false"
+                                android:value="0"
                                 android:valueFrom="0.0"
                                 android:valueTo="100.0"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
-                                android:enabled="false"
-                                android:value="30"
-                                app:trackColorActive="#8FCBCA"
-                                app:trackColorInactive="#B2B2B2"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:thumbRadius="0dp"
-                                app:tickVisible="false" />
+                                app:tickVisible="false"
+                                app:trackColorActive="#8FCBCA"
+                                app:trackColorInactive="#B2B2B2" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
 
 
                     </LinearLayout>
 
 
-
-
-
-
                 </LinearLayout>
-
-
 
 
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:minHeight="170dp"
-                android:orientation="vertical"
                 android:background="@drawable/border_just_bottom"
-                >
+                android:minHeight="170dp"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="70dp"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/border_black"
-                    android:gravity="center"
-                    android:minWidth="122dp"
-                    android:minHeight="30dp"
-                    android:text="평균점수"
-                    android:textColor="#666666"
-                    android:textSize="13sp"
+                    android:background="@drawable/underline"
+                    android:backgroundTint="#FFD7D7"
+                    android:drawableRight="@drawable/ic_graph"
+                    android:gravity="left"
+                    android:text="평균점수  "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="37dp"
                     android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:orientation="horizontal"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4">
+
                     <ImageView
                         android:id="@+id/iv_avg_score"
 
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ghost_02_normal"
                         android:layout_gravity="end"
+                        android:src="@drawable/ghost_02_normal"
 
                         />
+
                     <TextView
                         android:id="@+id/tv_avg_score"
-                        android:layout_marginStart="25dp"
                         android:layout_width="60dp"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:layout_marginStart="25dp"
                         android:gravity="center"
-                        android:textColor="@color/pink"
                         android:text="90"
+                        android:textColor="@color/pink"
+                        android:textSize="15sp"
 
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textColor="#4A4A4A"
                         android:text=" 점"
+                        android:textColor="#4A4A4A"
+                        android:textSize="15sp"
 
                         />
 
 
                 </LinearLayout>
-            </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:minHeight="200dp"
                 android:layout_marginBottom="10dp"
-                android:background="@drawable/border_just_bottom"
+                android:background="#F5F5F5"
+                android:minHeight="321dp"
+                android:paddingBottom="30dp"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/border_black"
-                    android:gravity="center"
-                    android:minWidth="122dp"
-                    android:minHeight="30dp"
-                    android:text="기분분포"
-                    android:textColor="#666666"
-                    android:textSize="13sp"
-                    />
-                
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:paddingTop="20dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+
                     android:orientation="horizontal"
-                    >
+                    android:paddingTop="20dp">
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:paddingRight="16dp"
-                        android:paddingStart="16dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="vertical"
-                        >
+                        android:paddingStart="16dp"
+                        android:paddingRight="16dp">
+
                         <ImageView
                             android:layout_width="match_parent"
-                            android:adjustViewBounds="true"
                             android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_00_verygood"
-                            />
+                            android:src="@drawable/ghost_00_verygood" />
 
-                        <TextView
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#757575"
-                            android:text="매우좋음"
-                            android:textSize="11sp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            />
+
+
                         <TextView
                             android:id="@+id/tv_vergood_per"
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:text="30 %"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            android:gravity="center"
                             android:layout_gravity="center"
-                            />
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="30 %"
+                            android:textColor="@color/black"
+
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:paddingRight="16dp"
-                        android:paddingStart="16dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="vertical"
-                        >
+                        android:paddingStart="16dp"
+                        android:paddingRight="16dp">
+
                         <ImageView
                             android:layout_width="match_parent"
-                            android:adjustViewBounds="true"
                             android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_01_good"
-                            />
+                            android:src="@drawable/ghost_01_good" />
 
-                        <TextView
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#757575"
-                            android:text="좋음"
-                            android:textSize="11sp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            />
+
+
                         <TextView
                             android:id="@+id/tv_good_per"
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:text="30 %"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            android:gravity="center"
                             android:layout_gravity="center"
-                            />
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="30 %"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:paddingRight="16dp"
-                        android:paddingStart="16dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="vertical"
-                        >
+                        android:paddingStart="16dp"
+                        android:paddingRight="16dp">
+
                         <ImageView
                             android:layout_width="match_parent"
-                            android:adjustViewBounds="true"
                             android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_02_normal"
-                            />
+                            android:src="@drawable/ghost_02_normal" />
 
-                        <TextView
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#757575"
-                            android:text="보통"
-                            android:textSize="11sp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            />
+
+
                         <TextView
                             android:id="@+id/tv_normal_per"
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:text="30 %"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            android:gravity="center"
                             android:layout_gravity="center"
-                            />
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="30 %"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:paddingRight="16dp"
-                        android:paddingStart="16dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="vertical"
-                        >
+                        android:paddingStart="16dp"
+                        android:paddingRight="16dp">
+
                         <ImageView
                             android:layout_width="match_parent"
-                            android:adjustViewBounds="true"
                             android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_03_bad"
-                            />
+                            android:src="@drawable/ghost_03_bad" />
 
-                        <TextView
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#757575"
-                            android:text="나쁨"
-                            android:textSize="11sp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            />
+
                         <TextView
                             android:id="@+id/tv_bad_per"
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:text="30 %"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            android:gravity="center"
                             android:layout_gravity="center"
-                            />
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="30 %"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:paddingRight="16dp"
-                        android:paddingStart="16dp"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:orientation="vertical"
-                        >
+                        android:paddingStart="16dp"
+                        android:paddingRight="16dp">
+
                         <ImageView
                             android:layout_width="match_parent"
-                            android:adjustViewBounds="true"
                             android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_04_verybad"
-                            />
+                            android:src="@drawable/ghost_04_verybad" />
 
-                        <TextView
-                            android:layout_marginTop="5dp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#757575"
-                            android:text="매우나쁨"
-                            android:textSize="11sp"
-                            android:gravity="center"
-                            android:layout_gravity="center"
-                            />
+
                         <TextView
                             android:id="@+id/tv_verbad_per"
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/black"
-                            android:text="30 %"
-                            android:textStyle="bold"
-                            android:textSize="15sp"
-                            android:gravity="center"
                             android:layout_gravity="center"
-                            />
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="30 %"
+                            android:textColor="@color/black"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
-
 
 
                 </LinearLayout>
-
-
-
-
 
 
             </LinearLayout>
@@ -1045,8 +1028,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                >
+                android:paddingBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView"
@@ -1069,16 +1051,16 @@
 
                 <TextView
                     android:id="@+id/tv_select_analyze"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp"
                     android:layout_width="wrap_content"
-                    android:maxWidth="120dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:background="@drawable/border_black"
                     android:gravity="center"
+                    android:maxWidth="120dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="5dp"
 
                     android:text="감정 선택"
                     android:textColor="#000000"
@@ -1101,10 +1083,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:minHeight="170dp"
-                    android:orientation="vertical"
                     android:background="@drawable/border_just_bottom"
-                    >
+                    android:minHeight="170dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -1123,40 +1104,41 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
                         android:layout_height="0dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginBottom="30dp"
-                        android:orientation="horizontal"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        >
+                        android:orientation="horizontal">
+
                         <ImageView
                             android:id="@+id/iv_select_score"
 
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
-                            android:src="@drawable/ghost_02_normal"
                             android:layout_gravity="end"
+                            android:src="@drawable/ghost_02_normal"
 
                             />
+
                         <TextView
                             android:id="@+id/tv_select_score"
-                            android:layout_marginStart="25dp"
                             android:layout_width="60dp"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
+                            android:layout_marginStart="25dp"
                             android:gravity="center"
-                            android:textColor="@color/pink"
                             android:text="90"
+                            android:textColor="@color/pink"
+                            android:textSize="15sp"
 
                             />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:textColor="#4A4A4A"
                             android:text=" 점"
+                            android:textColor="#4A4A4A"
+                            android:textSize="15sp"
 
                             />
 
@@ -1168,9 +1150,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:minHeight="200dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/border_just_bottom"
+                    android:minHeight="200dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -1184,246 +1166,226 @@
                         android:minHeight="30dp"
                         android:text="기분분포"
                         android:textColor="#666666"
-                        android:textSize="13sp"
-                        />
+                        android:textSize="13sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:paddingTop="20dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_weight="1"
                         android:orientation="horizontal"
-                        >
+                        android:paddingTop="20dp">
+
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:paddingRight="16dp"
-                            android:paddingStart="16dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:orientation="vertical"
-                            >
+                            android:paddingStart="16dp"
+                            android:paddingRight="16dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:adjustViewBounds="true"
                                 android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
 
                                 android:minHeight="40dp"
-                                android:src="@drawable/ghost_00_verygood"
-                                />
+                                android:src="@drawable/ghost_00_verygood" />
 
                             <TextView
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#757575"
-                                android:text="매우좋음"
-                                android:textSize="11sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="매우좋음"
+                                android:textColor="#757575"
+                                android:textSize="11sp" />
+
                             <TextView
                                 android:id="@+id/tv_select_vergood_per"
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="30 %"
-                                android:textStyle="bold"
-                                android:textSize="15sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="30 %"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:paddingRight="16dp"
-                            android:paddingStart="16dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:orientation="vertical"
-                            >
+                            android:paddingStart="16dp"
+                            android:paddingRight="16dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:adjustViewBounds="true"
                                 android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
 
                                 android:minHeight="40dp"
-                                android:src="@drawable/ghost_01_good"
-                                />
+                                android:src="@drawable/ghost_01_good" />
 
                             <TextView
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#757575"
-                                android:text="좋음"
-                                android:textSize="11sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="좋음"
+                                android:textColor="#757575"
+                                android:textSize="11sp" />
+
                             <TextView
                                 android:id="@+id/tv_select_good_per"
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="30 %"
-                                android:textStyle="bold"
-                                android:textSize="15sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="30 %"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:paddingRight="16dp"
-                            android:paddingStart="16dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:orientation="vertical"
-                            >
+                            android:paddingStart="16dp"
+                            android:paddingRight="16dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:adjustViewBounds="true"
                                 android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
 
                                 android:minHeight="40dp"
-                                android:src="@drawable/ghost_02_normal"
-                                />
+                                android:src="@drawable/ghost_02_normal" />
 
                             <TextView
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#757575"
-                                android:text="보통"
-                                android:textSize="11sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="보통"
+                                android:textColor="#757575"
+                                android:textSize="11sp" />
+
                             <TextView
                                 android:id="@+id/tv_select_normal_per"
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="30 %"
-                                android:textStyle="bold"
-                                android:textSize="15sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="30 %"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:paddingRight="16dp"
-                            android:paddingStart="16dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:orientation="vertical"
-                            >
+                            android:paddingStart="16dp"
+                            android:paddingRight="16dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:adjustViewBounds="true"
                                 android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
 
                                 android:minHeight="40dp"
-                                android:src="@drawable/ghost_03_bad"
-                                />
+                                android:src="@drawable/ghost_03_bad" />
 
                             <TextView
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#757575"
-                                android:text="나쁨"
-                                android:textSize="11sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="나쁨"
+                                android:textColor="#757575"
+                                android:textSize="11sp" />
+
                             <TextView
                                 android:id="@+id/tv_select_bad_per"
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="30 %"
-                                android:textStyle="bold"
-                                android:textSize="15sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="30 %"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:paddingRight="16dp"
-                            android:paddingStart="16dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:orientation="vertical"
-                            >
+                            android:paddingStart="16dp"
+                            android:paddingRight="16dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
-                                android:adjustViewBounds="true"
                                 android:layout_height="wrap_content"
+                                android:adjustViewBounds="true"
 
                                 android:minHeight="40dp"
-                                android:src="@drawable/ghost_04_verybad"
-                                />
+                                android:src="@drawable/ghost_04_verybad" />
 
                             <TextView
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="#757575"
-                                android:text="매우나쁨"
-                                android:textSize="11sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="매우나쁨"
+                                android:textColor="#757575"
+                                android:textSize="11sp" />
+
                             <TextView
                                 android:id="@+id/tv_select_verbad_per"
-                                android:layout_marginTop="5dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/black"
-                                android:text="30 %"
-                                android:textStyle="bold"
-                                android:textSize="15sp"
-                                android:gravity="center"
                                 android:layout_gravity="center"
-                                />
+                                android:layout_marginTop="5dp"
+                                android:gravity="center"
+                                android:text="30 %"
+                                android:textColor="@color/black"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
-
 
 
                     </LinearLayout>
-
-
-
-
 
 
                 </LinearLayout>
 
 
             </LinearLayout>
-
-
-
-
-
-
-
 
 
         </LinearLayout>

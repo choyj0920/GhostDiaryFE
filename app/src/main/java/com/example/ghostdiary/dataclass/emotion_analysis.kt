@@ -1,5 +1,11 @@
 package com.example.ghostdiary.dataclass
 
+import com.github.mikephil.charting.charts.LineChart
+import com.github.mikephil.charting.data.CandleData
+import com.github.mikephil.charting.data.CandleEntry
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.lang.Math.round
 
 data class emotion_analysis(var text:String,var ghostnum:Int,var emotioncount: Array<Int> = arrayOf(0,0,0,0,0)){
@@ -8,9 +14,13 @@ data class emotion_analysis(var text:String,var ghostnum:Int,var emotioncount: A
 
     var mypercentage:ArrayList<Int>?=null
 
+
+
     fun init(){
         myscore=getmyscore()
         mypercentage=getmypercentage()
+
+
     }
 
 

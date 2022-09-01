@@ -217,6 +217,10 @@ class CalendarFragment : Fragment() {
             intent.putExtra("firsttext",false)
             startActivity(intent)
         }
+        binding!!.ivAnalyze.setOnClickListener {
+            val intent = Intent(requireContext(), AnalyzeActivity::class.java)
+            startActivity(intent)
+        }
 
 
     }

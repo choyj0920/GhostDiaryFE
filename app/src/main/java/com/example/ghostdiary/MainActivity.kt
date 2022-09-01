@@ -330,9 +330,15 @@ class MainActivity : AppCompatActivity() {
         else {
 
             if (viewPager.currentItem == 0) {
-                // If the user is currently looking at the first step, allow the system to handle the
-                // Back button. This calls finish() on this activity and pops the back stack.
-                super.onBackPressed()
+                if(System.currentTimeMillis() - lastTimeBackPressed >= 1500){
+                    lastTimeBackPressed = System.currentTimeMillis()
+                    showmessage("\"'뒤로' 버튼을 한번 더 누르시면 종료됩니다.\"")
+                }
+                else {
+                    finishAffinity()
+                    System.runFinalization()
+                    System.exit(0)
+                }
                 return
 
             } else {

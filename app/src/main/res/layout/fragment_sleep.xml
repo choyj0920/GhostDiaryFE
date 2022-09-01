@@ -5,17 +5,42 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/banner_analyze_sleep"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_wrongsleep"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:gravity="center"
+
+        android:text="충분한 데이터가 없어서 분석이 되지 않아요.\n\n수면시간이 5일 이상 입력되어야해요"
+
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:nestedScrollingEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#F5F5F5"
+        android:background="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/imageView">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,82 +48,89 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:padding="15dp"
-                android:text="수면"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:background="@color/white"
-
-                />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:minHeight="170dp"
-                android:orientation="vertical"
-                android:background="@drawable/border_just_topbottom"
+                android:background="#FFFFFF"
                 >
 
+                <ImageView
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="12dp"
+                    android:padding="3dp"
+                    android:rotation="180"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_arrow"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView2"
+                    app:tint="@color/black" />
+
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/border_black"
-                    android:gravity="center"
-                    android:minWidth="122dp"
-                    android:minHeight="30dp"
-                    android:text="평균 수면시간"
-                    android:textColor="#666666"
-                    android:textSize="13sp"
-
-                    />
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="30dp"
+                    android:background="@drawable/underline"
+                    android:backgroundTint="#C8EBEA"
+                    android:drawableRight="@drawable/ic_graph"
+                    android:gravity="left"
+                    android:text="수면분석 "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <LinearLayout
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="47dp"
+                    android:layout_marginBottom="43dp"
                     android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal"
+                    android:background="#FFFFFF"
                     android:gravity="center"
-                    >
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2">
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:background="#FFFFFF"
                         android:gravity="center"
-                        >
+
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:textSize="16sp"
                             android:gravity="center"
-                            android:textColor="#4A4A4A"
                             android:text="잠든 시간"
+                            android:textColor="#4A4A4A"
+                            android:textSize="16sp"
 
                             />
+
                         <TextView
                             android:id="@+id/tv_sleepstarttime"
                             android:layout_width="wrap_content"
-                            android:layout_weight="1"
                             android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textSize="16sp"
-                            android:textColor="@color/pink"
                             android:text="11:11"
+                            android:textColor="@color/pink"
+                            android:textSize="16sp"
 
                             />
 
@@ -106,31 +138,32 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:textSize="16sp"
                             android:gravity="center"
-                            android:textColor="#4A4A4A"
                             android:text="일어난 시간"
+                            android:textColor="#4A4A4A"
+                            android:textSize="16sp"
 
                             />
+
                         <TextView
                             android:id="@+id/tv_sleependtime"
                             android:layout_width="wrap_content"
-                            android:layout_weight="1"
                             android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textSize="16sp"
-                            android:textColor="@color/pink"
                             android:text="11:11"
+                            android:textColor="@color/pink"
+                            android:textSize="16sp"
 
                             />
 
@@ -138,116 +171,110 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_weight="1"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        >
+                        android:orientation="vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:textSize="16sp"
                             android:gravity="center"
-                            android:textColor="#4A4A4A"
                             android:text="수면 시간"
+                            android:textColor="#4A4A4A"
+                            android:textSize="16sp"
 
                             />
+
                         <TextView
                             android:id="@+id/tv_sleeptime"
                             android:layout_width="wrap_content"
-                            android:layout_weight="1"
                             android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1"
                             android:gravity="center"
-                            android:textSize="16sp"
-                            android:textColor="@color/pink"
                             android:text="11:11"
+                            android:textColor="@color/pink"
+                            android:textSize="16sp"
 
                             />
 
                     </LinearLayout>
 
 
-
                 </LinearLayout>
-            </LinearLayout>
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:minHeight="200dp"
                 android:orientation="vertical"
-                android:background="@drawable/border_just_topbottom"
+                android:minHeight="250dp"
+
+                android:background="#F5F5F5"
+
                 >
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/border_black"
-                    android:gravity="center"
-                    android:minWidth="122dp"
-                    android:minHeight="30dp"
-                    android:text="수면 그래프"
-                    android:textColor="#666666"
-                    android:textSize="13sp"
-
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    />
                 <com.github.mikephil.charting.charts.CandleStickChart
                     android:layout_weight="1"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:minHeight="200dp"
                     android:id="@+id/chart"
+                    android:layout_gravity="center"
 
+                    android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="250dp" />
+                    android:layout_height="wrap_content" />
 
 
 
             </LinearLayout>
 
-            <LinearLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/border_just_topbottom"
-                android:minHeight="170dp"
-                android:orientation="vertical">
+                android:background="#FFFFFF"
+                >
+
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="70dp"
                     android:layout_marginTop="30dp"
-                    android:background="@drawable/border_black"
-                    android:gravity="center"
-                    android:minWidth="122dp"
-                    android:minHeight="30dp"
-                    android:text="추천 수면시간"
-                    android:textColor="#666666"
-                    android:textSize="13sp"
+                    android:background="@drawable/underline"
+                    android:backgroundTint="#C8EBEA"
+                    android:gravity="left"
+                    android:text="추천 수면시간 "
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="33dp"
+
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -271,64 +298,63 @@
                         android:textSize="12sp" />
 
 
-                </LinearLayout>
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:minHeight="170dp"
-                android:orientation="vertical"
-                android:background="@drawable/border_just_topbottom"
-                >
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:layout_height="0dp"
-                    android:padding="10dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="30dp"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    >
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:minWidth="50dp"
-                        android:maxHeight="100dp"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ghost_sleep"
-                        android:maxWidth="100dp"
-                        />
+                        android:layout_height="0dp"
+                        android:padding="10dp"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="30dp"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        >
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:minWidth="50dp"
+                            android:maxHeight="100dp"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ghost_sleep"
+                            android:maxWidth="100dp"
+                            />
 
-                        android:layout_margin="10dp"
-                        android:layout_weight="2"
-                        android:background="@drawable/ic_ballon"
-                        android:elevation="10dp"
-                        android:paddingLeft="26dp"
-                        android:paddingTop="17dp"
-                        android:paddingRight="15dp"
-                        android:paddingBottom="15dp"
-                        android:text="Tip)\n\n성인의 수면 적정시간은\n7시간에서 8시간 정도입니다"
-                        android:textColor="#4A4A4A"
-                        android:textSize="12sp" />
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_margin="10dp"
+                            android:layout_weight="2"
+                            android:background="@drawable/ic_ballon"
+                            android:elevation="10dp"
+                            android:paddingLeft="26dp"
+                            android:paddingTop="17dp"
+                            android:paddingRight="15dp"
+                            android:paddingBottom="15dp"
+                            android:text="Tip)\n\n성인의 수면 적정시간은\n7시간에서 8시간 정도입니다"
+                            android:textColor="#4A4A4A"
+                            android:textSize="12sp" />
+
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
-            </LinearLayout>
+
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
 
 
 

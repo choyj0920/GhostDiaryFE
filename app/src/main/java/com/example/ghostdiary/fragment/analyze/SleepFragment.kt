@@ -1,4 +1,4 @@
-package com.example.ghostdiary.fragment.main
+package com.example.ghostdiary.fragment.analyze
 
 import android.graphics.Color
 import android.graphics.Paint
@@ -9,9 +9,9 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.alpha
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.ghostdiary.MainViewModel
@@ -28,18 +28,20 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
+import kotlin.math.min
 import kotlin.math.round
 
 
 class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
     private var binding: FragmentSleepBinding?=null
 
     private var chartData = ArrayList<CandleEntry>()  // 데이터 배열
     private var lineDataSet = ArrayList<ILineDataSet>()  // 데이터 배열 → 데이터 셋
     private var candleData: CandleData = CandleData()
     lateinit var chart: CandleStickChart
+    var xlabelindex:ArrayList<String> = arrayListOf()
     companion object{
         fun convertDays(date: Date): Float {
             val basedata = "2022-02-10"
@@ -82,6 +84,11 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
     }
 
     private fun init() {
+        if(Sleep_data.avgsleepstart==null){
+            binding!!.scrollView.visibility=View.GONE
+            binding!!.tvWrongsleep.visibility=View.VISIBLE
+            return
+        }
 
         var sleepstart =Date (TimeUnit.MINUTES.toMillis(round(60 * 9 +Sleep_data.avgsleepstart!!*10).toLong()))
         var sleepend =Date (TimeUnit.MINUTES.toMillis(60 * 9+ round(Sleep_data.avgsleepend!!*10).toLong()))
@@ -102,6 +109,20 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         initChart()
 
         initadvice_sleep()
+
+        chart.setOnTouchListener(View.OnTouchListener { v, event ->
+            val action = event.action
+            when (action) {
+                MotionEvent.ACTION_DOWN ->                 // Disallow ScrollView to intercept touch events.
+                    v.parent.requestDisallowInterceptTouchEvent(true)
+                MotionEvent.ACTION_UP ->                 // Allow ScrollView to intercept touch events.
+                    v.parent.requestDisallowInterceptTouchEvent(false)
+            }
+            // Handle Seekbar touch events.
+            v.onTouchEvent(event)
+            true
+        })
+
 
 
     }
@@ -152,14 +173,19 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         // 더미데이터
         sleepArray.sortBy { it.date }
 
+        xlabelindex = arrayListOf()
+        xlabelindex.add("")
+        var index=0
+        var formatdate = SimpleDateFormat("yy/MM/dd")
 
         for(i in sleepArray){
-
+            index+=1
             var start=i.sleepstart/6.0f
             var end=i.sleepend/6.0f
             var middle=round((start+end)/2)
             Log.d("TAG","에베베베$start,$end")
-            chartData.add(CandleEntry(convertDays(i.date).toFloat(), end,start,start,start,resources.getDrawable(R.drawable.circle_justside)))
+            chartData.add(CandleEntry(index.toFloat(), end,start,start,start,resources.getDrawable(R.drawable.circle_justside)))
+            xlabelindex.add(formatdate.format(i.date))
 
 //            if((i.sleeptime/6)<=8 && (i.sleeptime/6)>=7){
 //                chartData.add(CandleEntry(convertDays(i.date).toFloat(), end,start,end,start,resources.getDrawable(R.drawable.circle_justside)))
@@ -169,22 +195,24 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 //
 //            }
         }
+        xlabelindex.add("")
+
 
 
         var set = CandleDataSet(chartData, "set1")
         set.setDrawIcons(true)
 
         set.setShadowColor(getResources().getColor(R.color.pink));
-        set.setShadowWidth(5f)
+        set.setShadowWidth(2f)
 
         set.color=resources.getColor(R.color.black)
 
 
         set.decreasingColor=resources.getColor(R.color.badsleep)
         set.setDecreasingPaintStyle(Paint.Style.FILL);
-        set.increasingColor=resources.getColor(R.color.white)
+        set.increasingColor=resources.getColor(R.color.transp)
         set.setIncreasingPaintStyle(Paint.Style.FILL);
-        set.neutralColor=resources.getColor(R.color.white)
+        set.neutralColor=resources.getColor(R.color.transp)
 
         candleData = CandleData(set)
 
@@ -198,9 +226,10 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
     private fun initChart() {
         chart.run {
             setDrawGridBackground(false)
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(resources.getColor(R.color.backf5))
             legend.isEnabled = false
             isHighlightPerTapEnabled=false
+
             legend.setDrawInside(true)
         }
         chart.setHighlightPerDragEnabled(false);
@@ -213,16 +242,20 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
         xAxis.setDrawGridLines(false) // disable x axis grid lines
 
-        xAxis.axisMaximum = chartData.get(chartData.size-1).x +1
-        xAxis.axisMinimum = chartData.get(0).x - 1
+        xAxis.axisMaximum = chartData.size.toFloat()+1
+        xAxis.axisMinimum = min(0.toFloat(),xAxis.axisMaximum-5f)
+
         xAxis.labelCount = 5
-        xAxis.valueFormatter = TimeAxisValueFormat()
-        xAxis.textSize=12f
+//        xAxis.valueFormatter = TimeAxisValueFormat()
+        xAxis.valueFormatter = IndexAxisValueFormatter(xlabelindex)
+        xAxis.textSize=8f
         xAxis.granularity=1f
         xAxis.position=XAxis.XAxisPosition.BOTTOM_INSIDE
 
+        chart.setVisibleXRangeMinimum(5f)
+//        chart.setVisibleXRangeMinimum(6f)
 
-        chart.setVisibleXRangeMinimum(10f)
+        chart.moveViewToX(5f)
 
 
 
@@ -234,14 +267,14 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
         // 왼쪽 y축 값
         val yLAxis = chart.axisLeft
-        yLAxis.axisMaximum = 20f   // y축 최대값(고정)
+        yLAxis.axisMaximum = 21f   // y축 최대값(고정)
         yLAxis.axisMinimum = 0f  // y축 최소값(고정)
         yLAxis.setDrawGridLines(true)
-        yLAxis.setDrawAxisLine(true)
+        yLAxis.setDrawAxisLine(false)
 
         // 왼쪽 y축 도메인 변경
         val yAxisVals = ArrayList<String>()
-        for (i in 0..20){
+        for (i in 0..21){
             yAxisVals.add(((i+18)%24).toString())
         }
         yLAxis.valueFormatter = IndexAxisValueFormatter(yAxisVals)
@@ -260,7 +293,7 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 //        marker.chartView = chart
 //        chart.marker = marker
 
-        chart.setVisibleYRange(20f,20f,YAxis.AxisDependency.LEFT)
+        chart.setVisibleYRange(21f,21f,YAxis.AxisDependency.LEFT)
 
         chart!!.description.isEnabled = false  // 설명
         chart.data=candleData

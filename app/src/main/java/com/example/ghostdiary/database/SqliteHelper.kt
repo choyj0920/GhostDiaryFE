@@ -59,6 +59,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "memo_id  integer NOT NULL PRIMARY KEY autoincrement," +
                 "folder_id    integer NOT NULL," +
                 "title    TEXT NOT NULL," +
+                "date     TEXT  NOT NULL," +
                 "text   TEXT NOT NULL," +
                 "FOREIGN KEY(folder_id) REFERENCES MEMO_FOLDER(folder_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create_memo)
@@ -105,6 +106,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "memo_id  integer NOT NULL PRIMARY KEY autoincrement," +
                 "folder_id    integer NOT NULL," +
                 "title    TEXT NOT NULL," +
+                "date     TEXT  NOT NULL," +
                 "text   TEXT NOT NULL," +
                 "FOREIGN KEY(folder_id) REFERENCES MEMO_FOLDER(folder_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create_memo)
@@ -168,6 +170,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 "memo_id  integer NOT NULL PRIMARY KEY autoincrement," +
                 "folder_id    integer NOT NULL," +
                 "title    TEXT NOT NULL," +
+                "date     TEXT  NOT NULL," +
                 "text   TEXT NOT NULL," +
                 "FOREIGN KEY(folder_id) REFERENCES MEMO_FOLDER(folder_id) ON DELETE CASCADE ON UPDATE CASCADE);"
         db?.execSQL(create_memo)
@@ -207,12 +210,15 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         return result
 
     }
-    fun insert_Memo(folder_id:Int,title:String,text:String,memo_id:Int=-1):Int{
+    fun insert_Memo(folder_id:Int,title:String,text:String,date: Date,memo_id:Int=-1):Int{
 
         if(memo_id!=-1){
-            updateMemo(title,text,memo_id)
+            updateMemo(title,text,date,memo_id)
             return memo_id
         }
+        var formatDatetime = SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+
         val wd = writableDatabase
 
         val values = ContentValues()
@@ -222,6 +228,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         values.put("folder_id",folder_id)
         values.put("title",title)
         values.put("text",text)
+        values.put("date",formatDatetime.format(date))
 
 
         //쓰기나 수정이 가능한 데이터베이스 변수
@@ -238,7 +245,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         val values = ContentValues()
         //넘겨줄 컬럼의 매개변수 지정
         var formatDate = SimpleDateFormat("yyyy-MM-dd");
-        var formatDatetime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        var formatDatetime = SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 
         values.put("date",formatDate.format(diary.date))
@@ -405,7 +412,6 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
             while (findghostnumcursor.moveToNext()){
                 ghostnum=findghostnumcursor.getLong(findghostnumcursor.getColumnIndex("ghost_num")).toInt()
-                Log.e("TAG","asdfasdfasdf !@#!@#_____________${ghostnum}: $text  sql : ${findque}")
                 break
             }
 
@@ -437,6 +443,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
             var folder_name = folder_cursor.getString(folder_cursor.getColumnIndex("folder_name"))
             val ghost_num = folder_cursor.getLong(folder_cursor.getColumnIndex("ghost_num")).toInt()
 
+
             var memoFolder=Memo_Folder(id,folder_name,ghost_num)
 
             folderlist.add(memoFolder)
@@ -447,15 +454,18 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
         val selectAll_memo = "select * from MEMO;"
         val memo_cursor = rd.rawQuery(selectAll_memo,null)
 
+        var formatDate = SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         while(memo_cursor.moveToNext()){
+            var strdate = memo_cursor.getString(memo_cursor.getColumnIndex("date"))
+            var date:Date = formatDate.parse(strdate)
 
             val memo_id = memo_cursor.getLong(memo_cursor.getColumnIndex("memo_id")).toInt()
             val folder_id = memo_cursor.getLong(memo_cursor.getColumnIndex("folder_id")).toInt()
             var title = memo_cursor.getString(memo_cursor.getColumnIndex("title"))
             var text = memo_cursor.getString(memo_cursor.getColumnIndex("text"))
 
-            var memo=Memo(folder_id,title,text,memo_id)
+            var memo=Memo(folder_id,title,text,date,memo_id)
 
             for (i in folderlist){
                 if(i.folder_id==folder_id) {
@@ -516,7 +526,6 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
 
             val emotioncursor=rd.rawQuery(selectAll_emotions+id.toString()+";",null)
-            Log.e("TAG","현재 다이어리 id ${id} ,${date} , ${diary.image}, ${diary.text} ,${diary.sleepstart},${diary.sleepend}")
             while(emotioncursor.moveToNext()){
                 cursor_emotion(emotioncursor,diary)
             }
@@ -564,15 +573,18 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     }
 
     //update 메소드
-    fun updateMemo(title: String,text: String,memo_id: Int){
+    fun updateMemo(title: String,text: String,date: Date,memo_id: Int){
         val wd = writableDatabase
 
         val values = ContentValues()
         //넘겨줄 컬럼의 매개변수 지정
+        var formatDatetime = SimpleDateFormat("yyyy-MM-dd HH:mm");
 
 
         values.put("title",title)
         values.put("text",text)
+        values.put("date",formatDatetime.format(date))
+
 
         //쓰기나 수정이 가능한 데이터베이스 변수
 

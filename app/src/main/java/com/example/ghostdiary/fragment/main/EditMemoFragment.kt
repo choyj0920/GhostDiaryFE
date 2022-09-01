@@ -59,7 +59,7 @@ class EditMemoFragment(var parent:MemoSelectFragment,var folder_id:Int,var memo:
     }
     fun init(){
         if(memo==null){
-            curMemo=Memo(folder_id,"","", memoid = -1)
+            curMemo=Memo(folder_id,"","",Calendar.getInstance().time, memoid = -1)
         }else{
             curMemo=memo!!
 

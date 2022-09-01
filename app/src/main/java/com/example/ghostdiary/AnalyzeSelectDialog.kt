@@ -5,7 +5,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle;
 import android.os.Parcelable
 import android.text.Editable
-import android.text.InputFilter
 import android.text.TextWatcher
 import android.view.*
 import android.widget.ImageView
@@ -14,18 +13,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.adapter.AdapterPostdiary
 import com.example.ghostdiary.databinding.DialogAnalyzeSelectBinding
 
-import com.example.ghostdiary.databinding.DialogGhostsSelectBinding
 import com.example.ghostdiary.databinding.ItemAnalyzeBinding
-import com.example.ghostdiary.databinding.ItemGhostBinding
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.dataclass.Memo_Folder
 import com.example.ghostdiary.dataclass.emotion_analysis
-import com.example.ghostdiary.dataclass.emotionclass
-import com.example.ghostdiary.fragment.main.AnalysisFragment
-import com.example.ghostdiary.fragment.main.MemoFragment
+import com.example.ghostdiary.fragment.analyze.AnalysisFragment
 
 class AnalyzeSelectDialog(var _parent: AnalysisFragment): DialogFragment() {
 
