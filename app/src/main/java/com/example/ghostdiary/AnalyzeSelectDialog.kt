@@ -18,9 +18,10 @@ import com.example.ghostdiary.databinding.DialogAnalyzeSelectBinding
 import com.example.ghostdiary.databinding.ItemAnalyzeBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotion_analysis
+import com.example.ghostdiary.fragment.analyze.AnalysisDetailFragment
 import com.example.ghostdiary.fragment.analyze.AnalysisFragment
 
-class AnalyzeSelectDialog(var _parent: AnalysisFragment): DialogFragment() {
+class AnalyzeSelectDialog(var _parent: AnalysisDetailFragment): DialogFragment() {
 
     // 뷰 바인딩 정의
     private var binding: DialogAnalyzeSelectBinding? = null

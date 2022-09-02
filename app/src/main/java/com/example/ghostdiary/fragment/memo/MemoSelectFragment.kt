@@ -1,4 +1,4 @@
-package com.example.ghostdiary.fragment.main
+package com.example.ghostdiary.fragment.memo
 
 import android.os.Bundle
 import android.os.Parcelable
@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.*
@@ -18,13 +17,14 @@ import com.example.ghostdiary.databinding.*
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.Memo
 import com.example.ghostdiary.dataclass.Memo_Folder
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
+class MemoSelectFragment(var parent:MemoActivity, var memoFolder: Memo_Folder) : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
     private var binding: FragmentMemoSelectBinding?=null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,18 +43,16 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
 
     private fun init() {
 
-        binding!!.ivGhost.setImageResource(Day_Diary.int_to_image.get(memoFolder.ghost_num))
         binding!!.tvName.text=memoFolder.folder_name
 
-        binding!!.ivPost.setOnClickListener {
-//            MainActivity.mainactivity.containerChange(EditMemoFragment( this,memoFolder.folder_id,null))
+        binding!!.ivMemoplus.setOnClickListener {
+            parent.containerChange(EditMemoFragment( parent,memoFolder.folder_id,null))
+            binding!!.rvMemo.scrollToPosition(0)
+
 
         }
 
-
-
         update()
-
 
     }
 
@@ -65,6 +63,9 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
 
 
     fun update(isnew:Boolean=false) {
+        memoFolder.arrMemo.sortBy { it.date }
+        memoFolder.arrMemo.reverse()
+
         var state: Parcelable?=null
         try {
             state=binding!!.rvMemo.layoutManager!!.onSaveInstanceState()
@@ -74,7 +75,6 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
         }
         val memolistmanager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         val memolistadapter = Memoadpater(memoFolder.arrMemo)
-
 
         binding!!.rvMemo.apply {
             layoutManager=memolistmanager
@@ -89,14 +89,13 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
     }
 
 
-
     inner class Memoadpater(var memos:ArrayList<Memo>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
         inner class Memoview(binding: ItemMemoBinding) : RecyclerView.ViewHolder(binding.root) {
             var memoTitle:TextView= binding.tvTitle
-            var memotext:TextView= binding.tvText
-            var memooption: ImageView =binding.btnOption
+            var memodate:TextView= binding.tvDate
+            var layoutmemo=binding.layoutmemo
         }
 
 
@@ -120,8 +119,16 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
             var memo =memos[position]
 
             holder.memoTitle.text=memo.title
-            holder.memotext.text=memo.text
-            holder.memooption.setOnClickListener {
+            var formatdate = SimpleDateFormat("yy.MM.dd")
+            var formatdatenonyear = SimpleDateFormat("MM.dd.")
+            var curyear =Calendar.getInstance().time.year
+            holder.memodate.text= if(curyear == memo.date.year) formatdatenonyear.format(memo.date) else formatdate.format(memo.date)
+
+            holder.layoutmemo.setOnClickListener{
+                parent.containerChange(EditMemoFragment(parent,memo.folder_id,memo))
+            }
+
+            /*holder.memooption.setOnClickListener {
                 var popupMenu= PopupMenu(this@MemoSelectFragment.context ,holder.memooption)
                 this@MemoSelectFragment.requireActivity().menuInflater.inflate(R.menu.diary_sidemenu,popupMenu.menu)
 
@@ -142,7 +149,7 @@ class MemoSelectFragment(var memoFolder: Memo_Folder) : Fragment() {
                     item !=null
                 }
                 popupMenu.show()
-            }
+            }  */
 
 
 

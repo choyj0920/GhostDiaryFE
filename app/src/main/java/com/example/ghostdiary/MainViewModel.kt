@@ -31,12 +31,19 @@ class MainViewModel(): ViewModel() {
 
     fun addMemo(folder_id:Int ,title: String,text:String){
         maindb!!.insert_Memo(folder_id,title,text, date = Calendar.getInstance().time)
+    }fun delMemo(folder_id: Int,memoid:Int){
+        maindb!!.deleteMemo(memoid)
+        for(i in memofolder_array!!){
+            i.arrMemo!!.removeIf { it.memoid==memoid }
+        }
 
     }
+
     fun editmemo(memo: Memo){
-        var memo_id=maindb!!.insert_Memo(memo.folder_id,memo.title,memo.text, date = Calendar.getInstance().time,memo.memoid)
+        var memo_id=maindb!!.insert_Memo(memo.folder_id,memo.title,memo.text, date = memo.date ,memo.memoid)
         if(memo.memoid ==-1){
             memo.memoid=memo_id
+
             for (folder in memofolder_array!!){
                 if(folder.folder_id==memo.folder_id)
                     folder.arrMemo.add(memo)

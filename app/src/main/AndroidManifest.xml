@@ -27,6 +27,12 @@
             android:exported="false" >
 
         </activity>
+
+        <activity
+            android:name=".MemoActivity"
+            android:exported="false" >
+
+        </activity>
         <activity
             android:name=".PostDiaryActivity"
             android:exported="false" >

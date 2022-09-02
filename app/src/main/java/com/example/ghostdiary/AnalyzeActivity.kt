@@ -13,6 +13,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.adapter.FragmentViewHolder
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ghostdiary.databinding.ActivityAnalyzeBinding
+import com.example.ghostdiary.fragment.analyze.AnalysisDetailFragment
 import com.example.ghostdiary.fragment.analyze.AnalysisFragment
 import com.example.ghostdiary.fragment.analyze.SleepFragment
 import com.example.ghostdiary.fragment.calendar.CalendarFragment
@@ -24,6 +25,7 @@ import java.util.*
 class AnalyzeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAnalyzeBinding
     private lateinit var analysisFragment: AnalysisFragment
+    private lateinit var aDetailFragment: AnalysisDetailFragment
     private lateinit var sleepFragment: SleepFragment
 
     companion object{
@@ -43,6 +45,7 @@ class AnalyzeActivity : AppCompatActivity() {
         viewPager = binding.pager
 
         analysisFragment= AnalysisFragment(viewModel)
+        aDetailFragment= AnalysisDetailFragment(viewModel)
         sleepFragment= SleepFragment(viewModel.getsleepdataArray())
 
         init_view()
@@ -119,7 +122,7 @@ class AnalyzeActivity : AppCompatActivity() {
 
     private inner class CustomPagerAdapter(var fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int {
-            return 2
+            return 3
         }
 
         override fun onBindViewHolder(
@@ -129,10 +132,7 @@ class AnalyzeActivity : AppCompatActivity() {
         ) {
             val fragment  =  fa.supportFragmentManager.findFragmentByTag("f$position")
             fragment?.let{
-                if( it is CalendarFragment){
-                }else if(it is RecordFragment){
-                    Log.d("TAG","확인 vie호출")
-                }
+
             }
 
             super.onBindViewHolder(holder, position, payloads)
@@ -142,6 +142,8 @@ class AnalyzeActivity : AppCompatActivity() {
             when (position) {
                 0 -> {
                     return analysisFragment
+                }1->{
+                    return aDetailFragment
                 }
                 else ->{
                     return sleepFragment

@@ -427,6 +427,39 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
     }
 
     @SuppressLint("Range")
+    fun select_diaryanalysis_detail(findtext:String):emotion_analysis_detail{
+        var hashMap :HashMap<Date,Int> = hashMapOf()
+
+        var result=emotion_analysis_detail(findtext,hashMap)
+        val rd =readableDatabase
+        var formatDate = SimpleDateFormat("yyyy-MM-dd");
+
+
+
+        val que="select date, text,today from emotions join (select date,Diary.diary_id as did, today from Diary join (select emotions.diary_id as ed, ghost_num as today from emotions where category=0 AND isactive=1) on Diary.diary_id=ed) on emotions.diary_id=did  where isactive=1  AND category is not 0 AND text=\"${findtext}\";"
+        val analcursor=rd.rawQuery(que,null)
+
+        while (analcursor.moveToNext()){
+            val text=analcursor.getString(analcursor.getColumnIndex("text"))
+            var strdate = analcursor.getString(analcursor.getColumnIndex("date"))
+            val today = analcursor.getLong(analcursor.getColumnIndex("today")).toInt()
+
+            var date:Date = formatDate.parse(strdate)
+
+
+            if(!hashMap.contains(date)){
+                hashMap.put(date,today )
+            }
+            result.emotioncount[today]+=1
+
+        }
+
+        return result
+
+    }
+
+
+    @SuppressLint("Range")
     fun select_Memo():ArrayList<Memo_Folder>{
         var folderlist:ArrayList<Memo_Folder> = arrayListOf()
 

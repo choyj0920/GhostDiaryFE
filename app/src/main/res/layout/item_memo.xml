@@ -7,17 +7,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="20dp"
-    android:paddingTop="20dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
+
     android:layout_marginBottom="1dp"
     android:layout_marginTop="1dp"
     android:background="@drawable/border_just_bottom"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutmemo"
         android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="28dp"
+        android:paddingRight="25dp"
         android:layout_height="wrap_content">
 
 
@@ -26,41 +30,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textStyle="bold"
 
             android:text="Lorem ipsum dolor sit amet"
             android:textColor="#333333"
 
-            android:textSize="16sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="45dp"
+            android:minWidth="45dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
 
-        <ImageView
-            android:id="@+id/btn_option"
-            android:rotation="90"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:paddingBottom="10dp"
+            android:text="08.19"
+            android:textColor="#BAB6B6"
 
-            android:scaleType="fitCenter"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_sideoption"
-            app:tint="#666666" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <TextView
-        android:id="@+id/tv_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#757575"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. "
-
-        />
 
 </LinearLayout>

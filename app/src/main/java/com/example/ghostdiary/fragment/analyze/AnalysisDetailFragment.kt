@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.ghostdiary.*
 import com.example.ghostdiary.databinding.FragmentAnalysisBinding
+import com.example.ghostdiary.databinding.FragmentAnalysisDetailBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotion_analysis
 import com.github.mikephil.charting.charts.LineChart
@@ -28,13 +29,14 @@ import java.util.*
 import kotlin.math.min
 
 
-class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
+class AnalysisDetailFragment(private val viewModel:MainViewModel) : Fragment() {
 
-    private var binding: FragmentAnalysisBinding?=null
+    private var binding: FragmentAnalysisDetailBinding?=null
 
     lateinit var analysisMap :HashMap<String,emotion_analysis>
     lateinit var analysisList:List<emotion_analysis>
     var allscore:Int=-1
+    var selectemotion :emotion_analysis?=null
 
     lateinit var chart: LineChart
     private var chartData = ArrayList<Entry>()  // 데이터 배열
@@ -53,7 +55,7 @@ class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentAnalysisBinding.inflate(inflater,container,false)
+        binding= FragmentAnalysisDetailBinding.inflate(inflater,container,false)
 
         init()
         Util.setGlobalFont(binding!!.root)
@@ -71,115 +73,62 @@ class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
 
             return
         }
-        allscore=emotion_analysis.getallscore()
-        allpercen=emotion_analysis.getallpercentage()
 
+
+
+        binding!!.ivSelectAnalyze.setOnClickListener {
+            val dialog = AnalyzeSelectDialog(this )
+            dialog.isCancelable = true
+            dialog.show(requireActivity().supportFragmentManager, "ConfirmDialog")
+        }
+
+        analysisList=analysisList.sortedBy { -it.mypercentage!!.slice(0..1).sum() }
+
+        selectemotionUpdate()
+
+
+    }
+
+    fun selectemotionUpdate(){
+        if(selectemotion==null){
+            binding!!.laytoutDetail.visibility=View.GONE
+            binding!!.layoutScore.visibility=View.GONE
+
+            binding!!.tvNotselect.visibility=View.VISIBLE
+            return
+
+        }
+        binding!!.laytoutDetail.visibility=View.VISIBLE
+        binding!!.layoutScore.visibility=View.VISIBLE
+        binding!!.tvNotselect.visibility=View.GONE
+        binding!!.ivSelectAnalyze.setImageResource(Day_Diary.int_to_image[selectemotion!!.ghostnum])
+
+
+
+        var selectscore=selectemotion!!.getmyscore()
+        var selectpercen=selectemotion!!.getmypercentage()
+
+
+        binding!!.tvScore.text=selectscore.toString()
+
+        binding!!.tvVerygoodPer.text="${selectpercen[0]} %"
+        binding!!.tvGoodPer.text="${selectpercen[1]} %"
+        binding!!.tvNormalPer.text="${selectpercen[2]} %"
+        binding!!.tvBadPer.text="${selectpercen[3]} %"
+        binding!!.tvVerybadPer.text="${selectpercen[4]} %"
 
         initChartData()
 
         initChart()
 
-
-
-
-        analysisList=analysisList.sortedBy { -it.mypercentage!!.slice(0..1).sum() }
-
-
-
-        if(analysisList[0].mypercentage!!.slice(0..1).sum()>0){
-            binding!!.tvVeryhappy.text=analysisList[0].text
-
-            binding!!.ivGood1.setImageResource(Day_Diary.int_to_image.get(analysisList[0].ghostnum))
-            binding!!.tvGood1.text=analysisList[0].text
-            binding!!.tvGoodValue1.text="+${analysisList[0].mypercentage!!.slice(0..1).sum()}%"
-            binding!!.sliderGood1.value= analysisList[0].mypercentage!!.slice(0..1).sum().toFloat()
-        }else{
-            binding!!.tvVeryhappy.text= "--"
-
-            binding!!.ivGood1.visibility=View.INVISIBLE
-        }
-
-        if(analysisList[1].mypercentage!!.slice(0..1).sum()>0){
-            binding!!.ivGood2.setImageResource(Day_Diary.int_to_image[analysisList[1].ghostnum])
-            binding!!.tvGood2.text=analysisList[1].text
-            binding!!.tvGoodValue2.text="+${analysisList[1].mypercentage!!.slice(0..1).sum()}%"
-            binding!!.sliderGood2.value= analysisList[1].mypercentage!!.slice(0..1).sum().toFloat()
-        }else{
-            binding!!.ivGood2.visibility=View.INVISIBLE
-        }
-
-        if(analysisList[2].mypercentage!!.slice(0..1).sum()>0){
-            binding!!.ivGood3.setImageResource(Day_Diary.int_to_image[analysisList[2].ghostnum])
-            binding!!.tvGood3.text=analysisList[2].text
-            binding!!.tvGoodValue3.text="+${analysisList[2].mypercentage!!.slice(0..1).sum()}%"
-            binding!!.sliderGood3.value= analysisList[2].mypercentage!!.slice(0..1).sum().toFloat()
-
-
-        }else{
-            binding!!.ivGood3.visibility=View.INVISIBLE
-        }
-
-
-
-        analysisList= analysisList.sortedBy { -it.mypercentage!!.slice(3..4).sum() }
-
-        if(analysisList[0].mypercentage!!.slice(3..4).sum()>0){
-            binding!!.tvVerybad.text=analysisList[0].text
-            binding!!.tvVerybad2.text=analysisList[0].text
-
-            binding!!.ivBad1.setImageResource(Day_Diary.int_to_image[analysisList[0].ghostnum])
-            binding!!.tvBad1.text=analysisList[0].text
-            binding!!.tvBadValue1.text="+${analysisList[0].mypercentage!!.slice(3..4).sum()}%"
-            binding!!.sliderBad1.value= analysisList[0].mypercentage!!.slice(3..4).sum().toFloat()
-        }else{
-            binding!!.tvVerybad.text="--"
-            binding!!.tvVerybad2.text="--"
-            binding!!.ivBad1.visibility=View.INVISIBLE
-        }
-
-        if(analysisList[1].mypercentage!!.slice(3..4).sum()>0){
-            binding!!.ivBad2.setImageResource(Day_Diary.int_to_image[analysisList[1].ghostnum])
-            binding!!.tvBad2.text=analysisList[1].text
-            binding!!.tvBadValue2.text="+${analysisList[1].mypercentage!!.slice(3..4).sum()}%"
-            binding!!.sliderBad2.value= analysisList[1].mypercentage!!.slice(3..4).sum().toFloat()
-        }else{
-            binding!!.ivBad2.visibility=View.INVISIBLE
-
-        }
-        if(analysisList[2].mypercentage!!.slice(3..4).sum()>0){
-            binding!!.ivBad3.setImageResource(Day_Diary.int_to_image[analysisList[2].ghostnum])
-            binding!!.tvBad3.text=analysisList[2].text
-            binding!!.tvBadValue3.text="+${analysisList[2].mypercentage!!.slice(3..4).sum()}%"
-            binding!!.sliderBad3.value= analysisList[2].mypercentage!!.slice(3..4).sum().toFloat()
-        }else{
-            binding!!.ivBad3.visibility=View.INVISIBLE
-
-        }
-
-
-
-        binding!!.tvAvgScore.text=allscore.toString()
-
-        binding!!.tvVergoodPer.text="${allpercen[0]} %"
-        binding!!.tvGoodPer.text="${allpercen[1]} %"
-        binding!!.tvNormalPer.text="${allpercen[2]} %"
-        binding!!.tvBadPer.text="${allpercen[3]} %"
-        binding!!.tvVerbadPer.text="${allpercen[4]} %"
-
-
-        analysisList=analysisList.sortedBy { -it.mypercentage!!.slice(0..1).sum() }
-
-
-
-
     }
-
 
 
     private fun initChartData() {
         // 더미데이터
-        var array =viewModel.getEmotionArray().values.toList()
-        array =array.sortedBy { it.date }
+        var detailmap =viewModel.getdb(requireContext()).select_diaryanalysis_detail(selectemotion!!.text).data
+        var array =detailmap.keys.toList().sorted()
+
 
 
         xlabelindex = arrayListOf()
@@ -189,13 +138,14 @@ class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
         var formatdatenonyear = SimpleDateFormat("MM.dd.")
 
         var curyear=Calendar.getInstance().time.year
+        chartData= arrayListOf()
 
         for(i in array){
             index+=1
 
-            chartData.add(Entry(index.toFloat(), (4-i.today_emotion.ghostimage).toFloat()) )
-            xlabelindex.add(if(i.date.year==curyear) formatdatenonyear.format(i.date) else formatdate.format(i.date))
 
+            chartData.add(Entry(index.toFloat(), (4- detailmap[i]!!).toFloat()) )
+            xlabelindex.add(if(i.year==curyear) formatdatenonyear.format(i) else formatdate.format(i))
         }
         xlabelindex.add("")
 
@@ -293,6 +243,7 @@ class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
 
         chart!!.description.isEnabled = false  // 설명
 
+        lineData=LineData()
         chart.data=lineData
         lineData.addDataSet(lineDataSet)
 

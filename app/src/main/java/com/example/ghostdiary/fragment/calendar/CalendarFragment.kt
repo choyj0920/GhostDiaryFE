@@ -1,6 +1,8 @@
 package com.example.ghostdiary.fragment.calendar
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,6 +20,7 @@ import com.example.ghostdiary.*
 import com.example.ghostdiary.adapter.AdapterMonth
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
+import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.fragment.postdiary.SelectEmotionFragment
 import java.util.*
 
@@ -85,6 +88,11 @@ class CalendarFragment : Fragment() {
                         newcal.add(Calendar.MONTH, curpo - center)
                         viewModel.calendar =newcal
                         curCal.time=newcal.time
+                        if(curpo-center >10 ||curpo-center<-10){
+                            initmonthpicker()
+                            return
+                        }
+
                     }
                 }
             }
@@ -151,63 +159,64 @@ class CalendarFragment : Fragment() {
 
     fun initmonthpicker(){
         //  날짜 dialog
-        /*
-        binding!!.tvDate.setOnClickListener {
 
-            val edialog : LayoutInflater = LayoutInflater.from(context)
-            val dialogbinding:FragmentMonthpickerBinding=FragmentMonthpickerBinding.inflate(edialog)
-            val mView : View = dialogbinding.root
+        val edialog : LayoutInflater = LayoutInflater.from(context)
+        val dialogbinding: FragmentMonthpickerBinding =FragmentMonthpickerBinding.inflate(edialog)
+        val mView : View = dialogbinding.root
 
-            val year : NumberPicker = dialogbinding.yearpickerDatepicker
-            val month : NumberPicker = dialogbinding.monthpickerDatepicker
+        val year : NumberPicker = dialogbinding.yearpickerDatepicker
+        val month : NumberPicker = dialogbinding.monthpickerDatepicker
 
-            val dialog = AlertDialog.Builder(context).apply {
-                setPositiveButton("확인",
-                    DialogInterface.OnClickListener { dialog, i ->
+        val dialog = AlertDialog.Builder(context).apply {
+            setPositiveButton("확인",
+                DialogInterface.OnClickListener { dialog, i ->
 
-                        setMonth(year.value, month.value)
-                        dialog.dismiss()
-                        dialog.cancel()
-                    })
-                setNegativeButton("취소",
-                    DialogInterface.OnClickListener { dialog, i ->
-                        dialog.dismiss()
-                        dialog.cancel()
+                    dialog.dismiss()
+                    dialog.cancel()
+                    viewModel.calendar.set(Calendar.YEAR,year.value)
+                    viewModel.calendar.set(Calendar.MONTH,month.value-1)
+                    init_rv()
+                })
+            setNegativeButton("취소",
+                DialogInterface.OnClickListener { dialog, i ->
+                    dialog.dismiss()
+                    dialog.cancel()
+                    viewModel.calendar.set(Calendar.YEAR,curCal.get(Calendar.YEAR))
+                    viewModel.calendar.set(Calendar.MONTH,curCal.get(Calendar.MONTH))
+                    init_rv()
 
-                    })}.create()
-
-
-            //  순환 안되게 막기
-            year.wrapSelectorWheel = false
-            month.wrapSelectorWheel = false
-
-            //  editText 설정 해제
-            year.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-            month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-
-            //  최소값 설정
-            year.minValue = 2001
-            month.minValue = 1
-
-            //  최대값 설정
-            year.maxValue = 2080
-            month.maxValue = 12
-
-            // 값 설정
-            year.value=calendar.get(Calendar.YEAR)
-            month.value=calendar.get(Calendar.MONTH)+1
-
-            dialog.setView(mView)
-            dialog.create()
-            dialog.show()
+                })}.create()
 
 
-        }*/
+        //  순환 안되게 막기
+        year.wrapSelectorWheel = false
+        month.wrapSelectorWheel = false
+
+        //  editText 설정 해제
+        year.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+
+        //  최소값 설정
+        year.minValue = 2001
+        month.minValue = 1
+
+        //  최대값 설정
+        year.maxValue = 2080
+        month.maxValue = 12
+
+        // 값 설정
+        year.value= curCal.get(Calendar.YEAR)
+        month.value=curCal.get(Calendar.MONTH)+1
+
+        dialog.setView(mView)
+        dialog.create()
+        dialog.show()
+
+
     }
 
     fun initView() {
 
-        initmonthpicker()
 
         init_spinner()
         init_rv()

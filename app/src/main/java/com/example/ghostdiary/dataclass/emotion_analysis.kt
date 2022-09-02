@@ -7,22 +7,18 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import java.lang.Math.round
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 data class emotion_analysis(var text:String,var ghostnum:Int,var emotioncount: Array<Int> = arrayOf(0,0,0,0,0)){
-
     var myscore:Int=-1
-
     var mypercentage:ArrayList<Int>?=null
-
-
 
     fun init(){
         myscore=getmyscore()
         mypercentage=getmypercentage()
-
-
     }
-
 
     companion object{
         var allemotion:Array<Int> = arrayOf(0,0,0,0,0)
@@ -59,5 +55,8 @@ data class emotion_analysis(var text:String,var ghostnum:Int,var emotioncount: A
     }fun getmyscore(): Int {
         return getScore(this.emotioncount)
     }
+
+}
+data class emotion_analysis_detail(var text:String,var data :HashMap<Date,Int>,var emotioncount: Array<Int> = arrayOf(0,0,0,0,0)) {
 
 }

@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
     private lateinit var memoFragment: MemoFragment
-    private lateinit var clinicFragment: ClinicFragment
     private lateinit var prefs : SharedPreferences
     companion object{
         lateinit var mainactivity:MainActivity
@@ -157,7 +156,6 @@ class MainActivity : AppCompatActivity() {
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
         memoFragment=MemoFragment()
-        clinicFragment= ClinicFragment()
         mainactivity=this
 
 

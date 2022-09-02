@@ -42,6 +42,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,7 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/border_just_bottom"
+                android:background="#ffffff"
                 android:minHeight="170dp"
                 android:orientation="vertical">
 
@@ -74,7 +76,7 @@
 
 
                 <ImageView
-                    android:id="@+id/tv_select_analyze"
+                    android:id="@+id/iv_select_analyze"
                     android:layout_width="36dp"
                     android:layout_height="36dp"
                     android:layout_gravity="center"
@@ -116,7 +118,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
 
+
+
                 <LinearLayout
+
+                    android:id="@+id/layout_score"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginTop="37dp"
@@ -162,7 +168,24 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/tv_notselect"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+
+                android:text="세부 분석할 활동을 선택 해주세요."
+
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
             <LinearLayout
+                android:id="@+id/laytout_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -171,13 +194,24 @@
                 android:minHeight="321dp"
                 android:orientation="vertical">
 
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginEnd="10dp"
+
                     android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:paddingTop="20dp">
@@ -198,22 +232,14 @@
                             android:minHeight="40dp"
                             android:src="@drawable/ghost_00_verygood" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="매우좋음"
-                            android:textColor="#757575"
-                            android:textSize="11sp" />
+
 
                         <TextView
-                            android:id="@+id/tv_vergood_per"
+                            android:id="@+id/tv_verygood_per"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center"
                             android:text="30 %"
                             android:textColor="@color/black"
@@ -238,22 +264,13 @@
                             android:minHeight="40dp"
                             android:src="@drawable/ghost_01_good" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="좋음"
-                            android:textColor="#757575"
-                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tv_good_per"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center"
                             android:text="30 %"
                             android:textColor="@color/black"
@@ -278,22 +295,14 @@
                             android:minHeight="40dp"
                             android:src="@drawable/ghost_02_normal" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="보통"
-                            android:textColor="#757575"
-                            android:textSize="11sp" />
+
 
                         <TextView
                             android:id="@+id/tv_normal_per"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center"
                             android:text="30 %"
                             android:textColor="@color/black"
@@ -318,22 +327,13 @@
                             android:minHeight="40dp"
                             android:src="@drawable/ghost_03_bad" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="나쁨"
-                            android:textColor="#757575"
-                            android:textSize="11sp" />
 
                         <TextView
                             android:id="@+id/tv_bad_per"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center"
                             android:text="30 %"
                             android:textColor="@color/black"
@@ -358,22 +358,14 @@
                             android:minHeight="40dp"
                             android:src="@drawable/ghost_04_verybad" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
-                            android:gravity="center"
-                            android:text="매우나쁨"
-                            android:textColor="#757575"
-                            android:textSize="11sp" />
+
 
                         <TextView
-                            android:id="@+id/tv_verbad_per"
+                            android:id="@+id/tv_verybad_per"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginTop="5dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center"
                             android:text="30 %"
                             android:textColor="@color/black"
@@ -389,11 +381,6 @@
             </LinearLayout>
 
 
-            <LinearLayout
-                android:id="@+id/layout_select"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"/>
 
 
         </LinearLayout>
