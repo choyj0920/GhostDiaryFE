@@ -43,10 +43,12 @@ class MainViewModel(): ViewModel() {
         var memo_id=maindb!!.insert_Memo(memo.folder_id,memo.title,memo.text, date = memo.date ,memo.memoid)
         if(memo.memoid ==-1){
             memo.memoid=memo_id
-
             for (folder in memofolder_array!!){
-                if(folder.folder_id==memo.folder_id)
+                if(folder.folder_id==memo.folder_id) {
                     folder.arrMemo.add(memo)
+
+                }
+
             }
         }
     }

@@ -56,7 +56,7 @@ class MemoFolderAddDialog(var memoparent:MemoFragment?=null): DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
       
 
-        binding.inputGhostname.hint="폴더 명을 입력하세요"
+        binding.inputGhostname.hint="폴더명을 입력하세요"
 
         binding.tvOk.setOnClickListener {
             if(selectghost==-1){
@@ -66,7 +66,7 @@ class MemoFolderAddDialog(var memoparent:MemoFragment?=null): DialogFragment() {
             var ghostname=binding.inputGhostname.text.toString()
 
             if(ghostname==""){
-                MainActivity.mainactivity.showmessage("폴더의 이름을 입력해주세요.")
+                MainActivity.mainactivity.showmessage("폴더명을 입력해주세요.")
                 return@setOnClickListener
             }
             var index=MainActivity.mainactivity.viewModel.getdb(null).insertMemo_folder(selectghost,ghostname)

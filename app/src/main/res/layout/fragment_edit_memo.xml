@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="20dp"
     tools:context=".fragment.memo.MemoSelectFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -153,6 +154,7 @@
                 android:id="@+id/iv_show_close"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
+
                 android:layout_marginStart="10dp"
                 android:clickable="true"
                 android:elevation="5dp"
@@ -160,7 +162,7 @@
                 android:padding="8dp"
                 android:src="@drawable/ic_button_x_close"
 
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/linearLayout5"
@@ -204,10 +206,11 @@
 
             <ImageView
                 android:id="@+id/btn_sidemenu"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="26dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center"
                 android:paddingStart="5dp"
+                android:paddingEnd="5dp"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
                 android:layout_marginLeft="20dp"

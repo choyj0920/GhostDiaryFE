@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -22,8 +24,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
+        android:layout_height="140dp"
+        android:background="#ffffff"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,14 +36,15 @@
             android:id="@+id/spinner_emotion"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            app:layout_goneMarginRight="5dp"
             android:background="@drawable/border_white"
             android:popupElevation="5dp"
             android:elevation="5dp"
             android:gravity="center"
             android:popupBackground="@drawable/border_white"
             android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iv_post"
             app:layout_constraintStart_toStartOf="parent"
 
@@ -52,14 +55,16 @@
             android:id="@+id/iv_post"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            app:layout_goneMarginRight="5dp"
+
             android:background="@drawable/border_black"
             android:elevation="5dp"
             android:padding="15dp"
 
             android:src="@drawable/ic_plus"
 
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -70,14 +75,16 @@
             android:id="@+id/iv_analyze"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_margin="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="5dp"
+            app:layout_goneMarginRight="5dp"
+
             android:background="@drawable/border_white"
             android:elevation="5dp"
 
             android:padding="10dp"
             android:src="@drawable/ic_graph"
 
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_post"
             app:layout_constraintTop_toTopOf="parent"

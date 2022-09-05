@@ -87,7 +87,9 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
             })
 
             Update_rv()
-        }else if(memoparent !=null){ // 메모에서
+        }else if(memoparent !=null){
+            /*
+            // 메모에서
             dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             binding.tvTitle.text="메모 폴더 추가"
 
@@ -133,10 +135,14 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
 
                 }
             })
+                        Update_rv()
 
-            Update_rv()
+
+             */
+
 
         }
+
 
 
 

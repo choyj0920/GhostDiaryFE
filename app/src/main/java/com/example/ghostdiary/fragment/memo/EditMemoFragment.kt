@@ -138,6 +138,8 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
         val imm = parent.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         imm.hideSoftInputFromWindow(parent.currentFocus?.windowToken, 0)
+        imm.hideSoftInputFromWindow(binding!!.inputTitle.windowToken,0)
+        imm.hideSoftInputFromWindow(binding!!.inputText.windowToken,0)
 
     }
     fun switcheditmode(editmode:Boolean){
@@ -181,9 +183,21 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
             parent.showmessage("메모를 입력해주세요.")
             return
         }
+
         curMemo.date=Calendar.getInstance().time
 
-        parent.viewModel.editmemo(curMemo)
+        if(memo!=null){
+            memo!!.text= curMemo.text
+            memo!!.title=curMemo.title
+            memo!!.date=curMemo.date
+
+            parent.viewModel.editmemo(memo!!)
+
+        }else{
+            parent.viewModel.editmemo(curMemo)
+
+        }
+
         switcheditmode(false)
 
 

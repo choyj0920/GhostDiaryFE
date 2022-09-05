@@ -86,7 +86,7 @@ class EditDiaryFragment(
 
         binding!!.inputText.setText(curDiary.text)
 
-        var transFormat = SimpleDateFormat("yyyy/MM/dd.")
+        var transFormat = SimpleDateFormat("yyyy.MM.dd.")
         var to = transFormat.format(date)
         var tempcal=Calendar.getInstance()
         tempcal.time =curDiary.date

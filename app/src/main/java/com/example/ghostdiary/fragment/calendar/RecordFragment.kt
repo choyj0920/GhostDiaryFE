@@ -15,6 +15,7 @@ import android.widget.NumberPicker
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.Util
@@ -61,6 +62,7 @@ class RecordFragment : Fragment() {
         super.onStart()
         calendar=viewModel.calendar
         curCal.time=calendar.time
+
 
         update()
         Util.setGlobalFont(binding!!.root)

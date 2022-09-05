@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     android:id="@+id/linearLayout"
     android:background="#ffffff"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
     android:orientation="vertical">
 
     <!--헤더-->
@@ -13,7 +15,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_marginTop="10dp"
-        android:padding="5dp"
+
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
         android:minHeight="50dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -28,8 +32,8 @@
             android:gravity="center"
             android:popupBackground="@drawable/border_white"
             android:popupElevation="5dp"
-            android:scaleX="0.8"
-            android:scaleY="0.8"
+            android:scaleX="1"
+            android:scaleY="1"
             android:spinnerMode="dropdown"
             app:layout_constraintBottom_toBottomOf="parent"
 
@@ -66,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="10dp"
             android:text="2022.07"
             android:textStyle="bold"
             android:lineSpacingExtra="5sp"

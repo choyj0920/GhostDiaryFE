@@ -56,7 +56,6 @@ class CalendarFragment : Fragment() {
     }
 
     override fun onStart() {
-        MainActivity.mainactivity.switchHidetopmenu(false)
         init_rv()
         super.onStart()
     }
@@ -125,7 +124,9 @@ class CalendarFragment : Fragment() {
         val array= arrayListOf<Int>(-1,0,1,2,3,4)
         val adapter=EmotionSpinnerAdapter(MainActivity.mainactivity,array)
 
+
         binding!!.spinnerEmotion.adapter=adapter
+
 
 
         binding!!.spinnerEmotion.onItemSelectedListener= object: AdapterView.OnItemSelectedListener{

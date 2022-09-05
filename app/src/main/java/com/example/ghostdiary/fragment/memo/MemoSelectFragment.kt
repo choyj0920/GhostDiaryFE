@@ -156,6 +156,7 @@ class MemoSelectFragment(var parent:MemoActivity, var memoFolder: Memo_Folder) :
 
         }
 
+
         override fun getItemViewType(position: Int): Int {
             return 1
         }

@@ -97,8 +97,8 @@ class MainActivity : AppCompatActivity() {
 
                             }catch(e: Exception){
                             }
+                            switchHidetopmenu(false)
 
-                            binding.layoutTopmenu.visibility=View.VISIBLE
                         }
                         1-> {
                             try {
@@ -109,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                             }catch(e: Exception){
 
                             }
-                            binding.layoutTopmenu.visibility=View.GONE
+                            switchHidetopmenu(true)
                         }
                     }
                 }
@@ -224,7 +224,7 @@ class MainActivity : AppCompatActivity() {
             val islock= prefs.getBoolean("isLock",false)
             if(islock) // 글자 눌러서 잠금되어있을때만 락
                 lockapp()
-            binding.drawerlayout.closeDrawer(GravityCompat.START)
+            binding.drawerlayout.closeDrawer(GravityCompat.END)
         }
         binding.sidemenuFont.setOnClickListener {
             val dialog = FontSelectDialog(this)
@@ -244,7 +244,7 @@ class MainActivity : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
 
-                binding.drawerlayout.closeDrawer(GravityCompat.START)
+                binding.drawerlayout.closeDrawer(GravityCompat.END)
 
             }else{
                 val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
@@ -288,6 +288,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+
+        if(!binding.swtichbutton.isChecked){
+
+        }
 
         val islock= prefs.getBoolean("isLock",false)
         if(islock){
