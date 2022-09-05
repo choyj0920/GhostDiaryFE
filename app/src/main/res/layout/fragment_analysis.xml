@@ -5,16 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/banner_analyze1"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_wronganalyze"
@@ -29,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <ScrollView
         android:visibility="visible"
@@ -42,7 +32,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -54,20 +44,6 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="12dp"
-                    android:padding="3dp"
-                    android:rotation="180"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_arrow"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView2"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView2"
-                    app:tint="@color/black" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -854,6 +830,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginEnd="17dp"
                     android:gravity="center"
 
                     android:orientation="horizontal"
@@ -874,7 +852,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_00_verygood" />
+                            android:src="@drawable/ghost_00_verygood_edit" />
 
 
 
@@ -907,7 +885,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_01_good" />
+                            android:src="@drawable/ghost_01_good_edit" />
 
 
 
@@ -939,7 +917,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_02_normal" />
+                            android:src="@drawable/ghost_02_normal_edit" />
 
 
 
@@ -971,7 +949,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_03_bad" />
+                            android:src="@drawable/ghost_03_bad_edit" />
 
 
                         <TextView
@@ -1002,7 +980,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_04_verybad" />
+                            android:src="@drawable/ghost_04_verybad_edit" />
 
 
                         <TextView

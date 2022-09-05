@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_ghost_view"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_weight="1"
+
     android:layout_gravity="center"
 
     >
@@ -13,8 +14,8 @@
 
     <ImageView
         android:id="@+id/iv_ghost"
-        android:layout_width="28dp"
-        android:layout_height="35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
 

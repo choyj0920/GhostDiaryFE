@@ -43,7 +43,7 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
         }else{
             curMemo=Memo(folder_id,memo!!.title,memo!!.text,memo!!.date, memo!!.memoid )
         }
-        var formatdate = SimpleDateFormat("yyyy.MM.dd")
+        var formatdate = SimpleDateFormat("yyyy.MM.dd.")
         binding!!.tvDay.text=formatdate.format(curMemo.date)
         binding!!.tvTitle.text=curMemo.title
         binding!!.tvText.text=curMemo.text

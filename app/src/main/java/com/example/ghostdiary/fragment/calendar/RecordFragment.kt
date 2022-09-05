@@ -67,7 +67,17 @@ class RecordFragment : Fragment() {
         update()
         Util.setGlobalFont(binding!!.root)
 
+    }fun updatefont(){
+
+
+        Util.setGlobalFont(binding!!.root)
+        initmonthpicker()
+        init_spinner()
+
+        update()
+
     }
+
 
     @SuppressLint("ClickableViewAccessibility")
     fun init(){
@@ -158,6 +168,8 @@ class RecordFragment : Fragment() {
             // 값 설정
             year.value=calendar.get(Calendar.YEAR)
             month.value=calendar.get(Calendar.MONTH)+1
+
+            Util.setGlobalFont(mView)
 
             dialog.setView(mView)
             dialog.create()

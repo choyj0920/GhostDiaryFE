@@ -39,11 +39,11 @@ class EmotionSpinnerAdapter(private val context: Context,val emotionarray: Array
         binding.ivSpinnerItem.setImageResource(
             when (emotionarray.get(position)) {
                 -1 ->R.drawable.ic_category
-                0 -> R.drawable.ghost_00_verygood
-                1 -> R.drawable.ghost_01_good
-                2 -> R.drawable.ghost_02_normal
-                3 -> R.drawable.ghost_03_bad
-                4 -> R.drawable.ghost_04_verybad
+                0 -> R.drawable.ghost_00_verygood_edit
+                1 -> R.drawable.ghost_01_good_edit
+                2 -> R.drawable.ghost_02_normal_edit
+                3 -> R.drawable.ghost_03_bad_edit
+                4 -> R.drawable.ghost_04_verybad_edit
 
                 else -> {
                     R.drawable.ic_ghost

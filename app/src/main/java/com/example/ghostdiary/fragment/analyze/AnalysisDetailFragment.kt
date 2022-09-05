@@ -76,6 +76,7 @@ class AnalysisDetailFragment(private val viewModel:MainViewModel) : Fragment() {
 
 
 
+
         binding!!.ivSelectAnalyze.setOnClickListener {
             val dialog = AnalyzeSelectDialog(this )
             dialog.isCancelable = true

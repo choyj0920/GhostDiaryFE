@@ -1,6 +1,7 @@
 package com.example.ghostdiary
 
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -19,6 +20,7 @@ import com.example.ghostdiary.fragment.analyze.SleepFragment
 import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import com.example.ghostdiary.fragment.calendar.RecordFragment
 import com.example.ghostdiary.fragment.main.*
+import com.google.android.material.tabs.TabLayoutMediator
 import java.util.*
 
 
@@ -60,12 +62,44 @@ class AnalyzeActivity : AppCompatActivity() {
         viewPager.adapter = pagerAdapter
         viewPager.apply {  }
 
+        var pageCallBack = object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                // 특정 페이지가 선택될 때 마다 여기가 호출됩니다.
+                // position 에는 현재 페이지 index - 첫페이지면 0
+                when(position){
+                    0-> {
+                        binding.tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#F08080"))
+                        binding.imageView.setImageResource(R.drawable.banner_analyze1)
+                    }
+                    1-> {
+                        binding.tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#FAD98C"))
+                        binding.imageView.setImageResource(R.drawable.banner_analyze2)
+
+                    }
+                    2->{
+                        binding.tabLayout.setSelectedTabIndicatorColor(Color.parseColor("#6DDBD9"))
+                        binding.imageView.setImageResource(R.drawable.banner_analyze_sleep)
+
+
+                    }
+                }
+            }
+        }
+        viewPager.registerOnPageChangeCallback(pageCallBack)
 
 
     }
 
     fun init_view(){
         Update_pager()
+
+        TabLayoutMediator(binding.tabLayout, binding.pager) {tab, position ->
+            when(position) {
+                0 -> tab.text = "종합분석"
+                1 -> tab.text = "세부분석"
+                2 -> tab.text = "수면분석"
+            }
+        }.attach()
 
     }
 

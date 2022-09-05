@@ -28,5 +28,10 @@
     <color name="tint4">#D7F5FF</color>
     <color name="tint5">#D7E2FF</color>
 
+    <color name="banner1">#F08080</color>
+    <color name="banner2">#FAD98C</color>
+    <color name="banner3">#6DDBD9</color>
+
+
 
 </resources>

@@ -1,5 +1,6 @@
 package com.example.ghostdiary.adapter
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import com.example.ghostdiary.Util
 import com.example.ghostdiary.databinding.ItemEmotionGhostjustviewBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotionclass
+import com.example.ghostdiary.fragment.calendar.RecordFragment
 import com.skydoves.balloon.Balloon
 import com.skydoves.balloon.BalloonSizeSpec
 
@@ -22,6 +24,7 @@ class AdapterEmotionjustview(val parent: Fragment, var emotions:MutableList<emot
 
 
         var ghostimage:ImageView=binding.ivGhost
+        var layout=binding.layoutGhostView
     }
 
 
@@ -39,6 +42,10 @@ class AdapterEmotionjustview(val parent: Fragment, var emotions:MutableList<emot
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         var holder=holder as GhostView
+
+        if(parent is RecordFragment){
+            holder.layout.foregroundGravity=Gravity.RIGHT
+        }
 
         if (emotions[position]==null){
             holder.ghostimage.visibility=View.GONE

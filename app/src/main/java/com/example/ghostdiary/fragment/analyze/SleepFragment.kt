@@ -90,6 +90,8 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
             return
         }
 
+
+
         var sleepstart =Date (TimeUnit.MINUTES.toMillis(round(60 * 9 +Sleep_data.avgsleepstart!!*10).toLong()))
         var sleepend =Date (TimeUnit.MINUTES.toMillis(60 * 9+ round(Sleep_data.avgsleepend!!*10).toLong()))
         var sleeptime =Date (TimeUnit.MINUTES.toMillis(60*(-9)+ round(Sleep_data.avgsleeptime!!*10).toLong()))

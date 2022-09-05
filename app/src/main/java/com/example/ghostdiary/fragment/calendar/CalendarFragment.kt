@@ -157,6 +157,11 @@ class CalendarFragment : Fragment() {
         binding=null
         super.onDestroyView()
     }
+    fun update_rv(){
+        viewModel.calendar.set(Calendar.YEAR,curCal.get(Calendar.YEAR))
+        viewModel.calendar.set(Calendar.MONTH,curCal.get(Calendar.MONTH))
+        init_rv()
+    }
 
     fun initmonthpicker(){
         //  날짜 dialog

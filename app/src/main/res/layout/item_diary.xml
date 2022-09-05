@@ -24,8 +24,10 @@
 
         <ImageView
             android:id="@+id/iv_ghost"
-            android:layout_width="26dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="42dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="4dp"
             android:scaleType="fitCenter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +36,8 @@
 
 
         <LinearLayout
+            android:paddingTop="5dp"
+
             android:id="@+id/linearLayout3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,11 +77,12 @@
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="155dp"
-            android:maxWidth="155dp"
-            android:layout_height="50dp"
+            android:layout_width="170dp"
+            android:maxWidth="170dp"
+            android:layout_height="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintTop_toTopOf="parent"
             >
 
@@ -91,6 +96,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
                 tools:itemCount="4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

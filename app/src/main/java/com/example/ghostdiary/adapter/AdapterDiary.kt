@@ -119,6 +119,12 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         }
 
          holder.tv_text.text=diary.text
+        if(diary.text==""){
+            holder.tv_text.visibility=View.GONE
+        }else{
+            holder.tv_text.visibility=View.VISIBLE
+
+        }
 
 
 

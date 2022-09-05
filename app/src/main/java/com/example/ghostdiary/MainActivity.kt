@@ -52,6 +52,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
     fun setfont(){
         Util.setGlobalFont(binding.root)
+
         binding.sidemenuTvCurfont.text= fontname[Util.curfont]
 
     }fun savefontsetting(fontindex:Int){
@@ -61,6 +62,20 @@ class MainActivity : AppCompatActivity() {
         Util.curfont=fontindex
 
         setfont()
+
+        try {
+            calendarFragment.update_rv()
+
+        }catch(e: Exception){
+
+        }
+        try {
+            recordFragment.updatefont()
+
+        }catch(e: Exception){
+
+        }
+
 
     }
 

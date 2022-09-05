@@ -81,7 +81,6 @@ class FontSelectDialog(var parent: MainActivity): DialogFragment() {
 
 
 
-
     }
     fun Update_rv(){
 

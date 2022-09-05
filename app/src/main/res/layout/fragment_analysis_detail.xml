@@ -5,43 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/banner_analyze2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tv_wronganalyze"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center"
-
         android:text="충분한 데이터가 없어서 분석이 되지 않아요.\n\n 선택된 활동들의 종류가 5개이상이어야해요."
 
         android:textSize="15sp"
+
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <ScrollView
-        android:visibility="visible"
+        android:layout_marginTop="10dp"
+
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
-
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
 
         <LinearLayout
@@ -59,21 +52,6 @@
                 android:minHeight="170dp"
                 android:orientation="vertical">
 
-                <ImageView
-                    android:id="@+id/btn_cancel"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="12dp"
-                    android:padding="3dp"
-                    android:rotation="180"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_arrow"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView4"
-                    app:layout_constraintTop_toTopOf="@+id/textView4"
-                    app:layout_constraintStart_toStartOf="parent"
-
-                    app:tint="@color/black" />
-
 
                 <ImageView
                     android:id="@+id/iv_select_analyze"
@@ -90,11 +68,11 @@
                     android:paddingBottom="5dp"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_search"
-                    app:layout_constraintHorizontal_bias="0.7"
-
                     android:textSize="12sp"
+
                     app:layout_constraintBottom_toBottomOf="@+id/textView4"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.7"
                     app:layout_constraintStart_toEndOf="@+id/textView4"
                     app:layout_constraintTop_toTopOf="@+id/textView4" />
 
@@ -116,8 +94,6 @@
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
                 <LinearLayout
@@ -170,14 +146,14 @@
 
             <TextView
                 android:id="@+id/tv_notselect"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-
                 android:text="세부 분석할 활동을 선택 해주세요."
 
                 android:textSize="15sp"
+
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -197,14 +173,13 @@
                 <com.github.mikephil.charting.charts.LineChart
                     android:id="@+id/chart"
                     android:layout_width="match_parent"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
                     android:layout_height="150dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="10dp"
+                    android:layout_marginEnd="20dp"
 
                     android:paddingLeft="20dp"
                     android:paddingRight="20dp" />
-
 
 
                 <LinearLayout
@@ -231,7 +206,6 @@
 
                             android:minHeight="40dp"
                             android:src="@drawable/ghost_00_verygood" />
-
 
 
                         <TextView
@@ -296,7 +270,6 @@
                             android:src="@drawable/ghost_02_normal" />
 
 
-
                         <TextView
                             android:id="@+id/tv_normal_per"
                             android:layout_width="wrap_content"
@@ -359,7 +332,6 @@
                             android:src="@drawable/ghost_04_verybad" />
 
 
-
                         <TextView
                             android:id="@+id/tv_verybad_per"
                             android:layout_width="wrap_content"
@@ -379,8 +351,6 @@
 
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>
