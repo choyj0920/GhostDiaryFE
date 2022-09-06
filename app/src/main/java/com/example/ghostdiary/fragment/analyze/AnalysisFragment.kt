@@ -1,7 +1,6 @@
 package com.example.ghostdiary.fragment.analyze
 
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
@@ -16,6 +15,8 @@ import com.example.ghostdiary.*
 import com.example.ghostdiary.databinding.FragmentAnalysisBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotion_analysis
+import com.example.ghostdiary.utilpackage.MyYAxisLeftRenderer
+import com.example.ghostdiary.utilpackage.Util
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.YAxis
@@ -307,9 +308,11 @@ class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
 
         Log.d("TAG","여기에서는 ? ${imagelist} ${imagelist[2]}")
 
-        chart.rendererLeftYAxis = MyYAxisLeftRenderer(
-            chart.viewPortHandler,
-            chart.axisLeft, chart.getTransformer(YAxis.AxisDependency.LEFT),imagelist)
+        chart.rendererLeftYAxis =
+            MyYAxisLeftRenderer(
+                chart.viewPortHandler,
+                chart.axisLeft, chart.getTransformer(YAxis.AxisDependency.LEFT), imagelist
+            )
 
         chart!!.invalidate()  // 다시 그리기
 

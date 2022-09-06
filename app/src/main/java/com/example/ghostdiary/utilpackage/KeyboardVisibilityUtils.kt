@@ -1,4 +1,4 @@
-package com.example.ghostdiary
+package com.example.ghostdiary.utilpackage
 
 import android.graphics.Rect
 import android.view.ViewTreeObserver

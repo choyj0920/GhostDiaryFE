@@ -1,4 +1,4 @@
-package com.example.ghostdiary;
+package com.example.ghostdiary.utilpackage;
 
 import android.content.Context;
 import android.graphics.Bitmap;

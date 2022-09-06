@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
-import com.example.ghostdiary.Util
+import com.example.ghostdiary.utilpackage.Util
 import com.example.ghostdiary.databinding.ItemMonthBinding
 import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import java.text.SimpleDateFormat

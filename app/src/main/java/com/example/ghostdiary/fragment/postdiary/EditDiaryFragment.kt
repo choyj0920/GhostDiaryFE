@@ -12,15 +12,11 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.util.TypedValue
 import android.view.*
-import android.widget.EditText
-import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.PopupWindow
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.view.menu.MenuBuilder
-import androidx.appcompat.view.menu.MenuPopupHelper
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ghostdiary.*
@@ -28,12 +24,11 @@ import com.example.ghostdiary.adapter.AdapterEmotionjustview
 import com.example.ghostdiary.databinding.FragmentEditDiaryBinding
 import com.example.ghostdiary.databinding.MenuSideoptionBinding
 import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.fragment.calendar.CalendarFragment
+import com.example.ghostdiary.utilpackage.Util
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
-import java.lang.reflect.Method
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -94,9 +89,7 @@ class EditDiaryFragment(
 
         binding!!.tvDate.text=to
 
-        binding!!.btnSidemenu.setOnClickListener {
-            showPopupMenu()
-        }
+        initPopupMenu()
 
 
         // 취소 버튼
@@ -208,70 +201,60 @@ class EditDiaryFragment(
         curDiary.text=binding!!.inputText.text.toString()
 
         if(binding!!.layoutImage.visibility==View.VISIBLE){
-            saveBitmapToJpeg(curbitmap)
+            try {
+                saveBitmapToJpeg(curbitmap)
+
+            }catch(e: Exception){
+
+            }
         }else{
             curDiary.image=null
         }
     }
 
-    // popup menu 보여주는 method
-    private fun showPopupMenu() {
+    private fun initPopupMenu() {
+
+        val popupInflater =
+            requireActivity().applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupBind = MenuSideoptionBinding.inflate(popupInflater)
 
 
+        val popupWindow = PopupWindow(
+            popupBind.root,dpToPx(requireContext(),75f).toInt() ,dpToPx(requireContext(),91f).toInt()  , true
+        ).apply { contentView.setOnClickListener { dismiss() }
+            popupBind.btn1.setOnClickListener {
+                switcheditmode(true)
 
+                dismiss()
 
-        // popoup menu 에 적용할 style
-        val contextThemeWrapper =
-            ContextThemeWrapper(requireContext(),R.style.PopupMenuStyle)
-        // popup menu 가 보일 위치
-        val popupBase = binding!!.btnSidemenu
-
-        // popup menu 선언
-        val popupMenu = PopupMenu(contextThemeWrapper, popupBase,Gravity.BOTTOM)
-        popupMenu.menuInflater.inflate(R.menu.diary_sidemenu, popupMenu.menu)
-        popupMenu.setOnMenuItemClickListener { m ->
-            when (m.itemId) {
-                R.id.menu_edit -> {
-                    switcheditmode(true)
-                }
-                R.id.menu_delete -> {
-                    parent!!.deleteDiary(date)
-
-                }
             }
-            false
+            popupBind.btn2.setOnClickListener {
+                parent!!.deleteDiary(date)
+
+                dismiss()
+
+            }
+
+        }
+        Util.setGlobalFont(popupBind.root)
+        // make sure you use number than wrap_content or match_parent,
+        // because for me it is not showing anything if I set it to wrap_content from ConstraintLayout.LayoutParams.
+
+
+        binding!!.btnSidemenu.setOnClickListener{
+            var loc:IntArray= intArrayOf(0,0)
+            binding!!.btnSidemenu.getLocationOnScreen(loc)
+            popupWindow.showAtLocation(binding!!.btnSidemenu, Gravity.NO_GRAVITY, loc[0]-popupWindow.width/2, loc[1]+binding!!.btnSidemenu.height);
         }
 
-        // Icon 보여주기
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            popupMenu.setForceShowIcon(true)
-        } else {
-            try {
-                val fields = popupMenu.javaClass.declaredFields
-                for (field in fields) {
-                    if ("mPopup" == field.name) {
-                        field.isAccessible = true
-                        val menuPopupHelper = field[popupMenu]
-                        val classPopupHelper = Class.forName(menuPopupHelper.javaClass.name)
-                        val setForceIcon: Method = classPopupHelper.getMethod(
-                            "setForceShowIcon",
-                            Boolean::class.javaPrimitiveType
-                        )
-                        setForceIcon.invoke(menuPopupHelper, true)
-                        break
-                    }
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
 
-        popupMenu.show()
 
 
     }
 
-
+    fun dpToPx(context: Context, dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+    }
 
 
     fun switcheditmode(isedit:Boolean){

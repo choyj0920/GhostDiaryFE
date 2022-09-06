@@ -23,6 +23,12 @@
 
         </activity>
         <activity
+            android:theme="@style/AppThemeDialog"
+            android:name=".CookiesActivity"
+            android:exported="false" >
+
+        </activity>
+        <activity
             android:name=".AnalyzeActivity"
             android:exported="false" >
 

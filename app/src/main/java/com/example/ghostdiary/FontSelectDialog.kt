@@ -1,32 +1,19 @@
 package com.example.ghostdiary;
 
 import android.graphics.Color
-import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle;
 import android.os.Parcelable
-import android.text.Editable
-import android.text.InputFilter
-import android.text.TextWatcher
 import android.view.*
-import android.widget.ImageView
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.adapter.AdapterPostdiary
 import com.example.ghostdiary.databinding.DialogFontSelectBinding
-import com.example.ghostdiary.databinding.ItemFolderBinding
 import com.example.ghostdiary.databinding.ItemFontBinding
 
-import com.example.ghostdiary.databinding.ItemGhostBinding
-import com.example.ghostdiary.dataclass.Day_Diary
-import com.example.ghostdiary.dataclass.Memo_Folder
-import com.example.ghostdiary.dataclass.emotionclass
-import com.example.ghostdiary.fragment.main.MemoFragment
+import com.example.ghostdiary.utilpackage.Util
 
 class FontSelectDialog(var parent: MainActivity): DialogFragment() {
 
@@ -48,7 +35,7 @@ class FontSelectDialog(var parent: MainActivity): DialogFragment() {
 
         // 레이아웃 배경을 투명하게 해줌, 필수 아님
         dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        selectfont=Util.curfont
+        selectfont= Util.curfont
 
         initview()
 

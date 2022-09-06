@@ -9,6 +9,11 @@
 
     </style>
 
+    <style name="AppThemeDialog" parent="Theme.Ghostdiary">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/black_overlay</item>
+    </style>
+
     <style name="PopupMenuStyle" parent="Widget.AppCompat.PopupMenu">
         <item name= "background">@drawable/border_white</item>
         <item name="android:gravity">center</item>

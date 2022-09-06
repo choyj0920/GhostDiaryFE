@@ -13,10 +13,8 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
-import com.example.ghostdiary.Util
+import com.example.ghostdiary.utilpackage.Util
 import com.example.ghostdiary.databinding.FragmentSleepBinding
 import com.example.ghostdiary.dataclass.Sleep_data
 import com.github.mikephil.charting.charts.CandleStickChart

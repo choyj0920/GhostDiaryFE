@@ -2,18 +2,18 @@ package com.example.ghostdiary.fragment.memo
 
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.widget.PopupMenu
+import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import com.example.ghostdiary.*
 import com.example.ghostdiary.databinding.FragmentEditMemoBinding
+import com.example.ghostdiary.databinding.MenuSideoptionBinding
 import com.example.ghostdiary.dataclass.Memo
-import java.lang.reflect.Method
+import com.example.ghostdiary.utilpackage.Util
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -29,6 +29,10 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
     ): View? {
 
         binding=FragmentEditMemoBinding.inflate(inflater,container,false)
+
+
+
+
 
         init()
         Util.setGlobalFont(binding!!.root)
@@ -52,10 +56,8 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
 
         switcheditmode(iseditmode)
 
+        initPopupMenu()
 
-        binding!!.btnSidemenu.setOnClickListener{
-            showPopupMenu()
-        }
 
         binding!!.btnClock.setOnClickListener {
             timestamp()
@@ -78,8 +80,43 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
 
     }
 
-    private fun showPopupMenu() {
+    private fun initPopupMenu() {
 
+        val popupInflater =
+            requireActivity().applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupBind = MenuSideoptionBinding.inflate(popupInflater)
+
+
+        val popupWindow = PopupWindow(
+            popupBind.root,dpToPx(requireContext(),75f).toInt() ,dpToPx(requireContext(),80f).toInt()  , true
+        ).apply { contentView.setOnClickListener { dismiss() }
+            popupBind.btn1.setOnClickListener {
+                switcheditmode(true)
+                dismiss()
+
+            }
+            popupBind.btn2.setOnClickListener {
+                parent.viewModel.delMemo(folder_id,curMemo.memoid)
+                parent.reversechange(this@EditMemoFragment)
+                dismiss()
+
+            }
+
+        }
+        Util.setGlobalFont(popupBind.root)
+        // make sure you use number than wrap_content or match_parent,
+        // because for me it is not showing anything if I set it to wrap_content from ConstraintLayout.LayoutParams.
+
+
+        binding!!.btnSidemenu.setOnClickListener{
+            var loc:IntArray= intArrayOf(0,0)
+            binding!!.btnSidemenu.getLocationOnScreen(loc)
+            popupWindow.showAtLocation(binding!!.btnSidemenu, Gravity.NO_GRAVITY, loc[0]-popupWindow.width/2, loc[1]+binding!!.btnSidemenu.height);
+        }
+
+
+
+        /*
 
         // popoup menu 에 적용할 style
         val contextThemeWrapper =
@@ -93,7 +130,6 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
         popupMenu.setOnMenuItemClickListener { m ->
             when (m.itemId) {
                 R.id.menu_edit -> {
-                    switcheditmode(true)
                 }
                 R.id.menu_delete -> {
                     parent.viewModel.delMemo(folder_id,curMemo.memoid)
@@ -129,6 +165,8 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
         }
 
         popupMenu.show()
+
+  */
 
 
     }
@@ -219,6 +257,9 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
         super.onDestroyView()
     }
 
+    fun dpToPx(context: Context, dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+    }
 
 
     fun timestamp(){

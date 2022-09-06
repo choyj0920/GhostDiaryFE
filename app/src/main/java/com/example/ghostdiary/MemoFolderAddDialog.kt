@@ -13,15 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.ghostdiary.adapter.AdapterPostdiary
 
-import com.example.ghostdiary.databinding.DialogGhostsSelectBinding
 import com.example.ghostdiary.databinding.DialogMemoFolderAddBinding
 import com.example.ghostdiary.databinding.ItemGhostBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.Memo_Folder
-import com.example.ghostdiary.dataclass.emotionclass
 import com.example.ghostdiary.fragment.main.MemoFragment
+import com.example.ghostdiary.utilpackage.Util
 
 class MemoFolderAddDialog(var memoparent:MemoFragment?=null): DialogFragment() {
 

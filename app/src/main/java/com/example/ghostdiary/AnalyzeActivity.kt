@@ -1,11 +1,8 @@
 package com.example.ghostdiary
 
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -17,11 +14,8 @@ import com.example.ghostdiary.databinding.ActivityAnalyzeBinding
 import com.example.ghostdiary.fragment.analyze.AnalysisDetailFragment
 import com.example.ghostdiary.fragment.analyze.AnalysisFragment
 import com.example.ghostdiary.fragment.analyze.SleepFragment
-import com.example.ghostdiary.fragment.calendar.CalendarFragment
-import com.example.ghostdiary.fragment.calendar.RecordFragment
-import com.example.ghostdiary.fragment.main.*
+import com.example.ghostdiary.utilpackage.Util
 import com.google.android.material.tabs.TabLayoutMediator
-import java.util.*
 
 
 class AnalyzeActivity : AppCompatActivity() {

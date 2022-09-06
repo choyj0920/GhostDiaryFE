@@ -15,6 +15,7 @@ import com.example.ghostdiary.*
 import com.example.ghostdiary.databinding.*
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.Memo_Folder
+import com.example.ghostdiary.utilpackage.Util
 
 
 class MemoFragment : Fragment() {

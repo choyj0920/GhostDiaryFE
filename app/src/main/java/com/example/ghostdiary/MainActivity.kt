@@ -28,11 +28,11 @@ import com.example.ghostdiary.databinding.ActivityMainBinding
 import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import com.example.ghostdiary.fragment.calendar.RecordFragment
 import com.example.ghostdiary.fragment.main.*
+import com.example.ghostdiary.utilpackage.Util
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var keyboardVisibilityUtils: KeyboardVisibilityUtils
     private lateinit var binding: ActivityMainBinding
     private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
@@ -209,7 +209,12 @@ class MainActivity : AppCompatActivity() {
                     if(v.id ==binding.ivSetting.id){
 
                         binding.drawerlayout.openDrawer(GravityCompat.END)
+                    }else if(v.id ==binding.ivCookies.id){
+                        val intent = Intent(this, CookiesActivity::class.java)
+                        intent.putExtra("data", "Test Popup")
+                        startActivity(intent)
                     }
+
                 }
             }
             false

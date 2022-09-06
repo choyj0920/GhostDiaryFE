@@ -1,8 +1,6 @@
 package com.example.ghostdiary.fragment.calendar
 
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,8 +18,8 @@ import com.example.ghostdiary.*
 import com.example.ghostdiary.adapter.AdapterMonth
 import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
-import com.example.ghostdiary.databinding.FragmentMonthpickerBinding
 import com.example.ghostdiary.fragment.postdiary.SelectEmotionFragment
+import com.example.ghostdiary.utilpackage.Util
 import java.util.*
 
 class CalendarFragment : Fragment() {
@@ -56,8 +54,8 @@ class CalendarFragment : Fragment() {
     }
 
     override fun onStart() {
-        init_rv()
         super.onStart()
+        init_rv()
     }
 
 
@@ -88,7 +86,7 @@ class CalendarFragment : Fragment() {
                         viewModel.calendar =newcal
                         curCal.time=newcal.time
                         if(curpo-center >10 ||curpo-center<-10){
-                            initmonthpicker()
+                            showmonthpicker()
                             return
                         }
 
@@ -163,60 +161,18 @@ class CalendarFragment : Fragment() {
         init_rv()
     }
 
-    fun initmonthpicker(){
+    fun showmonthpicker(){
         //  날짜 dialog
-
-        val edialog : LayoutInflater = LayoutInflater.from(context)
-        val dialogbinding: FragmentMonthpickerBinding =FragmentMonthpickerBinding.inflate(edialog)
-        val mView : View = dialogbinding.root
-
-        val year : NumberPicker = dialogbinding.yearpickerDatepicker
-        val month : NumberPicker = dialogbinding.monthpickerDatepicker
-
-        val dialog = AlertDialog.Builder(context).apply {
-            setPositiveButton("확인",
-                DialogInterface.OnClickListener { dialog, i ->
-
-                    dialog.dismiss()
-                    dialog.cancel()
-                    viewModel.calendar.set(Calendar.YEAR,year.value)
-                    viewModel.calendar.set(Calendar.MONTH,month.value-1)
-                    init_rv()
-                })
-            setNegativeButton("취소",
-                DialogInterface.OnClickListener { dialog, i ->
-                    dialog.dismiss()
-                    dialog.cancel()
-                    viewModel.calendar.set(Calendar.YEAR,curCal.get(Calendar.YEAR))
-                    viewModel.calendar.set(Calendar.MONTH,curCal.get(Calendar.MONTH))
-                    init_rv()
-
-                })}.create()
+        viewModel.calendar.set(Calendar.YEAR,curCal.get(Calendar.YEAR))
+        viewModel.calendar.set(Calendar.MONTH,curCal.get(Calendar.MONTH))
+//        init_rv()
 
 
-        //  순환 안되게 막기
-        year.wrapSelectorWheel = false
-        month.wrapSelectorWheel = false
+        val dialog = MonthSelectDialog(this,viewModel.calendar)
+        dialog.isCancelable = true
 
-        //  editText 설정 해제
-        year.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        dialog.show(requireActivity().supportFragmentManager, "ConfirmDialog")
 
-        //  최소값 설정
-        year.minValue = 2001
-        month.minValue = 1
-
-        //  최대값 설정
-        year.maxValue = 2080
-        month.maxValue = 12
-
-        // 값 설정
-        year.value= curCal.get(Calendar.YEAR)
-        month.value=curCal.get(Calendar.MONTH)+1
-
-        dialog.setView(mView)
-        dialog.create()
-        dialog.show()
 
 
     }

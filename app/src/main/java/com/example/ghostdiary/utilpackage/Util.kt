@@ -1,7 +1,5 @@
-package com.example.ghostdiary
+package com.example.ghostdiary.utilpackage
 
-import android.content.Context
-import android.content.res.Resources
 import android.graphics.Typeface
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +10,7 @@ class Util {
 
     companion object{
         fun init(fontarr:ArrayList<Typeface?>,cur:Int){
-            curfont=cur
+            curfont =cur
 
             fontarray = fontarr
 

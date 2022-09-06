@@ -1,7 +1,6 @@
 package com.example.ghostdiary.adapter
 
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -15,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.GhostsSelectDialog
 import com.example.ghostdiary.R
-import com.example.ghostdiary.Util
+import com.example.ghostdiary.utilpackage.Util
 import com.example.ghostdiary.databinding.ItemSelectEmotionBinding
 import com.example.ghostdiary.databinding.ItemSelectSleeptimeBinding
 import com.example.ghostdiary.dataclass.Day_Diary

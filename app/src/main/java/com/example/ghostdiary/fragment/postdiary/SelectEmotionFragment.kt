@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ghostdiary.PostDiaryActivity
 import com.example.ghostdiary.R
-import com.example.ghostdiary.Util
+import com.example.ghostdiary.utilpackage.Util
 import com.example.ghostdiary.adapter.AdapterPostdiary
 import com.example.ghostdiary.databinding.FragmentSelectEmotionBinding
 import com.example.ghostdiary.dataclass.Day_Diary

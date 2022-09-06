@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghostdiary.R
-import com.example.ghostdiary.Util
+import com.example.ghostdiary.utilpackage.Util
 import com.example.ghostdiary.databinding.ItemCalendarDaysBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.fragment.calendar.CalendarFragment

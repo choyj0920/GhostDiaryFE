@@ -19,7 +19,7 @@ import com.example.ghostdiary.databinding.ItemAnalyzeBinding
 import com.example.ghostdiary.dataclass.Day_Diary
 import com.example.ghostdiary.dataclass.emotion_analysis
 import com.example.ghostdiary.fragment.analyze.AnalysisDetailFragment
-import com.example.ghostdiary.fragment.analyze.AnalysisFragment
+import com.example.ghostdiary.utilpackage.Util
 
 class AnalyzeSelectDialog(var _parent: AnalysisDetailFragment): DialogFragment() {
 

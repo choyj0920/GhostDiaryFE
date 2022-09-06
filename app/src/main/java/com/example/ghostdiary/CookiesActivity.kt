@@ -1,50 +1,54 @@
 package com.example.ghostdiary
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.view.Gravity
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
-import com.example.ghostdiary.databinding.ActivityMemoBinding
-import com.example.ghostdiary.fragment.analyze.SleepFragment
+import com.example.ghostdiary.databinding.ActivityCookiesBinding
 import com.example.ghostdiary.fragment.memo.EditMemoFragment
-import com.example.ghostdiary.fragment.memo.MemoSelectFragment
 import com.example.ghostdiary.utilpackage.Util
 
 
-class MemoActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMemoBinding
+class CookiesActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityCookiesBinding
     private lateinit var container:FrameLayout
-
-    private lateinit var memoSelectFragment: MemoSelectFragment
-    private lateinit var sleepFragment: SleepFragment
 
     companion object{
 
     }
 
-    private lateinit var viewPager: ViewPager2
-
-    lateinit var viewModel: MainViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature( Window.FEATURE_NO_TITLE );
 
 
+        val layoutParams = WindowManager.LayoutParams()
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND
+        layoutParams.dimAmount = 0.7f
+        window.attributes = layoutParams
 
-        binding=ActivityMemoBinding.inflate(layoutInflater)
+        val dm = applicationContext.resources.displayMetrics
+
+        val height = (dm.heightPixels * 0.9).toInt() // Display 사이즈의 90%
+
+        window.attributes.gravity=Gravity.BOTTOM
+
+
+        window.attributes.height = height
+
+        binding=ActivityCookiesBinding.inflate(layoutInflater)
         container=binding.container
-        viewModel= MainActivity.mainactivity.viewModel
-
-        var folder_index=intent.getIntExtra("memofoderindex",-1)
-        if(folder_index==-1)
-            finish()
 
 
-        memoSelectFragment= MemoSelectFragment(this,viewModel.getMemo_FolderArray()[folder_index])
-        supportFragmentManager.beginTransaction().replace(container.id,memoSelectFragment).commit()
+//        supportFragmentManager.beginTransaction().replace(container.id,memoSelectFragment).commit()
         setContentView(binding.root)
         Util.setGlobalFont(binding.root)
 
@@ -73,24 +77,14 @@ class MemoActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
+        super.onBackPressed()
+        return
         var curfragment=supportFragmentManager.fragments.get(0)
         if(curfragment is EditMemoFragment){
-            if(curfragment.iseditmode){
-                if(curfragment.memo ==null){
-                    super.onBackPressed()
 
-                }else{
-                    curfragment.switcheditmode(false)
-                }
-
-            }else{
-                super.onBackPressed()
-            }
             return
-
         }
 
-        super.onBackPressed()
 
     }
     fun showmessage(str: String) {
