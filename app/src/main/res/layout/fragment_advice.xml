@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:paddingTop="50dp"
+
+    >
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+
+        android:text="어떤 감정 때문에 힘들었나요?"
+        android:layout_marginBottom="30dp"
+        android:textSize="16sp"
+        android:textColor="#4A4A4A"
+        android:gravity="center"
+
+        />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        >
+
+        <TextView
+            android:id="@+id/tv_rage"
+            android:layout_columnWeight="1"
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border_advice"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="분노"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_depressed"
+            android:layout_columnWeight="1"
+
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border_advice"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="우울"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_lethargy"
+            android:layout_columnWeight="1"
+
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border_advice"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="무기력"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_sad"
+            android:layout_columnWeight="1"
+
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border_advice"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="슬픔"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            />
+        <TextView
+            android:id="@+id/tv_lowself"
+            android:layout_columnWeight="1"
+
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border_advice"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="자존심 저하"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            />
+        <TextView
+            android:id="@+id/tv_tired"
+            android:layout_columnWeight="1"
+
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border_advice"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="피곤함"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            />
+
+
+
+
+
+
+    </GridLayout>
+
+
+
+
+
+
+
+</LinearLayout>

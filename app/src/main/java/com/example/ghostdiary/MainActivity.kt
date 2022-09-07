@@ -29,12 +29,12 @@ import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import com.example.ghostdiary.fragment.calendar.RecordFragment
 import com.example.ghostdiary.fragment.main.*
 import com.example.ghostdiary.utilpackage.Util
+import java.text.SimpleDateFormat
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var defaultFragment: DefaultFragment
     private lateinit var calendarFragment: CalendarFragment
     private lateinit var recordFragment: RecordFragment
     private lateinit var memoFragment: MemoFragment
@@ -167,7 +167,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        defaultFragment= DefaultFragment()
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
         memoFragment=MemoFragment()
@@ -197,6 +196,7 @@ class MainActivity : AppCompatActivity() {
             dialog.isCancelable = true
             dialog.show(supportFragmentManager, "ConfirmDialog")
         }
+        var isup=false
 
         var toplistener = OnTouchListener { v, event ->
             when (event.action) {
@@ -210,9 +210,36 @@ class MainActivity : AppCompatActivity() {
 
                         binding.drawerlayout.openDrawer(GravityCompat.END)
                     }else if(v.id ==binding.ivCookies.id){
-                        val intent = Intent(this, CookiesActivity::class.java)
-                        intent.putExtra("data", "Test Popup")
-                        startActivity(intent)
+                        if(isup){
+
+                        }
+                        else{
+                            isup=true
+                            val intent = Intent(this, CookiesActivity::class.java)
+                            intent.putExtra("data", "Test Popup")
+                            startActivity(intent)
+                            overridePendingTransition(R.anim.vertical_enter,R.anim.none);
+                            isup=false
+                        }
+
+                    }else if(v.id==binding.ivShare.id){
+                        val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+
+                        editor.putString("curday","1").apply()
+
+                        editor.commit()
+
+                        if(isup){
+
+                        }
+                        else{
+                            isup=true
+                            val intent = Intent(this, CookiesActivity::class.java)
+                            intent.putExtra("data", "Test Popup")
+                            startActivity(intent)
+                            overridePendingTransition(R.anim.vertical_enter,R.anim.none);
+                            isup=false
+                        }
                     }
 
                 }

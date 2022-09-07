@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="240dp">
+
+        <ImageView
+            android:id="@+id/iv_cookies"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:clickable="true"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:src="@drawable/ic_big_cookies"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tv_text"
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+
+        android:minWidth="312dp"
+        android:minHeight="110dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="#4A4A4A"
+        android:textSize="12sp"
+
+        android:background="@drawable/backgroundpage"
+        android:singleLine="false"
+        android:text="오늘은 집에서 에어컨을 키고 쉬거나\n분위기 좋은 카페를 가보는건 어떨까요?"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="23dp"
+
+        android:layout_gravity="end"
+        android:gravity="center"
+        android:minWidth="30dp"
+        android:minHeight="30dp"
+        android:textColor="#000000"
+        android:textSize="12sp"
+
+        android:singleLine="false"
+        android:text="닫기"
+        />
+
+
+
+
+
+
+
+</LinearLayout>

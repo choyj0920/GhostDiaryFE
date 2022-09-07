@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.ghostdiary.*
 import com.example.ghostdiary.databinding.FragmentAnalysisDetailBinding
@@ -154,14 +155,21 @@ class AnalysisDetailFragment(private val viewModel:MainViewModel) : Fragment() {
         lineDataSet = LineDataSet(chartData, "set1")
 
         lineDataSet.apply {
-            color=resources.getColor(R.color.pink)
+            color=ContextCompat.getColor(requireContext(), R.color.pink);
             lineWidth=2f
-            setDrawCircles(false)
+            setCircleColor(ContextCompat.getColor(requireContext(), R.color.pink))
+            circleHoleColor= ContextCompat.getColor(requireContext(), R.color.pink)
+            setDrawCircles(true)
+
+            setDrawCircleHole(true)
+
+            circleRadius=2f
+
             setDrawValues(false)
-            fillColor=resources.getColor(R.color.pink)
+            fillColor=ContextCompat.getColor(requireContext(), R.color.pink);
+
 
         }
-
 
 
 

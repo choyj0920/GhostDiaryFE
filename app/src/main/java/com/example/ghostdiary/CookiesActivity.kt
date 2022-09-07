@@ -1,52 +1,78 @@
 package com.example.ghostdiary
 
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
-import android.view.Gravity
-import android.view.View
-import android.view.Window
-import android.view.WindowManager
+import android.util.Log
+import android.view.*
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.ghostdiary.databinding.ActivityCookiesBinding
-import com.example.ghostdiary.fragment.memo.EditMemoFragment
+import com.example.ghostdiary.fragment.cookie.AdviceFragment
+import com.example.ghostdiary.fragment.cookie.SelectCookieFragment
 import com.example.ghostdiary.utilpackage.Util
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CookiesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCookiesBinding
     private lateinit var container:FrameLayout
+    private lateinit var prefs : SharedPreferences
+    lateinit var selectCookieFragment: SelectCookieFragment
+    lateinit var adviceFragment: AdviceFragment
+    var istodaycookie=true
 
     companion object{
+
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestWindowFeature( Window.FEATURE_NO_TITLE );
+//        requestWindowFeature( Window.FEATURE_NO_TITLE );
+
 
 
         val layoutParams = WindowManager.LayoutParams()
         layoutParams.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND
-        layoutParams.dimAmount = 0.7f
+//        layoutParams.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND
+        layoutParams.dimAmount = .5f
+
+
         window.attributes = layoutParams
 
-        val dm = applicationContext.resources.displayMetrics
 
-        val height = (dm.heightPixels * 0.9).toInt() // Display 사이즈의 90%
 
         window.attributes.gravity=Gravity.BOTTOM
 
+        window.decorView.setOnClickListener{
+            Log.d("TAG","클릭")
+        }
 
-        window.attributes.height = height
+
+
+
 
         binding=ActivityCookiesBinding.inflate(layoutInflater)
         container=binding.container
 
+        prefs = this.getSharedPreferences("Prefs", Context.MODE_PRIVATE)
+        var datefomat=SimpleDateFormat("yyyy-MM-dd")
+        var curday= datefomat.format(Calendar.getInstance().time)
+        var iscurrentday=prefs.getString("curday","0")
+        if(iscurrentday!=curday){
+            istodaycookie=true
+            show_Todaycookie()
+        }else{
+            istodaycookie=false
+            show_advice()
+
+        }
+        binding.outsidelayout.setOnClickListener{ finish() }
 
 //        supportFragmentManager.beginTransaction().replace(container.id,memoSelectFragment).commit()
         setContentView(binding.root)
@@ -62,6 +88,31 @@ class CookiesActivity : AppCompatActivity() {
         getSupportFragmentManager().popBackStack();
     }
 
+    override fun finish() {
+        super.finish()
+        overridePendingTransition(R.anim.none,R.anim.vertical_exit);
+
+    }
+
+    fun show_Todaycookie(){
+        binding.ivBanner.setImageResource(R.drawable.banner_cookies)
+
+        selectCookieFragment= SelectCookieFragment(true, arrayListOf("오늘은 집에서 에어컨을 키고 쉬거나\n" +
+                "분위기 좋은 카페를 가보는건 어떨까요?1",
+            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?2",
+            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?3",
+            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?4",
+            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?5"))
+
+        getSupportFragmentManager().beginTransaction().replace(binding.container.id, selectCookieFragment).addToBackStack(null).commit();
+    }
+    fun show_advice(){
+        binding.ivBanner.setImageResource(R.drawable.banner_advice)
+
+        adviceFragment= AdviceFragment()
+
+        getSupportFragmentManager().beginTransaction().replace(binding.container.id, adviceFragment).addToBackStack(null).commit();
+    }
 
 
 
@@ -77,13 +128,22 @@ class CookiesActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        return
+
         var curfragment=supportFragmentManager.fragments.get(0)
-        if(curfragment is EditMemoFragment){
+        if(curfragment is SelectCookieFragment && istodaycookie){
+
+            finish()
 
             return
+        }else if(!istodaycookie && curfragment is SelectCookieFragment){
+            reversechange(curfragment)
+            return
         }
+        else{
+            finish()
+            return
+        }
+
 
 
     }

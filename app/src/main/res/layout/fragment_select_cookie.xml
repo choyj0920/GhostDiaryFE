@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:paddingTop="50dp"
+
+    >
+
+   <TextView
+       android:id="@+id/tv_title"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:textStyle="bold"
+       
+       android:text="오늘의 쿠키를 골라보세요"
+       android:layout_marginBottom="30dp"
+       android:textSize="16sp"
+       android:textColor="#4A4A4A"
+       android:gravity="center"
+
+       />
+    
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cookies_parentlayout"
+
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="220dp">
+
+        <ImageView
+
+            android:id="@+id/iv_cookies_0"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:clickable="true"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:src="@drawable/ic_big_cookies"
+            app:layout_constraintEnd_toStartOf="@+id/iv_cookies_1"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/iv_cookies_1"
+            android:clickable="true"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+
+            android:src="@drawable/ic_big_cookies"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_cookies_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:clickable="true"
+            android:scaleX="0.7"
+
+            android:scaleY="0.7"
+            android:src="@drawable/ic_big_cookies"
+
+            app:layout_constraintStart_toEndOf="@id/iv_cookies_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_cookies_3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="100dp"
+            android:clickable="true"
+            android:scaleX="0.7"
+            android:layout_marginLeft="50dp"
+
+
+            android:scaleY="0.7"
+            android:src="@drawable/ic_big_cookies"
+            app:layout_constraintStart_toStartOf="@+id/iv_cookies_0"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_cookies_4"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="100dp"
+            android:clickable="true"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
+            android:layout_marginEnd="50dp"
+
+
+            android:src="@drawable/ic_big_cookies"
+            app:layout_constraintEnd_toEndOf="@+id/iv_cookies_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:id="@+id/layout_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="wrap_content"
+            android:layout_height="110dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginRight="28dp"
+
+            android:minWidth="312dp"
+            android:minHeight="110dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="#4A4A4A"
+            android:textSize="12sp"
+
+            android:background="@drawable/backgroundpage"
+            android:singleLine="false"
+            android:text="오늘은 집에서 에어컨을 키고 쉬거나\n분위기 좋은 카페를 가보는건 어떨까요?"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="23dp"
+
+            android:layout_gravity="end"
+            android:gravity="center"
+            android:minWidth="30dp"
+            android:minHeight="30dp"
+            android:textColor="#000000"
+            android:textSize="12sp"
+
+            android:singleLine="false"
+            android:text="닫기"
+            />
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>
