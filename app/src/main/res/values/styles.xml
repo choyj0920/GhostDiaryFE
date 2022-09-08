@@ -11,7 +11,10 @@
 
     <style name="AppThemeDialog" parent="Theme.Ghostdiary">
         <item name="android:windowIsTranslucent">true</item>
+        <item name="android:backgroundDimAmount">0.5 </item>
         <item name="android:windowBackground">@color/transp</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="PopupMenuStyle" parent="Widget.AppCompat.PopupMenu">

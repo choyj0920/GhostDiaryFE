@@ -92,7 +92,10 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
                             i.setOnClickListener {  }
                         }
                     }
-                    v.setOnClickListener{}
+
+
+
+                    v.setOnTouchListener(null)
 
                     uptextlayout(arraytext[index] )
 

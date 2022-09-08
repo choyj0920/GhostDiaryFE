@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var prefs : SharedPreferences
     companion object{
         lateinit var mainactivity:MainActivity
+        var isup=false
 
         var fontname:Array<String> = arrayOf("roboto","나눔바른펜","나눔 손글씨펜","d2코딩","BM연성","고도","고도마음","이롭게바탕","미생","야체")
     }
@@ -196,7 +197,6 @@ class MainActivity : AppCompatActivity() {
             dialog.isCancelable = true
             dialog.show(supportFragmentManager, "ConfirmDialog")
         }
-        var isup=false
 
         var toplistener = OnTouchListener { v, event ->
             when (event.action) {
@@ -210,16 +210,14 @@ class MainActivity : AppCompatActivity() {
 
                         binding.drawerlayout.openDrawer(GravityCompat.END)
                     }else if(v.id ==binding.ivCookies.id){
-                        if(isup){
 
-                        }
-                        else{
+                        val intent = Intent(this, CookiesActivity::class.java)
+                        intent.putExtra("data", "Test Popup")
+                        if(isup){
+                        }else {
                             isup=true
-                            val intent = Intent(this, CookiesActivity::class.java)
-                            intent.putExtra("data", "Test Popup")
                             startActivity(intent)
-                            overridePendingTransition(R.anim.vertical_enter,R.anim.none);
-                            isup=false
+                            overridePendingTransition(R.anim.vertical_enter, R.anim.none)
                         }
 
                     }else if(v.id==binding.ivShare.id){
@@ -229,16 +227,13 @@ class MainActivity : AppCompatActivity() {
 
                         editor.commit()
 
+                        val intent = Intent(this, CookiesActivity::class.java)
+                        intent.putExtra("data", "Test Popup")
                         if(isup){
-
-                        }
-                        else{
+                        }else {
                             isup=true
-                            val intent = Intent(this, CookiesActivity::class.java)
-                            intent.putExtra("data", "Test Popup")
                             startActivity(intent)
-                            overridePendingTransition(R.anim.vertical_enter,R.anim.none);
-                            isup=false
+                            overridePendingTransition(R.anim.vertical_enter, R.anim.none)
                         }
                     }
 

@@ -11,6 +11,7 @@ import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
@@ -80,6 +81,7 @@ class EditDiaryFragment(
         curDiary=parent!!.curDiary
 
         binding!!.inputText.setText(curDiary.text)
+
 
         var transFormat = SimpleDateFormat("yyyy.MM.dd.")
         var to = transFormat.format(date)
@@ -279,6 +281,7 @@ class EditDiaryFragment(
             binding!!.btnDelimage.visibility=View.GONE
             binding!!.inputText.hint=""
             binding!!.btnSidemenu.visibility=View.VISIBLE
+            binding!!.inputText.movementMethod= ScrollingMovementMethod()
 
 
         }

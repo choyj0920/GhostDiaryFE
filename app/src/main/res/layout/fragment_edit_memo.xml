@@ -41,6 +41,8 @@
                 android:layout_marginRight="35dp"
                 android:layout_marginLeft="35dp"
                 android:background="#FFFFFF"
+                android:singleLine="true"
+                android:maxLength="16"
 
                 android:gravity="center"
                 android:hint="제목"
@@ -170,8 +172,10 @@
 
             <LinearLayout
                 android:id="@+id/linearLayout5"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -181,19 +185,20 @@
 
                 <TextView
                     android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:lineSpacingExtra="5sp"
                     android:minHeight="24dp"
                     android:text="제목"
+                    android:singleLine="true"
+
                     android:textColor="#474746"
                     android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_day"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:gravity="center"
@@ -230,6 +235,7 @@
             android:background="@color/white"
             android:gravity="top"
             android:hint="내용을 입력해주세요"
+            
             android:paddingLeft="28dp"
             android:paddingTop="40dp"
             android:paddingRight="28dp"

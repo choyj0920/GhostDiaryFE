@@ -3,6 +3,7 @@ package com.example.ghostdiary.fragment.memo
 
 import android.content.Context
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.TypedValue
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -51,6 +52,8 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
         binding!!.tvDay.text=formatdate.format(curMemo.date)
         binding!!.tvTitle.text=curMemo.title
         binding!!.tvText.text=curMemo.text
+
+        binding!!.tvText.movementMethod=ScrollingMovementMethod()
 
 
 

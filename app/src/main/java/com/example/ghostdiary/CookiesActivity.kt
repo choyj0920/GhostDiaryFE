@@ -33,7 +33,7 @@ class CookiesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        requestWindowFeature( Window.FEATURE_NO_TITLE );
+        requestWindowFeature( Window.FEATURE_NO_TITLE );
 
 
 
@@ -90,6 +90,7 @@ class CookiesActivity : AppCompatActivity() {
 
     override fun finish() {
         super.finish()
+        MainActivity.isup=false
         overridePendingTransition(R.anim.none,R.anim.vertical_exit);
 
     }

@@ -28,13 +28,13 @@
         android:layout_height="0dp"
         android:nestedScrollingEnabled="false"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -807,7 +807,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="10dp"
                 android:background="#F5F5F5"
                 android:minHeight="321dp"
                 android:paddingBottom="30dp"
