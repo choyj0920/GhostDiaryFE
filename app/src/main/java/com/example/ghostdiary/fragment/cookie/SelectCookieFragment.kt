@@ -4,8 +4,10 @@ import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -15,12 +17,12 @@ import android.view.animation.AnimationUtils
 import android.view.animation.LinearInterpolator
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import com.example.ghostdiary.CookiesActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.FragmentSelectCookieBinding
 import com.example.ghostdiary.utilpackage.Util
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<String>) : Fragment() {
@@ -80,12 +82,8 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
                     var temp= cookiearray.indexOf(v)
 
                     var index:Int = (Math.random()*arraytext.size ).toInt()
-//                    if(activity is CookiesActivity){
-//                        (activity as CookiesActivity).containerChange(CookieViewFragment(arraytext[index]))
-//
-//                    }
 
-                    moveToCenterAnimation(requireContext(),v,500)
+//                    moveToCenterAnimation(requireContext(),v,500)
                     for(i in cookiearray){
                         if(i != v){
                             i.visibility=View.INVISIBLE
@@ -93,11 +91,7 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
                         }
                     }
 
-
-
                     v.setOnTouchListener(null)
-
-                    uptextlayout(arraytext[index] )
 
                     if(isTodaycookie){
                         val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
@@ -108,6 +102,7 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
                         editor.commit()
 
                     }
+                    (activity as CookiesActivity).containerChange(CookieViewFragment(arraytext[index]))
 
 
 
@@ -127,16 +122,7 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
 
 
 
-    fun uptextlayout(text:String){
-        binding!!.tvTitle.visibility=View.GONE
-        binding!!.layoutText.visibility=View.VISIBLE
-        binding!!.layoutText.startAnimation(AnimationUtils.loadAnimation(context, R.anim.vertical_enter))
-        binding!!.tvText.text=text
-        binding!!.tvCancel.setOnClickListener {
-            Log.d("TAG","${cookiearray[curselect].width}    , ${cookiearray[curselect].height}")
 
-            activity?.onBackPressed() }
-    }
 
     override fun onDestroyView() {
         binding=null
@@ -179,15 +165,20 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
         Log.d("TAG","parent ${binding!!.cookiesParentlayout.width}    , ${binding!!.cookiesParentlayout.height}")
         Log.d("TAG","pose $pos   $poslayout ")
 
-        var curlocX  = pos[0]+view.width/2
-        var curlocY  = pos[1]+view.height/2
+        var curlocX  = view.x +view.width/2
+        var curlocY  = view.y +view.height/2
+//        var curlocX  = view.width/2
+//        var curlocY  = view.height/2
 
-        view.pivotX=50f
-        view.pivotY=50f
+        view.pivotX=view.width/2f
+        view.pivotY=view.height/2f
 
 
-        var destlocX=poslayout[0] +binding!!.cookiesParentlayout.width/2f
-        var destlocY=poslayout[1] +binding!!.cookiesParentlayout.height/2f
+//        var destlocX=poslayout[0] +binding!!.cookiesParentlayout.width/2f
+//        var destlocY=poslayout[1] +binding!!.cookiesParentlayout.height/2f
+
+        var destlocX=binding!!.cookiesParentlayout.x +binding!!.cookiesParentlayout.width/2f
+        var destlocY=binding!!.cookiesParentlayout.y +binding!!.cookiesParentlayout.height/2f
 
         //Get screen size
         val screenWidth: Int
@@ -208,6 +199,7 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
             view,
             "translationY",
             destlocY-curlocY
+
         )
         val scalex=ObjectAnimator.ofFloat(
             view,
@@ -226,6 +218,7 @@ class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<Str
         //Play animator
         val animatorSet = AnimatorSet()
         animatorSet.playTogether(xAnimator, yAnimator,scalex,scaley)
+//        animatorSet.playTogether(xAnimator, yAnimator)
         animatorSet.start()
     }
 

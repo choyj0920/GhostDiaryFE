@@ -1,10 +1,19 @@
 package com.example.ghostdiary.utilpackage
 
+import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Typeface
+import android.os.Environment
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
+
 
 class Util {
 
@@ -34,6 +43,40 @@ class Util {
                     }
                 }
             }
+        }
+
+        fun getExternalFilePath(context: Context?): String? {
+            return Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
+                .toString() + "/"
+        }
+
+        fun saveImageIntoFileFromUri(
+            context: Context?,
+            bitmap: Bitmap,
+            fileName: String?,
+            path: String?
+        ): File? {
+            val file = File(path, fileName)
+            try {
+                val fileOutputStream = FileOutputStream(file)
+                when (file.getAbsolutePath()
+                    .substring(file.getAbsolutePath().lastIndexOf(".") + 1)) {
+                    "jpeg", "jpg" -> bitmap.compress(
+                        Bitmap.CompressFormat.JPEG,
+                        100,
+                        fileOutputStream
+                    )
+                    "png" -> bitmap.compress(Bitmap.CompressFormat.PNG, 100, fileOutputStream)
+                }
+                fileOutputStream.close()
+            } catch (e: FileNotFoundException) {
+                e.printStackTrace()
+                Log.e("Utils", "saveImageIntoFileFromUri FileNotFoundException : " + e.toString())
+            } catch (e: IOException) {
+                e.printStackTrace()
+                Log.e("Utils", "saveImageIntoFileFromUri IOException : " + e.toString())
+            }
+            return file
         }
 
     }

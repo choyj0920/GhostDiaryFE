@@ -42,24 +42,25 @@
         >
 
         <TextView
-            android:id="@+id/tv_save"
+            android:id="@+id/tv_cancel"
             android:layout_width="57dp"
             android:layout_height="36dp"
             android:layout_gravity="end"
             android:layout_marginEnd="27dp"
             android:gravity="center"
-            android:text="확인"
-            android:textColor="@color/pink"
+            android:text="취소"
+            android:textColor="#474746"
             android:textSize="14sp" />
         <TextView
-            android:id="@+id/tv_cancel"
+            android:id="@+id/tv_save"
             android:layout_width="57dp"
             android:layout_height="36dp"
             android:layout_gravity="end"
             android:layout_marginEnd="16dp"
             android:gravity="center"
-            android:text="취소"
-            android:textColor="@color/pink"
+            android:text="저장"
+            android:textColor="#474746"
+
             android:textSize="14sp" />
 
     </LinearLayout>

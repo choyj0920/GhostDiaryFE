@@ -43,6 +43,8 @@ class CookiesActivity : AppCompatActivity() {
         layoutParams.dimAmount = .5f
 
 
+
+
         window.attributes = layoutParams
 
 

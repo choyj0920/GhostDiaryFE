@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
             ResourcesCompat.getFont(this,R.font.yafont),
         )
 
-        var iscur=prefs.getInt("curfont",3)
+        var iscur=prefs.getInt("curfont",9)
         Util.init(array,prefs.getInt("isfontnum",iscur))
 
 
@@ -223,18 +223,8 @@ class MainActivity : AppCompatActivity() {
                     }else if(v.id==binding.ivShare.id){
                         val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
 
-                        editor.putString("curday","1").apply()
+                        calendarFragment.ScreenShotActivity()
 
-                        editor.commit()
-
-                        val intent = Intent(this, CookiesActivity::class.java)
-                        intent.putExtra("data", "Test Popup")
-                        if(isup){
-                        }else {
-                            isup=true
-                            startActivity(intent)
-                            overridePendingTransition(R.anim.vertical_enter, R.anim.none)
-                        }
                     }
 
                 }

@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:gravity="center"
-        android:text="충분한 데이터가 없어서 분석이 되지 않아요.\n\n 선택된 활동들의 종류가 5개이상이어야해요."
 
+        android:text="충분한 데이터가 없어서 분석이 어려워요.\n\n 유령을 5개 이상 선택해주세요"
         android:textSize="15sp"
 
         android:visibility="gone"
@@ -168,6 +168,8 @@
                 android:layout_marginBottom="10dp"
                 android:background="#F5F5F5"
                 android:minHeight="321dp"
+                android:paddingBottom="30dp"
+
                 android:orientation="vertical">
 
                 <com.github.mikephil.charting.charts.LineChart
@@ -186,8 +188,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="17dp"
+                    android:layout_marginEnd="17dp"
+                    android:gravity="center"
 
-                    android:layout_marginBottom="10dp"
                     android:orientation="horizontal"
                     android:paddingTop="20dp">
 
@@ -205,7 +210,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_00_verygood" />
+                            android:src="@drawable/ghost_00_verygood_edit" />
 
 
                         <TextView
@@ -236,7 +241,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_01_good" />
+                            android:src="@drawable/ghost_01_good_edit" />
 
 
                         <TextView
@@ -267,7 +272,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_02_normal" />
+                            android:src="@drawable/ghost_02_normal_edit" />
 
 
                         <TextView
@@ -298,7 +303,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_03_bad" />
+                            android:src="@drawable/ghost_03_bad_edit" />
 
 
                         <TextView
@@ -329,7 +334,7 @@
                             android:adjustViewBounds="true"
 
                             android:minHeight="40dp"
-                            android:src="@drawable/ghost_04_verybad" />
+                            android:src="@drawable/ghost_04_verybad_edit" />
 
 
                         <TextView

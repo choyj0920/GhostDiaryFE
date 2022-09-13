@@ -17,7 +17,7 @@
 
         android:layout_weight="1"
         android:alpha="1"
-        android:padding="2dp"
+        android:padding="5dp"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

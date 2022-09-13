@@ -1,15 +1,19 @@
 package com.example.ghostdiary.fragment.calendar
 
+import android.app.Application
+import android.content.ClipData
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.NonNull
-
+import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
@@ -20,7 +24,10 @@ import com.example.ghostdiary.adapter.EmotionSpinnerAdapter
 import com.example.ghostdiary.databinding.FragmentCalendarBinding
 import com.example.ghostdiary.fragment.postdiary.SelectEmotionFragment
 import com.example.ghostdiary.utilpackage.Util
+
+import java.io.File
 import java.util.*
+
 
 class CalendarFragment : Fragment() {
     companion object {
@@ -118,6 +125,61 @@ class CalendarFragment : Fragment() {
 
     }
 
+    fun ScreenShotActivity() {
+
+        try {
+            val view = (snap.findSnapView(binding!!.rvMonth.layoutManager)!! as ViewGroup).getChildAt(0)
+
+
+            //Imageview share = findViewById(R.id.share)
+            //Imageview share = findViewById(R.id.share)
+            view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight())
+            view.buildDrawingCache()
+            val bitmap = Bitmap.createBitmap(
+                view.getMeasuredWidth(), view.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888
+            )
+            val canvas = Canvas(bitmap)
+            view.draw(canvas)
+            val fileName = getString(R.string.app_name) + System.currentTimeMillis() + ".jpeg"
+
+            //외부 저장소에 이미지 파일 저장하기
+            val file: File? = Util.saveImageIntoFileFromUri(
+                requireContext(),
+                bitmap,
+                fileName,
+                Util.getExternalFilePath(requireContext())
+            )
+
+            //다른 앱에 이미지 공유하기
+            val shareIntent = Intent()
+
+            val photoURI = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().getPackageName(),
+                file!!
+            )
+
+            shareIntent.action = Intent.ACTION_SEND
+
+            shareIntent.putExtra(Intent.EXTRA_STREAM, photoURI)
+            shareIntent.type = "image/jpg"
+            shareIntent.clipData= ClipData.newRawUri("abc",photoURI)
+            shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+
+            startActivity(Intent.createChooser(shareIntent, "공유"))
+
+
+        }catch(e: Exception){
+
+            MainActivity.mainactivity.showmessage("오류.. 잠시 후 다시 시도해 주세요")
+        }
+
+
+
+    }
+
     fun init_spinner(){
         val array= arrayListOf<Int>(-1,0,1,2,3,4)
         val adapter=EmotionSpinnerAdapter(MainActivity.mainactivity,array)
@@ -172,8 +234,6 @@ class CalendarFragment : Fragment() {
         dialog.isCancelable = true
 
         dialog.show(requireActivity().supportFragmentManager, "ConfirmDialog")
-
-
 
     }
 

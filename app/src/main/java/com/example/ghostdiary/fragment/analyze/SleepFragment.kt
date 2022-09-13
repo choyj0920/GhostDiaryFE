@@ -148,7 +148,7 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
             endsleep="24"
 
 
-        val content  = "${startsleep}시에 자서  ${endsleep} 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"
+        val content  = "${startsleep} 시에 자서  ${endsleep} 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"
         val spannableString = SpannableString(content) //객체 생성
 
 

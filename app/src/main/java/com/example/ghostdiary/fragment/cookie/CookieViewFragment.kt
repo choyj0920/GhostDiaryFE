@@ -41,6 +41,8 @@ class CookieViewFragment(var text:String) : Fragment() {
         }
 
         binding!!.ivCookies.startAnimation(AnimationUtils.loadAnimation(context, R.anim.scaleup))
+        binding!!.tvText.startAnimation(AnimationUtils.loadAnimation(context, R.anim.vertical_enter))
+
 
     }
 

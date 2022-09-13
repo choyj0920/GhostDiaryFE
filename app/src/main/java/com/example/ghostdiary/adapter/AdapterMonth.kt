@@ -48,6 +48,13 @@ class AdapterMonth(var parent: CalendarFragment, val viewmodel : MainViewModel):
         val month = SimpleDateFormat("MMM").format(calendar.time)
 
         holder.month.text=month
+        holder.month.setOnClickListener{
+            parent.showmonthpicker()
+        }
+        holder.year.setOnClickListener {
+            parent.showmonthpicker()
+        }
+
         holder.year.text=year
 
         val tempMonth = calendar.get(Calendar.MONTH)

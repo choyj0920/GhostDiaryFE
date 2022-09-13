@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:gravity="center"
 
-        android:text="충분한 데이터가 없어서 분석이 되지 않아요.\n\n 선택된 활동들의 종류가 5개이상이어야해요."
+        android:text="충분한 데이터가 없어서 분석이 어려워요.\n\n 유령을 5개 이상 선택해주세요"
 
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
