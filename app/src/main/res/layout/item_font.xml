@@ -10,9 +10,10 @@
     android:layout_marginBottom="2dp"
     >
     
-    <RadioButton
+    <androidx.appcompat.widget.AppCompatRadioButton
         android:id="@+id/rb_font"
         android:layout_width="36dp"
+        android:buttonTint="#474746"
         android:layout_height="match_parent"
         android:gravity="left|center"
         android:layout_gravity="center"
@@ -20,12 +21,12 @@
 
     <TextView
         android:id="@+id/tv_font"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="26dp"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:text="폰트1"
         android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_gravity="center"
         />
 

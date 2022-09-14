@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
+    tools:openDrawer="end"
 
 
 
@@ -140,7 +141,7 @@
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@drawable/border_corners_justleft"
         android:layout_gravity="end">
 
         <LinearLayout
@@ -151,7 +152,6 @@
             android:layout_height="match_parent">
             <LinearLayout
                 android:background="@color/white"
-                android:layout_marginTop="50dp"
                 android:layout_weight="1"
 
                 android:orientation="vertical"
@@ -160,10 +160,14 @@
 
                 <TextView
                     android:id="@+id/sidemenu_buy"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
+                    android:visibility="visible"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/border_just_bottom"
+
+                    android:layout_height="100dp"
+                    android:paddingTop="38dp"
+                    android:paddingBottom="38dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
                     android:textSize="15dp"
                     android:textColor="#001018"
@@ -172,7 +176,7 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="30dp">
 
@@ -197,7 +201,7 @@
                         android:checked="false"
                         android:theme="@style/sw_mainColor"
                         android:thumbTint="#FAFAFA"
-                        android:layout_marginEnd="36dp"
+                        android:layout_marginEnd="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -205,22 +209,59 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_marginTop="30dp"
-                    android:id="@+id/sidemenu_alarm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
-                    android:textSize="15dp"
-                    android:textColor="#001018"
-                    android:text="알림"
-                    />
+                    android:layout_height="30dp">
+
+                    <TextView
+                        android:id="@+id/sidemenu_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="24dp"
+                        android:gravity="center"
+
+                        android:text="알림"
+
+                        android:textColor="#001018"
+                        android:textSize="15dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/sidemenu_tv_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end|center"
+                        android:text="PM 9:30"
+                        android:layout_marginStart="50dp"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Switch
+                        android:id="@+id/sidemenu_switch_alarm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:switchMinWidth="50dp"
+                        android:checked="false"
+                        android:theme="@style/sw_mainColor"
+                        android:thumbTint="#FAFAFA"
+                        android:layout_marginEnd="12dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
                     android:layout_marginTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
                     android:layout_height="24dp">
 
@@ -241,7 +282,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textColor="@color/gray"
-                        android:layout_marginEnd="36dp"
+                        android:layout_marginEnd="12dp"
                         android:textSize="15sp"
                         android:gravity="end|center"
                         android:text="현재 폰트"
@@ -263,7 +304,7 @@
                         android:id="@+id/sidemenu_backup"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="7dp"
                         android:layout_marginRight="10dp"
                         android:textSize="15dp"
                         android:textColor="#001018"
@@ -275,7 +316,7 @@
                         android:id="@+id/sidemenu_service"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="7dp"
                         android:layout_marginRight="10dp"
                         android:textSize="15dp"
                         android:textColor="#001018"
@@ -294,7 +335,7 @@
                     android:id="@+id/sidemenu_dbinit"
                     android:layout_width="wrap_content"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="7dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="20dp"
                     android:textSize="15dp"

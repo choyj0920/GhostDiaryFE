@@ -1,11 +1,14 @@
 package com.example.ghostdiary
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -42,12 +45,14 @@ class MainActivity : AppCompatActivity() {
     companion object{
         lateinit var mainactivity:MainActivity
         var isup=false
+        val M_ALARM_REQUEST_CODE = 1000
 
         var fontname:Array<String> = arrayOf("roboto","나눔바른펜","나눔 손글씨펜","d2코딩","BM연성","고도","고도마음","이롭게바탕","미생","야체")
     }
     var lastTimeBackPressed : Long = 0
     lateinit var pageCallBack: ViewPager2.OnPageChangeCallback
     private lateinit var viewPager: ViewPager2
+    private var alarmTime:Calendar=Calendar.getInstance()
 
 
     lateinit var viewModel: MainViewModel
@@ -165,8 +170,8 @@ class MainActivity : AppCompatActivity() {
             binding.sidemenuSwitchLock.isChecked=true
         }else{
             binding.sidemenuSwitchLock.isChecked=false
-
         }
+
 
         calendarFragment= CalendarFragment()
         recordFragment= RecordFragment()
@@ -244,6 +249,7 @@ class MainActivity : AppCompatActivity() {
 
     fun init_sidemenu(){
         //db 초기화
+        initAlarm()
         binding.sidemenuDbinit.setOnClickListener{
             viewModel.getdb(this).createdb()
             finishAffinity() //해당 앱의 루트 액티비티를 종료시킨다.
@@ -260,6 +266,11 @@ class MainActivity : AppCompatActivity() {
         }
         binding.sidemenuFont.setOnClickListener {
             val dialog = FontSelectDialog(this)
+            dialog.isCancelable = true
+            dialog.show(supportFragmentManager, "ConfirmDialog")
+        }
+        binding.sidemenuTvAlarm.setOnClickListener {
+            val dialog = AlarmSetterDialog(this,alarmTime)
             dialog.isCancelable = true
             dialog.show(supportFragmentManager, "ConfirmDialog")
         }
@@ -331,6 +342,16 @@ class MainActivity : AppCompatActivity() {
         }else{
             binding.sidemenuSwitchLock.isChecked=false
         }
+
+
+
+    }
+    fun setAlarmtext(){
+
+        var alarmtimetext=if(alarmTime.get(Calendar.AM_PM)==0) "AM "  else "PM "
+        alarmtimetext+="${alarmTime.get(Calendar.HOUR)}:${alarmTime.get(Calendar.MINUTE)}"
+
+        binding.sidemenuTvAlarm.text=alarmtimetext
     }
 
     fun reversechange(fragment: Fragment){
@@ -343,6 +364,116 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra("iscreate",false)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
         startActivity(intent)
+    }
+
+    private fun initAlarm() {
+        var formatDate = SimpleDateFormat("HH:mm");
+        var strdate = prefs.getString("alarmtime","21:30")
+        alarmTime.time = formatDate.parse(strdate)
+        setAlarmtext()
+
+        var isalarmOn=prefs.getBoolean("isalarmOn",false)
+
+
+
+        // 보정 조정 예외처 (브로드 캐스트 가져오기)
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            M_ALARM_REQUEST_CODE,
+            Intent(this, AlarmReceiver::class.java),
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE else PendingIntent.FLAG_NO_CREATE
+        ) // 있으면 가져오고 없으면 안만든다. (null)
+
+        if ((pendingIntent == null) and isalarmOn){
+            //알람은 꺼져있는데, 데이터는 켜져있는 경우
+            isalarmOn = false
+
+        } else if((pendingIntent != null) and !isalarmOn ){
+            // 알람은 켜져있는데 데이터는 꺼져있는 경우.
+            // 알람을 취소함
+            pendingIntent.cancel()
+        }
+
+        if(isalarmOn){
+            binding.sidemenuSwitchAlarm.isChecked=true
+        }else{
+            binding.sidemenuSwitchAlarm.isChecked=false
+        }
+        val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+        editor.putBoolean("isalarmOn",binding.sidemenuSwitchAlarm.isChecked).apply()
+        editor.commit()
+        binding.sidemenuSwitchAlarm.setOnCheckedChangeListener { buttonview, ischecked ->
+                    // 온/오프 에 따라 작업을 처리한다
+            updatealarm()
+            val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+            editor.putBoolean("isalarmOn",ischecked).apply()
+            editor.commit()
+
+
+        }
+    }
+    fun updatealarm(hour:Int=-1,min:Int=-1){
+        if(hour!=-1){
+            alarmTime.set(Calendar.HOUR_OF_DAY,hour)
+            alarmTime.set(Calendar.MINUTE,min)
+
+            val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+            var formatDate = SimpleDateFormat("HH:mm");
+            var temp=formatDate.format(alarmTime.time)
+            editor.putString("alarmtime",temp).apply()
+
+            editor.commit()
+
+            setAlarmtext()
+
+        }
+        var ischecked=binding.sidemenuSwitchAlarm.isChecked
+
+        if (ischecked){
+            // 온 -> 알람을 등록
+            val calender = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, alarmTime.get(Calendar.HOUR_OF_DAY))
+                set(Calendar.MINUTE, alarmTime.get(Calendar.MINUTE))
+                // 지나간 시간의 경우 다음날 알람으로 울리도록
+                if (before(Calendar.getInstance())){
+                    add(Calendar.DATE, 1) // 하루 더하기
+                }
+            }
+
+            //알람 매니저 가져오기.
+            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+            val intent = Intent(this, AlarmReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(
+                this,
+                M_ALARM_REQUEST_CODE,
+                intent,
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE  else PendingIntent.FLAG_UPDATE_CURRENT) // 있으면 새로 만든거로 업데이트
+
+            alarmManager.setInexactRepeating( // 정시에 반복
+                AlarmManager.RTC_WAKEUP, // RTC_WAKEUP : 실제 시간 기준으로 wakeup , ELAPSED_REALTIME_WAKEUP : 부팅 시간 기준으로 wakeup
+                calender.timeInMillis, // 언제 알람이 발동할지.
+                AlarmManager.INTERVAL_DAY, // 하루에 한번씩.
+                pendingIntent
+            )
+        } else{
+            // 오프 -> 알람을 제거
+            cancelAlarm()
+        }
+    }
+
+
+    private fun cancelAlarm(){
+        // 기존에 있던 알람을 삭제한다.
+
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            this,
+            M_ALARM_REQUEST_CODE,
+            Intent(this, AlarmReceiver::class.java),
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE else PendingIntent.FLAG_NO_CREATE
+            )
+        pendingIntent?.cancel() // 기존 알람 삭제
     }
 
 
