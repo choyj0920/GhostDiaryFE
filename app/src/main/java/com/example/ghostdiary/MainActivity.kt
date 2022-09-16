@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         lateinit var mainactivity:MainActivity
         var isup=false
         val M_ALARM_REQUEST_CODE = 1000
+        val REQUEST_CODE= M_ALARM_REQUEST_CODE
 
         var fontname:Array<String> = arrayOf("roboto","나눔바른펜","나눔 손글씨펜","d2코딩","BM연성","고도","고도마음","이롭게바탕","미생","야체")
     }
@@ -349,7 +350,7 @@ class MainActivity : AppCompatActivity() {
     fun setAlarmtext(){
 
         var alarmtimetext=if(alarmTime.get(Calendar.AM_PM)==0) "AM "  else "PM "
-        alarmtimetext+="${alarmTime.get(Calendar.HOUR)}:${alarmTime.get(Calendar.MINUTE)}"
+        alarmtimetext+="${alarmTime.get(Calendar.HOUR)}:${String.format("%02d",alarmTime.get(Calendar.MINUTE))}"
 
         binding.sidemenuTvAlarm.text=alarmtimetext
     }
@@ -376,23 +377,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        // 보정 조정 예외처 (브로드 캐스트 가져오기)
-        val pendingIntent = PendingIntent.getBroadcast(
-            this,
-            M_ALARM_REQUEST_CODE,
-            Intent(this, AlarmReceiver::class.java),
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE else PendingIntent.FLAG_NO_CREATE
-        ) // 있으면 가져오고 없으면 안만든다. (null)
-
-        if ((pendingIntent == null) and isalarmOn){
-            //알람은 꺼져있는데, 데이터는 켜져있는 경우
-            isalarmOn = false
-
-        } else if((pendingIntent != null) and !isalarmOn ){
-            // 알람은 켜져있는데 데이터는 꺼져있는 경우.
-            // 알람을 취소함
-            pendingIntent.cancel()
-        }
 
         if(isalarmOn){
             binding.sidemenuSwitchAlarm.isChecked=true
@@ -429,51 +413,41 @@ class MainActivity : AppCompatActivity() {
         }
         var ischecked=binding.sidemenuSwitchAlarm.isChecked
 
-        if (ischecked){
-            // 온 -> 알람을 등록
-            val calender = Calendar.getInstance().apply {
+        val alarmManager = binding.root.context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val pendingIntent = Intent(binding.root.context, AlarmReceiver::class.java).let {
+            it.putExtra("code", REQUEST_CODE)
+            it.putExtra("count", 32)
+
+            PendingIntent.getBroadcast(binding.root.context, REQUEST_CODE, it,
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_MUTABLE else 0)
+        }
+
+        if(ischecked) {
+            alarmManager.cancel(pendingIntent)
+
+            // Case 3: 오전 8시 27분 Alarm 생성 (Interval: Day)
+            val calendar = Calendar.getInstance().apply {
+                timeInMillis = System.currentTimeMillis()
                 set(Calendar.HOUR_OF_DAY, alarmTime.get(Calendar.HOUR_OF_DAY))
                 set(Calendar.MINUTE, alarmTime.get(Calendar.MINUTE))
-                // 지나간 시간의 경우 다음날 알람으로 울리도록
-                if (before(Calendar.getInstance())){
-                    add(Calendar.DATE, 1) // 하루 더하기
-                }
+                set(Calendar.SECOND,0)
+            }
+            if(calendar.before(Calendar.getInstance())){
+                calendar.add(Calendar.DATE,1)
             }
 
-            //알람 매니저 가져오기.
-            val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
-
-            val intent = Intent(this, AlarmReceiver::class.java)
-            val pendingIntent = PendingIntent.getBroadcast(
-                this,
-                M_ALARM_REQUEST_CODE,
-                intent,
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE  else PendingIntent.FLAG_UPDATE_CURRENT) // 있으면 새로 만든거로 업데이트
-
-            alarmManager.setInexactRepeating( // 정시에 반복
-                AlarmManager.RTC_WAKEUP, // RTC_WAKEUP : 실제 시간 기준으로 wakeup , ELAPSED_REALTIME_WAKEUP : 부팅 시간 기준으로 wakeup
-                calender.timeInMillis, // 언제 알람이 발동할지.
-                AlarmManager.INTERVAL_DAY, // 하루에 한번씩.
+            alarmManager.setExact(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
                 pendingIntent
             )
-        } else{
-            // 오프 -> 알람을 제거
-            cancelAlarm()
+//            Toast.makeText(applicationContext, "Start", Toast.LENGTH_SHORT).show()
+            Log.d("myLog", "Start")
+        } else {
+            alarmManager.cancel(pendingIntent)
+//            Toast.makeText(applicationContext, "Cancel", Toast.LENGTH_SHORT).show()
+            Log.d("myLog", "Cancel")
         }
-    }
-
-
-    private fun cancelAlarm(){
-        // 기존에 있던 알람을 삭제한다.
-
-
-        val pendingIntent = PendingIntent.getBroadcast(
-            this,
-            M_ALARM_REQUEST_CODE,
-            Intent(this, AlarmReceiver::class.java),
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) PendingIntent.FLAG_IMMUTABLE else PendingIntent.FLAG_NO_CREATE
-            )
-        pendingIntent?.cancel() // 기존 알람 삭제
     }
 
 

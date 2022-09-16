@@ -7,6 +7,7 @@ import android.os.Parcelable
 import android.view.*
 import android.widget.RadioButton
 import android.widget.TextView
+import androidx.core.app.NotificationCompat
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,6 +55,13 @@ class AlarmSetterDialog(var parent: MainActivity,var lasttime:Calendar): DialogF
         binding.tvSave.setOnClickListener {
 
             parent.updatealarm(binding.timepicker.hour,binding.timepicker.minute)
+
+
+//            var notificationHelper = NotificationHelper(requireContext())
+//
+//            val nb: NotificationCompat.Builder = notificationHelper.getChannelNotification("알람 설정", "${binding.timepicker.hour}:${binding.timepicker.minute}",null)
+//
+//            notificationHelper.getManager().notify(1, nb.build())
             dismiss()
 
         }
