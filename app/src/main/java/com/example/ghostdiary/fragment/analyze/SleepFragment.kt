@@ -102,6 +102,11 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
 
 
 
+        var sleepadvice=resources.getStringArray(R.array.SLEEPADVICE)
+        var temp=sleepadvice[(Math.random()*sleepadvice.size ).toInt()]
+        binding!!.tvSleepadvice.text="Tip)\n\n${temp}"
+
+
         chart=binding!!.chart
 
         initChartData()

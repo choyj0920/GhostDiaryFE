@@ -5,14 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.activityViewModels
 import com.example.ghostdiary.CookiesActivity
-import com.example.ghostdiary.MainViewModel
+import com.example.ghostdiary.R
 import com.example.ghostdiary.databinding.FragmentAdviceBinding
 import com.example.ghostdiary.utilpackage.Util
-import com.example.ghostdiary.databinding.FragmentClinicBinding
 
 
 class AdviceFragment : Fragment() {
@@ -21,8 +18,8 @@ class AdviceFragment : Fragment() {
     private lateinit var buttonarray:Array<TextView>
 
     companion object{
-        var adviceMap: MutableMap<String,ArrayList<String>> = mutableMapOf()
-        var advicecategory:Array<String> = arrayOf("분노","우울","무기력","슬픔","자존감 저하","피곤함")
+        var adviceMap: MutableMap<String,Array<String>> = mutableMapOf()
+        var advicecategory:Array<String> = arrayOf("불안","피로","우울","스트레스","좌절","자존감")
     }
 
 
@@ -44,17 +41,23 @@ class AdviceFragment : Fragment() {
 
     private fun init() {
 
-        buttonarray= arrayOf( binding!!.tvRage,binding!!.tvDepressed,binding!!.tvLethargy,binding!!.tvSad,binding!!.tvLowself,binding!!.tvTired)
+        buttonarray= arrayOf( binding!!.tvUnrest,binding!!.tvTired,binding!!.tvDepressed,binding!!.tvStress,binding!!.tvOtl,binding!!.tvLowself)
+
+
 
         for(i in 0 .. buttonarray.size-1){
             buttonarray[i].setOnClickListener {
                 if(!( advicecategory[i] in adviceMap)){
-                    var temp= arrayListOf<String>()
-                    for(j in 0..10){
-                        temp.add("${advicecategory[i]}조언 : num${j}")
-
+                    for(i in advicecategory){
+                        when(i){
+                            "불안"-> adviceMap.put(i, resources.getStringArray(R.array.COMMONADVICE) +resources.getStringArray( R.array.불안))
+                            "피로"-> adviceMap.put(i,resources.getStringArray( R.array.피로))
+                            "우울"-> adviceMap.put(i,resources.getStringArray(R.array.COMMONADVICE) + resources.getStringArray( R.array.우울))
+                            "스트레스"-> adviceMap.put(i,resources.getStringArray(R.array.COMMONADVICE) + resources.getStringArray( R.array.스트레스))
+                            "좌절"-> adviceMap.put(i,resources.getStringArray( R.array.좌절))
+                            "자존감"-> adviceMap.put(i,resources.getStringArray( R.array.자존감))
+                        }
                     }
-                    adviceMap.put(advicecategory[i],temp)
                 }
                 if(activity is CookiesActivity){
                     (activity as CookiesActivity).containerChange(SelectCookieFragment(false,

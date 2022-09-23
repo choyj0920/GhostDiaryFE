@@ -32,7 +32,7 @@
         >
 
         <TextView
-            android:id="@+id/tv_rage"
+            android:id="@+id/tv_unrest"
             android:layout_columnWeight="1"
             android:layout_width="125dp"
             android:layout_height="45dp"
@@ -41,7 +41,24 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="분노"
+            android:text="불안"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_tired"
+            android:layout_columnWeight="1"
+
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:background="@drawable/border_advice"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:text="피로"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
@@ -65,7 +82,7 @@
             />
 
         <TextView
-            android:id="@+id/tv_lethargy"
+            android:id="@+id/tv_stress"
             android:layout_columnWeight="1"
 
             android:layout_width="125dp"
@@ -75,14 +92,13 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="무기력"
+            android:text="스트레스"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
             />
-
         <TextView
-            android:id="@+id/tv_sad"
+            android:id="@+id/tv_otl"
             android:layout_columnWeight="1"
 
             android:layout_width="125dp"
@@ -92,7 +108,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="슬픔"
+            android:text="좌절"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
@@ -108,23 +124,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="자존심 저하"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-
-            />
-        <TextView
-            android:id="@+id/tv_tired"
-            android:layout_columnWeight="1"
-
-            android:layout_width="125dp"
-            android:layout_height="45dp"
-            android:background="@drawable/border_advice"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="15sp"
-            android:text="피곤함"
+            android:text="자존감"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 

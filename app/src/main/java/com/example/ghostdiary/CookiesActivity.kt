@@ -100,12 +100,9 @@ class CookiesActivity : AppCompatActivity() {
     fun show_Todaycookie(){
         binding.ivBanner.setImageResource(R.drawable.banner_cookies)
 
-        selectCookieFragment= SelectCookieFragment(true, arrayListOf("오늘은 집에서 에어컨을 키고 쉬거나\n" +
-                "분위기 좋은 카페를 가보는건 어떨까요?1",
-            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?2",
-            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?3",
-            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?4",
-            "오늘은 집에서 에어컨을 키고 쉬거나\n" + "분위기 좋은 카페를 가보는건 어떨까요?5"))
+        var arraytoday=resources.getStringArray(R.array.TODAYCOOKIES)
+
+        selectCookieFragment= SelectCookieFragment(true, arraytoday)
 
         getSupportFragmentManager().beginTransaction().replace(binding.container.id, selectCookieFragment).addToBackStack(null).commit();
     }

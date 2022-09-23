@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SelectCookieFragment(var isTodaycookie:Boolean,var arraytext:ArrayList<String>) : Fragment() {
+class SelectCookieFragment(var isTodaycookie:Boolean, var arraytext: Array<String>) : Fragment() {
 
     private var binding: FragmentSelectCookieBinding?=null
     private lateinit var cookiearray:Array<ImageView>
