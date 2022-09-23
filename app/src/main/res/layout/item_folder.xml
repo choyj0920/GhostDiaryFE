@@ -56,7 +56,7 @@
             android:singleLine="true"
             android:text="adfadf"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="15sp" />
 
 
     </LinearLayout>

@@ -57,7 +57,7 @@
 
                 android:text="8월 9일"
                 android:textColor="#DE000000"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 app:layout_constraintStart_toEndOf="@+id/iv_ghost"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -69,7 +69,7 @@
 
                 android:text="화요일"
                 android:textColor="#474746"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 app:layout_constraintStart_toEndOf="@+id/iv_ghost"
                 app:layout_constraintTop_toBottomOf="@id/tv_date" />
 
@@ -124,7 +124,7 @@
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:textSize="13sp"
         android:textColor="#757575"
         android:maxLines="3"
         android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nisl tincidunt eget nullam non. "

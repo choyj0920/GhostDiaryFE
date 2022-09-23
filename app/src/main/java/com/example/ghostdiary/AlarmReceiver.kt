@@ -43,7 +43,7 @@ class AlarmReceiver: BroadcastReceiver() {
             )
 
 
-            val nb: NotificationCompat.Builder = notificationHelper.getChannelNotification("GhostDiary", "오늘 일기 써볼까요?",openpendingIntent)
+            val nb: NotificationCompat.Builder = notificationHelper.getChannelNotification("GhostDiary", "오늘도 하루를 기록해볼까요?",openpendingIntent).setAutoCancel(true)
 
             notificationHelper.getManager().notify(1, nb.build())
 
@@ -63,9 +63,9 @@ class AlarmReceiver: BroadcastReceiver() {
                 set(Calendar.MINUTE, time.get(Calendar.MINUTE))
                 set(Calendar.SECOND,0)
             }
-            if(calendar.before(Calendar.getInstance())){
-                calendar.add(Calendar.DATE,1)
-            }
+
+            calendar.add(Calendar.DATE,1)
+
             alarmManager.setExact(
                 AlarmManager.RTC_WAKEUP,
                 calendar.timeInMillis,

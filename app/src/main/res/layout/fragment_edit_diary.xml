@@ -54,7 +54,7 @@
                 android:lineSpacingExtra="5sp"
                 android:text="2022.08.30."
                 android:textColor="#474746"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 />
             <TextView
@@ -65,7 +65,7 @@
                 android:gravity="center"
                 android:text="화요일"
                 android:textColor="#001018"
-                android:textSize="11sp"
+                android:textSize="12sp"
                 />
 
         </LinearLayout>
@@ -208,7 +208,7 @@
 
                 android:background="@color/white"
                 android:scrollbars="vertical"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:hint="내용을 입력해주세요"
                 android:paddingTop="20dp"
                 android:paddingLeft="15dp"
