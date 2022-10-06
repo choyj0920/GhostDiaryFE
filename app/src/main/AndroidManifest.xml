@@ -39,6 +39,11 @@
             android:exported="false" >
 
         </activity>
+        <activity
+            android:name=".TutorialActivity"
+            android:exported="false" >
+
+        </activity>
 
         <activity
             android:name=".MemoActivity"

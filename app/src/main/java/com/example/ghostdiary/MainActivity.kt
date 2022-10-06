@@ -174,6 +174,15 @@ class MainActivity : AppCompatActivity() {
         Util.init(array,prefs.getInt("isfontnum",iscur))
         curTheme=prefs.getInt("theme",1)
 
+        val isfirst= prefs.getBoolean("firststart",true)
+        if(isfirst){
+            var intent = Intent(this, TutorialActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        }
+
+
         val islock= prefs.getBoolean("isLock",false)
         if(islock){
             lockapp()
