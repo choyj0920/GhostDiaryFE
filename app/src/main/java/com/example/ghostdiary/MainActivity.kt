@@ -12,11 +12,16 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
+import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
@@ -28,6 +33,8 @@ import androidx.viewpager2.adapter.FragmentViewHolder
 import androidx.viewpager2.widget.ViewPager2
 import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.example.ghostdiary.databinding.ActivityMainBinding
+import com.example.ghostdiary.databinding.MenuSideoptionBinding
+import com.example.ghostdiary.databinding.MenuThemeBinding
 import com.example.ghostdiary.fragment.calendar.CalendarFragment
 import com.example.ghostdiary.fragment.calendar.RecordFragment
 import com.example.ghostdiary.fragment.main.*
@@ -45,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     companion object{
         lateinit var mainactivity:MainActivity
         var isup=false
+        var curTheme=1
+
         val M_ALARM_REQUEST_CODE = 1000
         val REQUEST_CODE= M_ALARM_REQUEST_CODE
 
@@ -114,7 +123,7 @@ class MainActivity : AppCompatActivity() {
                     when(position){
                         0-> {
                             try {
-                                if(calendarFragment.curCal.time.time!=recordFragment.curCal.time.time)
+                                if(calendarFragment.curCal.time.time!=viewModel.calendar.time.time)
                                     calendarFragment.init_rv()
 
                             }catch(e: Exception){
@@ -163,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
         var iscur=prefs.getInt("curfont",9)
         Util.init(array,prefs.getInt("isfontnum",iscur))
-
+        curTheme=prefs.getInt("theme",1)
 
         val islock= prefs.getBoolean("isLock",false)
         if(islock){
@@ -203,6 +212,74 @@ class MainActivity : AppCompatActivity() {
             dialog.isCancelable = true
             dialog.show(supportFragmentManager, "ConfirmDialog")
         }
+
+
+        val popupInflater =
+            applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupBind = MenuThemeBinding.inflate(popupInflater)
+
+
+        val popupWindow = PopupWindow(
+            popupBind.root,dpToPx(this,120f).toInt() ,dpToPx(this,140f).toInt()  , true
+        ).apply { contentView.setOnClickListener { dismiss() }
+            popupBind.btn1.setOnClickListener {
+                curTheme=1
+                val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+                editor.putInt("theme", curTheme).apply()
+                editor.commit()
+                dismiss()
+                changeTheme(curTheme)
+                try {
+                    calendarFragment.init_rv()
+
+                }catch(e: Exception){
+
+                }
+            }
+            popupBind.btn2.setOnClickListener {
+                curTheme=2
+
+                val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+                editor.putInt("theme", curTheme).apply()
+                editor.commit()
+                dismiss()
+                changeTheme(curTheme)
+                try {
+                    calendarFragment.init_rv()
+
+                }catch(e: Exception){
+
+                }
+
+            }
+            popupBind.btn3.setOnClickListener {
+                curTheme=3
+
+                val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+                editor.putInt("theme", curTheme).apply()
+                editor.commit()
+                dismiss()
+                changeTheme(curTheme)
+                try {
+                    calendarFragment.init_rv()
+
+                }catch(e: Exception){
+
+                }
+            }
+
+        }
+        Util.setGlobalFont(popupBind.root)
+        // make sure you use number than wrap_content or match_parent,
+        // because for me it is not showing anything if I set it to wrap_content from ConstraintLayout.LayoutParams.
+
+
+        binding!!.btnTheme.setOnClickListener{
+            var loc:IntArray= intArrayOf(0,0)
+            binding!!.btnTheme.getLocationOnScreen(loc)
+            popupWindow.showAtLocation(binding!!.btnTheme, Gravity.NO_GRAVITY, loc[0]+popupWindow.width/2, loc[1]);
+        }
+
 
         var toplistener = OnTouchListener { v, event ->
             when (event.action) {
@@ -244,6 +321,51 @@ class MainActivity : AppCompatActivity() {
         update_topmenu(true)
         Update_pager(true)
 
+
+    }
+
+    fun changeTheme(index:Int=-1){
+        var theme= curTheme
+        if(index!=-1){
+            theme=index
+        }
+
+        if(theme == 1){
+
+            binding!!.root.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding!!.pager.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding!!.titleTv.setTextColor(Color.parseColor("#000000"))
+            binding.btnTheme.setImageResource(R.drawable.ic_lamp_black)
+            binding.ivShare.setImageResource(R.drawable.ic_share)
+
+            binding.ivSetting.setImageResource(R.drawable.ic_setting)
+
+
+        }else if(theme == 2){
+            binding!!.root.setBackgroundColor(Color.parseColor("#000000"))
+            binding!!.pager.setBackgroundColor(Color.parseColor("#000000"))
+            binding!!.titleTv.setTextColor(Color.parseColor("#FFFFFF"))
+            binding.btnTheme.setImageResource(R.drawable.ic_lamp_white)
+            binding.ivShare.setImageResource(R.drawable.ic_share_white)
+            binding.ivSetting.setImageResource(R.drawable.ic_setting_white)
+
+
+
+        }
+        else if(theme == 3){
+            binding!!.root.setBackgroundColor(Color.parseColor("#000000"))
+            binding!!.pager.setBackgroundColor(Color.parseColor("#000000"))
+            binding!!.titleTv.setTextColor(Color.parseColor("#FFFFFF"))
+            binding.btnTheme.setImageResource(R.drawable.ic_lamp_white)
+            binding.ivShare.setImageResource(R.drawable.ic_share_white)
+            binding.ivSetting.setImageResource(R.drawable.ic_setting_white)
+
+
+
+        }
+
+
+        
 
     }
 
@@ -309,6 +431,8 @@ class MainActivity : AppCompatActivity() {
             binding.ivSetting.visibility=View.VISIBLE
             binding.ivShare.visibility=View.VISIBLE
             binding.ivMemoplus.visibility=View.GONE
+            binding.btnTheme.visibility=View.VISIBLE
+            changeTheme()
         }else{
             binding!!.titleTv.text="Memo"
             if(!binding.swtichbutton.isChecked)
@@ -317,6 +441,8 @@ class MainActivity : AppCompatActivity() {
             binding.ivSetting.visibility=View.GONE
             binding.ivShare.visibility=View.GONE
             binding.ivMemoplus.visibility=View.VISIBLE
+            binding.btnTheme.visibility=View.GONE
+            changeTheme(1)
 
 
         }
@@ -453,7 +579,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+    fun dpToPx(context: Context, dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+    }
 
 
     override fun onDestroy() {

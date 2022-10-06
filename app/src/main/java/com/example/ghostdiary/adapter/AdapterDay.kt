@@ -2,11 +2,13 @@ package com.example.ghostdiary.adapter
 
 import android.content.ContentValues.TAG
 import android.content.Intent
+import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.R
 import com.example.ghostdiary.utilpackage.Util
 import com.example.ghostdiary.databinding.ItemCalendarDaysBinding
@@ -38,6 +40,22 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 
         var transFormat = SimpleDateFormat("yyyy-MM-dd")
         var to = transFormat.format(dayList[position]);
+
+        when(MainActivity.curTheme){
+            1->{
+                holder.bindng.tvDate.setTextColor(Color.parseColor("#4A4A4A"))
+
+            }
+            2->{
+                holder.bindng.tvDate.setTextColor(Color.parseColor("#FFFFFF"))
+
+            }
+            3->{
+                holder.bindng.tvDate.setTextColor(Color.parseColor("#FFFFFF"))
+
+            }
+        }
+
         if(tempMonth != dayList.get(position).month) {
             holder.bindng.ivDate.isInvisible=true
             holder.bindng.tvDate.isInvisible=true
@@ -45,13 +63,14 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
             Log.d(TAG,"포함!! ${to}, ${emotionMap[to]}")
             holder.bindng.ivDate.setImageResource(
                 when(emotionMap.get(to)!!.today_emotion.ghostimage){
-                    0 -> R.drawable.ghost_00_verygood
-                    1 -> R.drawable.ghost_01_good
-                    2 -> R.drawable.ghost_02_normal
-                    3 -> R.drawable.ghost_03_bad
-                    4 -> R.drawable.ghost_04_verybad
 
-                    else -> {R.drawable.ic_ghost_default}
+                    0 -> if(MainActivity.curTheme !=3) R.drawable.ghost_00_verygood else R.drawable.ghost_halloween_00
+                    1 -> if(MainActivity.curTheme !=3) R.drawable.ghost_01_good else R.drawable.ghost_halloween_01
+                    2 -> if(MainActivity.curTheme !=3) R.drawable.ghost_02_normal else R.drawable.ghost_halloween_02
+                    3 -> if(MainActivity.curTheme !=3) R.drawable.ghost_03_bad else R.drawable.ghost_halloween_03
+                    4 -> if(MainActivity.curTheme !=3) R.drawable.ghost_04_verybad else R.drawable.ghost_halloween_04
+
+                    else -> {if(MainActivity.curTheme==1) R.drawable.ic_ghost_default else R.drawable.ic_ghost_default_dark}
                 } as Int
 
 
@@ -66,7 +85,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 
             }
             if(parent_fragment.emotionpostion != -1 && parent_fragment.emotionpostion != emotionMap.get(to)!!.today_emotion.ghostimage){
-                holder.bindng.ivDate.setImageResource(R.drawable.ic_ghost_default)
+                holder.bindng.ivDate.setImageResource(if(MainActivity.curTheme==1) R.drawable.ic_ghost_default else R.drawable.ic_ghost_default_dark)
             }
 
         }
@@ -78,6 +97,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
                 parent_fragment.requireActivity().startActivity(intent)
 
             }
+            holder.bindng.ivDate.setImageResource(if(MainActivity.curTheme==1) R.drawable.ic_ghost_default else R.drawable.ic_ghost_default_dark)
 
         }
     }

@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -75,7 +76,24 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    fun init_rv(){
+    fun init_rv() {
+
+        when (MainActivity.curTheme) {
+            1 -> {
+                binding!!.rvMonth?.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+
+            }
+            2 -> {
+                binding!!.rvMonth?.setBackgroundColor(Color.parseColor("#000000"))
+
+
+            }
+            3 -> {
+                binding!!.rvMonth?.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+
+            }
+        }
+
 
 
         val onScrollListener = object:RecyclerView.OnScrollListener() {
@@ -128,12 +146,14 @@ class CalendarFragment : Fragment() {
     fun ScreenShotActivity() {
 
         try {
-            val view = (snap.findSnapView(binding!!.rvMonth.layoutManager)!! as ViewGroup).getChildAt(0)
+            val view = (snap.findSnapView(binding!!.rvMonth.layoutManager)!! as ViewGroup)
+
+            val viewsize= (snap.findSnapView(binding!!.rvMonth.layoutManager)!! as ViewGroup).getChildAt(1)
 
 
             //Imageview share = findViewById(R.id.share)
             //Imageview share = findViewById(R.id.share)
-            view.layout(0, 0, view.getMeasuredWidth(), view.getMeasuredHeight())
+            view.layout(0, 0, viewsize.getMeasuredWidth(), viewsize.getMeasuredHeight())
             view.buildDrawingCache()
             val bitmap = Bitmap.createBitmap(
                 view.getMeasuredWidth(), view.getMeasuredHeight(),

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawerlayout"
     android:layout_width="match_parent"
-    tools:openDrawer="end"
 
 
 
@@ -14,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/transp"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,10 +54,29 @@
 
                 android:track="@drawable/track"
 
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/title_tv"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
                 tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <ImageView
+                android:id="@+id/btn_theme"
+                android:layout_width="21dp"
+                android:layout_marginLeft="17dp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_height="30dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:src="@drawable/ic_lamp_black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+
+
+                />
 
             <ImageView
                 android:id="@+id/iv_cookies"

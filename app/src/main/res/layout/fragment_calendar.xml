@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
 
     android:orientation="vertical">
 
@@ -12,6 +11,7 @@
         android:nestedScrollingEnabled="false"
 
         android:id="@+id/rv_month"
+
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -25,7 +25,6 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:background="#ffffff"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +59,7 @@
             app:layout_goneMarginRight="5dp"
 
             android:background="@drawable/border_black"
+            android:backgroundTint="#444444"
             android:elevation="5dp"
             android:padding="15dp"
 

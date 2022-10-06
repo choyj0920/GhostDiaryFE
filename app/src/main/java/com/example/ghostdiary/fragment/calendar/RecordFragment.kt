@@ -112,6 +112,7 @@ class RecordFragment : Fragment() {
 
     fun setMonth(year:Int,month:Int){
         calendar.set(year,month,1)
+
         update()
     }
 

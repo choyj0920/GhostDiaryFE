@@ -1,11 +1,14 @@
 package com.example.ghostdiary.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.ghostdiary.MainActivity
 import com.example.ghostdiary.MainViewModel
 import com.example.ghostdiary.R
 import com.example.ghostdiary.utilpackage.Util
@@ -22,7 +25,11 @@ class AdapterMonth(var parent: CalendarFragment, val viewmodel : MainViewModel):
     inner class MonthView(val binding: ItemMonthBinding): RecyclerView.ViewHolder(binding.root){
         var year:TextView=binding.tvYear
         var month:TextView=binding.tvMonth
+        var llayout=binding.linearLayout
         var rvcalendar:RecyclerView=binding.rvCalendar
+        var halloweenback=binding.backhalloween
+
+        var daylayout=binding.daynamelayout
 
 
     }
@@ -54,6 +61,37 @@ class AdapterMonth(var parent: CalendarFragment, val viewmodel : MainViewModel):
         holder.year.setOnClickListener {
             parent.showmonthpicker()
         }
+        when(MainActivity.curTheme){
+            1->{
+                holder.llayout.setBackgroundColor(Color.parseColor("#00000000"))
+                holder.year.setTextColor(Color.parseColor("#4A4A4A"))
+                holder.month.setTextColor(Color.parseColor("#4A4A4A"))
+                holder.halloweenback.visibility=View.GONE
+                Util.setChildColor(holder.daylayout,"#4A4A4A")
+
+            }
+            2->{
+                holder.llayout.setBackgroundColor(Color.parseColor("#000000"))
+                holder.year.setTextColor(Color.parseColor("#FFFFFF"))
+                holder.month.setTextColor(Color.parseColor("#FFFFFF"))
+                Util.setChildColor(holder.daylayout,"#FFFFFF")
+                holder.halloweenback.visibility=View.GONE
+
+
+
+            }
+            3->{
+                
+                holder.llayout.setBackgroundColor(Color.parseColor("#00000000"))
+                holder.halloweenback.visibility=View.VISIBLE
+                holder.year.setTextColor(Color.parseColor("#FFFFFF"))
+                holder.month.setTextColor(Color.parseColor("#FFFFFF"))
+                Util.setChildColor(holder.daylayout,"#FFFFFF")
+
+
+            }
+        }
+
 
         holder.year.text=year
 

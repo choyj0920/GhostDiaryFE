@@ -2,6 +2,7 @@ package com.example.ghostdiary.utilpackage
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Environment
 import android.util.Log
@@ -40,6 +41,22 @@ class Util {
                             v.setTypeface(fontarray[curfont])
                         }
                         setGlobalFont(v)
+                    }
+                }
+            }
+        }
+        fun setChildColor(view:View?,color:String){
+            if(view !=null){
+                if(view is ViewGroup){
+                    var len =view.childCount
+                    for(i in 0..len-1){
+                        var v=view.getChildAt(i)
+                        if(v is TextView ){
+                            v.setTextColor(Color.parseColor(color))
+                        }else if( v is EditText){
+                            v.setTextColor(Color.parseColor(color))
+                        }
+                        setChildColor(v,color)
                     }
                 }
             }
