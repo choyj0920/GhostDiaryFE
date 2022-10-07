@@ -30,11 +30,11 @@ class EmotionSpinnerAdapter(private val context: Context,val emotionarray: Array
 
         binding.ivSpinnerItem.visibility = View.VISIBLE
         binding.tvSpinnerItem.visibility = View.GONE
-//        if(emotionarray[position]==-1){
-//            binding.ivSpinnerItem.visibility=View.GONE
-//            binding.tvSpinnerItem.visibility=View.VISIBLE
-//            binding.tvSpinnerItem.text="전체"
-//        }
+        if(emotionarray[position]==-1){
+            binding.ivSpinnerItem.visibility=View.GONE
+            binding.tvSpinnerItem.visibility=View.VISIBLE
+            binding.tvSpinnerItem.text="전체"
+        }
         binding.ivSpinnerItem.setImageResource(
             when (emotionarray.get(position)) {
                 -1 ->R.drawable.ic_category

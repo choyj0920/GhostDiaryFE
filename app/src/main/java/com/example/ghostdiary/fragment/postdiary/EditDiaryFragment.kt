@@ -95,6 +95,7 @@ class EditDiaryFragment(
 
 
         // 취소 버튼
+        binding!!.btnCancel.visibility=View.INVISIBLE
         binding!!.btnCancel.setOnClickListener {
             parent!!.onBackPressed()
         }
