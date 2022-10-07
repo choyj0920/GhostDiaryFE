@@ -49,9 +49,6 @@ class TutorialActivity : AppCompatActivity() {
 
 
 
-
-        binding.dotsIndicator.attachTo(viewPager)
-
         binding.previousBtn.setOnClickListener {
 
             val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
@@ -63,6 +60,47 @@ class TutorialActivity : AppCompatActivity() {
             finish()
 
         }
+
+        binding.dotsIndicator.attachTo(viewPager)
+
+        var pageCallBack = object: ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                // 특정 페이지가 선택될 때 마다 여기가 호출됩니다.
+                // position 에는 현재 페이지 index - 첫페이지면 0
+                when(position){
+                    2-> {
+                        try {
+                            binding.nextBtn.text="시작"
+                            binding.nextBtn.setOnClickListener {
+                                binding.previousBtn.callOnClick()
+
+                            }
+
+                        }catch(e: Exception){
+                        }
+
+                    }
+                    else-> {
+                        try {
+                            binding.nextBtn.text="다음"
+                            binding.nextBtn.setOnClickListener {
+                                viewPager.currentItem = viewPager.currentItem + 1
+
+
+                            }
+
+                        }catch(e: Exception){
+
+                        }
+
+                    }
+                }
+            }
+        }
+        viewPager.registerOnPageChangeCallback(pageCallBack)
+
+
+
 
         setContentView(binding.root)
         Util.setGlobalFont(binding.root)
