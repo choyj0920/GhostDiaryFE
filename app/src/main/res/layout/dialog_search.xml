@@ -45,7 +45,8 @@
 
         android:tintMode="src_in"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
+        android:tint="@color/white"
+         />
 
 
 
