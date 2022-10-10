@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.ghostdiary.utilpackage.SquareFrameLayout_base_width xmlns:android="http://schemas.android.com/apk/res/android"
+<com.ghostdiary.ghostdiary.utilpackage.SquareFrameLayout_base_width xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutmonthview"
@@ -68,6 +68,6 @@
 
 
 
-</com.example.ghostdiary.utilpackage.SquareFrameLayout_base_width>
+</com.ghostdiary.ghostdiary.utilpackage.SquareFrameLayout_base_width>
 
 

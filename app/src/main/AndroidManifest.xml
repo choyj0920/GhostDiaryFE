@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.ghostdiary">
+    package="com.ghostdiary.ghostdiary">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -24,39 +24,39 @@
         android:theme="@style/Theme.Ghostdiary"
         tools:targetApi="31">
         <activity
-            android:name=".LockActivity"
+            android:name="com.ghostdiary.ghostdiary.LockActivity"
             android:exported="false" >
 
         </activity>
         <activity
             android:theme="@style/AppThemeDialog"
-            android:name=".CookiesActivity"
+            android:name="com.ghostdiary.ghostdiary.CookiesActivity"
             android:exported="false" >
 
         </activity>
         <activity
-            android:name=".AnalyzeActivity"
+            android:name="com.ghostdiary.ghostdiary.AnalyzeActivity"
             android:exported="false" >
 
         </activity>
         <activity
-            android:name=".TutorialActivity"
+            android:name="com.ghostdiary.ghostdiary.TutorialActivity"
             android:exported="false" >
 
         </activity>
 
         <activity
-            android:name=".MemoActivity"
+            android:name="com.ghostdiary.ghostdiary.MemoActivity"
             android:exported="false" >
 
         </activity>
         <activity
-            android:name=".PostDiaryActivity"
+            android:name="com.ghostdiary.ghostdiary.PostDiaryActivity"
             android:exported="false" >
 
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.ghostdiary.ghostdiary.MainActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -73,7 +73,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.ghostdiary"
+            android:authorities="com.ghostdiary.ghostdiary"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -82,7 +82,7 @@
 
         </provider>
 
-        <receiver android:name=".AlarmReceiver"
+        <receiver android:name="com.ghostdiary.ghostdiary.AlarmReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
