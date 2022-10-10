@@ -44,6 +44,27 @@ class Day_Diary(
             copyEmotionarr(where), copyEmotionarr(weather),sleepstart,sleepend,text,image)
     }
 
+    fun ishavetext(find:String):Boolean{
+        if(date.toString().contains(find)){
+            return true
+        }
+        if(today_emotion.text.contains(find)){
+            return true
+        }
+        for(i in getEmotionarrElement()){
+            if(i?.text?.contains(find) == true)
+                return true
+
+        }
+        if(text.contains(find)){
+            return true
+        }
+
+
+
+        return false
+    }
+
     companion object {
         fun copyEmotionarr(arr:ArrayList<emotionclass>):ArrayList<emotionclass>{
             var newarr:ArrayList<emotionclass> = arrayListOf()

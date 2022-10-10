@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="150dp"
+    android:layout_margin="1dp"
+    android:background="@drawable/border_corners_allside"
+
+    android:elevation="20dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp"
+    android:paddingStart="5dp"
+    android:paddingEnd="5dp"
+
+
+    android:layout_height="36dp">
+    
+    <EditText
+        android:id="@+id/input_search"
+        android:layout_width="0dp"
+        android:background="@color/white"
+
+        android:layout_height="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/iv_erase"
+        android:singleLine="true"
+        android:maxLines="1"
+        android:hint="검색"
+        android:textSize="13sp"
+        android:textColor="@color/black"
+
+        />
+
+    <ImageView
+        android:id="@id/iv_erase"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:padding="5dp"
+        android:background="@drawable/circle_backgroud_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_button_x_close"
+
+        android:tintMode="src_in"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

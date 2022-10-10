@@ -1,20 +1,24 @@
 package com.ghostdiary.ghostdiary.fragment.calendar
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.TypedValue
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.PopupWindow
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ghostdiary.ghostdiary.*
 import com.ghostdiary.ghostdiary.adapter.AdapterDiary
 import com.ghostdiary.ghostdiary.adapter.EmotionSpinnerAdapter
+import com.ghostdiary.ghostdiary.databinding.DialogSearchBinding
 import com.ghostdiary.ghostdiary.databinding.FragmentRecordBinding
+import com.ghostdiary.ghostdiary.databinding.MenuSideoptionBinding
 import com.ghostdiary.ghostdiary.dataclass.Day_Diary
 import com.ghostdiary.ghostdiary.utilpackage.Util
 import java.text.SimpleDateFormat
@@ -29,7 +33,9 @@ class RecordFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var binding: FragmentRecordBinding?=null
     private lateinit var monthDiary: ArrayList<Day_Diary>
+    private lateinit var filltermonthDiary: ArrayList<Day_Diary>
     var emotionpostion:Int=-1
+    var searchstring:String=""
     private var isrevse=true
     var curCal=Calendar.getInstance()
 
@@ -98,10 +104,56 @@ class RecordFragment : Fragment() {
 
         initmonthpicker()
         init_spinner()
+        init_searchbar()
 
         update()
 
 
+    }
+
+    fun init_searchbar(){
+        val popupInflater =
+            requireActivity().applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupBind = DialogSearchBinding.inflate(popupInflater)
+
+
+        val popupWindow = PopupWindow(
+            popupBind.root,dpToPx(requireContext(),150f).toInt() ,dpToPx(requireContext(),36f).toInt()  , true
+        ).apply { contentView.setOnClickListener { dismiss() }
+            popupBind.ivErase.setOnClickListener {
+                popupBind.inputSearch.setText("")
+                dismiss()
+
+            }
+            popupBind.inputSearch.setText(searchstring)
+            popupBind.inputSearch.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                    searchstring=popupBind.inputSearch.text.toString()
+                    filter_rv()
+
+                }
+            })
+
+        }
+        Util.setGlobalFont(popupBind.root)
+        // make sure you use number than wrap_content or match_parent,
+        // because for me it is not showing anything if I set it to wrap_content from ConstraintLayout.LayoutParams.
+
+
+        binding!!.ivSearch.setOnClickListener{
+            var loc:IntArray= intArrayOf(0,0)
+            binding!!.ivSearch.getLocationOnScreen(loc)
+            popupWindow.showAtLocation(binding!!.ivSearch, Gravity.NO_GRAVITY, loc[0]-popupWindow.width+binding!!.ivSearch.width, loc[1]);
+        }
     }
 
     fun addMonth(add:Int){
@@ -112,6 +164,7 @@ class RecordFragment : Fragment() {
 
     fun setMonth(year:Int,month:Int){
         calendar.set(year,month,1)
+
 
         update()
     }
@@ -157,14 +210,36 @@ class RecordFragment : Fragment() {
         if(isrevse)
             monthDiary.reverse()
 
-        var _adapter = AdapterDiary(this,monthDiary)
+        filter_rv()
+
+    }
+    fun filter_rv(){
+        filltermonthDiary= arrayListOf()
+        if(searchstring==""){
+            filltermonthDiary.addAll(monthDiary)
+        }else{
+            for(diary in monthDiary){
+                if(diary.ishavetext(searchstring)){
+                    filltermonthDiary.add(diary)
+                }
+
+            }
+        }
+
+        filltermonthDiary.sortBy { dayDiary -> dayDiary.date}
+        if(isrevse)
+            filltermonthDiary.reverse()
+
+        var _adapter = AdapterDiary(this,filltermonthDiary)
 
         binding!!.rvRecord.apply {
             layoutManager= LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
             adapter=_adapter
         }
 
+
     }
+
 
     fun init_spinner() {
         val array = arrayListOf<Int>(-1, 0, 1, 2, 3, 4)
@@ -201,5 +276,8 @@ class RecordFragment : Fragment() {
         viewModel.deleteDiary(date)
         update()
 
+    }
+    fun dpToPx(context: Context, dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
     }
 }
