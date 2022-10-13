@@ -24,11 +24,11 @@ class AdapterMonth(var parent: CalendarFragment, val viewmodel : MainViewModel):
     inner class MonthView(val binding: ItemMonthBinding): RecyclerView.ViewHolder(binding.root){
         var year:TextView=binding.tvYear
         var month:TextView=binding.tvMonth
-        var llayout=binding.linearLayout
+        var llayout=binding.parentlayout
         var rvcalendar:RecyclerView=binding.rvCalendar
         var halloweenback=binding.backhalloween
 
-        var daylayout=binding.daynamelayout
+        var daylayout=binding.`daynamelayout`
 
 
     }
@@ -62,7 +62,7 @@ class AdapterMonth(var parent: CalendarFragment, val viewmodel : MainViewModel):
         }
         when(MainActivity.curTheme){
             1->{
-                holder.llayout.setBackgroundColor(Color.parseColor("#00000000"))
+                holder.llayout.setBackgroundColor(Color.parseColor("#ffffff"))
                 holder.year.setTextColor(Color.parseColor("#4A4A4A"))
                 holder.month.setTextColor(Color.parseColor("#4A4A4A"))
                 holder.halloweenback.visibility=View.GONE
@@ -81,7 +81,7 @@ class AdapterMonth(var parent: CalendarFragment, val viewmodel : MainViewModel):
             }
             3->{
                 
-                holder.llayout.setBackgroundColor(Color.parseColor("#00000000"))
+                holder.llayout.setBackgroundColor(Color.parseColor("#000000"))
                 holder.halloweenback.visibility=View.VISIBLE
                 holder.year.setTextColor(Color.parseColor("#FFFFFF"))
                 holder.month.setTextColor(Color.parseColor("#FFFFFF"))

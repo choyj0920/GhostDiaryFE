@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ghostdiary</string>
+    <string name="app_name">유령집사</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dummy_button">Dummy Button</string>

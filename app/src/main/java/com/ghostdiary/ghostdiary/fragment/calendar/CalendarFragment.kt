@@ -79,7 +79,7 @@ class CalendarFragment : Fragment() {
 
         when (MainActivity.curTheme) {
             1 -> {
-                binding!!.rvMonth?.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+                binding!!.rvMonth?.setBackgroundColor(Color.parseColor("#FFFFFF"))
 
             }
             2 -> {
@@ -88,7 +88,7 @@ class CalendarFragment : Fragment() {
 
             }
             3 -> {
-                binding!!.rvMonth?.setBackgroundColor(Color.parseColor("#00FFFFFF"))
+                binding!!.rvMonth?.setBackgroundColor(Color.parseColor("#000000"))
 
             }
         }
@@ -155,7 +155,7 @@ class CalendarFragment : Fragment() {
             view.layout(0, 0, viewsize.getMeasuredWidth(), viewsize.getMeasuredHeight())
             view.buildDrawingCache()
             val bitmap = Bitmap.createBitmap(
-                view.getMeasuredWidth(), view.getMeasuredHeight(),
+                viewsize.getMeasuredWidth(), viewsize.getMeasuredHeight(),
                 Bitmap.Config.ARGB_8888
             )
             val canvas = Canvas(bitmap)
