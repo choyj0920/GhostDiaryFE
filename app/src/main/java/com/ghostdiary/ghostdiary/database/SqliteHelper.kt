@@ -292,7 +292,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 for (i in it){
                     var temp=ContentValues()
                     temp.put("diary_id",result)
-                    temp.put("category",2)
+                    temp.put("category",3)
                     temp.put("ghost_num",i.ghostimage)
                     temp.put("isactive", if(i.isactive) 1 else 0)
                     temp.put("text",i.text)
@@ -305,7 +305,7 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
                 for (i in it){
                     var temp=ContentValues()
                     temp.put("diary_id",result)
-                    temp.put("category",3)
+                    temp.put("category",2)
                     temp.put("ghost_num",i.ghostimage)
                     temp.put("isactive", if(i.isactive) 1 else 0)
                     temp.put("text",i.text)
