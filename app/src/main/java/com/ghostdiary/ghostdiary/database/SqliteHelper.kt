@@ -586,8 +586,8 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
             when(category){
                 0->Diary.today_emotion=emotion
                 1->Diary.whom!!.add(emotion)
-                2->Diary.doing!!.add(emotion)
-                3->Diary.where!!.add(emotion)
+                2->Diary.where!!.add(emotion)
+                3->Diary.doing!!.add(emotion)
                 4->Diary.weather!!.add(emotion)
                 else->{
 

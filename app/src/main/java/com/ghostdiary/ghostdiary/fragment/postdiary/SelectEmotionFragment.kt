@@ -150,8 +150,8 @@ class SelectEmotionFragment(val parent: PostDiaryActivity, var date: Date) : Fra
         curDiary.apply {
             this.today_emotion=todayemotion
             whom = emotionselect[1]
-            doing = emotionselect[2]
-            where=emotionselect[3]
+            where = emotionselect[2]
+            doing=emotionselect[3]
             weather=emotionselect[4]
             sleepstart=this@SelectEmotionFragment.sleepstart
             sleepend=this@SelectEmotionFragment.sleepend

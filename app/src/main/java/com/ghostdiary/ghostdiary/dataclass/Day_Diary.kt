@@ -190,6 +190,7 @@ class Day_Diary(
         arr.add(_weather)
         return arr
     }
+
     fun getEmotionarrElement():ArrayList<emotionclass?>{
         var arr:ArrayList<emotionclass?> = arrayListOf()
         arr.add(today_emotion)
@@ -204,18 +205,19 @@ class Day_Diary(
             if(i.isactive)
                 arr.add(i)
         }
-        if(doing.size!=0)
-            arr.add(null)
-        for( i in where){
-            if(i.isactive)
-                arr.add(i)
-        }
         if(where.size !=0)
             arr.add(null)
         for( i in weather){
             if(i.isactive)
                 arr.add(i)
         }
+        if(doing.size!=0)
+            arr.add(null)
+        for( i in where){
+            if(i.isactive)
+                arr.add(i)
+        }
+
         return arr
 
     }

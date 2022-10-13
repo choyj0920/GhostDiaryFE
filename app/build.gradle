@@ -11,7 +11,7 @@ android {
         applicationId "com.ghostdiary.ghostdiary"
         minSdk 26
         targetSdk 32
-        versionCode 4
+        versionCode 6
         versionName "1.002"
         vectorDrawables.useSupportLibrary=true
 
