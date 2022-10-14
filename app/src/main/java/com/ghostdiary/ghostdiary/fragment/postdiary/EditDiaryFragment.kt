@@ -95,8 +95,7 @@ class EditDiaryFragment(
 
 
         // 취소 버튼
-        binding!!.btnCancel.visibility=View.INVISIBLE
-        binding!!.btnCancel.setOnClickListener {
+        binding!!.btnArrow.setOnClickListener {
             parent!!.onBackPressed()
         }
 
@@ -270,12 +269,14 @@ class EditDiaryFragment(
             binding!!.btnDelimage.visibility=View.VISIBLE
             binding!!.inputText.hint="내용을 입력해주세요"
             binding!!.btnSidemenu.visibility=View.GONE
+            binding!!.btnArrow.visibility=View.VISIBLE
 
 
         }else{
             isEditmode=true
             binding!!.inputText.isEnabled=false
 
+            binding!!.btnArrow.visibility=View.GONE
 
             binding!!.constraintLayout4.visibility=View.GONE
             binding!!.btnPost.visibility=View.GONE

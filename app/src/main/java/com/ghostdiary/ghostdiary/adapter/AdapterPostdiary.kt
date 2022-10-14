@@ -170,6 +170,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, var sleepstart:Int, va
                     to
                 })
             holder.slider.addOnChangeListener { slider, value, fromUser ->
+
                 val values = holder.slider.values
                 parent.sleepend = values[1].toInt()
                 parent.sleepstart = values[0].toInt()
@@ -177,9 +178,12 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, var sleepstart:Int, va
 
 
 
+
+
             holder.scrollView.post(Runnable { holder.scrollView.smoothScrollTo((holder.slider.values.average() *600 / 120).toInt(),0) })
 
             holder.slider.setOnTouchListener(OnTouchListener { v, event ->
+
                 val action = event.action
                 when (action) {
                     MotionEvent.ACTION_DOWN ->                 // Disallow ScrollView to intercept touch events.

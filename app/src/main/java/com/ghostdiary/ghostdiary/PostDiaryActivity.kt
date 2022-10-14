@@ -132,7 +132,7 @@ class PostDiaryActivity( ) : AppCompatActivity () {
             viewPager.isUserInputEnabled=false
         }else{
             binding.ivNext.visibility=View.VISIBLE
-            viewPager.isUserInputEnabled=true
+            viewPager.isUserInputEnabled=false
 
 
         }
@@ -141,7 +141,7 @@ class PostDiaryActivity( ) : AppCompatActivity () {
         binding.ivNext.visibility=View.GONE
 
         if(editdiarymode){
-            viewPager.isUserInputEnabled=true
+            viewPager.isUserInputEnabled=false
 
 
         }else{

@@ -1,5 +1,6 @@
 package com.ghostdiary.ghostdiary.adapter
 
+import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Color
@@ -32,6 +33,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 
         return DayView(ItemCalendarDaysBinding.bind(view))
     }
+    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: DayView, position: Int) {
         holder.bindng.ivDate .setOnClickListener {
 
@@ -39,6 +41,8 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
         holder.bindng.tvDate.text = dayList[position].date.toString()
 
         var transFormat = SimpleDateFormat("yyyy-MM-dd")
+        var today = transFormat.format(Calendar.getInstance().time);
+
         var to = transFormat.format(dayList[position]);
 
         when(MainActivity.curTheme){
@@ -98,8 +102,25 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
 
             }
             holder.bindng.ivDate.setImageResource(if(MainActivity.curTheme==1) R.drawable.ic_ghost_default else R.drawable.ic_ghost_default_dark)
+            if(today==to){
+                holder.bindng.ivDate.setImageResource(R.drawable.ghost_today)
+            }
 
         }
+
+
+        if(today==to){
+            if(MainActivity.curTheme==1 )
+                holder.bindng.tvDate.setBackgroundResource(R.drawable.border_corners_all_today)
+            else
+                holder.bindng.tvDate.setBackgroundResource(R.drawable.border_corners_all_today_dark)
+
+
+        }else{
+            holder.bindng.tvDate.setBackgroundColor(0x00000000)
+        }
+
+
     }
 
 

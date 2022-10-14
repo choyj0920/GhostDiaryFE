@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="#00000000"
     android:id="@+id/parentlayout"
+    android:clipToPadding="false"
 
 
     android:orientation="vertical">
@@ -26,6 +27,7 @@
 
         />
     <LinearLayout
+        android:clipToPadding="false"
 
 
 
@@ -170,6 +172,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:clipToPadding="false"
 
             android:id="@+id/rv_calendar"
             android:layout_width="match_parent"
