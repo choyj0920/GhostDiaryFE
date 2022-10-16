@@ -62,11 +62,11 @@ class GhostsSelectDialog(var curpos:Int, var adpaterparent:AdapterPostdiary?, va
             var ghostname=binding.inputGhostname.text.toString()
             ghostname=ghostname.trim()
             if(selectghost==-1){
-                MainActivity.mainactivity.showmessage("유령을 골라주세요.")
+                MainActivity.mainactivity.showmessage(resources.getString(R.string.please_select_ghost))
                 return@setOnClickListener
             }
             if(ghostname==""){
-                MainActivity.mainactivity.showmessage("유령의 이름을 입력해주세요.")
+                MainActivity.mainactivity.showmessage(resources.getString(R.string.please_input_ghostname))
                 return@setOnClickListener
             }
             emotionlist!!.add(emotionclass(ghostname,selectghost,false))

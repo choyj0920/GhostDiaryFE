@@ -57,7 +57,7 @@ class SelectCookieFragment(var isTodaycookie:Boolean, var arraytext: Array<Strin
     @SuppressLint("ClickableViewAccessibility")
     private fun init() {
         binding!!.layoutText.visibility=View.GONE
-        binding!!.tvTitle.text= if(isTodaycookie) "오늘의 유령쿠키를 골라보세요." else "도움될만한 말을 쿠키에 적어놨어요.\n하나 골라볼래요?"
+        binding!!.tvTitle.text= if(isTodaycookie) resources.getString(R.string.todaycookie_title) else resources.getString(R.string.selectAdvicecookie_title)
 
         var touchlistener = View.OnTouchListener { v, event ->
             when (event.action) {

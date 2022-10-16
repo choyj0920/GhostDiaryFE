@@ -77,10 +77,10 @@ class SelectEmotionFragment(val parent: PostDiaryActivity, var date: Date) : Fra
 
     fun switcheditmode(isedit:Boolean){
         if(isedit){
-            binding!!.tvEditmode.text="완료"
+            binding!!.tvEditmode.text= resources.getString(R.string.select_emotion_compl)
             binding!!.btnPostcheck.visibility=View.GONE
         }else{
-            binding!!.tvEditmode.text="수정"
+            binding!!.tvEditmode.text= resources.getString(R.string.select_emotion_edit)
             binding!!.btnPostcheck.visibility=View.VISIBLE
 
         }

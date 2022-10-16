@@ -42,7 +42,7 @@ class AlarmReceiver: BroadcastReceiver() {
             )
 
 
-            val nb: NotificationCompat.Builder = notificationHelper.getChannelNotification("GhostDiary", "오늘도 하루를 기록해볼까요?",openpendingIntent).setAutoCancel(true)
+            val nb: NotificationCompat.Builder = notificationHelper.getChannelNotification("GhostDiary", p0.resources.getString(R.string.alarm_text),openpendingIntent).setAutoCancel(true)
 
             notificationHelper.getManager().notify(1, nb.build())
 

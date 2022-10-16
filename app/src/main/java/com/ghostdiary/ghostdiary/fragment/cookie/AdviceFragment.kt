@@ -19,7 +19,7 @@ class AdviceFragment : Fragment() {
 
     companion object{
         var adviceMap: MutableMap<String,Array<String>> = mutableMapOf()
-        var advicecategory:Array<String> = arrayOf("불안","피로","우울","스트레스","좌절","자존감")
+        lateinit var advicecategory:Array<String>
     }
 
 
@@ -43,19 +43,19 @@ class AdviceFragment : Fragment() {
 
         buttonarray= arrayOf( binding!!.tvUnrest,binding!!.tvTired,binding!!.tvDepressed,binding!!.tvStress,binding!!.tvOtl,binding!!.tvLowself)
 
-
+        advicecategory=resources.getStringArray(R.array.advice_category)
 
         for(i in 0 .. buttonarray.size-1){
             buttonarray[i].setOnClickListener {
                 if(!( advicecategory[i] in adviceMap)){
                     for(i in advicecategory){
                         when(i){
-                            "불안"-> adviceMap.put(i, resources.getStringArray(R.array.COMMONADVICE) +resources.getStringArray( R.array.불안))
-                            "피로"-> adviceMap.put(i,resources.getStringArray( R.array.피로))
-                            "우울"-> adviceMap.put(i,resources.getStringArray(R.array.COMMONADVICE) + resources.getStringArray( R.array.우울))
-                            "스트레스"-> adviceMap.put(i,resources.getStringArray(R.array.COMMONADVICE) + resources.getStringArray( R.array.스트레스))
-                            "좌절"-> adviceMap.put(i,resources.getStringArray( R.array.좌절))
-                            "자존감"-> adviceMap.put(i,resources.getStringArray( R.array.자존감))
+                            advicecategory[0]-> adviceMap.put(i, resources.getStringArray(R.array.COMMONADVICE) +resources.getStringArray( R.array.불안))
+                            advicecategory[1]-> adviceMap.put(i,resources.getStringArray( R.array.피로))
+                            advicecategory[2]-> adviceMap.put(i,resources.getStringArray(R.array.COMMONADVICE) + resources.getStringArray( R.array.우울))
+                            advicecategory[3]-> adviceMap.put(i,resources.getStringArray(R.array.COMMONADVICE) + resources.getStringArray( R.array.스트레스))
+                            advicecategory[4]-> adviceMap.put(i,resources.getStringArray( R.array.좌절))
+                            advicecategory[5]-> adviceMap.put(i,resources.getStringArray( R.array.자존감))
                         }
                     }
                 }

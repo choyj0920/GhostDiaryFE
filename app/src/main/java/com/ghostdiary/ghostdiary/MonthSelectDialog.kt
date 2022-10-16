@@ -65,15 +65,15 @@ class MonthSelectDialog(var parent: Fragment?,var calendar: Calendar): DialogFra
     fun initview(){
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.tvYear.text="${selectyear}년"
+        binding.tvYear.text="${selectyear}${resources.getString(R.string.yearstring_last)}"
 
         binding.ivLastyear.setOnClickListener {
             selectyear-=1
-            binding.tvYear.text="${selectyear}년"
+            binding.tvYear.text="${selectyear}${resources.getString(R.string.yearstring_last)}"
         }
         binding.ivNextyear.setOnClickListener {
             selectyear+=1
-            binding.tvYear.text="${selectyear}년"
+            binding.tvYear.text="${selectyear}${resources.getString(R.string.yearstring_last)}"
         }
 
 

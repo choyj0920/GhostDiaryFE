@@ -54,22 +54,22 @@ class MemoFolderAddDialog(var memoparent:MemoFragment?=null): DialogFragment() {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
       
 
-        binding.inputGhostname.hint="폴더명을 입력하세요"
+        binding.inputGhostname.hint=resources.getString(R.string.please_input_foldername1)
 
         binding.tvOk.setOnClickListener {
             if(selectghost==-1){
-                MainActivity.mainactivity.showmessage("폴더 아이콘을 골라주세요.")
+                MainActivity.mainactivity.showmessage(resources.getString(R.string.please_select_foldericon))
                 return@setOnClickListener
             }
             var ghostname=binding.inputGhostname.text.toString()
 
             if(ghostname==""){
-                MainActivity.mainactivity.showmessage("폴더명을 입력해주세요.")
+                MainActivity.mainactivity.showmessage(resources.getString(R.string.please_input_foldername2))
                 return@setOnClickListener
             }
             var index=MainActivity.mainactivity.viewModel.getdb(null).insertMemo_folder(selectghost,ghostname)
             if(index==-1){
-                MainActivity.mainactivity.showmessage("오류로 폴더가 추가되지 않았습니다.")
+                MainActivity.mainactivity.showmessage(resources.getString(R.string.failed_AddingFolder))
             }else{
                 memoparent!!.folderList.add(Memo_Folder(index,ghostname,selectghost))
                 memoparent!!.update()

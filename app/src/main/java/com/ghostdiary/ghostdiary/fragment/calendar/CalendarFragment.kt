@@ -192,7 +192,7 @@ class CalendarFragment : Fragment() {
 
         }catch(e: Exception){
 
-            MainActivity.mainactivity.showmessage("오류.. 잠시 후 다시 시도해 주세요")
+            MainActivity.mainactivity.showmessage("Error... Please try again in a momentarily")
         }
 
 

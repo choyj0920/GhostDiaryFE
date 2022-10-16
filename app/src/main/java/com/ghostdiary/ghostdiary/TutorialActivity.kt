@@ -65,7 +65,7 @@ class TutorialActivity : AppCompatActivity() {
                 when(position){
                     2-> {
                         try {
-                            binding.nextBtn.text="시작"
+                            binding.nextBtn.text=resources.getString(R.string.start)
                             binding.nextBtn.setOnClickListener {
                                 binding.previousBtn.callOnClick()
 
@@ -77,7 +77,7 @@ class TutorialActivity : AppCompatActivity() {
                     }
                     else-> {
                         try {
-                            binding.nextBtn.text="다음"
+                            binding.nextBtn.text=resources.getString(R.string.next)
                             binding.nextBtn.setOnClickListener {
                                 viewPager.currentItem = viewPager.currentItem + 1
 

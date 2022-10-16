@@ -152,8 +152,10 @@ class SleepFragment(var sleepArray:ArrayList<Sleep_data>) : Fragment() {
         if(endsleep=="0")
             endsleep="24"
 
+        var recommendtimearr=resources.getStringArray(R.array.recommendedsleeptime)
 
-        val content  = "${startsleep} 시에 자서  ${endsleep} 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"
+
+        val content  = "${recommendtimearr[0]}${startsleep}${recommendtimearr[1]}${endsleep}${recommendtimearr[2]}"
         val spannableString = SpannableString(content) //객체 생성
 
 

@@ -42,7 +42,7 @@ class EditDiaryFragment(
     private lateinit var activityResultLauncher:ActivityResultLauncher<Intent>
 
     companion object{
-        var daytostring:ArrayList<String> = arrayListOf("error","일","월","화","수","목","금","토")
+       lateinit var daytostring:Array<String>
     }
     lateinit var curDiary:Day_Diary
     lateinit var fileName:String
@@ -74,6 +74,7 @@ class EditDiaryFragment(
 
     @SuppressLint("RestrictedApi")
     fun init(){
+        daytostring=resources.getStringArray(R.array.daytostring)
         
         binding!!.inputText.requestFocus()
         switcheditmode(isEditmode)
@@ -87,7 +88,9 @@ class EditDiaryFragment(
         var to = transFormat.format(date)
         var tempcal=Calendar.getInstance()
         tempcal.time =curDiary.date
-        binding!!.tvDay.text= "${daytostring[tempcal.get(Calendar.DAY_OF_WEEK)]}요일"
+        binding!!.tvDay.text= "${daytostring[tempcal.get(Calendar.DAY_OF_WEEK)]}"+resources.getString(R.string.daystring_last)
+
+
 
         binding!!.tvDate.text=to
 
@@ -267,7 +270,7 @@ class EditDiaryFragment(
             binding!!.constraintLayout4.visibility=View.VISIBLE
             binding!!.btnPost.visibility=View.VISIBLE
             binding!!.btnDelimage.visibility=View.VISIBLE
-            binding!!.inputText.hint="내용을 입력해주세요"
+            binding!!.inputText.hint=resources.getString(R.string.please_input_text)
             binding!!.btnSidemenu.visibility=View.GONE
             binding!!.btnArrow.visibility=View.VISIBLE
 

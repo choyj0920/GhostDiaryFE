@@ -54,7 +54,7 @@ class FontSelectDialog(var parent: MainActivity): DialogFragment() {
             if(selectfont in 0..Util.fontarray.size-1){
                 parent.savefontsetting(selectfont)
             }else{
-                parent.showmessage("오류로 폰트가 설정되지 않았습니다.")
+                parent.showmessage("Font was not set due to an error.")
             }
             dismiss()
 

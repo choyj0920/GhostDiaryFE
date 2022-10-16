@@ -216,12 +216,12 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
         curMemo.title=binding!!.inputTitle.text.toString()
         curMemo.text=binding!!.inputText.text.toString()
         if(curMemo.title==""){
-            parent.showmessage("제목을 입력해주세요.")
+            parent.showmessage(resources.getString(R.string.please_input_title))
             return
         }
 
         if(curMemo.text==""){
-            parent.showmessage("메모를 입력해주세요.")
+            parent.showmessage(resources.getString(R.string.please_input_memo))
             return
         }
 

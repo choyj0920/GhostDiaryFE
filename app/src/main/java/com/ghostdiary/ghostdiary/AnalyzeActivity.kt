@@ -87,11 +87,14 @@ class AnalyzeActivity : AppCompatActivity() {
     fun init_view(){
         Update_pager()
 
+        val tabtitle=resources.getStringArray(R.array.analyze_tabtitle)
+
+
         TabLayoutMediator(binding.tabLayout, binding.pager) {tab, position ->
             when(position) {
-                0 -> tab.text = "종합분석"
-                1 -> tab.text = "세부분석"
-                2 -> tab.text = "수면분석"
+                0 -> tab.text = tabtitle[0]
+                1 -> tab.text = tabtitle[1]
+                2 -> tab.text = tabtitle[2]
             }
         }.attach()
 

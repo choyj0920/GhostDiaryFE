@@ -608,7 +608,7 @@ class MainActivity : AppCompatActivity() {
             if (viewPager.currentItem == 0) {
                 if(System.currentTimeMillis() - lastTimeBackPressed >= 1500){
                     lastTimeBackPressed = System.currentTimeMillis()
-                    showmessage("\"'뒤로' 버튼을 한번 더 누르시면 종료됩니다.\"")
+                    showmessage(resources.getString(R.string.app_close_message))
                 }
                 else {
                     finishAffinity()

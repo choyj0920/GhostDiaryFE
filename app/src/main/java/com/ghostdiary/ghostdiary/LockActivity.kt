@@ -53,21 +53,24 @@ class LockActivity : AppCompatActivity() {
 
     }
 
+
     fun createPin() {
+
+
         val fragment = PFLockScreenFragment()
         val builder = PFFLockScreenConfiguration.Builder(this)
             .setMode(PFFLockScreenConfiguration.MODE_CREATE).setCodeLength(4)
-            .setTitle("비밀번호를 입력해 주세요").setUseFingerprint(false)
-            .setNextButton("다 음")
+            .setTitle(resources.getString(R.string.please_input_password)).setUseFingerprint(false)
+            .setNextButton(resources.getString(R.string.next))
             .setNewCodeValidation(true)
-            .setNewCodeValidationTitle("한번 더 입력해 주세요")
+            .setNewCodeValidationTitle(resources.getString(R.string.please_enter_again))
         fragment.setConfiguration(builder.build())
         fragment.setCodeCreateListener(
             object : OnPFLockScreenCodeCreateListener {
                 override fun onCodeCreated(encodedCode: String) {
 
                     Log.e("ERR", "$encodedCode 가 만든 비번이에요")
-                    showmessage("입력하신 비밀번호로 잠금되었습니다.")
+                    showmessage(resources.getString(R.string.lock_sucess))
 
                     editor.putBoolean("isLock", true).apply()
                     editor.putString("pinencode", encodedCode).apply()
@@ -76,9 +79,9 @@ class LockActivity : AppCompatActivity() {
 
                 }
                 override fun onNewCodeValidationFailed() {
-                    title="한번 더 입력해 주세요"
+                    title=resources.getString(R.string.please_enter_again)
 
-                    showmessage("입력하신 비밃 번호와 다릅니다. 다시 입력해주세요")
+                    showmessage(resources.getString(R.string.wrong_password))
                     
 
                 }
@@ -94,19 +97,16 @@ class LockActivity : AppCompatActivity() {
         fragment.setEncodedPinCode(curPinencode)
         val builder = PFFLockScreenConfiguration.Builder(this)
             .setMode(PFFLockScreenConfiguration.MODE_AUTH).setCodeLength(4).setUseFingerprint(false)
-            .setTitle("비밀번호를 입력해 주세요").setClearCodeOnError(true)
+            .setTitle(resources.getString(R.string.please_input_password)).setClearCodeOnError(true)
         fragment.setConfiguration(builder.build())
         fragment.setLoginListener(
             object : PFLockScreenFragment.OnPFLockScreenLoginListener {
                 override fun onCodeInputSuccessful() {
                     Log.d("TAG", "코드 확인")
-                    showmessage("pin인증 완료")
-
                     finish()
                 }
 
                 override fun onFingerprintSuccessful() {
-                    showmessage("지문인증 완료")
                     Log.d("TAG", "지문 확인")
 
                     finish()
@@ -114,13 +114,12 @@ class LockActivity : AppCompatActivity() {
                 }
 
                 override fun onPinLoginFailed() {
-                    showmessage("비밀번호가 틀립니다.")
+                    showmessage(resources.getString(R.string.wrong_password))
                     Log.d("TAG", "코드 확인 실패")
 
                 }
 
                 override fun onFingerprintLoginFailed() {
-                    showmessage("올바르지 않은 지문입니다.")
                     Log.d("TAG", "지문 확인 실패")
 
                 }
@@ -140,7 +139,7 @@ class LockActivity : AppCompatActivity() {
 
             if (System.currentTimeMillis() - lastTimeBackPressed >= 1500) {
                 lastTimeBackPressed = System.currentTimeMillis()
-                showmessage("'뒤로' 버튼을 한번 더 누르시면 종료됩니다.")
+                showmessage(resources.getString(R.string.app_close_message))
 
             } else {
                 finishAffinity()
