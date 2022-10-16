@@ -54,7 +54,7 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
         return NotificationCompat.Builder(applicationContext, channelID)
             .setContentTitle(title) //제목
             .setContentText(message)//내용
-            .setSmallIcon(R.mipmap.ic_launcher) //아이콘
+            .setSmallIcon(R.mipmap.ic_applogo) //아이콘
             .setContentIntent(intent)
     }
 }

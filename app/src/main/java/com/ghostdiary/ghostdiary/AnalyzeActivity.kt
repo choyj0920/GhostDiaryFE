@@ -44,6 +44,7 @@ class AnalyzeActivity : AppCompatActivity() {
         aDetailFragment= AnalysisDetailFragment(viewModel)
         sleepFragment= SleepFragment(viewModel.getsleepdataArray())
 
+
         init_view()
 
         setContentView(binding.root)

@@ -171,6 +171,8 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, var sleepstart:Int, va
                 })
             holder.slider.addOnChangeListener { slider, value, fromUser ->
 
+                holder.slider.alpha=1f
+
                 val values = holder.slider.values
                 parent.sleepend = values[1].toInt()
                 parent.sleepstart = values[0].toInt()

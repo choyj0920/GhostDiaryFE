@@ -101,10 +101,14 @@
 
     <string name="alarm_text">오늘도 하루를 기록해볼까요?</string>
 
+    <string name="analyzetabname00">종합분석</string>
+    <string name="analyzetabname01">세부분석</string>
+    <string name="analyzetabname02">수면분석</string>
+
     <string-array name="analyze_tabtitle">
-        <item>종합분석</item>
-        <item>세부분석</item>
-        <item>수면분석</item>
+        <item>@string/analyzetabname00</item>
+        <item>@string/analyzetabname01</item>
+        <item>@string/analyzetabname02</item>
     </string-array>
 
     <string name="notSelect_emotion_analyze">분석할 활동이 선택되지 않았습니다.</string>
