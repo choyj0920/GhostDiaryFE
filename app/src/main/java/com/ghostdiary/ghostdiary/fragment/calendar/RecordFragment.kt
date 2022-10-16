@@ -85,6 +85,8 @@ class RecordFragment : Fragment() {
         var to = transFormat.format(calendar.time)
         binding!!.tvDate.setText(to)
 
+        AdapterDiary.daytostring=resources.getStringArray(R.array.daytostring)
+
         var toutchlistener = View.OnTouchListener { v, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {

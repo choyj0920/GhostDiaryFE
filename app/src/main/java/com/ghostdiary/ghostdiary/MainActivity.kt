@@ -33,6 +33,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.beautycoder.pflockscreen.security.PFSecurityManager
 import com.ghostdiary.ghostdiary.databinding.ActivityMainBinding
 import com.ghostdiary.ghostdiary.databinding.MenuThemeBinding
+import com.ghostdiary.ghostdiary.dataclass.Day_Diary
 import com.ghostdiary.ghostdiary.fragment.calendar.CalendarFragment
 import com.ghostdiary.ghostdiary.fragment.calendar.RecordFragment
 import com.ghostdiary.ghostdiary.fragment.main.*
@@ -95,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Day_Diary.init_data(this)
 
         binding=ActivityMainBinding.inflate(layoutInflater)
         viewModel= ViewModelProvider(this).get(MainViewModel::class.java)

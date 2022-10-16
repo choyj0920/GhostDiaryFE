@@ -1,5 +1,6 @@
 package com.ghostdiary.ghostdiary.dataclass
 
+import android.content.Context
 import com.ghostdiary.ghostdiary.R
 import java.util.*
 import kotlin.collections.ArrayList
@@ -114,26 +115,49 @@ class Day_Diary(
             R.drawable.ghost_32_rain
         )
 
-        val emotionname= arrayOf("오늘은 어떤 기분이었나요?","누구와 함께 하루를 보냈나요?","어디에서 하루를 보냈나요?","무엇을 하며 하루를 보냈나요?","오늘의 날씨는 어땠나요?","수면시간을 기록해주세요.")
-        val emotionarr: HashMap<String,Array<emotionclass>> = hashMapOf(
-            emotionname[0] to arrayOf(emotionclass("매우좋음",0,false),emotionclass("좋음",1,false),
-                emotionclass("보통",2,false),emotionclass("나쁨",3,false),
-                emotionclass("매우나쁨",4,false)),
-            emotionname[1] to arrayOf(emotionclass("혼자",5,false),emotionclass("가족",6,false),
-                emotionclass("친구",7,false),emotionclass("연인",8,false),
-                emotionclass("반려동물",9,false)),
 
-            emotionname[3] to arrayOf(emotionclass("산책",20,false),emotionclass("공부",21,false),
-                emotionclass("운동",22,false),emotionclass("일",23,false),emotionclass("쇼핑",24,false),
-                emotionclass("그림",25,false),emotionclass("독서",26,false),emotionclass("술",27,false),
-                emotionclass("게임",28,false),emotionclass("여행",29,false)),
-            emotionname[2] to arrayOf(emotionclass("집",10,false),emotionclass("학교",11,false),
-                emotionclass("직장",12,false),emotionclass("카페",13,false),
-                emotionclass("식당",14,false),emotionclass("교통수단",15,false),emotionclass("운동시설",16,false),
-                emotionclass("쇼핑몰",17,false),emotionclass("영화관",18,false),emotionclass("도서관",19,false)),
-            emotionname[4] to arrayOf(emotionclass("맑음",30,false),emotionclass("구름",31,false),
-                emotionclass("비",32,false))
-        )
+        lateinit var emotionname:Array<String>
+        lateinit var emotionarr: HashMap<String,Array<emotionclass>>
+
+        fun init_data(context: Context){
+            emotionname=context.resources.getStringArray(R.array.emotionname)
+
+            emotionarr= hashMapOf()
+
+            emotionarr.put(emotionname[0], arrayOf())
+            val category0=context.resources.getStringArray(R.array.emotionCategory0)
+            val category1=context.resources.getStringArray(R.array.emotionCategory1)
+            val category2=context.resources.getStringArray(R.array.emotionCategory2)
+            val category3=context.resources.getStringArray(R.array.emotionCategory3)
+            val category4=context.resources.getStringArray(R.array.emotionCategory4)
+
+
+            emotionarr= hashMapOf(
+            emotionname[0] to arrayOf(emotionclass(category0[0],0,false),emotionclass(category0[1],1,false),
+                emotionclass(category0[2],2,false),emotionclass(category0[3],3,false),
+                emotionclass(category0[4],4,false)),
+
+                emotionname[1] to arrayOf(emotionclass(category1[0],5,false),emotionclass(category1[1],6,false),
+                    emotionclass(category1[2],7,false),emotionclass(category1[3],8,false),
+                    emotionclass(category1[4],9,false)),
+
+                emotionname[2] to arrayOf(emotionclass(category2[0],10,false),emotionclass(category2[1],11,false),
+                    emotionclass(category2[2],12,false),emotionclass(category2[3],13,false),
+                    emotionclass(category2[4],14,false),emotionclass(category2[5],15,false),emotionclass(category2[6],16,false),
+                    emotionclass(category2[7],17,false),emotionclass(category2[8],18,false),emotionclass(category2[9],19,false)),
+
+
+                emotionname[3] to arrayOf(emotionclass(category3[0],20,false),emotionclass(category3[1],21,false),
+                    emotionclass(category3[2],22,false),emotionclass(category3[3],23,false),emotionclass(category3[4],24,false),
+                    emotionclass(category3[5],25,false),emotionclass(category3[6],26,false),emotionclass(category3[7],27,false),
+                    emotionclass(category3[8],28,false),emotionclass(category3[9],29,false)),
+
+                emotionname[4] to arrayOf(emotionclass(category4[0],30,false),emotionclass(category4[1],31,false),
+                    emotionclass(category4[2],32,false))
+            )
+
+
+        }
 
 
         fun addghost_arr():ArrayList<Int>{

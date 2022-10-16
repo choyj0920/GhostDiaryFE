@@ -27,7 +27,7 @@ import java.util.*
 class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diary>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object{
-        var daytostring: java.util.ArrayList<String> = arrayListOf("error","일","월","화","수","목","금","토")
+        lateinit var daytostring :Array<String>
 
     }
 
@@ -71,13 +71,13 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
         }
 
 
-        var transFormat = SimpleDateFormat("M월 d일")
+        var transFormat = SimpleDateFormat(parent.resources.getString(R.string.transformat_month_day))
         var str_date = transFormat.format(diary.date)
         var day= Calendar.getInstance()
         day.time=diary.date
 
         holder.tv_date.text=str_date
-        holder.tv_day.text= "${daytostring[day.get(Calendar.DAY_OF_WEEK)]}요일"
+        holder.tv_day.text= "${daytostring[day.get(Calendar.DAY_OF_WEEK)]}"+parent.resources.getString(R.string.daystring_last)
 
         holder.iv_ghost.setImageResource(Day_Diary.int_to_image[diary.today_emotion.ghostimage])
 
@@ -107,7 +107,7 @@ class AdapterDiary(val parent: RecordFragment, var diaryarr:MutableList<Day_Diar
             else {
                 holder.iv_image.visibility=View.GONE
                 diary.image=null
-                Log.e("TAG","파일을 찾을 수 없어 수정되었습니다.")
+                Log.e("TAG","File not found and modified.")
 
 
             }

@@ -265,7 +265,6 @@ class AnalysisDetailFragment(private val viewModel:MainViewModel) : Fragment() {
         imagelist.add(drawableToBitmap(resources.getDrawable(R.drawable.ic_graph_01))!!)
         imagelist.add(drawableToBitmap(resources.getDrawable(R.drawable.ic_graph_00))!!)
 
-        Log.d("TAG","여기에서는 ? ${imagelist} ${imagelist[2]}")
 
         chart.rendererLeftYAxis =
             MyYAxisLeftRenderer(

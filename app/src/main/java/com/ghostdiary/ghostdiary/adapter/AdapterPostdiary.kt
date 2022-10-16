@@ -151,7 +151,7 @@ class AdapterPostdiary(val parent: SelectEmotionFragment, var sleepstart:Int, va
             yesterday.set(Calendar.HOUR_OF_DAY, 18)
             yesterday.set(Calendar.MINUTE,0)
 
-            var timeformat = SimpleDateFormat("dd일 HH시 mm분")
+            var timeformat = SimpleDateFormat(parent.resources.getString(R.string.transformat_day_hour_min))
 
 
             holder.slider.values= listOf<Float>(24.0f,72.0f)
