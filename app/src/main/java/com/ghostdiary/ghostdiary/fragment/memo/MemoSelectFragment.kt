@@ -125,29 +125,6 @@ class MemoSelectFragment(var parent:MemoActivity, var memoFolder: Memo_Folder) :
                 parent.containerChange(EditMemoFragment(parent,memo.folder_id,memo))
             }
 
-            /*holder.memooption.setOnClickListener {
-                var popupMenu= PopupMenu(this@MemoSelectFragment.context ,holder.memooption)
-                this@MemoSelectFragment.requireActivity().menuInflater.inflate(R.menu.diary_sidemenu,popupMenu.menu)
-
-                popupMenu.setOnMenuItemClickListener { item  ->
-                    when(item?.itemId){
-                        R.id.menu_edit->{
-//                            MainActivity.mainactivity.containerChange(EditMemoFragment(this@MemoSelectFragment,memo.folder_id,memo))
-
-
-                        }
-                        R.id.menu_delete->{
-                            this@MemoSelectFragment.viewModel.maindb!!.deleteMemo(memo.memoid)
-                            memos.remove(memo)
-                            this@MemoSelectFragment.update()
-
-                        }
-                    }
-                    item !=null
-                }
-                popupMenu.show()
-            }  */
-
 
 
 

@@ -309,7 +309,7 @@ class EditDiaryFragment(
 
     fun timestamp(){
         var editText=  binding!!.inputText
-        var transFormat = SimpleDateFormat("hh:mm")
+        var transFormat = SimpleDateFormat("HH:mm")
         var calendar= Calendar.getInstance()
         var text = transFormat.format(calendar.time)
 

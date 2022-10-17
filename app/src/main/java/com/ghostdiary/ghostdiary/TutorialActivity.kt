@@ -63,7 +63,7 @@ class TutorialActivity : AppCompatActivity() {
                 // 특정 페이지가 선택될 때 마다 여기가 호출됩니다.
                 // position 에는 현재 페이지 index - 첫페이지면 0
                 when(position){
-                    2-> {
+                    4-> {
                         try {
                             binding.nextBtn.text=resources.getString(R.string.start)
                             binding.nextBtn.setOnClickListener {
@@ -136,13 +136,15 @@ class TutorialActivity : AppCompatActivity() {
 
 
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
-        override fun getItemCount(): Int = 3
+        override fun getItemCount(): Int = 5
 
         override fun createFragment(position: Int): Fragment {
             return when(position) {
                 0 -> TutorialFragment(R.drawable.tutorial_00)
                 1 -> TutorialFragment(R.drawable.tutorial_01)
-                else -> TutorialFragment(R.drawable.tutorial_02)
+                2 -> TutorialFragment(R.drawable.tutorial_02)
+                3 -> TutorialFragment(R.drawable.tutorial_03)
+                else -> TutorialFragment(R.drawable.tutorial_04)
             }
         }
     }

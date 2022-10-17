@@ -625,6 +625,24 @@ class SqliteHelper(context: Context?, name: String?, factory: SQLiteDatabase.Cur
 
     }
 
+    //update 메소드
+    fun updateMemofolder(folder: Memo_Folder){
+        val wd = writableDatabase
+
+        val values = ContentValues()
+        //넘겨줄 컬럼의 매개변수 지정
+
+        values.put("folder_name",folder.folder_name)
+        values.put("ghost_num",folder.ghost_num)
+
+
+        //쓰기나 수정이 가능한 데이터베이스 변수
+
+        wd.update("MEMO_FOLDER",values,"folder_id=${folder.folder_id}",null)
+        wd.close()
+
+    }
+
     //delete 메소드
     @SuppressLint("Range")
     fun deleteDiary(date:Date){

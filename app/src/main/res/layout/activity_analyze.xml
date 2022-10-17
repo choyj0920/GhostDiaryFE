@@ -30,17 +30,13 @@
         app:layout_constraintBottom_toBottomOf="@+id/imageView">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab00"
             android:layout_width="wrap_content"
             android:text="@string/analyzetabname00"
             android:layout_height="wrap_content"
             android:background="@color/transp"
-
             android:visibility="gone" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab01"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/analyzetabname01"
@@ -52,8 +48,6 @@
             />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tab02"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"

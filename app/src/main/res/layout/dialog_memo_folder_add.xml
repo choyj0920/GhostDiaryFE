@@ -10,6 +10,7 @@
     >
 
     <TextView
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:minWidth="85dp"
@@ -17,7 +18,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_margin="5dp"
-        android:text="「폴더추가」"
+        android:text="@string/folderaddtitle"
         android:textStyle="bold"
         android:background="@drawable/border_white"
         android:backgroundTint="#EBFFF6EF"
@@ -70,15 +71,34 @@
             android:text="0/10"
             android:layout_gravity="right"/>
 
-        <TextView
-            android:id="@+id/tv_ok"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:padding="5dp"
-            android:text="확인"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
+
+            android:orientation="horizontal">
+            <TextView
+
+                android:id="@+id/tv_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="삭제"
+                android:textColor="@color/red2"
+                android:layout_marginEnd="10dp"
+                android:textSize="13sp" />
+            <TextView
+                android:id="@+id/tv_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="확인"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>

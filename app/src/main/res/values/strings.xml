@@ -106,9 +106,9 @@
     <string name="analyzetabname02">수면분석</string>
 
     <string-array name="analyze_tabtitle">
-        <item>@string/analyzetabname00</item>
-        <item>@string/analyzetabname01</item>
-        <item>@string/analyzetabname02</item>
+        <item>종합분석</item>
+        <item>세부분석</item>
+        <item>수면분석</item>
     </string-array>
 
     <string name="notSelect_emotion_analyze">분석할 활동이 선택되지 않았습니다.</string>
@@ -128,15 +128,33 @@
     <string name="wrong_password">입력하신 비밃 번호와 다릅니다, 다시 입력해주세요.</string>
     
 <!--    memofolderadd-->
-    
+    <string name="folderaddtitle">「폴더추가」</string>
     <string name="please_select_foldericon">폴더 아이콘을 골라주세요.</string>
     <string name="please_input_foldername1">폴더명을 입력하세요</string>
     <string name="please_input_foldername2">폴더명을 입력해주세요.</string>
     <string name="failed_AddingFolder">오류로 폴더가 추가되지 않았습니다.</string>
+    <string name="folderedittitle">「폴더수정」</string>
+
     <!--    2022 , 2023뒤에 올 2000년 ,영어는 y? or 그냥 빈칸?  달 선택 창에 사용 -->
     <string name="yearstring_last">년</string>
 
+    <string name="navigationMenu_lock">화면 잠금</string>
+    <string name="navigationMenu_alarm">알림</string>
+    <string name="navigationMenu_font">폰트</string>
+    <string name="navigationMenu_service">소통창구</string>
+    <string name="navigationMenu_service_link">\@ghostdiary.app</string>
+    <string name="navigationMenu_hint">도움말</string>
+    <string name="navigationMenu_updatenote">업데이트 노트</string>
 
+
+    <string name="haveupdate_title">앱을 업데이트 해주세요!</string>
+    <string name="haveupdate_content">소처럼 일해서 개선하고 있답니다\n٩(•̤̀ᵕ•̤́๑)૭✧</string>
+    
+    <string name="afterupdate_title">업데이트 노트</string>
+    <string name="afterupdate_content">> 메모 폴더 삭제 기능 추가\n> 타임스탬프 12H → 24H\n> 기능에 대한 설명 추가\n> 전반적인 사용성 개선</string>
+    <string name="afterupdate_please">소처럼 일해서 개선하고 있답니다\n٩(•̤̀ᵕ•̤́๑)૭✧ 별점은 큰 힘이 됩니다!</string>
+    <string name="afterupdate_close">닫기</string>
+    <string name="afterupdate_review">별점주기</string>
 
 
 

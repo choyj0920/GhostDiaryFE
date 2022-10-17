@@ -103,7 +103,7 @@ class AdapterDay(val parent_fragment: CalendarFragment, val tempMonth:Int, val d
             }
             holder.bindng.ivDate.setImageResource(if(MainActivity.curTheme==1) R.drawable.ic_ghost_default else R.drawable.ic_ghost_default_dark)
             if(today==to){
-                holder.bindng.ivDate.setImageResource(R.drawable.ghost_today)
+                holder.bindng.ivDate.setImageResource(if(MainActivity.curTheme==1) R.drawable.ghost_today else R.drawable.ghost_today_dark)
             }
 
         }

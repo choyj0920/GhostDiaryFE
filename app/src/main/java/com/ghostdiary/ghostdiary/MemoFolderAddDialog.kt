@@ -21,7 +21,7 @@ import com.ghostdiary.ghostdiary.dataclass.Memo_Folder
 import com.ghostdiary.ghostdiary.fragment.main.MemoFragment
 import com.ghostdiary.ghostdiary.utilpackage.Util
 
-class MemoFolderAddDialog(var memoparent:MemoFragment?=null): DialogFragment() {
+class MemoFolderAddDialog(var memoparent:MemoFragment?=null,var memoFolderindex:Int=-1): DialogFragment() {
 
     // 뷰 바인딩 정의
     private var _binding: DialogMemoFolderAddBinding? = null
@@ -52,32 +52,81 @@ class MemoFolderAddDialog(var memoparent:MemoFragment?=null): DialogFragment() {
     fun initview(){
         // 메모에서
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-      
 
-        binding.inputGhostname.hint=resources.getString(R.string.please_input_foldername1)
+        if(memoFolderindex==-1){
 
-        binding.tvOk.setOnClickListener {
-            if(selectghost==-1){
-                MainActivity.mainactivity.showmessage(resources.getString(R.string.please_select_foldericon))
-                return@setOnClickListener
+            binding.tvTitle.text=resources.getString(R.string.folderaddtitle)
+
+            binding.inputGhostname.hint=resources.getString(R.string.please_input_foldername1)
+
+            binding.tvDelete.visibility=View.GONE
+
+            binding.tvOk.setOnClickListener {
+                if(selectghost==-1){
+                    MainActivity.mainactivity.showmessage(resources.getString(R.string.please_select_foldericon))
+                    return@setOnClickListener
+                }
+                var ghostname=binding.inputGhostname.text.toString()
+
+                if(ghostname==""){
+                    MainActivity.mainactivity.showmessage(resources.getString(R.string.please_input_foldername2))
+                    return@setOnClickListener
+                }
+                var index=MainActivity.mainactivity.viewModel.getdb(null).insertMemo_folder(selectghost,ghostname)
+                if(index==-1){
+                    MainActivity.mainactivity.showmessage(resources.getString(R.string.failed_AddingFolder))
+                }else{
+                    memoparent!!.folderList.add(Memo_Folder(index,ghostname,selectghost))
+                    memoparent!!.update()
+
+                }
+                dismiss()
+
             }
-            var ghostname=binding.inputGhostname.text.toString()
 
-            if(ghostname==""){
-                MainActivity.mainactivity.showmessage(resources.getString(R.string.please_input_foldername2))
-                return@setOnClickListener
+        }else{
+            var memoFolder=memoparent!!.viewModel.getMemo_FolderArray()[memoFolderindex]
+
+            binding.tvDelete.visibility=View.VISIBLE
+            binding.tvTitle.text=resources.getString(R.string.folderedittitle)
+            binding.inputGhostname.hint=memoFolder.folder_name
+            binding.inputGhostname.setText(memoFolder.folder_name)
+            selectghost=memoFolder.ghost_num
+
+            binding.tvDelete.setOnClickListener{
+
+                dismiss()
             }
-            var index=MainActivity.mainactivity.viewModel.getdb(null).insertMemo_folder(selectghost,ghostname)
-            if(index==-1){
-                MainActivity.mainactivity.showmessage(resources.getString(R.string.failed_AddingFolder))
-            }else{
-                memoparent!!.folderList.add(Memo_Folder(index,ghostname,selectghost))
+            binding.tvOk.setOnClickListener {
+                if(selectghost==-1){
+                    MainActivity.mainactivity.showmessage(resources.getString(R.string.please_select_foldericon))
+                    return@setOnClickListener
+                }
+                var ghostname=binding.inputGhostname.text.toString()
+
+                if(ghostname==""){
+                    MainActivity.mainactivity.showmessage(resources.getString(R.string.please_input_foldername2))
+                    return@setOnClickListener
+                }
+                memoFolder.folder_name= binding.inputGhostname.text.toString()
+                memoFolder.ghost_num=selectghost
+                memoparent!!.viewModel.edit_memoFolder(memoFolder)
                 memoparent!!.update()
 
+                dismiss()
             }
-            dismiss()
+            binding.tvDelete.setOnClickListener {
+                memoparent!!.viewModel.delete_MemoFolder(fid = memoFolder.folder_id)
+                memoparent!!.update()
+
+                dismiss()
+            }
+
 
         }
+      
+
+
 
 
         binding.inputGhostname.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))

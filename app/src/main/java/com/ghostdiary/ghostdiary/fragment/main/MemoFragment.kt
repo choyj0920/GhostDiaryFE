@@ -20,7 +20,7 @@ import com.ghostdiary.ghostdiary.utilpackage.Util
 
 class MemoFragment : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
+    val viewModel: MainViewModel by activityViewModels()
     private var binding: FragmentMemoBinding?=null
     lateinit var folderList:ArrayList<Memo_Folder>
 
@@ -33,7 +33,7 @@ class MemoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding= FragmentMemoBinding.inflate(inflater,container,false)
-        folderList=viewModel.getMemo_FolderArray()
+
 
         init()
         Util.setGlobalFont(binding!!.root)
@@ -49,11 +49,6 @@ class MemoFragment : Fragment() {
 
     private fun init() {
 
-        binding!!.ivFolderadd.setOnClickListener {
-                val dialog = GhostsSelectDialog(-1,adpaterparent = null , emotionlist = null,this )
-            dialog.isCancelable = true
-            dialog.show(requireActivity().supportFragmentManager, "ConfirmDialog")
-        }
 
         update()
 
@@ -67,6 +62,8 @@ class MemoFragment : Fragment() {
 
 
     fun update() {
+        folderList=viewModel.getMemo_FolderArray()
+
         val ghostlistmanager = GridLayoutManager(context, 3, GridLayoutManager.VERTICAL,false)
         val ghostlistadpter = Folderadpater(folderList)
 
@@ -85,6 +82,7 @@ class MemoFragment : Fragment() {
         inner class GhostView(binding: ItemFolderBinding) : RecyclerView.ViewHolder(binding.root) {
             var foldername:TextView= binding.tvName
             var ghostimage: ImageView =binding.ivGhost
+            var layout=binding.linearLayout
         }
 
 
@@ -109,11 +107,19 @@ class MemoFragment : Fragment() {
             holder.ghostimage.alpha=1f
             holder.ghostimage.setImageResource(Day_Diary.int_to_image.get(folders[position].ghost_num))
 
-            holder.ghostimage.setOnClickListener {
+            holder.layout.setOnClickListener {
                 val intent = Intent(requireContext(), MemoActivity::class.java)
                 intent.putExtra("memofoderindex",position)
                requireActivity().startActivity(intent)
 
+            }
+            holder.layout.setOnLongClickListener{
+
+                val dialog = MemoFolderAddDialog(this@MemoFragment,position )
+                dialog.isCancelable = true
+                dialog.show(activity!!.supportFragmentManager, "ConfirmDialog")
+
+                true
             }
 
             holder.foldername.text=folders[position].folder_name

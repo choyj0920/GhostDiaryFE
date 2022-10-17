@@ -98,6 +98,14 @@ class MainViewModel(): ViewModel() {
             memofolder_array = maindb!!.select_Memo()
         return memofolder_array!!
     }
+    fun delete_MemoFolder(context: Context?=null,fid: Int){
+        maindb?.deleteMemoFolder(fid)
+        memofolder_array?.removeIf { it.folder_id==fid }
+    }
+    fun edit_memoFolder(memoFolder: Memo_Folder){
+        maindb?.updateMemofolder(memoFolder)
+
+    }
 
     fun getEmotionArray(context: Context?=null): HashMap<String, Day_Diary> {
         if (calendar_emotionArray == null) {
@@ -109,6 +117,8 @@ class MainViewModel(): ViewModel() {
         }
         return calendar_emotionArray!!
     }
+
+
     fun getdiaryAnalysisMap(context: Context?=null): HashMap<String, emotion_analysis> {
         if(maindb==null) {
             diaryAnalysisMap = getdb(context!!)?.select_diaryanalysis()

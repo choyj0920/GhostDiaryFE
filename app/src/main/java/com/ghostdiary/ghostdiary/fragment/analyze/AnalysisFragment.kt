@@ -1,5 +1,6 @@
 package com.ghostdiary.ghostdiary.fragment.analyze
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -7,12 +8,17 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupWindow
 import androidx.fragment.app.Fragment
 import com.ghostdiary.ghostdiary.*
+import com.ghostdiary.ghostdiary.databinding.DialogAnalyzeScoreHintBinding
 import com.ghostdiary.ghostdiary.databinding.FragmentAnalysisBinding
+import com.ghostdiary.ghostdiary.databinding.MenuSideoptionBinding
 import com.ghostdiary.ghostdiary.dataclass.Day_Diary
 import com.ghostdiary.ghostdiary.dataclass.emotion_analysis
 import com.ghostdiary.ghostdiary.utilpackage.MyYAxisLeftRenderer
@@ -76,6 +82,7 @@ class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
         allpercen=emotion_analysis.getallpercentage()
 
 
+        init_popuphint()
         initChartData()
 
         initChart()
@@ -175,6 +182,30 @@ class AnalysisFragment(private val viewModel:MainViewModel) : Fragment() {
 
     }
 
+    private fun init_popuphint(){
+        val popupInflater =
+            requireActivity().applicationContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val popupBind = DialogAnalyzeScoreHintBinding.inflate(popupInflater)
+
+
+        val popupWindow = PopupWindow(
+            popupBind.root,dpToPx(requireContext(),210f).toInt() ,dpToPx(requireContext(),50f).toInt()  , true
+        ).apply { contentView.setOnClickListener { dismiss() }
+        }
+        Util.setGlobalFont(popupBind.root)
+        // make sure you use number than wrap_content or match_parent,
+        // because for me it is not showing anything if I set it to wrap_content from ConstraintLayout.LayoutParams.
+
+
+        binding!!.ivScoreHint.setOnClickListener{
+            var loc:IntArray= intArrayOf(0,0)
+            binding!!.ivScoreHint.getLocationOnScreen(loc)
+            popupWindow.showAtLocation(binding!!.ivScoreHint, Gravity.NO_GRAVITY, loc[0]-popupWindow.width/2, loc[1]+binding!!.ivScoreHint.height);
+        }
+    }
+    fun dpToPx(context: Context, dp: Float): Float {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, context.resources.displayMetrics)
+    }
 
 
     private fun initChartData() {

@@ -1,6 +1,7 @@
 package com.ghostdiary.ghostdiary
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
@@ -8,6 +9,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.Typeface
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -38,6 +40,13 @@ import com.ghostdiary.ghostdiary.fragment.calendar.CalendarFragment
 import com.ghostdiary.ghostdiary.fragment.calendar.RecordFragment
 import com.ghostdiary.ghostdiary.fragment.main.*
 import com.ghostdiary.ghostdiary.utilpackage.Util
+import com.google.android.gms.tasks.Task
+import com.google.android.play.core.appupdate.AppUpdateInfo
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
+import com.google.android.play.core.install.model.UpdateAvailability
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,10 +57,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var recordFragment: RecordFragment
     private lateinit var memoFragment: MemoFragment
     private lateinit var prefs : SharedPreferences
+    private lateinit var appUpdateManager:AppUpdateManager
     companion object{
         lateinit var mainactivity:MainActivity
         var isup=false
         var curTheme=1
+
+        val UPDATE_REQUEST_CODE=700
 
         val M_ALARM_REQUEST_CODE = 1000
         val REQUEST_CODE= M_ALARM_REQUEST_CODE
@@ -174,13 +186,7 @@ class MainActivity : AppCompatActivity() {
         Util.init(array,prefs.getInt("isfontnum",iscur))
         curTheme=prefs.getInt("theme",1)
 
-        val isfirst= prefs.getBoolean("firststart",true)
-        if(isfirst){
-            var intent = Intent(this, TutorialActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
-            finish()
-        }
+
 
 
         val islock= prefs.getBoolean("isLock",false)
@@ -210,6 +216,17 @@ class MainActivity : AppCompatActivity() {
         init_sidemenu()
 
         init_topmenu()
+
+        checkAppUpdate()
+
+        val isfirst= prefs.getBoolean("firststart",true)
+        if(isfirst){
+            var intent = Intent(this, TutorialActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+        }
+
 
     }
 
@@ -410,6 +427,29 @@ class MainActivity : AppCompatActivity() {
             val dialog = FontSelectDialog(this)
             dialog.isCancelable = true
             dialog.show(supportFragmentManager, "ConfirmDialog")
+        }
+        binding.sidemenuServiceLink.setOnClickListener {
+            var intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/ghostdiary.app/"))
+            startActivity(intent)
+        }
+
+        binding.sidemenuHint.setOnClickListener {
+            var intent = Intent(this, TutorialActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
+//            val dialog = HaveupdateDialog()
+//            dialog.isCancelable = true
+//            dialog.show(supportFragmentManager, "ConfirmDialog")
+//            binding.drawerlayout.closeDrawer(GravityCompat.END)
+        }
+        binding.sidemenuUpdatenote.setOnClickListener {
+            val dialog = AfterupdateDialog()
+            dialog.isCancelable = true
+            dialog.show(supportFragmentManager, "ConfirmDialog")
+            binding.drawerlayout.closeDrawer(GravityCompat.END)
+
+
         }
 
         binding.sidemenuSwitchLock.setOnCheckedChangeListener { buttonview, ischecked ->
@@ -686,6 +726,78 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun checkAppUpdate() {
+        appUpdateManager = AppUpdateManagerFactory.create(this)
+        val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+        
+        Log.d("TAG","업데이트 확인중")
+
+        appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+            ) { // 업데이트가 있는 경우
+                val dialog = HaveupdateDialog(appUpdateManager,appUpdateInfo)
+                dialog.isCancelable = true
+                dialog.show(supportFragmentManager, "ConfirmDialog")
+
+
+                Log.d("TAG","업데이트 발견")
+
+
+
+            } else { // 업데이트가 없는 경우
+
+                Log.d("TAG","업데이트 없음")
+                val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+                var curversion =prefs.getInt("curVersion",-1)
+
+                //
+                if(prefs.getBoolean("firststart",true)){
+                    editor.putInt("curVersion",BuildConfig.VERSION_CODE)
+                    editor.commit()
+
+                }else{
+                    if(curversion==BuildConfig.VERSION_CODE){ //
+
+                    }else{ // 이전에 설치했으며 이번 업데이트후 새롭게 실행한사람
+                        editor.putInt("curVersion",BuildConfig.VERSION_CODE)
+                        editor.commit()
+                        val dialog = AfterupdateDialog()
+                        dialog.isCancelable = true
+                        dialog.show(supportFragmentManager, "ConfirmDialog")
+
+                    }
+
+                }
+
+
+
+            }
+
+
+        }
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == UPDATE_REQUEST_CODE) {
+            if (resultCode != Activity.RESULT_OK) {
+
+                val appUpdateInfoTask: Task<AppUpdateInfo> = appUpdateManager.appUpdateInfo
+
+                appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+                    if (appUpdateInfo.updateAvailability() === UpdateAvailability.UPDATE_AVAILABLE) {
+                        val dialog = HaveupdateDialog(appUpdateManager,appUpdateInfo)
+                        dialog.isCancelable = true
+
+                        dialog.show(supportFragmentManager, "ConfirmDialog")
+
+                        Log.d("TAG","업데이트 발견")
+
+                    }
+                }
+            }
+        }
     }
 
 }

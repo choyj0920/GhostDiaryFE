@@ -275,7 +275,7 @@ class EditMemoFragment(var parent: MemoActivity, var folder_id:Int, var memo: Me
             return
         }
 
-        var transFormat = SimpleDateFormat(" hh:mm ")
+        var transFormat = SimpleDateFormat(" HH:mm ")
         var calendar= Calendar.getInstance()
         var text = transFormat.format(calendar.time)
 
