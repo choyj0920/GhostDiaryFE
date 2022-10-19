@@ -11,6 +11,8 @@ import com.ghostdiary.ghostdiary.databinding.DialogAfterupdateBinding
 import com.ghostdiary.ghostdiary.utilpackage.Util
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.review.ReviewManagerFactory
+import com.google.android.play.core.review.model.ReviewErrorCode
 
 
 class AfterupdateDialog(): DialogFragment() {
@@ -49,6 +51,22 @@ class AfterupdateDialog(): DialogFragment() {
 
         }
         binding.tvReview.setOnClickListener {
+
+//            val manager = ReviewManagerFactory.create(requireContext())
+//            val request = manager.requestReviewFlow()
+//            request.addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    // We got the ReviewInfo object
+//                    val reviewInfo = task.result
+//                    val flow = manager.launchReviewFlow(requireActivity(), reviewInfo!!)
+//                    flow.addOnCompleteListener { _ ->
+//
+//                    }
+//                } else {
+//                    // There was some problem, log or handle the error code.
+//                }
+//            }
+
 
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("market://details?id=${requireActivity().packageName}")

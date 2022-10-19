@@ -55,7 +55,7 @@
             android:id="@+id/tv_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:lineHeight="24px"
             android:maxHeight="25dp"

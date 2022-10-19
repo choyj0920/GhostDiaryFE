@@ -3,13 +3,14 @@
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
-    android:background="#80A7A7A7"
+    android:background="#59000000"
 android:layout_height="match_parent">
 
 
     <ImageView
         android:id="@+id/img_slide_image"
         android:layout_width="match_parent"
+        android:scaleType="fitXY"
         android:layout_height="0dp"
         android:adjustViewBounds="true"
         android:src="@drawable/tutorial_00"

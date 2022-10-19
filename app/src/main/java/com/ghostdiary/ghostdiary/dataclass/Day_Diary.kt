@@ -112,7 +112,8 @@ class Day_Diary(
             R.drawable.ghost_29_travel,
             R.drawable.ghost_30_sunny,
             R.drawable.ghost_31_cloudy,
-            R.drawable.ghost_32_rain
+            R.drawable.ghost_32_rain,
+            R.drawable.ghost_33_snow,
         )
 
 
@@ -153,7 +154,7 @@ class Day_Diary(
                     emotionclass(category3[8],28,false),emotionclass(category3[9],29,false)),
 
                 emotionname[4] to arrayOf(emotionclass(category4[0],30,false),emotionclass(category4[1],31,false),
-                    emotionclass(category4[2],32,false))
+                    emotionclass(category4[2],32,false),emotionclass(category4[3],33,false))
             )
 
 

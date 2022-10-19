@@ -38,14 +38,12 @@ import com.ghostdiary.ghostdiary.databinding.MenuThemeBinding
 import com.ghostdiary.ghostdiary.dataclass.Day_Diary
 import com.ghostdiary.ghostdiary.fragment.calendar.CalendarFragment
 import com.ghostdiary.ghostdiary.fragment.calendar.RecordFragment
-import com.ghostdiary.ghostdiary.fragment.main.*
+import com.ghostdiary.ghostdiary.fragment.main.MemoFragment
 import com.ghostdiary.ghostdiary.utilpackage.Util
 import com.google.android.gms.tasks.Task
 import com.google.android.play.core.appupdate.AppUpdateInfo
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.UpdateAvailability
 import java.text.SimpleDateFormat
 import java.util.*
@@ -205,11 +203,18 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.swtichbutton.setOnCheckedChangeListener { button, ismemo ->
+            val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
+
             if(ismemo){
                 Update_pager(false)
+                editor.putBoolean("curisCalendar", false).apply()
+
             }else{
+                editor.putBoolean("curisCalendar", true).apply()
                 Update_pager(true)
             }
+            editor.commit()
+
         }
 
 
@@ -225,6 +230,13 @@ class MainActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
             finish()
+        }
+
+        val curisCalendar=prefs.getBoolean("curisCalendar",true)
+        if(curisCalendar){
+            binding.swtichbutton.isChecked=false
+        }else{
+            binding.swtichbutton.isChecked=true
         }
 
 
@@ -734,6 +746,7 @@ class MainActivity : AppCompatActivity() {
         
         Log.d("TAG","업데이트 확인중")
 
+
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
             ) { // 업데이트가 있는 경우
@@ -748,7 +761,7 @@ class MainActivity : AppCompatActivity() {
 
             } else { // 업데이트가 없는 경우
 
-                Log.d("TAG","업데이트 없음")
+                Log.d("TAG","업데이트 없음 ${appUpdateInfo.updateAvailability()}  , ${UpdateAvailability.UPDATE_AVAILABLE}")
                 val editor : SharedPreferences.Editor = prefs.edit() // 데이터 기록을 위한 editor
                 var curversion =prefs.getInt("curVersion",-1)
 
@@ -786,7 +799,7 @@ class MainActivity : AppCompatActivity() {
                 val appUpdateInfoTask: Task<AppUpdateInfo> = appUpdateManager.appUpdateInfo
 
                 appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
-                    if (appUpdateInfo.updateAvailability() === UpdateAvailability.UPDATE_AVAILABLE) {
+                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE) {
                         val dialog = HaveupdateDialog(appUpdateManager,appUpdateInfo)
                         dialog.isCancelable = true
 
