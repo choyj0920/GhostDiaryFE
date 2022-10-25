@@ -209,7 +209,7 @@
                 android:background="@color/white"
                 android:scrollbars="vertical"
                 android:textSize="16sp"
-                android:hint="내용을 입력해주세요"
+                android:hint="@string/please_input_text"
                 android:paddingTop="20dp"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"

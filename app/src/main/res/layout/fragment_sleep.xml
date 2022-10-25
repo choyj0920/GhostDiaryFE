@@ -14,7 +14,7 @@
         android:layout_height="0dp"
         android:gravity="center"
 
-        android:text="충분한 데이터가 없어서 분석이 되지 않아요.\n\n수면시간이 5일 이상 입력되어야해요"
+        android:text="@string/analyze_sleep_failed"
 
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +59,7 @@
                     android:backgroundTint="#C8EBEA"
                     android:drawableRight="@drawable/ic_graph"
                     android:gravity="left"
-                    android:text="수면분석 "
+                    android:text="@string/analyzetab02_title"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -94,7 +94,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="잠든 시간"
+                            android:text="@string/analyzetab02_time00"
                             android:textColor="#4A4A4A"
                             android:textSize="16sp"
 
@@ -127,7 +127,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="일어난 시간"
+                            android:text="@string/analyzetab02_time01"
                             android:textColor="#4A4A4A"
                             android:textSize="16sp"
 
@@ -160,7 +160,7 @@
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="수면 시간"
+                            android:text="@string/analyzetab02_time02"
                             android:textColor="#4A4A4A"
                             android:textSize="16sp"
 
@@ -232,7 +232,7 @@
                     android:background="@drawable/underline"
                     android:backgroundTint="#C8EBEA"
                     android:gravity="left"
-                    android:text="추천 수면시간 "
+                    android:text="@string/analyzetab02_title01"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -272,7 +272,7 @@
                         android:layout_marginLeft="28dp"
                         android:layout_marginRight="28dp"
                         android:gravity="center"
-                        android:text="규칙적인 수면시간은 신체와 정신 건강에 도움이 됩니다."
+                        android:text="@string/analyzetab02_advice"
                         android:textColor="#4A4A4A"
                         android:textSize="12sp" />
 

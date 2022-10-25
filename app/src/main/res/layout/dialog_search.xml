@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toStartOf="@+id/iv_erase"
         android:singleLine="true"
         android:maxLines="1"
-        android:hint="검색"
+        android:hint="@string/search"
         android:textSize="13sp"
         android:textColor="@color/black"
 

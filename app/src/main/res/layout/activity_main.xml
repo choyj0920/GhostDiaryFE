@@ -193,7 +193,7 @@
                     android:layout_marginRight="10dp"
                     android:textSize="15dp"
                     android:textColor="#001018"
-                    android:text="이용권 구매"
+                    android:text="@string/navigationMenu_buy"
                     />
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

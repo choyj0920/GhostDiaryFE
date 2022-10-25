@@ -20,7 +20,7 @@
         android:minHeight="50dp"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:text="커스텀 유령 추가" />
+        android:text="@string/addghost_title" />
     
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ghosts"
@@ -38,7 +38,7 @@
         android:layout_height="match_parent"
         android:textColorHint="@color/gray"
         android:textColor="@color/black"
-        android:hint="이름을 입력하세요"
+        android:hint="@string/addghost_namehint"
         android:singleLine="true"
         android:maxLength="30"
         android:textSize="16sp"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:padding="5dp"
-        android:text="확인"
+        android:text="@string/ok"
         android:textColor="@color/black"
         android:textSize="13sp" />
 

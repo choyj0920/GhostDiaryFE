@@ -114,6 +114,9 @@ class Day_Diary(
             R.drawable.ghost_31_cloudy,
             R.drawable.ghost_32_rain,
             R.drawable.ghost_33_snow,
+            R.drawable.ghost_34_windy,
+            R.drawable.ghost_3011_cook,
+            R.drawable.ghost_3012_music
         )
 
 
@@ -151,10 +154,11 @@ class Day_Diary(
                 emotionname[3] to arrayOf(emotionclass(category3[0],20,false),emotionclass(category3[1],21,false),
                     emotionclass(category3[2],22,false),emotionclass(category3[3],23,false),emotionclass(category3[4],24,false),
                     emotionclass(category3[5],25,false),emotionclass(category3[6],26,false),emotionclass(category3[7],27,false),
-                    emotionclass(category3[8],28,false),emotionclass(category3[9],29,false)),
+                    emotionclass(category3[8],28,false),emotionclass(category3[9],29,false),emotionclass(category3[10],35,false),
+                    emotionclass(category3[11],36,false)),
 
                 emotionname[4] to arrayOf(emotionclass(category4[0],30,false),emotionclass(category4[1],31,false),
-                    emotionclass(category4[2],32,false),emotionclass(category4[3],33,false))
+                    emotionclass(category4[2],32,false),emotionclass(category4[3],33,false),emotionclass(category4[4],34,false))
             )
 
 
@@ -163,18 +167,18 @@ class Day_Diary(
 
         fun addghost_arr():ArrayList<Int>{
             var arr=arrayListOf(
-                0,1,2,3,4,-1,-1,-1,-1,-1,
-                5,6,7,8,9,-1,-1,-1,-1,-1,
-                20,21,22,23,24,25,26,27,28,29,
-                10,11,12,13,14,15,16,17,18,19
+                0,1,2,3,4,-1,-1,-1,-1,-1,-1,-1,
+                5,6,7,8,9,-1,-1,-1,-1,-1,-1,-1,
+                20,21,22,23,24,25,26,27,28,29,35,36,
+                10,11,12,13,14,15,16,17,18,19,-1,-1
             )
             var temp=(arr.size/4).toInt()
             var result= arrayListOf<Int>()
             for(i in 0..temp-1){
-                result.add(arr[10*0+i])
-                result.add(arr[10+i])
-                result.add(arr[20+i])
-                result.add(arr[30+i])
+                result.add(arr[temp*0+i])
+                result.add(arr[temp*1+i])
+                result.add(arr[temp*2+i])
+                result.add(arr[temp*3+i])
             }
             return result
 

@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:textColorHint="@color/gray"
             android:textColor="@color/black"
-            android:hint="폴더명을 입력하세요"
+            android:hint="@string/please_input_foldername2"
             android:singleLine="true"
             android:maxLength="30"
             android:textSize="16sp"
@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="삭제"
+                android:text="@string/delete"
                 android:textColor="@color/red2"
                 android:layout_marginEnd="10dp"
                 android:textSize="13sp" />
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="확인"
+                android:text="@string/ok"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
 

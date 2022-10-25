@@ -45,7 +45,7 @@
                 android:maxLength="16"
 
                 android:gravity="center"
-                android:hint="제목"
+                android:hint="@string/title"
                 android:textColor="#000000"
                 android:textSize="19sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -96,7 +96,7 @@
             android:paddingLeft="28dp"
             android:paddingTop="40dp"
             android:paddingRight="28dp"
-            android:hint="내용을 입력해주세요"
+            android:hint="@string/please_input_text"
             android:singleLine="false"
             android:scrollbars="vertical"
             android:gravity="top"
@@ -234,7 +234,7 @@
             android:layout_height="0dp"
             android:background="@color/white"
             android:gravity="top"
-            android:hint="내용을 입력해주세요"
+            android:hint="@string/please_input_text"
             
             android:paddingLeft="28dp"
             android:paddingTop="40dp"

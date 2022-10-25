@@ -68,7 +68,7 @@
         android:textSize="12sp"
 
         android:singleLine="false"
-        android:text="닫기"
+        android:text="@string/afterupdate_close"
         />
 
 

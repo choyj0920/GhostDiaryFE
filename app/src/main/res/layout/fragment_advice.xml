@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
 
-        android:text="어떤 감정 때문에 힘들었나요?"
+        android:text="@string/advice_tilte"
         android:layout_marginBottom="30dp"
         android:textSize="16sp"
         android:textColor="#4A4A4A"
@@ -41,7 +41,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="불안"
+            android:text="@string/advice_cate1"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="피로"
+            android:text="@string/advice_cate2"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
@@ -75,7 +75,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="우울"
+            android:text="@string/advice_cate3"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
@@ -92,7 +92,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="스트레스"
+            android:text="@string/advice_cate4"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
@@ -108,7 +108,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="좌절"
+            android:text="@string/advice_cate5"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 
@@ -124,7 +124,7 @@
             android:gravity="center"
             android:textColor="@color/black"
             android:textSize="15sp"
-            android:text="자존감"
+            android:text="@string/advice_cate6"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
 

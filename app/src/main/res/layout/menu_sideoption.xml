@@ -43,7 +43,7 @@
             android:gravity="center"
             android:paddingRight="0dp"
             android:textColor="#474746"
-            android:text="수정"
+            android:text="@string/edit"
             android:textSize="14sp" />
 
     </RelativeLayout>
@@ -75,12 +75,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
 
-            android:textColor="#474746"
-
             android:layout_centerInParent="true"
+
             android:gravity="center"
             android:paddingRight="0dp"
-            android:text="삭제"
+            android:text="@string/delete"
+            android:textColor="#474746"
             android:textSize="14sp" />
 
     </RelativeLayout>

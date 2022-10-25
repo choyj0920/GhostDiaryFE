@@ -15,7 +15,7 @@
         android:layout_height="0dp"
         android:gravity="center"
 
-        android:text="충분한 데이터가 없어서 분석이 어려워요.\n\n 유령을 5개 이상 선택해주세요"
+        android:text="@string/analyze_failed"
 
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -58,7 +58,7 @@
                     android:backgroundTint="#FFD7D7"
                     android:drawableRight="@drawable/ic_graph"
                     android:gravity="left"
-                    android:text="종합분석  "
+                    android:text="@string/analyzetab00_title"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -89,7 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="예시"
+                            android:text="happy"
                             android:textColor="@color/pink"
 
                             android:textSize="15sp"
@@ -100,7 +100,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="은(는) 당신을 가장 행복하게 하고,"
+                            android:text="@string/analyzetab00_happy"
                             android:textColor="#4A4A4A"
 
                             android:textSize="15sp"
@@ -122,7 +122,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="예시"
+                            android:text="bad"
                             android:textColor="@color/pink"
 
                             android:textSize="15sp"
@@ -133,7 +133,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="은(는) 당신을 가장 다운되게 해요."
+                            android:text="@string/analyzetab00_bad1"
                             android:textColor="#4A4A4A"
 
                             android:textSize="15sp"
@@ -156,7 +156,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="예시"
+                            android:text="bad"
                             android:textColor="@color/pink"
 
                             android:textSize="15sp"
@@ -168,7 +168,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
 
-                            android:text="은(는) 가능한 피해보는게 어때요?"
+                            android:text="@string/analyzetab00_bad2"
                             android:textColor="#4A4A4A"
 
                             android:textSize="15sp"
@@ -751,7 +751,7 @@
                     android:backgroundTint="#FFD7D7"
                     android:drawableRight="@drawable/ic_graph"
                     android:gravity="left"
-                    android:text="평균점수  "
+                    android:text="@string/analyzetab00_title2"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -812,7 +812,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" 점"
+                        android:text="@string/score"
                         android:textColor="#4A4A4A"
                         android:textSize="15sp"
 

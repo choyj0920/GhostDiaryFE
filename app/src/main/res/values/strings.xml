@@ -15,6 +15,8 @@
 
     </string-array>
 
+    <string name="sleepselect_title">수면시간을 기록해주세요.</string>
+
     <string-array name="emotionCategory0">
         <item>매우좋음</item>
         <item>좋음</item>
@@ -59,6 +61,8 @@
         <item>술</item>
         <item>게임</item>
         <item>여행</item>
+        <item>요리</item>
+        <item>음악</item>
 
     </string-array>
 
@@ -67,18 +71,23 @@
         <item>구름</item>
         <item>비</item>
         <item>눈</item>
+        <item>바람</item>
 
     </string-array>
+
+    <string name="postdiary_title">오늘의 기록</string>
     
-    <string-array name="recommendedsleeptime">
-<!--        추천 수면시간 문구를 작성하는 부분 순서대로 문자열1num1문자열2num2문자열3-->
-        <item></item>
-        <item>" 시에 자서  "</item>
-        <item>" 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"</item>
 
 
-    </string-array>
 
+    <string name="advice_tilte">어떤 감정 때문에 힘들었나요?</string>
+
+    <string name="advice_cate1">불안</string>
+    <string name="advice_cate2">피로</string>
+    <string name="advice_cate3">우울</string>
+    <string name="advice_cate4">스트레스</string>
+    <string name="advice_cate5">좌절</string>
+    <string name="advice_cate6">자존감</string>
 
 
     <string-array name="advice_category">
@@ -90,11 +99,17 @@
         <item>자존감</item>
     </string-array>
 
+<!--    -->
+    <string name="analyze_failed">충분한 데이터가 없어서 분석이 어려워요.\n\n 유령을 5개 이상 선택해주세요</string>
+    <string name="analyze_sleep_failed">충분한 데이터가 없어서 분석이 되지 않아요.\n\n수면시간이 5일 이상 입력되어야해요</string>
+
+
     <string name="todaycookie_title">오늘의 유령쿠키를 골라보세요.</string>
     <string name="selectAdvicecookie_title">"도움될만한 말을 쿠키에 적어놨어요.\n하나 골라볼래요?"</string>
 
     <string name="please_input_title">제목을 입력해주세요.</string>
     <string name="please_input_memo">메모을 입력해주세요.</string>
+
     <string name="please_input_text">내용을 입력해주세요.</string>
 
     <string name="select_emotion_edit">수정</string>
@@ -112,18 +127,70 @@
         <item>수면분석</item>
     </string-array>
 
+    <string name="analyzetab00_title">"종합분석  "</string>
+    <string name="analyzetab00_title2">"평균점수  "</string>
+    <string name="analyzetab00_happy">은(는) 당신을 가장 행복하게 하고,</string>
+    <string name="analyzetab00_bad1">은(는) 당신을 가장 다운되게 해요.</string>
+    <string name="analyzetab00_bad2">은(는) 가능한 피해보는게 어때요?</string>
+
+
+<!-- ~~ 점 영문에서는 그냥 빈칸? -->
+    <string name="score">" 점"</string>
+
+    <string name="analyzetab01_title">"세부분석  "</string>
+    <string name="analyzetab01_pleaseselect">세부 분석할 활동을 선택 해주세요.</string>
+
     <string name="notSelect_emotion_analyze">분석할 활동이 선택되지 않았습니다.</string>
 
     <string name="please_select_ghost">유령을 골라주세요.</string>
     <string name="please_input_ghostname">유령의 이름을 입력해주세요.</string>
+
+    <string name="analyzetab02_title">"수면분석  "</string>
+    <string name="analyzetab02_title01">"추천 수면시간 "</string>
+    <string name="analyzetab02_time00">잠든 시간</string>
+    <string name="analyzetab02_time01">일어난 시간</string>
+    <string name="analyzetab02_time02">수면 시간</string>
+
+    <string name="analyzetab02_advice">규칙적인 수면시간은 신체와 정신 건강에 도움이 됩니다.</string>
+    <string-array name="recommendedsleeptime">
+        <!--        추천 수면시간 문구를 작성하는 부분 순서대로 문자열1num1문자열2num2문자열3-->
+        <item></item>
+        <item>" 시에 자서  "</item>
+        <item>" 시에 일어나는\n규칙적인 생활습관을 길러보면 어떨까요?"</item>
+    </string-array>
+
+
 
     <string name="app_close_message">"\"'뒤로' 버튼을 한번 더 누르시면 종료됩니다.\""</string>
 
 <!--    Lock act-->
 
     <string name="please_input_password">비밀번호를 입력해 주세요</string>
+
+<!--    common string-->
+    <string name="edit">수정</string>
     <string name="next">다음</string>
+    <string name="jump">건너뛰기</string>
     <string name="start">시작</string>
+    <string name="delete">삭제</string>
+    <string name="title">제목</string>
+<!--    기록이나 달력에서 특정 유령만 볼때 -->
+    <string name="all">전체</string>
+<!--    알람-->
+    <string name="save">저장</string>
+    <string name="cancel">취소</string>
+
+<!--    세부분석-->
+    <string name="search">검색</string>
+    <string name="ok">확인</string>
+
+    <string name="fontsetting_title">폰트 설정</string>
+
+
+    <string name="addghost_title">커스텀 유령 추가</string>
+    <string name="addghost_namehint">이름을 입력하세요</string>
+
+
     <string name="please_enter_again">한번 더 입력해 주세요</string>
     <string name="lock_sucess">입력하신 비밀번호로 잠금되었습니다.</string>
     <string name="wrong_password">입력하신 비밃 번호와 다릅니다, 다시 입력해주세요.</string>
@@ -139,10 +206,12 @@
     <!--    2022 , 2023뒤에 올 2000년 ,영어는 y? or 그냥 빈칸?  달 선택 창에 사용 -->
     <string name="yearstring_last">년</string>
 
+    <string name="navigationMenu_buy">이용권 구매</string>
     <string name="navigationMenu_lock">화면 잠금</string>
     <string name="navigationMenu_alarm">알림</string>
     <string name="navigationMenu_font">폰트</string>
     <string name="navigationMenu_service">소통창구</string>
+<!--    @가 id명칭어라 @ 를 표시할때 \가 들어가야 표시 가능-->
     <string name="navigationMenu_service_link">\@ghostdiary.app</string>
     <string name="navigationMenu_hint">도움말</string>
     <string name="navigationMenu_updatenote">업데이트 노트</string>
@@ -152,7 +221,7 @@
     <string name="haveupdate_content">소처럼 일해서 개선하고 있답니다\n٩(•̤̀ᵕ•̤́๑)૭✧</string>
     
     <string name="afterupdate_title">업데이트 노트</string>
-    <string name="afterupdate_content">> 메모 폴더 삭제 기능 추가\n> 타임스탬프 12H → 24H\n> 기능에 대한 설명 추가\n> 전반적인 사용성 개선</string>
+    <string name="afterupdate_content">> 메모 폴더 삭제 기능 추가\n> 타임스탬프 12H → 24H\n> 기능에 대한 설명 추가\n> 전반적인 사용성 개선\n> 유령 추가</string>
     <string name="afterupdate_please">소처럼 일해서 개선하고 있답니다\n٩(•̤̀ᵕ•̤́๑)૭✧ 별점은 큰 힘이 됩니다!</string>
     <string name="afterupdate_close">닫기</string>
     <string name="afterupdate_review">별점주기</string>

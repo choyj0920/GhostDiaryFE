@@ -33,7 +33,7 @@ class EmotionSpinnerAdapter(private val context: Context,val emotionarray: Array
         if(emotionarray[position]==-1){
             binding.ivSpinnerItem.visibility=View.GONE
             binding.tvSpinnerItem.visibility=View.VISIBLE
-            binding.tvSpinnerItem.text="전체"
+            binding.tvSpinnerItem.text=context.resources.getString(R.string.all)
         }
         binding.ivSpinnerItem.setImageResource(
             when (emotionarray.get(position)) {

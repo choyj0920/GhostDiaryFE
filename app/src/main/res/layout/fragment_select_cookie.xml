@@ -17,7 +17,7 @@
        android:layout_height="wrap_content"
        android:textStyle="bold"
        
-       android:text="오늘의 쿠키를 골라보세요"
+       android:text="@string/todaycookie_title"
        android:layout_marginBottom="30dp"
        android:textSize="16sp"
        android:textColor="#4A4A4A"
@@ -148,7 +148,7 @@
             android:textSize="12sp"
 
             android:singleLine="false"
-            android:text="닫기"
+            android:text="@string/afterupdate_close"
             />
 
     </LinearLayout>

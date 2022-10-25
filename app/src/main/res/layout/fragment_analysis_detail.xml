@@ -11,7 +11,7 @@
         android:layout_height="0dp"
         android:gravity="center"
 
-        android:text="충분한 데이터가 없어서 분석이 어려워요.\n\n 유령을 5개 이상 선택해주세요"
+        android:text="@string/analyze_failed"
         android:textSize="15sp"
 
         android:visibility="gone"
@@ -88,7 +88,7 @@
                     android:backgroundTint="#FFF4D7"
                     android:drawableRight="@drawable/ic_graph"
                     android:gravity="left"
-                    android:text="세부분석 "
+                    android:text="@string/analyzetab01_title"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -134,7 +134,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=" 점"
+                        android:text="@string/score"
                         android:textColor="#4A4A4A"
                         android:textSize="15sp"
 
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="세부 분석할 활동을 선택 해주세요."
+                android:text="@string/analyzetab01_pleaseselect"
 
                 android:textSize="15sp"
 

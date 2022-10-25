@@ -32,7 +32,7 @@
         />
     <TextView
         android:gravity="center"
-        android:text="다음"
+        android:text="@string/next"
         android:id="@+id/next_btn"
         android:layout_marginRight="10dp"
         android:textSize="15dp"
@@ -52,7 +52,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:text="건너뛰기"
+        android:text="@string/jump"
 
         android:textStyle="bold" />
 
