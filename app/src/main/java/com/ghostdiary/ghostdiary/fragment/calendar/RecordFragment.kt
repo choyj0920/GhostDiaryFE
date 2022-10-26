@@ -81,7 +81,7 @@ class RecordFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     fun init(){
 
-        var transFormat = SimpleDateFormat("yyyy.MM.")
+        var transFormat = SimpleDateFormat(resources.getString(R.string.transformat_month))
         var to = transFormat.format(calendar.time)
         binding!!.tvDate.setText(to)
 
@@ -194,7 +194,7 @@ class RecordFragment : Fragment() {
         curCal.time=calendar.time
 
 
-        var transFormat1 = SimpleDateFormat("yyyy.MM.")
+        var transFormat1 = SimpleDateFormat(resources.getString(R.string.transformat_month))
         var to1 = transFormat1.format(calendar.time)
         binding!!.tvDate.setText(to1)
 

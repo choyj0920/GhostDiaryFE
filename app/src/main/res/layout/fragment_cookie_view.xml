@@ -34,7 +34,7 @@
     <TextView
         android:id="@+id/tv_text"
         android:layout_width="wrap_content"
-        android:layout_height="110dp"
+        android:layout_height="150dp"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:layout_marginLeft="28dp"
@@ -45,7 +45,7 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="#4A4A4A"
-        android:textSize="12sp"
+        android:textSize="14sp"
 
         android:background="@drawable/backgroundpage"
         android:singleLine="false"

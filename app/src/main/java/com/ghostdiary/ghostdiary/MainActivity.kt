@@ -106,6 +106,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        fontname=resources.getStringArray(R.array.font_list)
         Day_Diary.init_data(this)
 
         binding=ActivityMainBinding.inflate(layoutInflater)
@@ -168,19 +170,23 @@ class MainActivity : AppCompatActivity() {
 
         prefs = this.getSharedPreferences("Prefs", Context.MODE_PRIVATE)
         var array:ArrayList<Typeface?> = arrayListOf(
-            ResourcesCompat.getFont(this,R.font.roboto),
-            ResourcesCompat.getFont(this,R.font.nanumbarunpenr),
+            ResourcesCompat.getFont(this,R.font.nanumbarunpenr),  //0
             ResourcesCompat.getFont(this,R.font.nanumpen),
-            ResourcesCompat.getFont(this,R.font.d2coding),
-            ResourcesCompat.getFont(this,R.font.bmhannaair),
-            ResourcesCompat.getFont(this,R.font.godofont),
-            ResourcesCompat.getFont(this,R.font.godomaum),
-            ResourcesCompat.getFont(this,R.font.iropkebatangm),
+            ResourcesCompat.getFont(this,R.font.iropkebatangm),   //2
             ResourcesCompat.getFont(this,R.font.sdmisaeng),
+            ResourcesCompat.getFont(this,R.font.gangwoneducationall), //4
+            ResourcesCompat.getFont(this,R.font.ownglyph_),
+            ResourcesCompat.getFont(this,R.font.yutoimage_bongsoongatint), //6
+            ResourcesCompat.getFont(this,R.font.yutoimage_chaochuur),
+            ResourcesCompat.getFont(this,R.font.yutoimage_redmailbox), //8
             ResourcesCompat.getFont(this,R.font.yafont),
-        )
+            ResourcesCompat.getFont(this,R.font.yutoimage_star_moon), //10
+            )
 
         var iscur=prefs.getInt("curfont",9)
+        if(iscur>=array.size){
+            iscur=9
+        }
         Util.init(array,prefs.getInt("isfontnum",iscur))
         curTheme=prefs.getInt("theme",1)
 

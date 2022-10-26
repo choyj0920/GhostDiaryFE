@@ -1,0 +1,475 @@
+<resources>
+    <string name="app_name">Ghost diary</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+
+    <string-array name="font_list">
+        <item>nanumbarunpenr</item>
+        <item>nanumpen</item>
+        <item>iropkebatangm</item>
+        <item>misaeng</item>
+        <item>gangwoneducation</item>
+        <item>ownglyph</item>
+        <item>bongsoongatint</item>
+        <item>chaochuur</item>
+        <item>redmailbox</item>
+        <item>yafont</item>
+        <item>star_moon</item>
+    </string-array>
+
+    <string-array name="emotionname">
+        <item>How did you feel today?</item>
+        <item>Who did you spend your day with?</item>
+        <item>Where did you spend your day?</item>
+        <item>What did you do today?</item>
+        <item>How was the weather today?</item>
+        <item>Please record your sleep time.</item>
+
+    </string-array>
+
+    <string name="sleepselect_title">Please record your sleep time.</string>
+
+    <string-array name="emotionCategory0">
+        <item>happy</item>
+        <item>good</item>
+        <item>neutral</item>
+        <item>bad</item>
+        <item>awful</item>
+
+    </string-array>
+
+    <string-array name="emotionCategory1">
+        <item>alone</item>
+        <item>family</item>
+        <item>friends</item>
+        <item>lover</item>
+        <item>pet</item>
+
+    </string-array>
+
+
+    <string-array name="emotionCategory2">
+        <item>home</item>
+        <item>school</item>
+        <item>office</item>
+        <item>cafe</item>
+        <item>restaurant</item>
+        <item>transportation</item>
+        <item>fitness center</item>
+        <item>shopping mall</item>
+        <item>cinema</item>
+        <item>library</item>
+
+    </string-array>
+
+    <string-array name="emotionCategory3">
+        <item>strolling</item>
+        <item>study</item>
+        <item>exercise</item>
+        <item>work</item>
+        <item>shopping</item>
+        <item>painting</item>
+        <item>reading</item>
+        <item>drinking</item>
+        <item>gaming</item>
+        <item>trip</item>
+        <item>cooking</item>
+        <item>music</item>
+
+    </string-array>
+
+    <string-array name="emotionCategory4">
+        <item>sunny</item>
+        <item>cloudy</item>
+        <item>rainy</item>
+        <item>snowy</item>
+        <item>windy</item>
+
+    </string-array>
+
+    <string name="postdiary_title">Today\'s record</string>
+
+
+
+
+    <string name="advice_tilte">What made you feel worse?</string>
+
+    <string name="advice_cate1">Anxious</string>
+    <string name="advice_cate2">Tired</string>
+    <string name="advice_cate3">Depressed</string>
+    <string name="advice_cate4">Stressed</string>
+    <string name="advice_cate5">Frustrated</string>
+    <string name="advice_cate6">Self-esteem</string>
+
+
+    <string-array name="advice_category">
+        <item>Anxious</item>
+        <item>Tired</item>
+        <item>Depressed</item>
+        <item>Stressed</item>
+        <item>Frustrated</item>
+        <item>Self-esteem</item>
+    </string-array>
+
+    <!--    -->
+    <string name="analyze_failed">There is not enough data.\n\nPlease add at least five.</string>
+    <string name="analyze_sleep_failed">There is not enough data.\n\nPlease add at least five. </string>
+
+
+    <string name="todaycookie_title">Pick a ghost cookie for today.</string>
+    <string name="selectAdvicecookie_title">"Therapy is in cookies.\nPick one!"</string>
+
+    <string name="please_input_title">Enter a title</string>
+    <string name="please_input_memo">Add note</string>
+
+    <string name="please_input_text">Enter contents</string>
+
+    <string name="select_emotion_edit">edit</string>
+    <string name="select_emotion_compl">done</string>
+
+    <string name="alarm_text">Let\'s log a day!</string>
+
+    <string name="analyzetabname00">Total Analysis</string>
+    <string name="analyzetabname01">Detailed Stats</string>
+    <string name="analyzetabname02">Sleep Analysis</string>
+
+    <string-array name="analyze_tabtitle">
+        <item>Total Analysis</item>
+        <item>Detailed Stats</item>
+        <item>Sleep Analysis</item>
+    </string-array>
+
+    <string name="analyzetab00_title">"Total Analysis  "</string>
+    <string name="analyzetab00_title2">"Average mood  "</string>
+    <string name="analyzetab00_happy">" make(s) you feel best,"</string>
+    <string name="analyzetab00_bad1">" make(s) you feel worst."</string>
+    <string name="analyzetab00_bad2">" is recommended to be avoided."</string>
+
+
+    <!-- ~~ 점 영문에서는 그냥 빈칸? -->
+    <string name="score">" points"</string>
+
+    <string name="analyzetab01_title">"Detailed Stats  "</string>
+    <string name="analyzetab01_pleaseselect">Select an activity to analyze in detail.</string>
+
+    <string name="notSelect_emotion_analyze">No activity selected for analysis.</string>
+
+    <string name="please_select_ghost">Select a ghost.</string>
+    <string name="please_input_ghostname">Enter name of ghost.</string>
+
+    <string name="analyzetab02_title">"Sleep Analysis  "</string>
+    <string name="analyzetab02_title01">"Recommended sleep time "</string>
+    <string name="analyzetab02_time00">Time in bed</string>
+    <string name="analyzetab02_time01">Time woke up</string>
+    <string name="analyzetab02_time02">Time asleep</string>
+
+    <string name="analyzetab02_advice">Regular sleep time helps your physical and mental health.</string>
+    <string-array name="recommendedsleeptime">
+        <!--        추천 수면시간 문구를 작성하는 부분 순서대로 문자열1num1문자열2num2문자열3-->
+        <item>"What about forming a habit sleeping\nat "</item>
+        <item>" and waking up at "</item>
+        <item>" ?"</item>
+    </string-array>
+
+
+
+    <string name="app_close_message">"\"Press the Back button one more time to exit.\""</string>
+
+    <!--    Lock act-->
+
+    <string name="please_input_password">Enter your PIN</string>
+
+    <!--    common string-->
+    <string name="edit">edit</string>
+    <string name="next">next</string>
+    <string name="jump">jump</string>
+    <string name="start">start</string>
+    <string name="delete">delete</string>
+    <string name="title">title</string>
+    <!--    기록이나 달력에서 특정 유령만 볼때 -->
+    <string name="all">all</string>
+    <!--    알람-->
+    <string name="save">save</string>
+    <string name="cancel">cancel</string>
+
+    <!--    세부분석-->
+    <string name="search">search</string>
+    <string name="ok">ok</string>
+
+    <string name="fontsetting_title">Font</string>
+
+
+    <string name="addghost_title">Add custom ghost</string>
+    <string name="addghost_namehint">Enter name</string>
+
+
+    <string name="please_enter_again">Enter one more time.</string>
+    <string name="lock_sucess">Successfully locked with your PIN.</string>
+    <string name="wrong_password">PIN is incorrect. Please enter again.</string>
+
+    <!--    memofolderadd-->
+    <string name="folderaddtitle">「Add folder」</string>
+    <string name="please_select_foldericon">Select icon for folder</string>
+    <string name="please_input_foldername1">Enter folder name</string>
+    <string name="please_input_foldername2">Enter folder name</string>
+    <string name="failed_AddingFolder">Folder was not added as an error</string>
+    <string name="folderedittitle">「Edit folder」</string>
+
+    <!--    2022 , 2023뒤에 올 2000년 ,영어는 y? or 그냥 빈칸?  달 선택 창에 사용 -->
+    <string name="yearstring_last"></string>
+
+    <string name="navigationMenu_buy">Premium Pass</string>
+    <string name="navigationMenu_lock">Lock</string>
+    <string name="navigationMenu_alarm">Alarm</string>
+    <string name="navigationMenu_font">Font</string>
+    <string name="navigationMenu_service">Contact</string>
+    <!--    @가 id명칭어라 @ 를 표시할때 \가 들어가야 표시 가능-->
+    <string name="navigationMenu_service_link">\@ghostdiary.app</string>
+    <string name="navigationMenu_hint">Help</string>
+    <string name="navigationMenu_updatenote">Update note</string>
+
+
+    <string name="haveupdate_title">Please update the app!</string>
+    <string name="haveupdate_content">Working hard to improve\n٩(•̤̀ᵕ•̤́๑)૭✧</string>
+
+    <string name="afterupdate_title">Update Note</string>
+    <string name="afterupdate_content">> Added function to delete memo folder\n> Time stamp 12H → 24H\n> Added explanation for functions\n> Enhanced overall usability\n> Added ghosts</string>
+    <string name="afterupdate_please"> Working hard to improve\n٩(•̤̀ᵕ•̤́๑)૭✧ Please rate for us!</string>
+    <string name="afterupdate_close">close</string>
+    <string name="afterupdate_review">rate us</string>
+
+
+
+    <string-array name = "TODAYCOOKIES">
+        <item>Why don\'t you talk to someone step by step?</item>
+        <item>You\'re working hard on everything, so you\'ll be fine today.</item>
+        <item>Why don\'t you focus on yourself rather than on trivial matters?</item>
+        <item>Thinking positively can be a big help today.</item>
+        <item>The hard work will be finished and you will be able to relax.</item>
+        <item>There are days when it\'s good to let life go.</item>
+        <item>Everything will go smoothly. It\'s a really nice day!</item>
+        <item>How about taking a rest and having a comfortable day today?</item>
+        <item>You need time to solve your worries while recharging.</item>
+        <item>What is truly valuable can sometimes be acquired only through inefficient way.</item>
+        <item>There are times when you have to smile and move on even if you are not satisfied.</item>
+        <item>Everything depends on your mind.</item>
+        <item>The spirit can turn heaven into hell or hell into heaven. - Milton Silacone</item>
+        <item>There is no right time in life to set a goal. - Baldwin</item>
+        <item>Life is a tragedy at a close distance, a comedy at a distance. - Charlie Chaplin</item>
+        <item>Start for now. You can be perfect later. – Ron Moore</item>
+        <item>As long as there is life, there is hope. – Cicero</item>
+        <item>If you can\'t avoid it, enjoy it. - Robert Elliott</item>
+        <item>A great achievement begins with a small opportunity.</item>
+        <item>Don\'t match you with others.</item>
+        <item>Isn\'t life a series of self-repeating changes? - Andy Warhol</item>
+        <item>The person who paints a dream for a long time finally resembles it. - Andrémal</item>
+        <item>Don\'t underestimate yourself.</item>
+        <item>Don\'t misunderstand by expressing your opinion. Only active conversations and sincere actions can win the other person\'s heart.</item>
+        <item>There will be no problem if you continue to show your conviction as you have done so far.</item>
+        <item>How about building a relationship with confidence?</item>
+        <item>If you hurry, the tower that you worked on will collapse. Don\'t be impatient. Something good will happen soon.</item>
+        <item>Seek for happiness in the ordinary.</item>
+    </string-array>
+
+    <string-array name="COMMONADVICE">
+        <item>If there\'s something you\'re concerned about, why don\'t you organize your thoughts in a memo?</item>
+        <item>If you focus on manual work such as sewing, you can get rid of distractions.</item>
+        <item>If you\'re stressed out or angry, try a \'fake smile\'.</item>
+        <item>Organize your messy room. If you focus on simple cleaning, you can get rid of negative emotions.</item>
+        <item>Blue stabilizes the nerves. Why don\'t you wear blue clothes when you\'re in a bad mood?</item>
+        <item>Enjoy music quietly or hum a song.</item>
+        <item>Try to spend more time with your pet.</item>
+        <item>There is a cycle in emotional change. The high and low periods are usually repeated every five weeks.</item>
+        <item>Walk lightly and happily.</item>
+        <item>If you have a headache, it can be helpful to write them down on paper and write down each solution and deadline.</item>
+        <item>Eat lots of fresh fruits and vegetables.</item>
+        <item>The evaluation of others is not very important.</item>
+        <item>People are not as interested in you as you think.</item>
+        <item>Don\'t push yourself too hard just because you failed.</item>
+        <item>\"This will pass as well.\" Everything will pass, so cheer up a little.</item>
+        <item>Make habits for the future, such as exercising and reading.</item>
+
+    </string-array>
+
+
+    <string-array name="불안">
+        <item>When you are anxious, why don\'t you prioritize and do high-priority things first?</item>
+        <item>When you\'re in a bad mood, stay away from negative information for a moment.</item>
+        <item>There is a study that shows that when you try to recall your anxious memories, you get a series of anxiety. Please avoid recalling your anxious memories.</item>
+        <item>When you have negative feelings, take a deep breath or drink water and get rest for a while.</item>
+        <item>Writing anxious emotions can calm you down. If you use words like \'feel\' or \'think\' at this time, the effect will be doubled!</item>
+        <item>Positive words relieve pain. Using optimistic words can alleviate anxiety.</item>
+        <item>Focus on what\'s happening right now. Anxiety is caused by focusing on the future.</item>
+
+    </string-array>
+
+
+
+
+    <string-array name="피로">
+
+        <item>When you\'re tired, reduce your SNS access time or cut it off for a while.</item>
+        <item>Did you know that you can be more tired if you don\'t move your body? If you haven\'t moved for a long time, try some light stretching.</item>
+        <item>Get warm sunshine for about 30 minutes.</item>
+        <item>Take nutritional supplements including magnesium and vitamin D.</item>
+        <item>A balanced diet and sufficient water intake are very helpful in relieving fatigue.</item>
+        <item>Are you getting good quality sleep? Check your sleep pattern.</item>
+        <item>Excessive caffeine intake can interfere with sleep and cause fatigue.</item>
+        <item>If you sleep too much, you can be rather tired. Get into the habit of sleeping around 7 hours between 10 p.m. and 7 a.m.</item>
+        <item>Using digital devices too often may be the cause of fatigue. Why don\'t you reduce the use of digital devices little by little?</item>
+        <item>You have to wake up on time on holidays to maintain a regular biorhythm.</item>
+        <item>Fill the bathtub with warm water and soak your body. It can relieve fatigue by promoting blood circulation.</item>
+        <item>Drink caffeine-free herbal tea. Herbs contain ingredients that reduce fatigue.</item>
+        <item>Stretching often can relieve clumps and promote blood circulation.</item>
+        <item>Provide enough nutrients to your body by eating fresh vegetables and fruits.</item>
+        <item>Please finish your dinner 3 hours before you go to bed. Late-night snacks can put pressure on your stomach.</item>
+        <item>Take psychological stability using aroma scent products.</item>
+
+    </string-array>
+
+
+    <string-array name="우울">
+
+        <item>Why don\'t you smile before you think about something? Sometimes a smile changes your emotion.</item>
+        <item>There\'s a saying, \"A thousand-mile journey starts with one step.\" Just take one step in the right direction.</item>
+        <item>Set three goals that you are confident of achieving. Setting specific and meaningful long-term goals is a way to take a step closer to happiness.</item>
+        <item>It\'s easy to think negative thoughts at night. Why don\'t you write a diary in the morning rather than at night?</item>
+        <item>Walk outdoors for more than an hour every day. Exercise can relieve depression by increasing the activity of dopamine and serotonin, the hormones that make you feel better. </item>
+        <item>Get warm sunshine for about 30 minutes.</item>
+        <item>Insomnia can worsen depression. Try to make a habit of sleeping and waking up at the same time every day.</item>
+        <item>If you increase your body temperature, you can relieve depression. Why don\'t you take a lower-body bath or go sauna to refresh yourself?</item>
+        <item>How about cleaning your room and decorating your house today? </item>
+        <item>Dance excitedly while listening to music. Or turn on the karaoke application and shout out loud. Stress would fly away!</item>
+        <item>Contact anyone and talk about things you haven\'t talked about.</item>
+        <item>Why don\'t you reach out to someone who needs my help? Feel proud while doing volunteer work.</item>
+        <item>There are many people who love you. Let your heart out to them.</item>
+        <item>Most of depressed people experience sleep disorders. Have you had a hard time falling asleep these days?</item>
+        <item>If nutrition is not balanced, it is easy to get depressed. What about checking your diet?</item>
+        <item>Do you know exactly why you\'re depressed? Write down the reason you\'re depressed on a piece of paper. Finding the exact cause can make it easier to control your emotions.</item>
+        <item>Sometimes go to a bookstore and read a book you\'re attracted to.</item>
+
+    </string-array>
+
+
+    <string-array name="스트레스">
+        <item>Good quality sleep significantly lowers stress.</item>
+        <item>You can reduce your stress by 25 percent if you exercise steadily every day.</item>
+        <item>Dance excitedly while listening to music. Or turn on the karaoke application and shout out loud. Stress would fly away.</item>
+        <item>Make plan for the day in the morning. And develop a habit of dealing with the three most important tasks first.</item>
+        <item>Don\'t you have too much perfectionism? It\'s hard to do everything perfectly. Manage your stress effectively by prioritizing properly.</item>
+        <item>Isn\'t the break time too short? It\'s good to drink water every 1-2 hours or take a short walk and relax.</item>
+        <item>Getting a hold of your breath when you have a lot of stress can be very helpful in managing your mood.</item>
+        <item>Yoga is a good exercise to relieve tension and improve concentration. Why don\'t you give it a try?</item>
+        <item>Isn\'t there too many things that interfere with your daily life? Reduce time checking SNS, e-mails, text messages, and more.</item>
+        <item>Is there a place where you usually feel calm? When you\'re stressed out, try healing in that place.</item>
+        <item>Have you ever felt anxiety or palpitations after drinking caffeine? Then it\'s better to reduce your daily caffeine intake.</item>
+        <item>Write down the things you were grateful for in your life. You will find the precious value of everyday life.</item>
+        <item>Laugh out loud while watching funny videos, performances, etc.</item>
+        <item>Look back on your own mind and look into your mind. Thinking about what you really want will help you understand more about yourself.</item>
+        <item>If you want to relieve stress quickly, chew gum.</item>
+        <item>Use essential oils or scented candles with your favorite scent.</item>
+        <item>Did you take on something you didn\'t want because you couldn\'t say no? Make it a habit to refuse things you don\'t like.</item>
+
+
+    </string-array>
+
+    <string-array name="좌절">
+
+
+        <item>Understand your strengths and weaknesses and set the right goals.</item>
+        <item>Anyone can make mistakes in their lives.</item>
+        <item>Don\'t evaluate yourself based on what others have achieved.</item>
+        <item>Everyone has a negative side. In what part do you feel inferior?</item>
+        <item>Positive self-assertion creates courage and speculation. Shout out, \'I can do anything!\'</item>
+        <item>Are you looking at your weaknesses and overlooking your strengths? Don\'t be so hard on yourself.</item>
+        <item>Recognizing the problem correctly and looking straight at the substance is the first step to solve the problem. You can do it!</item>
+        <item>The world is not always fair. The occasional misfortune is inevitable, so think, \'This will pass, too.\'</item>
+        <item>Set a reasonable goal and achieve it. It will be an opportunity to increase your self-esteem.</item>
+        <item>It\'s natural to have negative feelings after failure. Feel the emotions as much as you want and you\'ll get relieved.</item>
+
+
+
+    </string-array>
+
+    <string-array name="자존감">
+
+
+        <item>Aren\'t you comparing yourself to others too much? Focus on what you want instead of comparing it to others.</item>
+        <item>Try to think positively.</item>
+        <item>Too big and ambitious goals are likely to lead to failure. Set a feasible, short-term goal.</item>
+        <item>Are you avoiding reality? Even if it\'s hard, face the reality and get through it little by little.</item>
+        <item>Have a habit of exercising regularly. Your self-esteem will go up a lot.</item>
+        <item>Try to say \'I can do it\' frequently. And if you achieve your goal well, compliment yourself.</item>
+        <item>Why don\'t you learn a new instrument or exercise? Or you can start a small hobby such as knitting.</item>
+        <item>Try light exercise three times a week for 30 minutes.</item>
+        <item>Meditation, yoga, and gardening are good activities that make you calm and positive.</item>
+        <item>Eating a meal with nutritious foods is important for controlling emotions.</item>
+        <item>You\'ve achieved more than you thought. Look back at photos, and souvenirs. Or read a notebook or diary you wrote before</item>
+        <item>Why don\'t you take a one-day class? You might find a new talent.</item>
+        <item>Why don\'t you reach out to someone who needs your help? Do volunteer work and feel proud.</item>
+
+    </string-array>
+
+    <string-array name="SLEEPADVICE">
+
+        <item>Please avoid bright light after sunset.</item>
+        <item>Take a walk in the sun during the day.</item>
+        <item>Make comfortable sleeping environment. Too cold or hot temperature can interfere with your sleep.</item>
+        <item>Use a bed or bedroom for sleeping purposes only.</item>
+        <item>Avoid surfing the Internet or watching videos in bed.</item>
+        <item>You can sleep more effectively if you make repeated routines as a preparation step before going to bed.</item>
+        <item>Please avoid caffeine before going to bed.</item>
+        <item>It\'s better to avoid eating three hours before going to bed.</item>
+        <item>Are you too nervous before going to bed? Relax and go back to sleep.</item>
+        <item>It\'s better not to do anything except sleeping in bed.</item>
+        <item>Please avoid looking at your smartphone in bed.</item>
+        <item>When you\'re not sleepy, it\'s better not to lie in bed.</item>
+        <item>If you can\'t sleep in bed and your thoughts are connected, your brain recognizes that the bed is a place to think.</item>
+        <item>For a regular life, it is important to set the \'wake-up time\' as well as the bedtime.</item>
+        <item>If you wake up late, you get sleep late.</item>
+        <item>Go to the window just after waking up in the morning. It will help you improve your sleep pattern.</item>
+        <item>If you intentionally darken your surroundings before going to bed, you can sleep more easily.</item>
+        <item>Muscle exercise improves the quality of sleep.</item>
+        <item>Opening curtains helps maintain a regular sleep pattern.</item>
+        <item>Don\'t rely too much on repeated alarm.</item>
+        <item>Change your clothes as soon as you wake up.</item>
+        <item>Eat sweets in the morning.</item>
+        <item>If you eat a sufficient breakfast and a light dinner, it is easy to control your biorhythm.</item>
+        <item>Don\'t sleep all at once on holidays. Try to keep the difference between waking hours on weekdays and holidays less than 3 hours.</item>
+        <item>If you sleep with your ankles warm, you can fall asleep easily.</item>
+        <item>It\'s not good to watch sleep-inducing videos lying on your bed.</item>
+        <item>Read books on paper rather than smartphones before going to bed.</item>
+        <item>Avoid high-intensity exercise in the evening. Rather, do housework or light walks.</item>
+        <item>If you\'re worried about snoring, roll your body sideways and sleep.</item>
+        <item>If you\'re sleepy all day, analyze the sleepy time.</item>
+        <item>Try to refrain from habitual caffeine consumption.</item>
+
+
+    </string-array>
+
+    <string-array name="daytostring">
+        <item>error</item>
+        <item>Sun</item>
+        <item>Mon</item>
+        <item>Tue</item>
+        <item>Wed</item>
+        <item>Thu</item>
+        <item>Fri</item>
+        <item>Sun</item>
+
+    </string-array>
+
+    <string name="transformat_month">MMM yyyy</string>
+    <string name="transformat_month_day">MMM d</string>
+    <string name="transformat_day_hour_min">"dd\'D\' HH:mm"</string>
+    <string name="daystring_last"></string>
+
+
+
+
+
+
+</resources>

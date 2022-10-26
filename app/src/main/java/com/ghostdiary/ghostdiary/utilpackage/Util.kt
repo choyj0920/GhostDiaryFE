@@ -37,8 +37,10 @@ class Util {
                         var v=view.getChildAt(i)
                         if(v is TextView ){
                             v.setTypeface(fontarray[curfont])
+
                         }else if( v is EditText){
                             v.setTypeface(fontarray[curfont])
+
                         }
                         setGlobalFont(v)
                     }

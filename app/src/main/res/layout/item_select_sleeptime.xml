@@ -30,7 +30,7 @@
         android:backgroundTint="#F0DCFF"
 
 
-        android:text="수면시간을 기록해주세요."
+        android:text="@string/sleepselect_title"
         />
     
 

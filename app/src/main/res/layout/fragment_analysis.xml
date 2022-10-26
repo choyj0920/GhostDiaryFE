@@ -59,6 +59,7 @@
                     android:drawableRight="@drawable/ic_graph"
                     android:gravity="left"
                     android:text="@string/analyzetab00_title"
+                    android:singleLine="true"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -749,6 +750,8 @@
                     android:layout_marginTop="30dp"
                     android:background="@drawable/underline"
                     android:backgroundTint="#FFD7D7"
+                    android:singleLine="true"
+
                     android:drawableRight="@drawable/ic_graph"
                     android:gravity="left"
                     android:text="@string/analyzetab00_title2"
