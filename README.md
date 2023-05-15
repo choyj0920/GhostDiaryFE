@@ -40,7 +40,7 @@
 
 ## **Google Play Store 링크**
 
-~~[여기](https://play.google.com/store/apps/details?id=com.ghostdiary.ghostdiary)를 클릭하면 Google Play Store에서 GhostDiaryFE 앱을 다운로드받을 수 있습니다. ~~~
+<s>[여기](https://play.google.com/store/apps/details?id=com.ghostdiary.ghostdiary)를 클릭하면 Google Play Store에서 GhostDiaryFE 앱을 다운로드받을 수 있습니다. </s>
 
 [APK](17.apk)
 
